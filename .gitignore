@@ -1,0 +1,7 @@
+/app/*
+/bin/*
+/tests/*
+/var/*
+/vendor/*
+/README.md
+/phpunit.xml.dist
