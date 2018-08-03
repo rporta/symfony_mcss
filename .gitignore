@@ -5,3 +5,4 @@
 /vendor/*
 /README.md
 /phpunit.xml.dist
+/.web-server-pid
