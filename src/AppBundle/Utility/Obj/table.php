@@ -51,7 +51,7 @@ class table extends createClass
 		$waves = $this->waves($this->waves);
 		$head = $this->getObj('html:head');
 		$row = $this->getObj('html:row');
-		$mode = $this->tableMode($this->mode);
+		$mode = $this->modeTable($this->mode);
 		$shadow =  $this->shadow($this->shadow);	
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{MODE}", "{CLASS}", "{HEAD}", "{ROW}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{CENTER}", "{SHADOW}");

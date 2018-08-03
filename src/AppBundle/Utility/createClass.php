@@ -212,7 +212,7 @@ class createClass
 		}
 		return $out;
 	}
-	protected function tableMode($arg){
+	protected function modeTable($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'bordered':
@@ -233,7 +233,7 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}
-	protected function preloaderMode($arg){
+	protected function modePreloader($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'linear':

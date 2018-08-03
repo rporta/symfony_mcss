@@ -31,7 +31,7 @@ class preloader extends createClass
 	}
 	public function refreshInfo(){
 		$id = $this->id;
-		$mode = $this->preloaderMode($this->mode);
+		$mode = $this->modePreloader($this->mode);
 
 		if ($mode == 'linear'){
 			$shadow =  $this->shadow($this->shadow);

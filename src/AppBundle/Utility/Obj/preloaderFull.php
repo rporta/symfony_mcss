@@ -33,7 +33,7 @@ class preloaderFull extends createClass
 	}
 	public function refreshInfo(){
 		$id = $this->id;
-		$mode = $this->preloaderMode($this->mode);
+		$mode = $this->modePreloader($this->mode);
 		$layerBackgroundColor = $this->backgroundColors($this->layerBackgroundColor);
 		if ($mode == 'linear'){
 			$shadow =  $this->shadow($this->shadow);
