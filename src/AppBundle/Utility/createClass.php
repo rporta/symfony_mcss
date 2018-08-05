@@ -273,15 +273,11 @@ class createClass
 			case 'single':
 				$out = "single"; 
 				break;
-			case '1':
-			case 'multiple':
-				$out = "multiple"; 
-				break;		
-			case '2':
+			case '1':	
 			case 'icon':
 				$out = "icon"; 
 				break;		
-			case '3':
+			case '2':
 			case 'browser':
 				$out = "browser"; 
 				break;		

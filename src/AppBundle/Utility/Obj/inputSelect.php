@@ -37,7 +37,6 @@ class inputSelect extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
 		$this->name = !isset($arg['name']) ? NULL : $arg['name'];			
 		$this->mode = !isset($arg['mode']) ? 'single' : $arg['mode'];			
-		$this->active = !isset($arg['active']) ? NULL : $arg['active'];			
 		$this->option = !isset($arg['option']) ? NULL : $arg['option'];			
 		$this->group = !isset($arg['group']) ? FALSE : $arg['group'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
@@ -55,29 +54,19 @@ class inputSelect extends createClass
 		$hoverable =  $this->hoverable($this->hoverable);		
 		$name =  $this->nameInputFields($this->name);		
 		$mode =  $this->modeInputSelect($this->mode);
-		$active =  $this->activeInputFields($this->active);
 		$optionHtml = $this->getOptions($this->option);
+		$defautlActive = !strpos($optionHtml, 'disabled') ? 'selected' : NULL ;
 
 		$this->js[] =  " $('select').material_select(); ";
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{OPTION:HTML}", "{ACTIVE}");
-		$replace = array($id, $textColor, $backgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $name, $optionHtml, $active);
+		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{OPTION:HTML}", "{DEFAULT:ACTIVE}");
+		$replace = array($id, $textColor, $backgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $name, $optionHtml, $defautlActive);
 
         if($mode == 'single'){
 			$tempHtml = 
 			'<div class="input-field">
 				<select {NAME} id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled selected>Seleccione una opcion</option>
-					{OPTION:HTML}
-				</select>
-				<label for="{TEXT}">{TEXT}</label>
-	        </div>';
-        }
-        elseif($mode == 'multiple'){
-			$tempHtml = 
-			'<div class="input-field">
-				<select multiple {NAME} id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled selected>Seleccione una opcion</option>
+					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 				<label for="{TEXT}">{TEXT}</label>
@@ -87,7 +76,7 @@ class inputSelect extends createClass
 			$tempHtml = 
 			'<div class="input-field">
 				<select {NAME} id="{ID}" class="icons {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled selected>Seleccione una opcion</option>
+					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 				<label for="{TEXT}">{TEXT}</label>
@@ -98,7 +87,7 @@ class inputSelect extends createClass
 			'<div>
 				<label for="{TEXT}">{TEXT}</label>
 				<select {NAME} id="{ID}" class="browser-default {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled selected>Seleccione una opcion</option>
+					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 	        </div>';
@@ -112,28 +101,30 @@ class inputSelect extends createClass
 		$mode = $this->modeInputSelect($this->mode);
 
 		if($mode == 'icon'){
-			$tempHtml = '<option value="{VALUE}" data-icon="{HREF}" class="circle {ALIGN}">{TEXT}</option>';
+			$tempHtml = '<option {ACTIVE} value="{VALUE}" data-icon="{HREF}" class="circle {ALIGN}">{TEXT}</option>';
 		}
 		else{
-			$tempHtml = '<option value="{VALUE}">{TEXT}</option>';
+			$tempHtml = '<option {ACTIVE} value="{VALUE}">{TEXT}</option>';
 		}
 
 		if($group){
 			foreach ($arg as $group => $arrayOption) {
 				$objHtml[] = str_replace('{GROUP}', $group, '<optgroup label="{GROUP}">');
 				foreach ($arrayOption as $option) {
+					$active = NULL;
 					$text = NULL;
 					$value = NULL;
 					$href = NULL;
 					$aling = NULL;
 					foreach ($option as $property => $data) {
+						if($property == 'active') $active = 'selected';
 						if($property == 'text') $text = $data;
 						if($property == 'value') $value = $data;					
 						if($property == 'href') $href = $data;					
 						if($property == 'aling') $aling = $this->float($data);
 					}
-					$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}");
-					$replace = array($text, $value, $href, $aling);
+					$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}");
+					$replace = array($text, $value, $href, $aling, $active);
 					$objHtml[] = str_replace($search, $replace, $tempHtml);
 				}
 				$objHtml[] = '</optgroup>';
@@ -141,18 +132,20 @@ class inputSelect extends createClass
 		}
 		else{
 			foreach ($arg as $option) {
+				$active = NULL;
 				$text = NULL;
 				$value = NULL;
 				$href = NULL;
 				$aling = NULL;
 				foreach ($option as $property => $data) {
+					if($property == 'active') $active = 'selected';
 					if($property == 'text') $text = $data;
 					if($property == 'value') $value = $data;					
 					if($property == 'href') $href = $data;					
 					if($property == 'aling') $aling = $this->float($data);					
 				}
-				$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}");
-				$replace = array($text, $value, $href, $aling);
+				$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}");
+				$replace = array($text, $value, $href, $aling, $active);
 				$objHtml[] = str_replace($search, $replace, $tempHtml);
 			}
 		}
