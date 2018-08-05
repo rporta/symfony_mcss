@@ -267,6 +267,27 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
+	protected function modeInputSelect($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'single':
+				$out = "single"; 
+				break;
+			case '1':
+			case 'multiple':
+				$out = "multiple"; 
+				break;		
+			case '2':
+			case 'icon':
+				$out = "icon"; 
+				break;		
+			case '3':
+			case 'browser':
+				$out = "browser"; 
+				break;		
+		}
+		return is_null($arg) ? NULL :$out;
+	}	
 	protected function modeMedia($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
