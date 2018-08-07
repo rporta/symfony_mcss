@@ -188,19 +188,20 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form['method'] = "POST";
 		$form = new AppBundle\Utility\Obj\form($form);
 
-			$input['placeholder'] = "Ingrese Correo";
-			$input['mode'] = "email";
+
+			// $input['backgroundColor'] = 'red,3';
 			$input['text'] = "nombre";
+			$input['mode'] = "0";
 			$input['name'] = "nombre01";
-			$input['textError'] = "Correo incorrecto";
-			$input['textSuccess'] = "correo correcto";
 
-			$input = new AppBundle\Utility\Obj\inputFields($input);
+				$option[] = array('text' => 'soyText1', 'value' => 'soy el valor 1');
+				$option[] = array('text' => 'soyText2', 'value' => 'soy el valor 2');
+				$option[] = array('text' => 'soyText3', 'value' => 'soy el valor 3');
 
-				$inputIcon['icon'] = "ac_unit";
-				$inputIcon = new AppBundle\Utility\Obj\icon($inputIcon);
+			$input['option'] = $option;
 
-			$input->addObj($inputIcon);
+			$input = new AppBundle\Utility\Obj\inputRadioButtons($input);
+
 
 		$form->addObj($input);
 

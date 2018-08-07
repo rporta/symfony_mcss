@@ -283,7 +283,20 @@ class createClass
 				break;		
 		}
 		return is_null($arg) ? NULL :$out;
-	}	
+	}
+	protected function modeInputRadioButtons($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'default':
+				$out = NULL; 
+				break;
+			case '1':	
+			case 'gap':
+				$out = "with-gap"; 
+				break;			
+		}
+		return is_null($arg) ? NULL :$out;
+	}		
 	protected function modeMedia($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
