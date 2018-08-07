@@ -189,7 +189,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form = new AppBundle\Utility\Obj\form($form);
 
 
-			// $input['backgroundColor'] = 'red,3';
+			$input['backgroundColor'] = 'orange,3';
+			$input['textColor'] = 'orange,3';
 			$input['text'] = "nombre";
 			$input['mode'] = "0";
 			$input['name'] = "nombre01";
@@ -200,7 +201,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$input['option'] = $option;
 
-			$input = new AppBundle\Utility\Obj\inputRadioButtons($input);
+			$input = new AppBundle\Utility\Obj\inputCheckboxes($input);
 
 
 		$form->addObj($input);

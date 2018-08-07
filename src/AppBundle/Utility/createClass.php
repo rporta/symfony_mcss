@@ -297,6 +297,19 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}		
+	protected function modeInputCheckboxes($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'default':
+				$out = NULL; 
+				break;
+			case '1':	
+			case 'filled':
+				$out = "filled-in"; 
+				break;			
+		}
+		return is_null($arg) ? NULL :$out;
+	}		
 	protected function modeMedia($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
