@@ -55,6 +55,16 @@ class inputCheckboxes extends createClass
 
 		$tempHtml = 
 		'<style>
+			[type="checkbox"].filled-in:not(:checked) + label::after {
+				background-color: transparent;
+				border: 2px solid {BACKGROUNDCOLOR};
+			}
+
+			[type="checkbox"].filled-in:checked + label::after {
+				border: 2px solid {BACKGROUNDCOLOR};
+				background-color: {BACKGROUNDCOLOR};
+			}
+
 			[type="checkbox"] + label::before {
 			    border: 2px solid {BACKGROUNDCOLOR};
 			}

@@ -189,10 +189,10 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form = new AppBundle\Utility\Obj\form($form);
 
 
-			$input['backgroundColor'] = 'orange,3';
-			$input['textColor'] = 'orange,3';
+			$input['backgroundColor'] = 'blue,3';
+			$input['textColor'] = 'red,3';
 			$input['text'] = "nombre";
-			$input['mode'] = "0";
+			$input['mode'] = "1";
 			$input['name'] = "nombre01";
 
 				$option[] = array('text' => 'soyText1', 'value' => 'soy el valor 1');
