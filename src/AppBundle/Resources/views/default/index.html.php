@@ -189,7 +189,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form = new AppBundle\Utility\Obj\form($form);
 
 
-			$input['backgroundColor'] = 'blue,3';
+			$input['activeBackgroundColor'] = 'blue,3';
 			$input['textColor'] = 'red,3';
 			$input['text'] = "nombre";
 			$input['mode'] = "1";

@@ -10,7 +10,8 @@ class inputSwitch extends createClass
 	public $type;
 	public $html;
 	public $textColor;
-	public $backgroundColor;
+	public $activeBackgroundColor;
+	public $disabledBackgroundColor;
 	public $text;
 	public $textAling;	
 	public $shadow;	
@@ -27,7 +28,8 @@ class inputSwitch extends createClass
 		$this->id = 'inputSwitch-'.$this->createID(5);
 		$this->type = 'inputSwitch';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
-		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'grey,7' : $arg['backgroundColor'];
+		$this->activeBackgroundColor = !isset($arg['activeBackgroundColor']) ? 'green,7' : $arg['activeBackgroundColor'];
+		$this->disabledBackgroundColor = !isset($arg['disabledBackgroundColor']) ? 'red,3' : $arg['disabledBackgroundColor'];
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
@@ -44,8 +46,11 @@ class inputSwitch extends createClass
 	public function refreshInfo(){
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
-		$backgroundColor[0] =  $this->hexColors($this->backgroundColor);
-		$backgroundColor[1] = (explode(",", $this->backgroundColor)[1] > 7) ? $this->hexColors(explode(",", $this->backgroundColor)[0].",3") : $this->hexColors(explode(",", $this->backgroundColor)[0].",9") ;
+		$activeBackgroundColor[0] =  $this->hexColors($this->activeBackgroundColor);
+		$activeBackgroundColor[1] = (explode(",", $this->activeBackgroundColor)[1] > 7) ? $this->hexColors(explode(",", $this->activeBackgroundColor)[0].",3") : $this->hexColors(explode(",", $this->activeBackgroundColor)[0].",9") ;
+		$disabledBackgroundColor[0] =  $this->hexColors($this->disabledBackgroundColor);
+		$disabledBackgroundColor[1] = (explode(",", $this->disabledBackgroundColor)[1] > 7) ? $this->hexColors(explode(",", $this->disabledBackgroundColor)[0].",3") : $this->hexColors(explode(",", $this->disabledBackgroundColor)[0].",9") ;
+		$clickBackgroundColor = "#0000";
 		$text = $this->text;
 		$textAling =  $this->textAling($this->textAling);
 		$shadow =  $this->shadow($this->shadow);	
@@ -59,16 +64,26 @@ class inputSwitch extends createClass
 
 		$tempHtml = 
 		'<style>
+			/*style click*/
 			.switch label .lever::before {
-				background-color: {BACKGROUNDCOLOR:0};
+				background-color: {CLICKBACKGROUNDCOLOR};
 			}
+			/*style horizontal active*/
 			.switch label input[type="checkbox"]:checked + .lever {
-				background-color: {BACKGROUNDCOLOR:0};
+				background-color: {ACTIVEBACKGROUNDCOLOR:0};
 			}
+			/*style button active*/
 			.switch label input[type="checkbox"]:checked + .lever::after {
-				background-color: {BACKGROUNDCOLOR:1};
+			 	background-color: {ACTIVEBACKGROUNDCOLOR:1};
 			}
-
+			/*style horizontal disabled*/
+			.switch label input[type="checkbox"]:not(:checked) + .lever {
+				background-color: {DISABLEDBACKGROUNDCOLOR:0};
+			}
+			/*style button disabled*/
+			.switch label input[type="checkbox"]:not(:checked) + .lever::after {
+			 	background-color: {DISABLEDBACKGROUNDCOLOR:1};
+			}			
 		</style>
 		<div id="{ID}" class="switch">
 			<label class="{TEXTCOLOR}">
@@ -78,9 +93,11 @@ class inputSwitch extends createClass
 
         $tempHtml = str_replace("{INPUTSWITCH:HTML}", $inputSwitchHtml, $tempHtml);
 
+        dump($activeBackgroundColor);
+        dump($disabledBackgroundColor);
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR:0}", "{BACKGROUNDCOLOR:1}" , "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{NAME}", "{DISABLED}", "{ACTIVE}");
-		$replace = array($id, $textColor, $backgroundColor[0], $backgroundColor[1], $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $name, $disabled, $active);
+		$search = array("{ID}", "{TEXTCOLOR}", "{CLICKBACKGROUNDCOLOR}", "{ACTIVEBACKGROUNDCOLOR:0}", "{ACTIVEBACKGROUNDCOLOR:1}", "{DISABLEDBACKGROUNDCOLOR:0}", "{DISABLEDBACKGROUNDCOLOR:1}","{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{NAME}", "{DISABLED}", "{ACTIVE}");
+		$replace = array($id, $textColor, $clickBackgroundColor, $activeBackgroundColor[0], $activeBackgroundColor[1], $disabledBackgroundColor[0], $disabledBackgroundColor[1], $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $name, $disabled, $active);
 
 
 		$tempHtml = str_replace($search, $replace, $tempHtml);
