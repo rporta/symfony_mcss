@@ -47,7 +47,7 @@ class icon extends createClass
 		$float =  $this->float($this->float);	
 
 		$search = array("{ID}", "{SIZE}", "{ICON}", "{TEXTCOLOR}", "{SHADOW}", "{CARDPANEL}", "{HOVERABLE}", "{FLOAT}", "{CLASS}");
-		$replace = array("$id}", "{$size}", "{$icon}", "{$textColor}", "{$shadow}", "{$cardPanel}", "{$hoverable}", "{$float}", "{$class}");
+		$replace = array("{$id}", "{$size}", "{$icon}", "{$textColor}", "{$shadow}", "{$cardPanel}", "{$hoverable}", "{$float}", "{$class}");
 		$tempHtml = '<i id="{ID}" class="material-icons {SIZE} {TEXTCOLOR} {SHADOW} 
 {CARDPANEL} {HOVERABLE} {FLOAT} {CLASS}">{ICON}</i>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
