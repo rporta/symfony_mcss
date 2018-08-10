@@ -196,12 +196,11 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$input['name'] = "nombre01";
 
 				$option[] = array('text' => 'soyText1', 'value' => 'soy el valor 1');
-				$option[] = array('text' => 'soyText2', 'value' => 'soy el valor 2');
-				$option[] = array('text' => 'soyText3', 'value' => 'soy el valor 3');
+				$option[] = array('text' => 'soyText2', 'value' => 'soy el valor 2');		
 
 			$input['option'] = $option;
 
-			$input = new AppBundle\Utility\Obj\inputCheckboxes($input);
+			$input = new AppBundle\Utility\Obj\inputSwitch($input);
 
 
 		$form->addObj($input);

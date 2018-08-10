@@ -389,6 +389,12 @@ class createClass
 	protected function disabledInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "disabled";
 	}
+	protected function disabledInputSwitch($arg = NULL){
+		return is_null($arg) ? NULL : "disabled";
+	}
+	protected function activeInputSwitch($arg = NULL){
+		return is_null($arg) ? NULL : "checked";
+	}	
 	protected function dataActive($arg = NULL){
 		return is_null($arg) ? NULL : "data-activates='{$arg}'";
 	}

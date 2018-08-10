@@ -34,8 +34,8 @@ class inputCheckboxes extends createClass
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
 		$this->name = !isset($arg['name']) ? NULL : $arg['name'];			
-		$this->option = !isset($arg['option']) ? NULL : $arg['option'];			
 		$this->mode = !isset($arg['mode']) ? 'default' : $arg['mode'];			
+		$this->option = !isset($arg['option']) ? NULL : $arg['option'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->refreshInfo();			
 	}
@@ -51,7 +51,7 @@ class inputCheckboxes extends createClass
 		$hoverable =  $this->hoverable($this->hoverable);		
 		$name =  $this->nameInputFields($this->name);		
 		$mode =  $this->modeInputCheckboxes($this->mode);
-		$inputRadioButtonsHtml = $this->getOptions($this->option);
+		$inputCheckboxesButtonsHtml = $this->getOptions($this->option);
 
 		$tempHtml = 
 		'<style>
@@ -75,10 +75,10 @@ class inputCheckboxes extends createClass
 
 		</style>
 		<div id="{ID}">
-			{INPUTRADIOBUTTONS:HTML}
+			{INPUTCHECKBOXESBUTTONS:HTML}
         </div>';
 
-        $tempHtml = str_replace("{INPUTRADIOBUTTONS:HTML}", $inputRadioButtonsHtml, $tempHtml);
+        $tempHtml = str_replace("{INPUTCHECKBOXESBUTTONS:HTML}", $inputCheckboxesButtonsHtml, $tempHtml);
 
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}");
