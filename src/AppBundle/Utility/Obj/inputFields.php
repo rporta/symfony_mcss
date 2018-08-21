@@ -35,6 +35,7 @@ class inputFields extends createClass
 		$this->type = 'InputFields';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
+		$this->activeBackgroundColor = !isset($arg['activeBackgroundColor']) ? 'green,3' : $arg['activeBackgroundColor'];
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
@@ -56,7 +57,9 @@ class inputFields extends createClass
 	public function refreshInfo(){
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
+		$hexColor =  $this->hexColors($this->textColor);
 		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
+		$activeBackgroundColor =  $this->hexColors($this->activeBackgroundColor);
 		$text = $this->text;
 		$textAling =  $this->textAling($this->textAling);
 		$shadow =  $this->shadow($this->shadow);	
@@ -78,11 +81,26 @@ class inputFields extends createClass
 			$this->js[] =  " $('#{$id}').characterCounter(); ";
 		}
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{PLACEHOLDER}", "{NAME}", "{obj:html}", "{ACTIVE}", "{DISABLED}", "{TEXTERROR}", "{TEXTSUCCESS}", "{CHARACTERCOUNTER}", "{VALUE}");
-		$replace = array($id, $textColor, $backgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $placeholder, $name, $objHtml, $active, $disabled, $textError, $textSuccess, $characterCounter, $value);
+		$search = array("{ID}", "{TEXTCOLOR}", "{HEXCOLOR}", "{BACKGROUNDCOLOR}", "{ACTIVECOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{PLACEHOLDER}", "{NAME}", "{obj:html}", "{ACTIVE}", "{DISABLED}", "{TEXTERROR}", "{TEXTSUCCESS}", "{CHARACTERCOUNTER}", "{VALUE}");
+		$replace = array($id, $textColor, $hexColor, $backgroundColor, $activeBackgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $placeholder, $name, $objHtml, $active, $disabled, $textError, $textSuccess, $characterCounter, $value);
 
 		$tempHtml = 
 		'<div class="input-field">
+			<style>
+				.input-field .prefix.active {
+					color: {ACTIVECOLOR};
+				}
+				input[type="{MODE}"]:not(.browser-default):focus:not([readonly]) + label{
+					color: {ACTIVECOLOR};
+				}
+				input[type="{MODE}"]:not(.browser-default):focus:not([readonly]){
+					border-bottom: 1px solid {HEXCOLOR};
+					box-shadow: 0 1px 0 0 {HEXCOLOR};
+				}
+				input[type="{MODE}"]:not(.browser-default){
+					border-bottom: 1px solid {HEXCOLOR};
+				}
+			</style>
 			{obj:html}
 			<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE} {ACTIVE} ">
 			<label {TEXTERROR} {TEXTSUCCESS} for="{TEXT}">{TEXT} </label>
@@ -112,6 +130,8 @@ class inputFields extends createClass
 			if(!empty($this->obj)){
 				foreach ($this->obj as $idObj) {
 					$idObj->class = "prefix";
+					$idObj->textColor = NULL;
+					$idObj->float = NULL;
 					$idObj->refreshInfo();
 					$objHtml[] = $idObj->html;
 				}

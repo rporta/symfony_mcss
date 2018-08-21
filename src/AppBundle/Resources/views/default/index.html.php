@@ -192,16 +192,14 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$input['activeBackgroundColor'] = 'blue,3';
 			$input['textColor'] = 'red,3';
 			$input['text'] = "nombre";
-			$input['mode'] = "1";
+			$input['value'] = "nombre";
+			$input['mode'] = "0";
 			$input['name'] = "nombre01";
 
-				$option[] = array('text' => 'soyText1', 'value' => 'soy el valor 1');
-				$option[] = array('text' => 'soyText2', 'value' => 'soy el valor 2');		
 
-			$input['option'] = $option;
-
-			$input = new AppBundle\Utility\Obj\inputSwitch($input);
-
+			$input = new AppBundle\Utility\Obj\inputFields($input);
+			
+			$input->addObj($icon_1);
 
 		$form->addObj($input);
 
