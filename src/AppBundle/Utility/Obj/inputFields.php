@@ -12,6 +12,7 @@ class inputFields extends createClass
 	public $size;
 	public $textColor;
 	public $backgroundColor;
+	public $activeBackgroundColor;
 	public $text;
 	public $textAling;	
 	public $shadow;	

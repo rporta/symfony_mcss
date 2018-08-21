@@ -197,7 +197,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$input['name'] = "nombre01";
 
 
-			$input = new AppBundle\Utility\Obj\inputFields($input);
+			$input = new AppBundle\Utility\Obj\inputTextarea($input);
 			
 			$input->addObj($icon_1);
 
