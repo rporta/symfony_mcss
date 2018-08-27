@@ -94,7 +94,7 @@ class preloaderFull extends createClass
 		}
 		elseif ($mode == 'circularFlashing'){
 			$size = $this->sizePreloader($this->size);
-			$tempHtml = "<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: absolute; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>";
+			$tempHtml = "<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>";
 			$arrayTempHtml[] = str_replace(array("{ID}" ,"{SIZE}", "{LAYERBACKGROUNDCOLOR}"), array($id, $size, $layerBackgroundColor), $tempHtml);
 			$spinnerColor = array("spinner-blue", "spinner-red", "spinner-yellow", "spinner-green");
 			$i = 0;
@@ -121,7 +121,7 @@ class preloaderFull extends createClass
 			$tempHtml = implode("", $arrayTempHtml);
 		}
 		
-		$this->js[] = $this->createJs($id);
+		// $this->js[] = $this->createJs($id);
 		
 		$this->html = $tempHtml;
 	}
