@@ -121,7 +121,7 @@ class preloaderFull extends createClass
 			$tempHtml = implode("", $arrayTempHtml);
 		}
 		
-		// $this->js[] = $this->createJs($id);
+		$this->js[] = $this->createJs($id);
 		
 		$this->html = $tempHtml;
 	}
