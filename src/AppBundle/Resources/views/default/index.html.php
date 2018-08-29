@@ -191,16 +191,14 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$input['activeBackgroundColor'] = 'blue,3';
 			$input['textColor'] = 'red,3';
-			$input['text'] = "nombre";
-			$input['value'] = "nombre";
+			$input['value'] = "50";
 			$input['mode'] = "0";
 			$input['name'] = "nombre01";
 
 
-			$input = new AppBundle\Utility\Obj\inputTextarea($input);
+			$input = new AppBundle\Utility\Obj\inputRange($input);
 			
-			$input->addObj($icon_1);
-
+			
 		$form->addObj($input);
 
 	$main->addObj($modal);

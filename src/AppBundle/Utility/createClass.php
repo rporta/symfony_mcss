@@ -266,7 +266,20 @@ class createClass
 				break;		
 		}
 		return is_null($arg) ? NULL :$out;
-	}	
+	}
+	protected function modeInputRange($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'noUiSlider':
+				$out = "noUiSlider"; 
+				break;
+			case '1':
+			case 'HTML5 Range':
+				$out = "HTML5 Range"; 
+				break;
+		}
+		return is_null($arg) ? NULL :$out;
+	}		
 	protected function modeInputSelect($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':

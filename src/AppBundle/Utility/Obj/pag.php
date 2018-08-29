@@ -30,6 +30,7 @@ class pag extends createClass
 		"	<head>\n".
 		"		<link href='css/icon.css' rel='stylesheet'>\n".
 		"		<link type='text/css' rel='stylesheet' href='{$css[0]}'  media='screen,projection'/>\n".
+		"		<link type='text/css' rel='stylesheet' href='css/nouislider.css' />\n".
 		"		<meta name='viewport' content='width=device-width, initial-scale=1.0'/>\n".
 		"		{STICKYFOOTER}\n".
 		"	</head>\n".
@@ -37,6 +38,7 @@ class pag extends createClass
 	    "    	{obj:html}\n".
 		"		<script src='js/jquery-3.2.1.min.js'></script>\n".
 		"		<script src='js/materialize.min.js'></script>\n".
+		"		<script src='js/nouislider.js'></script>\n".
 		"		<script >\n".
 		"		$( document ).ready(function() {\n".
 		"			{obj:js}\n".
