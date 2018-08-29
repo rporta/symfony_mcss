@@ -27,8 +27,8 @@ class inputRange extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
-		$this->id = 'InputFields-'.$this->createID(5);
-		$this->type = 'InputFields';
+		$this->id = 'inputRange-'.$this->createID(5);
+		$this->type = 'inputRange';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
 		$this->activeBackgroundColor = !isset($arg['activeBackgroundColor']) ? 'green,3' : $arg['activeBackgroundColor'];
