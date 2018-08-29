@@ -65,10 +65,11 @@ class inputRange extends createClass
 		$disabled =  $this->disabledInputFields($this->disabled);
 		$range = $this->range;
 		$orientation = $this->orientation;
-
+		$value = NULL;
 		if($mode == "noUiSlider"){
-
-			$tempHtml = "<div class='{TEXTCOLOR} {BACKGROUNDCOLOR}' id='{ID}' {NAME}></div>";
+			$style = NULL;
+			if($orientation == 'vertical') $style = "style='height: 200px;'";
+			$tempHtml = "<div $style class='{TEXTCOLOR} {BACKGROUNDCOLOR}' id='{ID}' {NAME}></div>";
 
 			$tempJs = 
 			"var slider = document.getElementById('{ID}');
@@ -97,8 +98,8 @@ class inputRange extends createClass
 			"<p class='range-field'>
 				<input {VALUE} style='border: none;' class='{TEXTCOLOR} {BACKGROUNDCOLOR}' type='range' id='{ID}' min='{RANGE:0}' max='{RANGE:1}' {NAME} />
 			</p>";
+			$value = $this->valueInputFields($this->value);
 		}
-		$value = $this->valueInputFields($this->value);
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{HEXCOLOR}", "{BACKGROUNDCOLOR}", "{ACTIVECOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{ACTIVE}", "{DISABLED}", "{VALUE}", "{RANGE:0}", "{RANGE:1}","{ORIENTATION}");
 		$replace = array($id, $textColor, $hexColor, $backgroundColor, $activeBackgroundColor, $text, $textAling, $shadow, $cardPanel, $hoverable, $mode, $name, $active, $disabled, $value, $range[0], $range[1], $orientation);

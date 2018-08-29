@@ -191,8 +191,9 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$input['activeBackgroundColor'] = 'blue,3';
 			$input['textColor'] = 'red,3';
-			$input['value'] = "50";
+			$input['value'] = array(20,40);
 			$input['mode'] = "0";
+			// $input['orientation'] = "vertical";
 			$input['name'] = "nombre01";
 
 

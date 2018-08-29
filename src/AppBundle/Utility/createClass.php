@@ -394,7 +394,7 @@ class createClass
 		return is_null($arg) ? NULL : "data-length='{$arg}'";
 	}
 	protected function valueInputFields($arg = NULL){
-		return is_null($arg) ? NULL : "value='{$arg}'";
+		return is_null($arg) ? NULL : (is_array($arg) ? "value='{$arg[0]}'" : "value='{$arg}'");
 	}
 	protected function activeInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "active";
