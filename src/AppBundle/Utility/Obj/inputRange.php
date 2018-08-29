@@ -30,7 +30,7 @@ class inputRange extends createClass
 		$this->id = 'inputRange-'.$this->createID(5);
 		$this->type = 'inputRange';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
-		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
+		$this->backgroundColor = !isset($arg['backgroundColor']) ? NULL : $arg['backgroundColor'];
 		$this->activeBackgroundColor = !isset($arg['activeBackgroundColor']) ? 'green,3' : $arg['activeBackgroundColor'];
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
@@ -52,7 +52,8 @@ class inputRange extends createClass
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
 		$hexColor =  $this->hexColors($this->textColor);
-		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
+		$backgroundColor =  $this->hexColors($this->backgroundColor);
+		$hexBackgroundColor =  $this->hexColors($this->backgroundColor);
 		$activeBackgroundColor =  $this->hexColors($this->activeBackgroundColor);
 		$text = $this->text;
 		$textAling =  $this->textAling($this->textAling);
@@ -69,7 +70,16 @@ class inputRange extends createClass
 		if($mode == "noUiSlider"){
 			$style = NULL;
 			if($orientation == 'vertical') $style = "style='height: 200px;'";
-			$tempHtml = "<div $style class='{TEXTCOLOR} {BACKGROUNDCOLOR}' id='{ID}' {NAME}></div>";
+			$tempHtml = 
+			"<style>
+				.noUi-tooltip span{
+					color: {HEXCOLOR} !important;
+				}
+				.noUi-connect, .noUi-target.noUi-{ORIENTATION} .noUi-tooltip, .noUi-{ORIENTATION} .noUi-handle{
+				    background: {HEXBACKGROUNDCOLOR};
+				}
+			</style>
+			<div $style class='{TEXTCOLOR} {BACKGROUNDCOLOR}' id='{ID}' {NAME}></div>";
 
 			$tempJs = 
 			"var slider = document.getElementById('{ID}');
@@ -94,15 +104,24 @@ class inputRange extends createClass
 		}
 		elseif($mode == "HTML5 Range"){
 			$tempJs = NULL;
+			
 			$tempHtml =
-			"<p class='range-field'>
+			"<style>
+				input[type='range'] + .thumb, input[type='range']::-moz-range-thumb{
+				    background: {HEXBACKGROUNDCOLOR};
+				}
+				input[type='range'] + .thumb .value{
+					color: {HEXCOLOR} !important;				
+				}
+			</style>
+			<p class='range-field'>
 				<input {VALUE} style='border: none;' class='{TEXTCOLOR} {BACKGROUNDCOLOR}' type='range' id='{ID}' min='{RANGE:0}' max='{RANGE:1}' {NAME} />
 			</p>";
 			$value = $this->valueInputFields($this->value);
 		}
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{HEXCOLOR}", "{BACKGROUNDCOLOR}", "{ACTIVECOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{ACTIVE}", "{DISABLED}", "{VALUE}", "{RANGE:0}", "{RANGE:1}","{ORIENTATION}");
-		$replace = array($id, $textColor, $hexColor, $backgroundColor, $activeBackgroundColor, $text, $textAling, $shadow, $cardPanel, $hoverable, $mode, $name, $active, $disabled, $value, $range[0], $range[1], $orientation);
+		$search = array("{ID}", "{TEXTCOLOR}", "{HEXCOLOR}", "{HEXBACKGROUNDCOLOR}","{BACKGROUNDCOLOR}", "{ACTIVECOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{ACTIVE}", "{DISABLED}", "{VALUE}", "{RANGE:0}", "{RANGE:1}","{ORIENTATION}");
+		$replace = array($id, $textColor, $hexColor, $hexBackgroundColor, $backgroundColor, $activeBackgroundColor, $text, $textAling, $shadow, $cardPanel, $hoverable, $mode, $name, $active, $disabled, $value, $range[0], $range[1], $orientation);
 
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 		$tempJs = str_replace($search, $replace, $tempJs);

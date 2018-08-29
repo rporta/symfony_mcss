@@ -189,8 +189,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form = new AppBundle\Utility\Obj\form($form);
 
 
-			$input['activeBackgroundColor'] = 'blue,3';
 			$input['textColor'] = 'red,3';
+			$input['backgroundColor'] = 'blue,3';
 			$input['value'] = array(20,40);
 			$input['mode'] = "0";
 			// $input['orientation'] = "vertical";
