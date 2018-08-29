@@ -9,7 +9,6 @@ class inputFields extends createClass
 	public $id;
 	public $type;
 	public $html;
-	public $size;
 	public $textColor;
 	public $backgroundColor;
 	public $activeBackgroundColor;
