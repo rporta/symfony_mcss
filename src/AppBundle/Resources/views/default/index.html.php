@@ -188,10 +188,11 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form['method'] = "POST";
 		$form = new AppBundle\Utility\Obj\form($form);
 
+			$input['backgroundColor'] = "red,6";
 			$input['name'] = "nombre01";
 			$input['text'] = "archivo";
 
-			$input = new AppBundle\Utility\Obj\inputTimePicker($input);
+			$input = new AppBundle\Utility\Obj\inputButton($input);
 	
 			
 		$form->addObj($input);

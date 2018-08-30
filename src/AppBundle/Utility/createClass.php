@@ -267,6 +267,22 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}
+	protected function submitInputButton($arg){
+		return is_null($arg) ? NULL :  "type='submit'";
+	}	
+	protected function modeInputinputButton($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'a':
+				$out = "a"; 
+				break;
+			case '1':
+			case 'button':
+				$out = "button"; 
+				break;
+		}
+		return is_null($arg) ? NULL :$out;
+	}	
 	protected function modeInputRange($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
@@ -356,6 +372,12 @@ class createClass
 	}
 	protected function cardPanel($arg = NULL){
 		return is_null($arg) ? NULL :  "card-panel";
+	}
+	protected function largeInputButton($arg = NULL){
+		return is_null($arg) ? NULL :  "btn-large";
+	}
+	protected function floatingInputButton($arg = NULL){
+		return is_null($arg) ? NULL :  "btn-floating";
 	}
 	protected function container($arg = NULL){
 		return is_null($arg) ? NULL : "container";
