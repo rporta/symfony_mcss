@@ -387,6 +387,9 @@ class createClass
 	protected function textErrorInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "data-error='{$arg}'";
 	}
+	protected function multipleInputFile($arg = NULL){
+		return is_null($arg) ? NULL : "multiple";
+	}
 	protected function textSuccessInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "data-success='{$arg}'";
 	}
