@@ -189,15 +189,17 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form = new AppBundle\Utility\Obj\form($form);
 
 
-			$input['textColor'] = 'red,3';
+			$input['textColor'] = 'blue,3';
 			$input['backgroundColor'] = 'blue,3';	
+			$input['activeBackgroundColor'] = 'blue,5';	
 			$input['name'] = "nombre01";
 			$input['text'] = "archivo";
-			$input['multiple'] = TRUE;
+			$input['dataAutoComplete'] = array('google' => NULL, 'mcss'=> NULL);
 
 
-			$input = new AppBundle\Utility\Obj\inputFile($input);
+			$input = new AppBundle\Utility\Obj\inputAutocomplete($input);
 			
+			$input->addObj($icon_1);
 			
 		$form->addObj($input);
 
