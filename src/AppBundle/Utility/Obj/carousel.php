@@ -4,7 +4,7 @@ namespace AppBundle\Utility\Obj;
 
 use AppBundle\Utility\createClass;
 
-class row extends createClass
+class carousel extends createClass
 {
 	public $id;
 	public $type;
@@ -23,8 +23,8 @@ class row extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
-		$this->type = 'row';
-		$this->id = 'row-'.$this->createID(5);
+		$this->type = 'carousel';
+		$this->id = 'carousel-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? NULL : $arg['backgroundColor'];
 		$this->container = !isset($arg['container']) ? NULL : $arg['container'];
@@ -35,7 +35,9 @@ class row extends createClass
 		$this->truncate = !isset($arg['truncate']) ? NULL : $arg['truncate'];			
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];	
-		$this->js = !isset($arg['js']) ? array() : array($arg['js']);		
+		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->fullHeight = !isset($arg['fullHeight']) ? NULL : $arg['fullHeight'];	
+		$this->indicators = !isset($arg['indicators']) ? NULL : $arg['indicators'];	
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
@@ -50,16 +52,23 @@ class row extends createClass
 		$truncate =  $this->truncate($this->truncate);		
 		$cardPanel =  $this->cardPanel($this->cardPanel);		
 		$hoverable =  $this->hoverable($this->hoverable);		
+		$indicators =  $this->indicatorCarousel($this->indicators);
+		$fullHeight = is_null($this->fullHeight) ? 'position: absolute;' : 'position: fixed;';
+
 		$objHtml = $this->getObj('html');
 		
+
 		$this->getObj('js');
 
-		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}");
-		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}");
-		$tempHtml = '<div id="{ID}" class="row {TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">{obj:html}</div>';
+		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{INDICATORS}", "{FULLHEIGHT}");
+		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}", "{$indicators}", "{$fullHeight}");
+		$tempHtml = '<div id="{ID}" class="carousel carousel-slider {TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}" style="height: 100%; z-index: -1; {FULLHEIGHT}" {INDICATORS}>{obj:html}</div>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
+
 		$this->html = $tempHtml;
+		$this->js[] = " $('.carousel.carousel-slider').carousel({fullWidth: true}); ";
+		// $this->js[] = " $('#{$id}').carousel({fullWidth: true}); ";
 	}
 	public function addObj($obj){
 		$this->obj[] = $obj;
@@ -81,7 +90,8 @@ class row extends createClass
 		if($arg == 'html'){
 			if(!empty($this->obj)){
 				foreach ($this->obj as $idObj) {
-					$objHtml[] = $idObj->html;
+					$tmp = str_replace("<div ", "<div style='position: relative; width: 100%; height: 100%;' ", $idObj->html);			
+					$objHtml[] = "<div class='carousel-item'>".$tmp."</div>";
 				}
 				$objHtml = implode("", $objHtml);
 			}

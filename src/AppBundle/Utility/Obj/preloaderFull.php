@@ -131,4 +131,10 @@ class preloaderFull extends createClass
 		$js = " setTimeout(function(){".$code."},1000); ";
 		return $js;
 	}
+	public function refreshId(){
+		$type = $this->type;
+		$id = $this->createID(5);
+		$this->id = "{$type}-{$id}";
+	}
+
 }

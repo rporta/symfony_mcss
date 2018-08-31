@@ -58,5 +58,11 @@ class badge extends createClass
 
 		$this->html = $tempHtml;
 	}
+	public function refreshId(){
+		$type = $this->type;
+		$id = $this->createID(5);
+		$this->id = "{$type}-{$id}";
+	}
+	
 }
 

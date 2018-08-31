@@ -352,6 +352,19 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
+	protected function modeChip($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'Contactos':
+				$out = "Contactos"; 
+				break;
+			case '1':
+			case 'Etiquetas':
+				$out = "Etiquetas"; 
+				break;		
+		}
+		return is_null($arg) ? NULL :$out;
+	}	
 	protected function truncate($arg = NULL){
 		return is_null($arg) ? NULL :  "truncate";
 	}
@@ -426,6 +439,9 @@ class createClass
 	}
 	protected function disabledInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "disabled";
+	}
+	protected function indicatorCarousel($arg = NULL){
+		return is_null($arg) ? NULL : " data-indicators='true' ";
 	}
 	protected function disabledInputSwitch($arg = NULL){
 		return is_null($arg) ? NULL : "disabled";

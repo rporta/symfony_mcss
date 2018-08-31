@@ -101,6 +101,7 @@ class pag extends createClass
 						}
 					}
 				}
+				$objJs = array_unique($objJs);
 				if(isset($objJs)) return implode("\n\t\t\t", $objJs);
 			}
 			else{
@@ -130,5 +131,10 @@ class pag extends createClass
 				}
 			}
 		}
+	}
+	public function refreshId(){
+		$type = $this->type;
+		$id = $this->createID(5);
+		$this->id = "{$type}-{$id}";
 	}
 }

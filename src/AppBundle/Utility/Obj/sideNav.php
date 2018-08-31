@@ -139,6 +139,12 @@ class sideNav extends createClass
 				if(isset($objHtml)) return implode("", $objHtml);
 			}
 		}
-	}	
+	}
+	public function refreshId(){
+		$type = $this->type;
+		$id = $this->createID(5);
+		$this->id = "{$type}-{$id}";
+	}
+
 }
 

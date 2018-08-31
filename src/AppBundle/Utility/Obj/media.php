@@ -68,4 +68,10 @@ class media extends createClass
 			}
 		}
 	}
+	public function refreshId(){
+		$type = $this->type;
+		$id = $this->createID(5);
+		$this->id = "{$type}-{$id}";
+	}
+
 }
