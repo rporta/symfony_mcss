@@ -53,7 +53,7 @@ class carousel extends createClass
 		$cardPanel =  $this->cardPanel($this->cardPanel);		
 		$hoverable =  $this->hoverable($this->hoverable);		
 		$indicators =  $this->indicatorCarousel($this->indicators);
-		$fullHeight = is_null($this->fullHeight) ? 'position: absolute;' : 'position: fixed;';
+		$fullHeight = is_null($this->fullHeight) ? NULL : 'position: fixed; z-index: -1;';
 
 		$objHtml = $this->getObj('html');
 		
@@ -62,7 +62,7 @@ class carousel extends createClass
 
 		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{INDICATORS}", "{FULLHEIGHT}");
 		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}", "{$indicators}", "{$fullHeight}");
-		$tempHtml = '<div id="{ID}" class="carousel carousel-slider {TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}" style="height: 100%; z-index: -1; {FULLHEIGHT}" {INDICATORS}>{obj:html}</div>';
+		$tempHtml = '<div id="{ID}" class="carousel carousel-slider {TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}" style="height: 100%; {FULLHEIGHT}" {INDICATORS}>{obj:html}</div>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 
@@ -91,6 +91,7 @@ class carousel extends createClass
 			if(!empty($this->obj)){
 				foreach ($this->obj as $idObj) {
 					$tmp = str_replace("<div ", "<div style='position: relative; width: 100%; height: 100%;' ", $idObj->html);			
+					// $tmp =  $idObj->html;			
 					$objHtml[] = "<div class='carousel-item'>".$tmp."</div>";
 				}
 				$objHtml = implode("", $objHtml);
