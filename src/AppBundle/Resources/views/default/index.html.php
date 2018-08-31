@@ -1,6 +1,9 @@
 <?php
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
+
+		$br['repeat'] = 1;
+		$br = new AppBundle\Utility\Obj\br($br);
 	
 	$preloaderFull['layerBackgroundColor'] = 'b-w-t,0';
 	$preloaderFull['backgroundColor'] = array('purple,5', 'blue,3');
@@ -12,21 +15,45 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$carrousel = new AppBundle\Utility\Obj\carousel();
 
-			$div['backgroundColor'] = 'green,3';
+			$div['backgroundColor'] = 'blue,3';
 			$div = new AppBundle\Utility\Obj\div($div);
 
 			$div2 = clone $div;
-			$div2->backgroundColor = "green,5";
-			$div2->refreshInfo();
-
-
 			$div3 = clone $div;
-			$div3->backgroundColor = "green,8";
+			$div4 = clone $div;
+
+			$conteiner = new AppBundle\Utility\Obj\container();		
+
+				$p['text'] = "Hola soy P1";
+				$p = new AppBundle\Utility\Obj\p($p);
+
+				$conteiner->addObj($p);
+				$conteiner->addObj($br);
+				$conteiner->addObj($p);
+				$conteiner->addObj($br);
+				$conteiner->addObj($p);
+				$conteiner->addObj($br);
+
+			$div->addObj($conteiner);
+
+
+			$div2->backgroundColor = "blue,5";
+			$div2->refreshInfo();
+			$div2->addObj($conteiner);
+
+
+			$div3->backgroundColor = "blue,8";
 			$div3->refreshInfo();
+			$div3->addObj($conteiner);
+
+			$div4->backgroundColor = "blue,10";
+			$div4->refreshInfo();
+			$div4->addObj($conteiner);
 
 		$carrousel->addObj($div);
 		$carrousel->addObj($div2);
 		$carrousel->addObj($div3);
+		$carrousel->addObj($div4);
 
 		$nav['backgroundColor'] = 'blue,8';
 		$nav['float'] = 'r';
@@ -130,8 +157,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$footer['stickyfooter'] = true;
 	$footer = new AppBundle\Utility\Obj\footer($footer);
 
-		$br['repeat'] = 1;
-		$br = new AppBundle\Utility\Obj\br($br);
+
 
 	$footer->addObj($br);
 	$footer->addObj($br);
