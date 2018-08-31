@@ -191,9 +191,13 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$input['backgroundColor'] = "red,6";
 			$input['name'] = "nombre01";
 			$input['text'] = "archivo";
+			$input['waves'] = "1";
 
 			$input = new AppBundle\Utility\Obj\inputButton($input);
-	
+			$icon_1->float = 'l';
+			$icon_1->textColor = 'blue,3';
+			$icon_1->refreshInfo();
+			$input->addObj($icon_1);
 			
 		$form->addObj($input);
 

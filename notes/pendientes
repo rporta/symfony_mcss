@@ -1,9 +1,16 @@
 pendientes :
 
-	en Form :
-
-		Range
-		date Picker
-		time Picker
-		Autocomplete 
-		File Input Button 
+	chips
+	cards
+	carrousel
+	dialog
+	FeatureDiscovery
+	media:
+		Material Box
+		Slider
+	Parallax
+	pushpin
+	ScrollFire
+	Scrollspy
+	tabs
+	Transitions
