@@ -170,7 +170,7 @@ class createClass
 		}
 	}
 	protected function sizeIcon($arg = 0){
-		$size = "Tiny,Small,Medium,Large";
+		$size = "tiny,small,medium,large";
 		$size = explode(",", $size);
 		$arg = is_null($arg) ? 0 :$arg;
 		switch (strtolower((string)$arg)) {
@@ -193,6 +193,26 @@ class createClass
 		}
 		return $out;
 	}
+	protected function sizeCard($arg = 0){
+		$size = "small,medium,large";
+		$size = explode(",", $size);
+		$arg = is_null($arg) ? 0 :$arg;
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 's':
+				$out = $size[0];
+				break;
+			case '1':
+			case 'm':
+				$out = $size[1];
+				break;
+			case '2':
+			case 'l':
+				$out = $size[2];
+				break;
+		}
+		return $out;
+	}	
 	protected function sizePreloader($arg = 0){
 		$size = array("small", "medium", "big");
 		$arg = is_null($arg) ? 0 :$arg;
@@ -233,6 +253,32 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}
+	protected function modeCard($arg){
+		switch (strtolower((string)$arg)) {
+			case '0':
+			case 'basic':
+				$out = "basic"; 
+				break;
+			case '1':
+			case 'reveal':
+				$out = "reveal"; 
+				break;			
+		}
+		return is_null($arg) ? NULL :$out;
+	}
+	protected function orientationCard($arg){
+		switch (strtolower((string)$arg)) {
+			// case 'v':
+			// case 'vertical':
+			// 	$out = "vertical"; 
+			// 	break;
+			case 'h':
+			case 'horizontal':
+				$out = "horizontal"; 
+				break;			
+		}
+		return is_null($arg) ? NULL :$out;
+	}	
 	protected function modePreloader($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':

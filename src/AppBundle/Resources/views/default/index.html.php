@@ -150,7 +150,28 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 
 
-	$main->addObj($carrousel);
+	//$main->addObj($carrousel);
+	
+		$card['backgroundColor'] = "red,6";
+		$card = new AppBundle\Utility\Obj\card($card);
+
+			$titulo['textColor'] = 'red,3';
+			$titulo['text'] = 'soy titulo';
+			$titulo['size'] = '4';
+			$titulo = new AppBundle\Utility\Obj\h($titulo);
+			
+
+			$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
+			$media = new AppBundle\Utility\Obj\media($media);
+
+			dump($media);
+
+		$card->addObjImg($media);
+		$card->addObjImg($titulo);
+		$card->addObjContent($titulo);
+		$card->addObjContent($p);
+
+	$main->addObj($card);
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
@@ -165,5 +186,5 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 $pag->addObj($preloaderFull);
 $pag->addObj($header);
 $pag->addObj($main);
-// $pag->addObj($footer);
+$pag->addObj($footer);
 $pag->render();

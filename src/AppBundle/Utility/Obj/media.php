@@ -1,5 +1,9 @@
 <?php 
 
+namespace AppBundle\Utility\Obj;
+
+use AppBundle\Utility\createClass;
+
 class media extends createClass
 {
 	public $id;
@@ -12,7 +16,7 @@ class media extends createClass
 	public $mode;
 	public $js;
 	
-	function __construct($array = null)
+	function __construct($arg = null)
 	{
 		$this->id = 'media-'.$this->createID(5);
 		$this->type = 'media';
