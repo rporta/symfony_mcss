@@ -174,11 +174,25 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$card->addObjContent($p);
 		$card->addObjReveal($p);
 
-	$parallax = new AppBundle\Utility\Obj\parallax();
-	$parallax->addObj($media);
+	$tab = new AppBundle\Utility\Obj\tab();
+
+	$a_xx['textColor'] = 'grey,9';
+	$a_xx['text'] = 'btn 2';
+	$a_xx = new AppBundle\Utility\Obj\a($a_xx);
+
+	$a_xxx['textColor'] = 'grey,9';
+	$a_xxx['text'] = 'btn 2x';
+	$a_xxx = new AppBundle\Utility\Obj\a($a_xxx);
+
+	$tab->addHead($a_xx);
+	$tab->addHead($a_xx);
+	$tab->addHead($a_xx);
+	$tab->addCol($a_xxx);
+	$tab->addCol($a_xx);
+	$tab->addCol($a_xx);
 
 	$main->addObj($card);
-	$main->addObj($parallax);
+	$main->addObj($tab);
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
