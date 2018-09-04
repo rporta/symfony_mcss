@@ -394,6 +394,10 @@ class createClass
 				$out = "img"; 
 				break;
 			case '1':
+			case 'MaterialBox':
+				$out = "MaterialBox"; 
+				break;	
+			case '2':
 			case 'video':
 				$out = "video"; 
 				break;		

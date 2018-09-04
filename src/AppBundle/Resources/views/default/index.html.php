@@ -176,13 +176,21 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 	$main->addObj($card);
 
+		$divContent['textAling'] = 'c';
+		$divContent = new AppBundle\Utility\Obj\div($divContent);
+		
 			$a_fff['toast'] = 'fafafa';
 			$a_fff['class'] = 'btn';
 			$a_fff['textColor'] = 'grey,9';
 			$a_fff['text'] = 'btn 1';
 			$a_fff = new AppBundle\Utility\Obj\a($a_fff);
-	
-	$main->addObj($a_fff);
+		
+		$divContent->addObj($a_fff);
+
+	$main->addObj($br);
+	$main->addObj($divContent);
+	$main->addObj($br);
+	$main->addObj($br);
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";

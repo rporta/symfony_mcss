@@ -44,6 +44,19 @@ class media extends createClass
 			
 			$this->html = $tempHtml;
 		}
+		elseif ($mode == 'MaterialBox'){
+			$circle = $this->circle($this->circle);
+			$responsive = $this->responsiveImg($this->responsive);
+			$src = $this->srcMedia($this->src);
+			$alt = $this->altMedia($this->alt);
+
+			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}");
+			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}");
+			$tempHtml = "<img class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT}>";
+			$tempHtml = str_replace($search, $replace, $tempHtml);
+			
+			$this->html = $tempHtml;
+		}		
 		elseif ($mode == 'video'){
 			$src = $this->srcMedia($this->src);
 			if ($this->_embeds == FALSE){

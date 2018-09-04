@@ -1,11 +1,12 @@
 pendientes :
 
 	chips
-	dialog
-	FeatureDiscovery
 	media:
 		Material Box
 		Slider
+
+	dialog
+	FeatureDiscovery
 	pushpin
 	ScrollFire
 	Scrollspy
