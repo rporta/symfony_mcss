@@ -154,8 +154,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$rowContent['textAling'] = 'c';
 		$rowContent = new AppBundle\Utility\Obj\row($rowContent);	
 			
-			$coli['s'] = 4;
-			$coli['m'] = 4;
+			$coli['s'] = 12;
+			$coli['m'] = 12;
 			$coli['l'] = 4;
 			$coli['xl'] = 4;
 			$coli = new AppBundle\Utility\Obj\col($coli);
@@ -185,9 +185,12 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$card->addObjReveal($p);
 
 			$colm->addObj($card);
+		
 		$rowContent->addObj($coli);
 		$rowContent->addObj($colm);
 		$rowContent->addObj($cold);
+
+	$main->addObj($br);
 	$main->addObj($rowContent);
 
 		$divContent['textAling'] = 'c';

@@ -1,13 +1,12 @@
 pendientes :
 
-	chips
 	media:
-		Material Box
 		Slider
+	chips
+	FeatureDiscovery
+	ScrollFire
 
 	dialog
-	FeatureDiscovery
 	pushpin
-	ScrollFire
 	Scrollspy
 	Transitions
