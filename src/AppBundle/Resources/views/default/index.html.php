@@ -174,7 +174,11 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$card->addObjContent($p);
 		$card->addObjReveal($p);
 
+	$parallax = new AppBundle\Utility\Obj\parallax();
+	$parallax->addObj($media);
+
 	$main->addObj($card);
+	$main->addObj($parallax);
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
