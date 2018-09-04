@@ -96,6 +96,9 @@ class createClass
 		}
 
 	}
+	protected function toast($arg = NULL, $arg2 = 4000){
+		return is_null($arg) ? NULL : $tmp = "Materialize.toast('{$arg}', {$arg2});";
+	}
 	protected function float($arg = NULL){
 		switch (strtolower((string)$arg)) {
 			case "0":

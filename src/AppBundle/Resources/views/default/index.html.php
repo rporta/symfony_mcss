@@ -153,8 +153,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	//$main->addObj($carrousel);
 	
 		$card['mode'] = "1";
-		$card['backgroundColor'] = "red,6";
-		$card['orientation'] = "h";
+		// $card['backgroundColor'] = "red,6";
+		// $card['orientation'] = "h";
 		$card['size'] = "1";
 		$card = new AppBundle\Utility\Obj\card($card);
 
@@ -174,25 +174,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$card->addObjContent($p);
 		$card->addObjReveal($p);
 
-	$tab = new AppBundle\Utility\Obj\tab();
-
-	$a_xx['textColor'] = 'grey,9';
-	$a_xx['text'] = 'btn 2';
-	$a_xx = new AppBundle\Utility\Obj\a($a_xx);
-
-	$a_xxx['textColor'] = 'grey,9';
-	$a_xxx['text'] = 'btn 2x';
-	$a_xxx = new AppBundle\Utility\Obj\a($a_xxx);
-
-	$tab->addHead($a_xx);
-	$tab->addHead($a_xx);
-	$tab->addHead($a_xx);
-	$tab->addCol($a_xxx);
-	$tab->addCol($a_xx);
-	$tab->addCol($a_xx);
-
 	$main->addObj($card);
-	$main->addObj($tab);
+
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";

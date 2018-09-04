@@ -32,7 +32,7 @@ class card extends createClass
 		$this->type = 'card';
 		$this->id = 'card-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
-		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
+		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,1' : $arg['backgroundColor'];
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
