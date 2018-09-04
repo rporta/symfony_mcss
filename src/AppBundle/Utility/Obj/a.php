@@ -23,6 +23,7 @@ class a extends createClass
 	public $waves;
 	public $valign;
 	public $obj;
+	public $toast;
 
 	public function __construct($arg = NULL){
 		$this->id = 'a-'.$this->createID(5);
@@ -39,6 +40,7 @@ class a extends createClass
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];
+		$this->toast = !isset($arg['toast']) ? NULL : $arg['toast'];
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
@@ -55,7 +57,13 @@ class a extends createClass
 		$class = $this->class;
 		$waves = $this->waves($this->waves);
 		$objHtml = $this->getObj('html');
+		$toast = $this->toast($this->toast);
+		
 		$this->getObj('js');		
+		
+		if(!is_null($toast)){
+			$this->js[] = "$( '#$id' ).click(function() {".$toast."});";
+		}
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}");
 		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}");
