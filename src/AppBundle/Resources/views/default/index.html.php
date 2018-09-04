@@ -151,30 +151,44 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 
 	//$main->addObj($carrousel);
-	
-		$card['mode'] = "1";
-		// $card['backgroundColor'] = "red,6";
-		// $card['orientation'] = "h";
-		$card['size'] = "1";
-		$card = new AppBundle\Utility\Obj\card($card);
-
-			$titulo['textColor'] = 'red,3';
-			$titulo['text'] = 'soy titulo';
-			$titulo['size'] = '4';
-			$titulo = new AppBundle\Utility\Obj\h($titulo);
+		$rowContent['textAling'] = 'c';
+		$rowContent = new AppBundle\Utility\Obj\row($rowContent);	
 			
+			$coli['s'] = 4;
+			$coli['m'] = 4;
+			$coli['l'] = 4;
+			$coli['xl'] = 4;
+			$coli = new AppBundle\Utility\Obj\col($coli);
+			$colm = clone $coli;
+			$cold = clone $coli;
 
-			$media['responsive'] = true;
-			$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
-			$media = new AppBundle\Utility\Obj\media($media);
+				$card['mode'] = "1";
+				// $card['backgroundColor'] = "red,6";
+				// $card['orientation'] = "h";
+				$card['size'] = "1";
+				$card = new AppBundle\Utility\Obj\card($card);
 
-		$card->addObjImg($media);
-		$card->addObjImg($titulo);
-		$card->addObjContent($titulo);
-		$card->addObjContent($p);
-		$card->addObjReveal($p);
+					$titulo['textColor'] = 'red,3';
+					$titulo['text'] = 'soy titulo';
+					$titulo['size'] = '4';
+					$titulo = new AppBundle\Utility\Obj\h($titulo);
+					
 
-	$main->addObj($card);
+					$media['responsive'] = true;
+					$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
+					$media = new AppBundle\Utility\Obj\media($media);
+
+				$card->addObjImg($media);
+				$card->addObjImg($titulo);
+				$card->addObjContent($titulo);
+				$card->addObjContent($p);
+				$card->addObjReveal($p);
+
+			$colm->addObj($card);
+		$rowContent->addObj($coli);
+		$rowContent->addObj($colm);
+		$rowContent->addObj($cold);
+	$main->addObj($rowContent);
 
 		$divContent['textAling'] = 'c';
 		$divContent = new AppBundle\Utility\Obj\div($divContent);

@@ -59,7 +59,7 @@ class col extends createClass
 		$textAling =  $this->textAling($this->textAling);	
 		$float =  $this->float($this->float);	
 		$shadow =  $this->shadow($this->shadow);	
-		$truncate =  $this->truncate($this->truncaten);
+		$truncate =  $this->truncate($this->truncate);
 		$cardPanel =  $this->cardPanel($this->cardPanel);		
 		$hoverable =  $this->hoverable($this->hoverable);		
 		$objHtml = $this->getObj('html');
@@ -68,8 +68,8 @@ class col extends createClass
 
 		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}");
 		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}");
-		array_push($search, array("{S}", "{M}", "{L}", "{XL}"));
-		array_push($replace, array("{$s}", "{$m}", "{$l}", "{$xl}"));
+		array_push($search, "{S}", "{M}", "{L}", "{XL}");
+		array_push($replace, "{$s}", "{$m}", "{$l}", "{$xl}");
 		$tempHtml = '<div id="{ID}" class="col s{S} m{M} l{L} xl{XL} {TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">{obj:html}</div>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
