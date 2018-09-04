@@ -7,7 +7,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	
 	$preloaderFull['layerBackgroundColor'] = 'b-w-t,0';
 	$preloaderFull['backgroundColor'] = array('purple,5', 'blue,3');
-	$preloaderFull['mode'] = "2";
+	$preloaderFull['mode'] = "0";
 	$preloaderFull = new AppBundle\Utility\Obj\preloaderFull($preloaderFull);
 
 	$header['backgroundColor'] = "blue,8";
@@ -163,8 +163,6 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
 			$media = new AppBundle\Utility\Obj\media($media);
-
-			dump($media);
 
 		$card->addObjImg($media);
 		$card->addObjImg($titulo);

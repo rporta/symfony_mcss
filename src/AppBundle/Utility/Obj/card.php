@@ -179,7 +179,12 @@ class card extends createClass
 		if($arg == 'html:img'){
 			if(!empty($this->objImg)){
 				foreach ($this->objImg as $idObj) {
-					if($idObj->type == 'h' || $idObj->type == 'span' || $idObj->type == 'p' || $idObj->type == 'pre' ) {
+					if(
+						$idObj->type == 'h' || 
+						$idObj->type == 'span' || 
+						$idObj->type == 'p' || 
+						$idObj->type == 'pre' 
+					) {
 						$objHtml[] = str_replace('class="', 'class="card-title ', $idObj->html);
 					}
 					else{
