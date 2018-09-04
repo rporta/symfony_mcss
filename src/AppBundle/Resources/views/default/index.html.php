@@ -152,7 +152,10 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 	//$main->addObj($carrousel);
 	
+		$card['mode'] = "1";
 		$card['backgroundColor'] = "red,6";
+		$card['orientation'] = "h";
+		$card['size'] = "1";
 		$card = new AppBundle\Utility\Obj\card($card);
 
 			$titulo['textColor'] = 'red,3';
@@ -161,6 +164,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$titulo = new AppBundle\Utility\Obj\h($titulo);
 			
 
+			$media['responsive'] = true;
 			$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
 			$media = new AppBundle\Utility\Obj\media($media);
 
@@ -168,6 +172,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$card->addObjImg($titulo);
 		$card->addObjContent($titulo);
 		$card->addObjContent($p);
+		$card->addObjReveal($p);
 
 	$main->addObj($card);
 

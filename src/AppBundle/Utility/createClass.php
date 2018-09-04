@@ -193,10 +193,9 @@ class createClass
 		}
 		return $out;
 	}
-	protected function sizeCard($arg = 0){
+	protected function sizeCard($arg = NULL){
 		$size = "small,medium,large";
 		$size = explode(",", $size);
-		$arg = is_null($arg) ? 0 :$arg;
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 's':
@@ -211,7 +210,7 @@ class createClass
 				$out = $size[2];
 				break;
 		}
-		return $out;
+		return is_null($arg) ? NULL : $out;
 	}	
 	protected function sizePreloader($arg = 0){
 		$size = array("small", "medium", "big");

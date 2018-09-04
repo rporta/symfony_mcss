@@ -42,11 +42,12 @@ class card extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
 		$this->orientation = !isset($arg['orientation']) ? NULL : $arg['orientation'];	
 		$this->mode = !isset($arg['mode']) ? '0' : $arg['mode'];
-		$this->size = !isset($arg['size']) ? NULL : $arg['size'];
+		$this->size = !isset($arg['size']) ? '1' : $arg['size'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
+
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
 		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
@@ -60,14 +61,10 @@ class card extends createClass
 		$orientation = $this->orientationCard($this->orientation);
 		$mode =  $this->modeCard($this->mode);		
 		$size =  $this->sizeCard($this->size);
-
 		$objImg = $this->getObj('html:img');
 		$objReveal = $this->getObj('html:reveal');
 		$objContent = $this->getObj('html:content');
 		$objAction = $this->getObj('html:action');
-
-
-
 
 		$this->getObj('js');
 		
@@ -76,7 +73,7 @@ class card extends createClass
 
 		if($mode == "basic"){
 
-			$tempHtml[] = '<div id="{ID}" class="card {VALIGN} {TEXTALING} {FLOAT} {ORIENTATION} {SIZE} {BACKGROUNDCOLOR} {TEXTCOLOR} {SHADOW} {CARDPANEL} {HOVERABLE} {TRUNCATE}">';
+			$tempHtml[] = '<div id="{ID}" style="margin:0% auto;" class="card {VALIGN} {TEXTALING} {FLOAT} {ORIENTATION} {SIZE} {BACKGROUNDCOLOR} {TEXTCOLOR} {SHADOW} {CARDPANEL} {HOVERABLE} {TRUNCATE}">';
 
 			if(!is_null($objImg)) $tempHtml[] = '<div class="card-image">{OBJHTML:IMG}</div>'	;
 
@@ -97,12 +94,22 @@ class card extends createClass
 
 		}
 		if($mode == "reveal"){
-			$tempHtml[] = '<div id="{ID}" class="card {VALIGN} {TEXTALING} {FLOAT} {SIZE} {BACKGROUNDCOLOR} {TEXTCOLOR} {SHADOW} {CARDPANEL} {HOVERABLE} {TRUNCATE}">';
+			$tempHtml[] = '<div id="{ID}" style="margin:0% auto;" class="card {VALIGN} {TEXTALING} {FLOAT} {SIZE} {BACKGROUNDCOLOR} {ORIENTATION} {TEXTCOLOR} {SHADOW} {CARDPANEL} {HOVERABLE} {TRUNCATE}">';
 
-			if(!is_null($objImg)) $tempHtml[] = '<div class="card-image">{OBJHTML:IMG}</div>'	;
-			if(!is_null($objContent)) $tempHtml[] = '<div class="card-content">{OBJHTML:CONTENT}</div>';
-			if(!is_null($objAction)) $tempHtml[] = '<div class="card-action">{OBJHTML:ACTION}</div>';
-			if(!is_null($objReveal)) $tempHtml[] = '<div class="card-reveal"><i class="material-icons right card-title">close</i>{OBJHTML:REAVEL}</div>';
+			if(!is_null($objImg)) $tempHtml[] = '<div class="card-image">{OBJHTML:IMG}</div>';
+			if($orientation == "horizontal"){
+				$tempHtml[]= '<div class="card-stacked">';
+				if(!is_null($objContent)) $tempHtml[] = '<div class="card-content"><i class="material-icons right activator card-title">more_vert</i>{OBJHTML:CONTENT}</div>';
+				if(!is_null($objAction)) $tempHtml[] = '<div class="card-action">{OBJHTML:ACTION}</div>';
+				$tempHtml[] = '</div>';
+				if(!is_null($objReveal)) $tempHtml[] = '<div class="card-reveal {BACKGROUNDCOLOR} {TEXTCOLOR}"><i class="material-icons right card-title">close</i>{OBJHTML:REAVEL}</div>';
+			}
+			else{
+				if(!is_null($objContent)) $tempHtml[] = '<div class="card-content"><i class="material-icons right activator card-title">more_vert</i>{OBJHTML:CONTENT}</div>';
+				if(!is_null($objAction)) $tempHtml[] = '<div class="card-action">{OBJHTML:ACTION}</div>';
+				if(!is_null($objReveal)) $tempHtml[] = '<div class="card-reveal {BACKGROUNDCOLOR} {TEXTCOLOR}"><i class="material-icons right card-title">close</i>{OBJHTML:REAVEL}</div>';
+
+			}
 			
 			$tempHtml[] = '</div>';
 
