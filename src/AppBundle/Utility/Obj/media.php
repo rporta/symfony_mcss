@@ -9,6 +9,7 @@ class media extends createClass
 	public $id;
 	public $type;
 	public $src;
+	public $caption;
 	public $alt;
 	public $circle;
 	public $responsive;
@@ -22,14 +23,17 @@ class media extends createClass
 		$this->type = 'media';
 		$this->src = !isset($arg['src']) ? NULL : $arg['src'];
 		$this->alt = !isset($arg['alt']) ? NULL : $arg['alt'];
+		$this->caption = !isset($arg['caption']) ? NULL : $arg['caption'];
 		$this->circle = !isset($arg['circle']) ? NULL : $arg['circle'];
 		$this->responsive = !isset($arg['responsive']) ? NULL : $arg['responsive'];
 		$this->embeds = !isset($arg['embeds']) ? NULL : $arg['embeds'];
 		$this->mode = !isset($arg['mode']) ? '0' : $arg['mode'];
+		$this->center = !isset($arg['center']) ? NULL : $arg['center'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);		
 		$this->refreshInfo();
 	}
 	public function refreshInfo(){
+		$id = $this->id;
 		$mode = $this->modeMedia($this->mode);
 		if ($mode == 'img'){
 			$circle = $this->circle($this->circle);
@@ -45,17 +49,21 @@ class media extends createClass
 			$this->html = $tempHtml;
 		}
 		elseif ($mode == 'MaterialBox'){
+			$caption = $this->dataCaption($this->caption);
 			$circle = $this->circle($this->circle);
 			$responsive = $this->responsiveImg($this->responsive);
 			$src = $this->srcMedia($this->src);
 			$alt = $this->altMedia($this->alt);
 
-			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}");
-			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}");
-			$tempHtml = "<img class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT}>";
+			$center = is_null($this->center) ? NULL : "style='margin: 0% auto;'";
+
+			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CAPTION}", "{CENTER}");
+			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$caption}", "{$center}");
+			$tempHtml = "<img class='materialboxed {CIRCLE} {RESPONSIVE}' {CAPTION} {SRC} {ALT} {CENTER}>";
 			$tempHtml = str_replace($search, $replace, $tempHtml);
 			
 			$this->html = $tempHtml;
+			$this->js[] = " $('#{$id}').materialbox(); ";
 		}		
 		elseif ($mode == 'video'){
 			$src = $this->srcMedia($this->src);

@@ -184,20 +184,30 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$a_fff['textColor'] = 'grey,9';
 			$a_fff['text'] = 'btn 1';
 			$a_fff = new AppBundle\Utility\Obj\a($a_fff);
+		$d2 = clone $divContent;
 		
 		$divContent->addObj($a_fff);
+		$divContent->cardPanel = true;
+
+			$media2['center'] = true;
+			$media2['caption'] = 'soy data caption';
+			$media2['src'] = 'https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?dpr=1&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=';
+			$media2['mode'] = 1;
+			$media2 = new AppBundle\Utility\Obj\media($media2);
+
+		$d2->addObj($media2);
+
 
 	$main->addObj($br);
 	$main->addObj($divContent);
 	$main->addObj($br);
+	$main->addObj($d2);
 	$main->addObj($br);
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;
 	$footer = new AppBundle\Utility\Obj\footer($footer);
-
-
 
 	$footer->addObj($br);
 	$footer->addObj($br);

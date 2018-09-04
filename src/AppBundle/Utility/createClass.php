@@ -483,6 +483,9 @@ class createClass
 	protected function characterCounterInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "data-length='{$arg}'";
 	}
+	protected function dataCaption($arg = NULL){
+		return is_null($arg) ? NULL : "data-caption='{$arg}'";
+	}
 	protected function valueInputFields($arg = NULL){
 		return is_null($arg) ? NULL : (is_array($arg) ? "value='{$arg[0]}'" : "value='{$arg}'");
 	}
