@@ -196,7 +196,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$divContent['textAling'] = 'c';
 		$divContent = new AppBundle\Utility\Obj\div($divContent);
 		
-			$a_fff['toast'] = 'fafafa';
+			$a_fff['toast'] = 'jhflja<k';
 			$a_fff['class'] = 'btn';
 			$a_fff['textColor'] = 'grey,9';
 			$a_fff['text'] = 'btn 1';
@@ -221,6 +221,13 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$main->addObj($d2);
 	$main->addObj($br);
 
+		$slider = new AppBundle\Utility\Obj\slider();
+		$media2->mode = 0;
+		$media2->refreshInfo();
+		$slider->addObj($media2, $titulo);
+		$slider->addObj($media2, $titulo);
+
+	$main->addObj($slider);
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;

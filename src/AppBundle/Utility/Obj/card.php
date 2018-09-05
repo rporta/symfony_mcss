@@ -206,7 +206,7 @@ class card extends createClass
 			}
 			return $objHtml;
 		}
-		if($arg == 'html:content'){
+		elseif($arg == 'html:content'){
 			if(!empty($this->objContent)){
 				foreach ($this->objContent as $idObj) {
 					$objHtml[] = $idObj->html;
@@ -218,7 +218,7 @@ class card extends createClass
 			}
 			return $objHtml;
 		}
-		if($arg == 'html:reveal'){
+		elseif($arg == 'html:reveal'){
 			if(!empty($this->objReveal)){
 				foreach ($this->objReveal as $idObj) {
 					$objHtml[] = $idObj->html;
@@ -230,7 +230,7 @@ class card extends createClass
 			}
 			return $objHtml;
 		}
-		if($arg == 'html:action'){
+		elseif($arg == 'html:action'){
 			if(!empty($this->objAction)){
 				foreach ($this->objAction as $idObj) {
 					$objHtml[] = $idObj->html;
