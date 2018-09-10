@@ -1,7 +1,5 @@
 pendientes :
 
-	media:
-		Slider
 	chips
 	FeatureDiscovery
 	ScrollFire

@@ -2,8 +2,8 @@
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
 
-		$br['repeat'] = 1;
-		$br = new AppBundle\Utility\Obj\br($br);
+	$br['repeat'] = 1;
+	$br = new AppBundle\Utility\Obj\br($br);
 	
 	$preloaderFull['layerBackgroundColor'] = 'b-w-t,0';
 	$preloaderFull['backgroundColor'] = array('purple,5', 'blue,3');
@@ -148,86 +148,30 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$main['shadow'] = "0";
 	$main = new AppBundle\Utility\Obj\main($main);
 
+		$card['mode'] = "1";
+		// $card['backgroundColor'] = "red,6";
+		// $card['orientation'] = "h";
+		$card['size'] = "1";
+		$card = new AppBundle\Utility\Obj\card($card);
 
-
-	//$main->addObj($carrousel);
-		$rowContent['textAling'] = 'c';
-		$rowContent = new AppBundle\Utility\Obj\row($rowContent);	
+			$titulo['textColor'] = 'red,3';
+			$titulo['text'] = 'soy titulo';
+			$titulo['size'] = '4';
+			$titulo = new AppBundle\Utility\Obj\h($titulo);
 			
-			$coli['s'] = 12;
-			$coli['m'] = 12;
-			$coli['l'] = 4;
-			$coli['xl'] = 4;
-			$coli = new AppBundle\Utility\Obj\col($coli);
-			$colm = clone $coli;
-			$cold = clone $coli;
 
-				$card['mode'] = "1";
-				// $card['backgroundColor'] = "red,6";
-				// $card['orientation'] = "h";
-				$card['size'] = "1";
-				$card = new AppBundle\Utility\Obj\card($card);
+			$media['responsive'] = true;
+			$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
+			$media = new AppBundle\Utility\Obj\media($media);
 
-					$titulo['textColor'] = 'red,3';
-					$titulo['text'] = 'soy titulo';
-					$titulo['size'] = '4';
-					$titulo = new AppBundle\Utility\Obj\h($titulo);
-					
+		$card->addObjImg($media);
+		$card->addObjImg($titulo);
+		$card->addObjContent($titulo);
+		$card->addObjContent($p);
+		$card->addObjReveal($p);
 
-					$media['responsive'] = true;
-					$media['src'] = "http://archives.materializecss.com/0.100.2/images/sample-1.jpg";
-					$media = new AppBundle\Utility\Obj\media($media);
+	$main->addObj($card);
 
-				$card->addObjImg($media);
-				$card->addObjImg($titulo);
-				$card->addObjContent($titulo);
-				$card->addObjContent($p);
-				$card->addObjReveal($p);
-
-			$colm->addObj($card);
-		
-		$rowContent->addObj($coli);
-		$rowContent->addObj($colm);
-		$rowContent->addObj($cold);
-
-	$main->addObj($br);
-	$main->addObj($rowContent);
-
-		$divContent['textAling'] = 'c';
-		$divContent = new AppBundle\Utility\Obj\div($divContent);
-		
-			$a_fff['toast'] = 'jhflja<k';
-			$a_fff['class'] = 'btn';
-			$a_fff['textColor'] = 'grey,9';
-			$a_fff['text'] = 'btn 1';
-			$a_fff = new AppBundle\Utility\Obj\a($a_fff);
-		$d2 = clone $divContent;
-		
-		$divContent->addObj($a_fff);
-		$divContent->cardPanel = true;
-
-			$media2['center'] = true;
-			$media2['caption'] = 'soy data caption';
-			$media2['src'] = 'https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?dpr=1&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=';
-			$media2['mode'] = 1;
-			$media2 = new AppBundle\Utility\Obj\media($media2);
-
-		$d2->addObj($media2);
-
-
-	$main->addObj($br);
-	$main->addObj($divContent);
-	$main->addObj($br);
-	$main->addObj($d2);
-	$main->addObj($br);
-
-		$slider = new AppBundle\Utility\Obj\slider();
-		$media2->mode = 0;
-		$media2->refreshInfo();
-		$slider->addObj($media2, $titulo);
-		$slider->addObj($media2, $titulo);
-
-	$main->addObj($slider);
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;
