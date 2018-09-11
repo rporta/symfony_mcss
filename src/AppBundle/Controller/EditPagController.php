@@ -27,8 +27,9 @@ class EditPagController extends Controller
 
     	if(!empty($post)){
             #aca va la plantilla que carga la pagina 
-    		return $this->render('AppBundle:default:editPag.html.php', array('post' => $post));
-    	}else{
+    		#return $this->render('AppBundle:default:editPag.html.php', array('post' => $post));
+            return $this->render('AppBundle:default:editPag.html.php', array('selectFile' => $selectFile));
+        }else{
     		return $this->render('AppBundle:default:editPag.html.php', array('selectFile' => $selectFile));
     	}
     }	

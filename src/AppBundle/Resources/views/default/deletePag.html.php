@@ -28,7 +28,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$form['textAling'] = 'c';
 		$form['method'] = 'POST';
-		$form['action'] = '/editpag';
+		$form['action'] = '/deletepag';
 		$form = new AppBundle\Utility\Obj\form($form);
 
 			$select['name'] = 'borrar_pagina';
