@@ -444,6 +444,9 @@ class createClass
 	protected function floatingInputButton($arg = NULL){
 		return is_null($arg) ? NULL :  "btn-floating";
 	}
+	protected function flatButton($arg = NULL){
+		return is_null($arg) ? NULL :  "btn-flat";
+	}	
 	protected function container($arg = NULL){
 		return is_null($arg) ? NULL : "container";
 	}

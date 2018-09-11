@@ -47,6 +47,7 @@ class inputButton extends createClass
 		$this->name = !isset($arg['name']) ? NULL : $arg['name'];
 		$this->large = !isset($arg['large']) ? NULL : $arg['large'];
 		$this->floating = !isset($arg['floating']) ? NULL : $arg['floating'];
+		$this->flat = !isset($arg['flat']) ? NULL : $arg['flat'];
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
@@ -67,12 +68,13 @@ class inputButton extends createClass
 		$name =  $this->nameInputFields($this->name);
 		$large =  $this->largeInputButton($this->large);
 		$floating =  $this->floatingInputButton($this->floating);
+		$flat = $this->flatButton($this->flat);
 		$objHtml = $this->getObj('html');
 		$this->getObj('js');		
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}", "{MODE}", "{SUBMIT}", "{NAME}", "{LARGE}", "{FLOATING}");
-		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}", "{$mode}", "{$submit}", "{$name}", "{$large}", "{$floating}");
-		$tempHtml = '<{MODE} {SUBMIT} {NAME} id="{ID}" href="{HREF}" {DATA:ACTIVE} {DATA:TARGET} class="btn {LARGE} {FLOATING} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT}">{TEXT} {obj:html}</{MODE}>';
+		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}", "{MODE}", "{SUBMIT}", "{NAME}", "{LARGE}", "{FLOATING}", "{FLAT}");
+		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}", "{$mode}", "{$submit}", "{$name}", "{$large}", "{$floating}", "{$flat}");
+		$tempHtml = '<{MODE} {SUBMIT} {NAME} id="{ID}" href="{HREF}" {DATA:ACTIVE} {DATA:TARGET} class="btn {LARGE} {FLOATING} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT} {FLAT}">{TEXT} {obj:html}</{MODE}>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

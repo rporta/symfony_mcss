@@ -128,7 +128,7 @@ class preloaderFull extends createClass
 	public function createJs($id){
 		$effect =  "fadeOut(500)";
 		$code = " $('#{$id}').{$effect}; ";
-		$js = " setTimeout(function(){".$code."},1000); ";
+		$js = " setTimeout(function(){".$code."},1); ";
 		return $js;
 	}
 	public function refreshId(){
