@@ -14,7 +14,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$title['textAling'] = 'c';
 		$title['textColor'] = 'grey,9';
-		$title['text'] = 'Nueva Pagina :';
+		$title['text'] = 'Crear Pagina :';
 		$title = new AppBundle\Utility\Obj\h($title);
 
 	$header->addObj($br);

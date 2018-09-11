@@ -27,8 +27,14 @@ class DeletePagController extends Controller
     	}
 
     	if(!empty($post)){
+    		unset($selectFile);
     		$deletePag = $post['borrar_pagina'];
     		$dirbase->deleteFile($deletePag);
+			$arrayFileTempHtml = $dirbase->getProperty('arrayFile');
+
+			foreach ($arrayFileTempHtml as $key => $value) {
+				$selectFile[] = array('text' => $value, 'value' => $value);
+			}    		
     		return $this->render('AppBundle:default:deletePag.html.php', array('selectFile' => $selectFile, 'post' => $post));
     	}else{
     		return $this->render('AppBundle:default:deletePag.html.php', array('selectFile' => $selectFile));
