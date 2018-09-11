@@ -99,7 +99,10 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		}
 
 	$main->addObj($form);
-
+	if(!empty($post)){
+		$pURL = "/createpag";
+		$footer['js'] = "document.location.href='{$pURL}';";
+	}
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;

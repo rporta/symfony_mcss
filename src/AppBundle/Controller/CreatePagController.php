@@ -25,8 +25,6 @@ class CreatePagController extends Controller
 
 	    	$dirbase->createFile($newpag);
 
-	    	dump($dirbase);
-
 			return $this->render('AppBundle:default:createPag.html.php', array('post' => $post));
     	}
     	else {
