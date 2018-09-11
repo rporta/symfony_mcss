@@ -2,7 +2,7 @@
 
 namespace AppBundle\Utility\Obj;
 
-use AppBundle\Utility\createClass;
+use AppBundle\Utility\Obj\CreateClass\createClass;
 use AppBundle\Utility\Obj\a;
 use AppBundle\Utility\Obj\icon;
 

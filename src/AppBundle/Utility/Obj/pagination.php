@@ -2,7 +2,7 @@
 
 namespace AppBundle\Utility\Obj;
 
-use AppBundle\Utility\createClass;
+use AppBundle\Utility\Obj\CreateClass\createClass;
 
 /*
 	href es un array y los valores son string "href,id"

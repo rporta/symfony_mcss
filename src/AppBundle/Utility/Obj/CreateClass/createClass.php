@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Utility;
+namespace AppBundle\Utility\Obj\CreateClass;
 
 class createClass 
 {
