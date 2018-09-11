@@ -43,13 +43,13 @@ class folder extends folderFile
 		$this->size = $this->__getSizeObj($filesR, 'is_dir');
 		unset($files);
 		$arrayPathL = $this->__getDir($this->path);
-		if(!is_null($arrayPathL['dir'])){
+		if(!empty($arrayPathL['dir'])){
 			foreach($arrayPathL['dir'] as $key => $path) {
 				$this->arrayFolder[] = str_replace($this->path, "", $path);
 			}
 			$this->__createObj($this,$arrayPathL['dir'], 'is_dir');
 		}
-		if(!is_null($arrayPathL['file'])){
+		if(!empty($arrayPathL['file'])){
 			foreach($arrayPathL['file'] as $key => $path) {
 				$this->arrayFile[] = str_replace($this->path, "", $path);
 			}
