@@ -57,14 +57,14 @@ class form extends createClass
 		$cardPanel =  $this->cardPanel($this->cardPanel);		
 		$hoverable =  $this->hoverable($this->hoverable);		
 		$objHtml = $this->getObj('html');
-		$action = $this->action;
+		$action = $this->formAction($this->action);
 		$method = $this->method;
 		$files = $this->formFiles($this->files);
 		$this->getObj('js');
 
-		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{METHOD}", "{FILES}", "{HOVERABLE}");
-		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$method}", "{$files}", "{$hoverable}");
-		$tempHtml = '<form method="{METHOD}" id="{ID}" {FILES} class="{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">{obj:html}</form>';
+		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{METHOD}", "{FILES}", "{HOVERABLE}", "{ACTION}");
+		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$method}", "{$files}", "{$hoverable}", "{$action}");
+		$tempHtml = '<form method="{METHOD}" id="{ID}" {FILES} class="{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}" {ACTION}>{obj:html}</form>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

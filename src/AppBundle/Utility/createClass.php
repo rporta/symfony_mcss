@@ -465,6 +465,9 @@ class createClass
 	protected function formFiles($arg = NULL){
 		return is_null($arg) ? NULL : "enctype='multipart/form-data'";
 	}
+	protected function formAction($arg = NULL){
+		return is_null($arg) ? NULL : " action='{$arg}' ";
+	}
 	protected function placeholderInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "placeholder='{$arg}'";
 	}
