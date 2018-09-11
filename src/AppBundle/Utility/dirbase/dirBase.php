@@ -41,7 +41,6 @@ class dirBase extends folderFile
 		$this->size = $this->__getSizeObj($filesR,'is_dir');
 		unset($files);
 		$arrayPathL = $this->__getDir($this->path);
-		dump($arrayPathL);
 		if(!empty($arrayPathL['dir'])){
 			foreach ($arrayPathL['dir'] as $key => $pathDir) {
 				$this->arrayFolder[] = str_replace($this->path, "", $pathDir);
