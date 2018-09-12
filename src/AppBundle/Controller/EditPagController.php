@@ -13,7 +13,7 @@ class EditPagController extends Controller
     {
     	$post = $request->request->all();
     	
-        if(strpos("/", $request->server->get('DOCUMENT_ROOT')) === FALSE ){
+        if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){
             #path plantillas html
             $relativePath = "\\src\\AppBundle\\Resources\\views\\default";
             $path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));

@@ -52,7 +52,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form->addObj($inputButton);
 
 		if(!empty($post)){
-			$alert = new AppBundle\Utility\Obj\alert();
+			$alert['redirectPath'] = "/deletepag";
+			$alert = new AppBundle\Utility\Obj\alert($alert);
 
 			$p['text'] = "Pagina '{$post['borrar_pagina']}' borrada exitosamente";
 			$p = new AppBundle\Utility\Obj\p($p);
@@ -99,10 +100,6 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		}
 
 	$main->addObj($form);
-	if(!empty($post)){
-		$pURL = "/createpag";
-		$footer['js'] = "document.location.href='{$pURL}';";
-	}
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;

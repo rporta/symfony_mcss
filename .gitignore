@@ -3,6 +3,7 @@
 /tests/*
 /var/*
 /vendor/*
+/src/cms.rar
 /README.md
 /phpunit.xml.dist
 /.web-server-pid

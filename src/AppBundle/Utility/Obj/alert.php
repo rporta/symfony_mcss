@@ -20,6 +20,7 @@ class alert extends createClass
 	public $shadow;	
 	public $footerFixed;
 	public $button;
+	public $redirectPath;
 
 	public function __construct($arg = NULL){
 		$this->id = 'alert-'.$this->createID(5);
@@ -35,6 +36,7 @@ class alert extends createClass
 		$this->button = !isset($arg['button']) ? TRUE : $arg['button'];	
 		$this->footerFixed = !isset($arg['footerFixed']) ? NULL : $arg['footerFixed'];	
 		$this->bottonSheet = !isset($arg['bottonSheet']) ? NULL : $arg['bottonSheet'];	
+		$this->redirectPath = !isset($arg['redirectPath']) ? NULL : $arg['redirectPath'];	
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
@@ -119,10 +121,20 @@ class alert extends createClass
 			}
 			//js
 			$id = $this->id;
-			$js = "$('#{$id}').modal(); $('#{$id}').modal('open');";
-			if(!in_array($js, $this->js)){
-				$this->js[] = $js;
-			}			
+			if(!is_null($this->redirectPath)){
+				$pURL = $this->redirectPath;				
+				$js = "$('#{$id}').modal({complete: function() { document.location.href='{$pURL}'; }}); $('#{$id}').modal('open');";
+				if(!in_array($js, $this->js)){
+					$this->js[] = $js;
+				}			
+			}
+			else{
+				
+				$js = "$('#{$id}').modal(); $('#{$id}').modal('open');";
+				if(!in_array($js, $this->js)){
+					$this->js[] = $js;
+				}
+			}
 		}		
 	}
 	public function refreshId(){

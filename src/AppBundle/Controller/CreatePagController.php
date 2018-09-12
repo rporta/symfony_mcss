@@ -14,7 +14,7 @@ class CreatePagController extends Controller
     	$post = $request->request->all();
     	if(!empty($post)){
 	    	$extends = ".html.php";
-	    	if(strpos("/", $request->server->get('DOCUMENT_ROOT')) === FALSE ){
+	    	if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){
 		    	#path plantillas html
 				$relativePath = "\\src\\AppBundle\\Resources\\views\\default";
 		    	$path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
@@ -26,7 +26,6 @@ class CreatePagController extends Controller
 		    	$path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
 
 	    	}
-
 	    	$dirbase = new dirbase($path);
 
 	    	$newpag = $post['nueva_pagina'].$extends;
