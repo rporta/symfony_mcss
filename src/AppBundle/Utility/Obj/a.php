@@ -12,6 +12,7 @@ class a extends createClass
 	public $textColor;
 	public $backgroundColor;
 	public $text;
+	public $textAling;
 	public $flowText;
 	public $href;
 	public $float;
@@ -30,6 +31,7 @@ class a extends createClass
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? NULL : $arg['backgroundColor'];
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
+		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];		
 		$this->flowText = !isset($arg['flowText']) ? NULL : $arg['flowText'];		
 		$this->href = !isset($arg['href']) ? "#" : $arg['href'];
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
@@ -52,6 +54,7 @@ class a extends createClass
 		$dataActive = $this->dataActive($this->dataActive);
 		$dataTarget = $this->dataTarget($this->dataTarget);
 		$text = $this->text;
+		$textAling =  $this->textAling($this->textAling);	
 		$flowText =  $this->flowText($this->flowText);	
 		$class = $this->class;
 		$waves = $this->waves($this->waves);
@@ -64,9 +67,9 @@ class a extends createClass
 			$this->js[] = "$( '#$id' ).click(function() {".$toast."});";
 		}
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}");
-		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}");
-		$tempHtml = '<a id="{ID}" href="{HREF}" {DATA:ACTIVE} {DATA:TARGET} class="{TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT}">{TEXT} {obj:html}</a>';
+		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}", "{TEXTALING}");
+		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}", "{$textAling}");
+		$tempHtml = '<a id="{ID}" href="{HREF}" {DATA:ACTIVE} {DATA:TARGET} class="{TEXTALING} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT}">{TEXT} {obj:html}</a>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

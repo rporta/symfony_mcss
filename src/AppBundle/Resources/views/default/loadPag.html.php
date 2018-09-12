@@ -56,7 +56,13 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNav = new AppBundle\Utility\Obj\sideNav($sideNav);
 		$sideNav->addObj($button);
 		$a['text'] = 'sarasa';
+		$a['textAling'] = 'l';
 		$a = new AppBundle\Utility\Obj\a($a);
+			$icon_a['size'] = 1;
+			$icon_a['float'] = 'l';
+			$icon_a['icon'] = 'mode_edit';
+			$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
+		$a->addObj($icon_a);
 		$sideNav->addObj($a);
 
 		
