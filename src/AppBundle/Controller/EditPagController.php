@@ -35,7 +35,6 @@ class EditPagController extends Controller
     	}
 
     	if(!empty($post)){
-            dump('entre');
             #aca va la plantilla que carga la pagina 
     		#return $this->render('AppBundle:default:editPag.html.php', array('post' => $post));
             return $this->render('AppBundle:default:loadPag.html.php', array('post' => $post));
