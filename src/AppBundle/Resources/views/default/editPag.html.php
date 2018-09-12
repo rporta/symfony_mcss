@@ -24,8 +24,6 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$main['container'] = TRUE;
 	$main = new AppBundle\Utility\Obj\main($main);
 
-
-
 		$form['textAling'] = 'c';
 		$form['method'] = 'POST';
 		$form['action'] = '/editpag';
@@ -50,53 +48,6 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form->addObj($select);
 		$form->addObj($br);
 		$form->addObj($inputButton);
-
-		if(!empty($post)){
-			$alert = new AppBundle\Utility\Obj\alert();
-
-			$p['text'] = "Pagina '{$post['borrar_pagina']}' editada exitosamente";
-			$p = new AppBundle\Utility\Obj\p($p);
-
-			$divContent['textAling'] = 'c';
-			$divContent = new AppBundle\Utility\Obj\div($divContent);
-				
-				$closeInput['mode'] = 'button';
-				$closeInput['text'] = 'cerrar';
-				$closeInput['flat'] = TRUE;
-				$closeInput['class'] = 'modal-action modal-close';
-
-				$closeInput = new AppBundle\Utility\Obj\inputButton($closeInput);
-
-			$divContent->addObj($closeInput);
-
-			$alert->addObj($p);
-			$alert->addObj($divContent);
-
-			$main->addObj($alert);
-		}
-		elseif(!empty($error)){
-			$alert = new AppBundle\Utility\Obj\alert();
-
-			$p['text'] = "Intente nuevamente ";
-			$p = new AppBundle\Utility\Obj\p($p);
-
-			$divContent['textAling'] = 'c';
-			$divContent = new AppBundle\Utility\Obj\div($divContent);
-				
-				$closeInput['mode'] = 'button';
-				$closeInput['text'] = 'cerrar';
-				$closeInput['flat'] = TRUE;
-				$closeInput['class'] = 'modal-action modal-close';
-
-				$closeInput = new AppBundle\Utility\Obj\inputButton($closeInput);
-
-			$divContent->addObj($closeInput);
-
-			$alert->addObj($p);
-			$alert->addObj($divContent);
-
-			$main->addObj($alert);			
-		}
 
 	$main->addObj($form);
 

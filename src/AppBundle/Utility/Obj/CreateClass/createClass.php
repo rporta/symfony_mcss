@@ -471,6 +471,9 @@ class createClass
 	protected function formAction($arg = NULL){
 		return is_null($arg) ? NULL : " action='{$arg}' ";
 	}
+	protected function style($arg = NULL){
+		return is_null($arg) ? NULL : " style='{$arg}' ";
+	}
 	protected function placeholderInputFields($arg = NULL){
 		return is_null($arg) ? NULL : "placeholder='{$arg}'";
 	}

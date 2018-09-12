@@ -15,11 +15,13 @@ class div extends createClass
 	public $container;
 	public $valign;	
 	public $textAling;	
-	public $float;	
+	public $float;
+	public $name;
 	public $shadow;	
 	public $truncate;
 	public $cardPanel;
 	public $hoverable;
+	public $style;
 	public $js;
 
 	public function __construct($arg = NULL){
@@ -31,10 +33,12 @@ class div extends createClass
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
+		$this->name = !isset($arg['name']) ? NULL : $arg['name'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
 		$this->truncate = !isset($arg['truncate']) ? NULL : $arg['truncate'];			
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
+		$this->style = !isset($arg['style']) ? NULL : $arg['style'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->refreshInfo();			
 	}
@@ -50,13 +54,15 @@ class div extends createClass
 		$truncate =  $this->truncate($this->truncate);			
 		$cardPanel =  $this->cardPanel($this->cardPanel);
 		$hoverable =  $this->hoverable($this->hoverable);		
-		
+		$style =  $this->style($this->style);		
+		$name =  $this->nameInputFields($this->name);
+
 		$objHtml = $this->getObj('html');
 		$this->getObj('js');
 
-		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}");
-		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}");
-		$tempHtml = '<div id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">{obj:html}</div>';
+		$search = array("{ID}", "{obj:html}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{STYLE}", "{NAME}");
+		$replace = array("{$id}", "{$objHtml}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}", "{$style}", "{$name}");
+		$tempHtml = '<div id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}" {STYLE} {NAME}>{obj:html}</div>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

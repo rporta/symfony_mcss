@@ -7,6 +7,12 @@ create_pag:
 edit_pag:
     defaults:  { _controller: AppBundle:EditPag:index }
     path:      /editpag
+load_pag:
+    defaults:  { _controller: AppBundle:LoadPag:index }
+    path:      /loadpag/{pag}
 delete_pag:
     defaults:  { _controller: AppBundle:DeletePag:index }
-    path:      /deletepag    
+    path:      /deletepag
+frame_load:
+    defaults:  { _controller: AppBundle:FrameLoad:index }
+    path:      /frameload/{pag}
