@@ -21,7 +21,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$div = new AppBundle\Utility\Obj\div($div);
 
 		#div pane
-		$div_2['style'] = "z-index: 2; width: 100%; position: absolute; bottom: 15px; right: 15px;";
+		$div_2['textAling'] = "r";
+		$div_2['style'] = "z-index: 2; width: 100%; position: absolute; bottom: 40px; right: 40px;";
 		$div_2['name'] = "panel";
 		$div_2['js'] = 
 
@@ -37,6 +38,19 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$div_2 = new AppBundle\Utility\Obj\div($div_2);
 
+			$button['large'] = TRUE;
+			$button['mode'] = "button";
+			$button['floating'] = TRUE;
+			$button = new AppBundle\Utility\Obj\inputButton($button);
+
+				$icon['icon'] = 'mode_edit';
+				$icon = new AppBundle\Utility\Obj\icon($icon);
+
+			$button->addObj($icon);
+
+
+
+		$div_2->addObj($button);
 	$header->addObj($div);
 	$header->addObj($div_2);
 	## main
