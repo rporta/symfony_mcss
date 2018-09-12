@@ -24,6 +24,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$main['container'] = TRUE;
 	$main = new AppBundle\Utility\Obj\main($main);
 
+	if(!empty($selectFile)){
 		$form['textAling'] = 'c';
 		$form['method'] = 'POST';
 		$form['action'] = '/editpag';
@@ -50,6 +51,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$form->addObj($inputButton);
 
 	$main->addObj($form);
+	}
 
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";

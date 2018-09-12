@@ -1,6 +1,8 @@
 <?php
-$editPag = $post['editar_pagina'];
-$pathLoadPag = "/loadpag/{$editPag}";
+if(!empty($post)){
+	$editPag = $post['editar_pagina'];
+	$pathLoadPag = "/loadpag/{$editPag}";
+}
 
 
 $pag['backgroundColor'] = "grey,0";
@@ -22,20 +24,22 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		#div pane
 		$div_2['textAling'] = "r";
-		$div_2['style'] = "z-index: 2; width: 100%; position: absolute; bottom: 40px; right: 40px;";
+		$div_2['style'] = "width: 100%; position: absolute; bottom: 40px; right: 40px;";
 		$div_2['name'] = "panel";
-		$div_2['js'] = 
+		if(!empty($post)){
+			$div_2['js'] = 
 
-			"function loadlink(){
-	    		$('div[name=proyectPag]').load('{$pathLoadPag}',function () {
-	         		$(this).unwrap();
-	    		});
-			}
-			loadlink();
-			// setInterval(function(){
-			//     loadlink() // this will run after every 5 seconds
-			// }, 5000);";
+				"function loadlink(){
+		    		$('div[name=proyectPag]').load('{$pathLoadPag}',function () {
+		         		$(this).unwrap();
+		    		});
+				}
+				loadlink();
+				// setInterval(function(){
+				//     loadlink() // this will run after every 5 seconds
+				// }, 5000);";
 
+		}	
 		$div_2 = new AppBundle\Utility\Obj\div($div_2);
 
 			$button['large'] = TRUE;
@@ -48,9 +52,15 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$button->addObj($icon);
 
+		$sideNav['edge'] = 'r';
+		$sideNav = new AppBundle\Utility\Obj\sideNav($sideNav);
+		$sideNav->addObj($button);
+		$a['text'] = 'sarasa';
+		$a = new AppBundle\Utility\Obj\a($a);
+		$sideNav->addObj($a);
 
-
-		$div_2->addObj($button);
+		
+		$div_2->addObj($sideNav);
 	$header->addObj($div);
 	$header->addObj($div_2);
 	## main

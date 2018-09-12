@@ -28,7 +28,7 @@ class sideNav extends createClass
 		$this->type = 'sideNav';
 		$this->id = 'sideNav-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
-		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
+		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,1' : $arg['backgroundColor'];
 		$this->container = !isset($arg['container']) ? NULL : $arg['container'];
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
 		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
@@ -114,7 +114,7 @@ class sideNav extends createClass
 			if(!empty($this->obj)){
 				foreach ($this->obj as $key => $idObj) {
 					if($key == 0){
-						$idObj->dataAtive = $this->id;
+						$idObj->dataActive = $this->id;
 						$idObj->class = 'btn';
 						$aId = $idObj->id;
 						$idObj->refreshInfo();

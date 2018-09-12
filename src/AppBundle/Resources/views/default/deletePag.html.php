@@ -24,6 +24,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$main['container'] = TRUE;
 	$main = new AppBundle\Utility\Obj\main($main);
 
+	if(!empty($selectFile)){
 
 
 		$form['textAling'] = 'c';
@@ -100,6 +101,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		}
 
 	$main->addObj($form);
+	}
 	$footer['shadow'] = 5;
 	$footer['backgroundColor'] = "red,6";
 	$footer['stickyfooter'] = true;
