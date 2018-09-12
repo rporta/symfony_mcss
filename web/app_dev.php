@@ -2,7 +2,8 @@
 /*---------------------------------------------------*/	
 function xbug($arg,$arg2 = false){
 	$arg3 = str_repeat("-", 60);
-	echo "<pre>";
+	echo "<pre style='color:#00ff00; background-color:black;' >\n";
+	echo "\n";
 	echo "<".$arg3."\tIn\t".$arg3.">\n";	
 	if(is_array($arg) || is_object($arg)){
 		if($arg2 == true){
@@ -21,6 +22,7 @@ function xbug($arg,$arg2 = false){
 		}
 	}
 	echo "<".$arg3."\tOut\t".$arg3.">\n";
+	echo "\n";
 	echo "</pre>";
 }
 /*---------------------------------------------------*/	
