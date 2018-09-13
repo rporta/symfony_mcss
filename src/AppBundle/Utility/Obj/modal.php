@@ -22,6 +22,10 @@ class modal extends createClass
 	public $button;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'modal-'.$this->createID(5);
 		$this->type = 'modal';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

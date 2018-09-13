@@ -26,6 +26,10 @@ class tab extends createClass
 	public $col;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'tab-'.$this->createID(5);
 		$this->type = 'tab';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

@@ -24,6 +24,9 @@ class blockquote extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);			
+	}
+	public function reset($arg = NULL){
 		$this->id = 'blockquote-'.$this->createID(5);
 		$this->type = 'blockquote';
 		$this->icon = !isset($arg['icon']) ? 'add' : $arg['icon'];
@@ -38,7 +41,7 @@ class blockquote extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];		
 		$this->flowText = !isset($arg['flowText']) ? NULL : $arg['flowText'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
-		$this->refreshInfo();			
+		$this->refreshInfo();		
 	}
 	public function refreshInfo(){
 		$id = $this->id;

@@ -12,6 +12,10 @@ class pag extends createClass
 	public $backgroundColor;
 	
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->type = 'pag';
 		$this->id = 'pag-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];

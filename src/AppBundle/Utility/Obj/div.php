@@ -25,6 +25,10 @@ class div extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->type = 'div';
 		$this->id = 'div-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

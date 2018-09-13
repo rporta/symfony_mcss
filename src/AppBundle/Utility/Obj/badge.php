@@ -23,6 +23,9 @@ class badge extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);		
+	}
+	public function reset($arg = NULL){
 		$this->id = 'badge-'.$this->createID(5);
 		$this->type = 'badge';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];
@@ -36,7 +39,7 @@ class badge extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];		
 		$this->new = !isset($arg['new']) ? NULL : $arg['new'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
-		$this->refreshInfo();			
+		$this->refreshInfo();
 	}
 	public function refreshInfo(){
 		$id = $this->id;

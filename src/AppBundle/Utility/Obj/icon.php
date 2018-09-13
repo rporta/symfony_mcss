@@ -22,6 +22,10 @@ class icon extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);			
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'icon-'.$this->createID(5);
 		$this->type = 'icon';
 		$this->icon = !isset($arg['icon']) ? 'add' : $arg['icon'];

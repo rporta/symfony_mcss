@@ -28,6 +28,10 @@ class inputButton extends createClass
 	public $obj;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'inputButton-'.$this->createID(5);
 		$this->type = 'inputButton';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

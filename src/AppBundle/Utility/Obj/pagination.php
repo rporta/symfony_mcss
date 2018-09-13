@@ -19,7 +19,11 @@ class pagination extends createClass
 	public $active;
 	public $html;
 	public $js;	
-	public function __construct($array = null)
+	public function __construct($arg = NULL)
+	{
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
 	{
 		$this->id = 'pagination-'.$this->createID(5);
 		$this->type = 'pagination';

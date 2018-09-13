@@ -23,6 +23,9 @@ class alert extends createClass
 	public $redirectPath;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);			
+	}
+	public function reset($arg = NULL){
 		$this->id = 'alert-'.$this->createID(5);
 		$this->type = 'alert';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

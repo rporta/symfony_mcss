@@ -24,6 +24,10 @@ class span extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'span-'.$this->createID(5);
 		$this->type = 'span';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

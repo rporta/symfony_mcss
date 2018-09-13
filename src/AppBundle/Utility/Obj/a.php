@@ -26,6 +26,9 @@ class a extends createClass
 	public $toast;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL){
 		$this->id = 'a-'.$this->createID(5);
 		$this->type = 'a';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];
@@ -42,7 +45,7 @@ class a extends createClass
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];
 		$this->toast = !isset($arg['toast']) ? NULL : $arg['toast'];
-		$this->refreshInfo();			
+		$this->refreshInfo();		
 	}
 	public function refreshInfo(){
 		$id = $this->id;

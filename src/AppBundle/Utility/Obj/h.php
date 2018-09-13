@@ -24,6 +24,10 @@ class h extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'h-'.$this->createID(5);
 		$this->type = 'h';
 		$this->size = !isset($arg['size']) ? 1 : $arg['size'];

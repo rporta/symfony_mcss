@@ -26,6 +26,10 @@ class chip extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'chip-'.$this->createID(5);
 		$this->type = 'chip';
 		$this->src = !isset($arg['src']) ? NULL : $arg['src'];

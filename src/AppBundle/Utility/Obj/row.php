@@ -23,6 +23,10 @@ class row extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->type = 'row';
 		$this->id = 'row-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

@@ -26,6 +26,10 @@ class table extends createClass
 	public $row;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'table-'.$this->createID(5);
 		$this->type = 'table';
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];

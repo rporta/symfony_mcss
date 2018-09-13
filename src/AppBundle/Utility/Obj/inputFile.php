@@ -27,6 +27,10 @@ class inputFile extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'inputFile-'.$this->createID(5);
 		$this->type = 'inputFile';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
@@ -46,7 +50,6 @@ class inputFile extends createClass
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->refreshInfo();			
 	}
-
 	public function refreshInfo(){
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);

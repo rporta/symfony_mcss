@@ -32,6 +32,10 @@ class inputAutocomplete extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'inputAutocomplete-'.$this->createID(5);
 		$this->type = 'inputAutocomplete';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];

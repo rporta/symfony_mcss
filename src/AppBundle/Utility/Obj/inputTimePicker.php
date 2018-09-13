@@ -35,6 +35,10 @@ class inputTimePicker extends createClass
 	public $js;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->id = 'inputTimePicker-'.$this->createID(5);
 		$this->type = 'inputTimePicker';
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];

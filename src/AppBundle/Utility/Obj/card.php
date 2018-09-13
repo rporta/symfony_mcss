@@ -29,6 +29,10 @@ class card extends createClass
 
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->type = 'card';
 		$this->id = 'card-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];

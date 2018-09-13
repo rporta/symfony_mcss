@@ -60,11 +60,17 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$a = new AppBundle\Utility\Obj\a($a);
 			$icon_a['size'] = 1;
 			$icon_a['float'] = 'l';
-			$icon_a['icon'] = 'mode_edit';
+			$icon_a['icon'] = 'add_box';
 			$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
 		$a->addObj($icon_a);
 		$sideNav->addObj($a);
 
+		$a2 = clone $a;
+		$icon_a2 = clone $icon_a;
+
+
+		$a3 = clone $a;
+		$icon_a3 = clone $icon_a;
 		
 		$div_2->addObj($sideNav);
 	$header->addObj($div);

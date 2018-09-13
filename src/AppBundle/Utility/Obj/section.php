@@ -22,6 +22,10 @@ class section extends createClass
 	public $hoverable;
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
+	{
 		$this->type = 'section';
 		$this->id = 'section-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];

@@ -17,7 +17,10 @@ class media extends createClass
 	public $mode;
 	public $js;
 	
-	function __construct($arg = null)
+	public function __construct($arg = null){
+		$this->reset($arg);
+	}
+	public function reset($arg = null)
 	{
 		$this->id = 'media-'.$this->createID(5);
 		$this->type = 'media';

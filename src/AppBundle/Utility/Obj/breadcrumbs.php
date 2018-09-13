@@ -31,6 +31,9 @@ class breadcrumbs extends createClass
 
 
 	public function __construct($arg = NULL){
+		$this->reset($arg);			
+	}
+	public function reset($arg = NULL){
 		$this->type = 'breadcrumbs';
 		$this->id = 'breadcrumbs-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
@@ -44,8 +47,7 @@ class breadcrumbs extends createClass
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
-
-		$this->refreshInfo();			
+		$this->refreshInfo();		
 	}
 	public function refreshInfo(){
 		$id = $this->id;

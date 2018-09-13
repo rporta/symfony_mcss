@@ -12,7 +12,11 @@ class br extends createClass
 	public $repeat;
 	public $js;
 
-	function __construct($arg = NULL)
+	public function __construct($arg = NULL)
+	{
+		$this->reset($arg);
+	}
+	public function reset($arg = NULL)
 	{
 		$this->id = 'br-'.$this->createID(5);
 		$this->type = 'br';
