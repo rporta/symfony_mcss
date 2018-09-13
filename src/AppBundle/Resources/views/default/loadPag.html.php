@@ -56,37 +56,16 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNav = new AppBundle\Utility\Obj\sideNav($sideNav);
 		$sideNav->addObj($button);
 
-			$a['text'] = 'Crear Objeto';
+			$a['text'] = 'Lista de objetos';
+			$a['href'] = '/listobj/'.$editPag;
 			$a['textAling'] = 'l';
 			$a = new AppBundle\Utility\Obj\a($a);
 				$icon_a['size'] = 1;
 				$icon_a['float'] = 'l';
-				$icon_a['icon'] = 'add';
+				$icon_a['icon'] = 'list';
 				$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
 			$a->addObj($icon_a);
 		$sideNav->addObj($a);
-
-			$a2['text'] = 'Modificar Objeto';
-			$a2['textAling'] = 'l';
-			$a2 = new AppBundle\Utility\Obj\a($a2);
-
-				$icon_a2 = clone $icon_a;
-				$icon_a2->icon = 'create';
-
-			$a2->addObj($icon_a2);
-
-		$sideNav->addObj($a2);
-
-			$a3['text'] = 'Eliminar Objeto';
-			$a3['textAling'] = 'l';
-			$a3 = new AppBundle\Utility\Obj\a($a3);
-
-				$icon_a3 = clone $icon_a;
-				$icon_a3->icon = 'remove';
-
-			$a3->addObj($icon_a3);
-
-		$sideNav->addObj($a3);
 
 			$a4['href'] = '/editpag';
 			$a4['text'] = 'Volver';
