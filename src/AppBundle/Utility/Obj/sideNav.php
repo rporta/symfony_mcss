@@ -6,23 +6,23 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class sideNav extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $obj;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
-	// protected $menuWidth;	
-	protected $edge;	
-	protected $js;	
+	// protected $menuWidth;
+	protected $edge;
+	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -44,6 +44,8 @@ class sideNav extends createClass
 		// $this->menuWidth = !isset($arg['menuWidth']) ? "300" : $arg['menuWidth'];			
 		$this->edge = !isset($arg['edge']) ? NULL : $arg['edge'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;		
+		$this->obj = NULL;
 
 		$this->refreshInfo();			
 	}

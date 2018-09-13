@@ -8,14 +8,13 @@ class inputFile extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $activeBackgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
-	protected $cardPanel;	
+	protected $textAling;
+	protected $shadow;
+	protected $cardPanel;
 	protected $hoverable;
 	protected $placeholder;
 	protected $name;
@@ -23,8 +22,8 @@ class inputFile extends createClass
 	protected $active;
 	protected $disabled;
 	protected $value;
-	protected $obj;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -48,6 +47,7 @@ class inputFile extends createClass
 		$this->disabled = !isset($arg['disabled']) ? NULL : $arg['disabled'];			
 		$this->value = !isset($arg['value']) ? NULL : $arg['value'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

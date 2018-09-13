@@ -13,15 +13,13 @@ class table extends createClass
 	protected $textColor;
 	protected $backgroundColor;
 	protected $float;
-	protected $dataAtive;
-	protected $js;
-	protected $html;
-	protected $class;
-	protected $waves;
+	protected $center;
 	protected $valign;
-	protected $shadow;	
-	protected $textAling;	
+	protected $js;
+	protected $class;
 	protected $mode;
+	protected $shadow;
+	protected $html;
 	protected $head;
 	protected $row;
 
@@ -41,6 +39,9 @@ class table extends createClass
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->mode = !isset($arg['mode']) ? NULL : $arg['mode'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
+		$this->html = NULL;
+		$this->head = NULL;
+		$this->row = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

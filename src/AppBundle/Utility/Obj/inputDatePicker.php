@@ -6,31 +6,32 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputDatePicker extends createClass
 {
+
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $activeBackgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
+	protected $textAling;
+	protected $shadow;
 	protected $truncate;
-	protected $cardPanel;	
+	protected $cardPanel;
 	protected $hoverable;
 	protected $placeholder;
 	protected $name;
 	protected $mode;
 	protected $active;
 	protected $disabled;
-	protected $textError;
-	protected $textSuccess;
 	protected $textToday;
 	protected $textClear;
 	protected $textClose;
+	protected $textError;
+	protected $textSuccess;
 	protected $value;
-	protected $obj;
 	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -60,6 +61,8 @@ class inputDatePicker extends createClass
 		$this->textSuccess = !isset($arg['textSuccess']) ? NULL : $arg['textSuccess'];		
 		$this->value = !isset($arg['value']) ? NULL : $arg['value'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

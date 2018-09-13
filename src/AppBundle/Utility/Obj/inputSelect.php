@@ -8,21 +8,20 @@ class inputSelect extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
+	protected $textAling;
+	protected $shadow;
 	protected $truncate;
-	protected $cardPanel;	
+	protected $cardPanel;
 	protected $hoverable;
 	protected $name;
 	protected $mode;
-	protected $active;
 	protected $option;
 	protected $group;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -44,6 +43,7 @@ class inputSelect extends createClass
 		$this->option = !isset($arg['option']) ? NULL : $arg['option'];			
 		$this->group = !isset($arg['group']) ? FALSE : $arg['group'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

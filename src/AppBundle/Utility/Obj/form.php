@@ -6,17 +6,15 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class form extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $obj;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
@@ -24,6 +22,8 @@ class form extends createClass
 	protected $method;
 	protected $files;
 	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -46,6 +46,8 @@ class form extends createClass
 		$this->method = !isset($arg['method']) ? 'get' : $arg['method'];			
 		$this->files = !isset($arg['files']) ? NULL : $arg['files'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

@@ -7,9 +7,9 @@ class pag extends createClass
 {	
 	protected $type;
 	protected $id;
-	protected $obj;
 	protected $textColor;
 	protected $backgroundColor;
+	protected $obj;
 	
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -20,6 +20,7 @@ class pag extends createClass
 		$this->id = 'pag-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,1' : $arg['backgroundColor'];
+		$this->obj = NULL;
 	}
 	public function render($arg = NULL){
 		$id = $this->id;

@@ -10,15 +10,14 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 class pagination extends createClass
 {
 	protected $id;
-	protected $type;	
+	protected $type;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $waves;
 	protected $limit;
-	protected $href;
 	protected $active;
+	protected $href;
 	protected $html;
-	protected $js;	
 	public function __construct($arg = NULL)
 	{
 		$this->reset($arg);
@@ -32,7 +31,8 @@ class pagination extends createClass
 		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];	
 		$this->limit = !isset($arg['limit']) ? 50 : $arg['limit'];	
 		$this->active = !isset($arg['active']) ? 1 : $arg['active'];	
-		$this->href = !isset($arg['href']) ? array() : $arg['href'];	
+		$this->href = !isset($arg['href']) ? array() : $arg['href'];
+		$this->html = NULL;	
 		$this->refreshInfo();
 	}
 	public function refreshInfo(){

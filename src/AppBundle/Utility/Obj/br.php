@@ -8,9 +8,9 @@ class br extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;	
 	protected $repeat;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL)
 	{
@@ -22,6 +22,7 @@ class br extends createClass
 		$this->type = 'br';
 		$this->repeat = !isset($arg['repeat']) ? 1 : $arg['repeat'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();
 	}
 	public function refreshInfo($arg = null){

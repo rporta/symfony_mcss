@@ -8,14 +8,13 @@ class inputRange extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $activeBackgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
-	protected $cardPanel;	
+	protected $textAling;
+	protected $shadow;
+	protected $cardPanel;
 	protected $hoverable;
 	protected $name;
 	protected $mode;
@@ -23,8 +22,9 @@ class inputRange extends createClass
 	protected $disabled;
 	protected $value;
 	protected $range;
-	protected $obj;
+	protected $orientation;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -49,6 +49,7 @@ class inputRange extends createClass
 		$this->range = !isset($arg['range']) ? array(0,100) : $arg['range'];		
 		$this->orientation = !isset($arg['orientation']) ? 'horizontal' : $arg['orientation'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

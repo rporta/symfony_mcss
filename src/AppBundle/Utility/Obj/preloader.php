@@ -10,13 +10,13 @@ class preloader extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $backgroundColor;
-	protected $shadow;	
-	protected $size;	
+	protected $shadow;
+	protected $size;
 	protected $mode;
 	protected $determinate;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -31,6 +31,7 @@ class preloader extends createClass
 		$this->mode = !isset($arg['mode']) ? 0 : $arg['mode'];			
 		$this->determinate = !isset($arg['determinate']) ? FALSE : $arg['determinate'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

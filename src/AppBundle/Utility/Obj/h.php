@@ -10,18 +10,18 @@ class h extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $size;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
+	protected $textAling;
+	protected $shadow;
 	protected $truncate;
-	protected $cardPanel;	
+	protected $cardPanel;
 	protected $hoverable;
 	protected $flowText;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -41,6 +41,7 @@ class h extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];
 		$this->flowText = !isset($arg['flowText']) ? NULL : $arg['flowText'];				
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

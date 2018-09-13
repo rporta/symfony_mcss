@@ -13,17 +13,15 @@ use AppBundle\Utility\Obj\icon;
 
 class nav extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $obj;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
@@ -31,10 +29,10 @@ class nav extends createClass
 	protected $mobileBackgroundColor;
 	protected $fixed;
 	protected $extended;
-	protected $js;	
-
-	public $classData;
-
+	protected $js;
+	protected $html;
+	protected $obj;
+	protected $classData;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -56,9 +54,11 @@ class nav extends createClass
 		$this->mobile = !isset($arg['mobile']) ? FALSE : $arg['mobile'];			
 		$this->mobileBackgroundColor = !isset($arg['mobileBackgroundColor']) ? FALSE : $arg['mobileBackgroundColor'];			
 		$this->fixed = !isset($arg['fixed']) ? FALSE : $arg['fixed'];			
-		$this->extended = !isset($arg['extended']) ? FALSE : $arg['extended'];			
+		$this->extended = !isset($arg['extended']) ? FALSE : $arg['extended'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
-
+		$this->html = NULL;
+		$this->obj = NULL;
+		$this->classData = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

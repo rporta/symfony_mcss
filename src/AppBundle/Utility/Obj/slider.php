@@ -5,22 +5,22 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class slider extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $objImg;
-	protected $objContent;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
 	protected $js;
+	protected $objContent;
+	protected $objImg;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -40,6 +40,9 @@ class slider extends createClass
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];	
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->objContent = NULL;
+		$this->objImg = NULL;
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

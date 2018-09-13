@@ -9,13 +9,15 @@ class media extends createClass
 	protected $id;
 	protected $type;
 	protected $src;
-	protected $caption;
 	protected $alt;
+	protected $caption;
 	protected $circle;
 	protected $responsive;
 	protected $embeds;
 	protected $mode;
+	protected $center;
 	protected $js;
+	protected $html;
 	
 	public function __construct($arg = null){
 		$this->reset($arg);
@@ -32,7 +34,8 @@ class media extends createClass
 		$this->embeds = !isset($arg['embeds']) ? NULL : $arg['embeds'];
 		$this->mode = !isset($arg['mode']) ? '0' : $arg['mode'];
 		$this->center = !isset($arg['center']) ? NULL : $arg['center'];
-		$this->js = !isset($arg['js']) ? array() : array($arg['js']);		
+		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;		
 		$this->refreshInfo();
 	}
 	public function refreshInfo(){
@@ -80,7 +83,7 @@ class media extends createClass
 				</video>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
 
-				$this->_html = $tempHtml;
+				$this->html = $tempHtml;
 			}
 			else{
 
@@ -92,7 +95,7 @@ class media extends createClass
 				</div>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
 
-				$this->_html = $tempHtml;
+				$this->html = $tempHtml;
 			}
 		}
 	}

@@ -10,16 +10,16 @@ class icon extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $icon;
 	protected $size;
 	protected $textColor;
-	protected $shadow;	
+	protected $shadow;
 	protected $cardPanel;
 	protected $hoverable;
-	protected $class;
-	protected $float;	
 	protected $js;
+	protected $class;
+	protected $float;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);			
@@ -37,6 +37,7 @@ class icon extends createClass
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];		
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

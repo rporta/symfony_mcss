@@ -6,19 +6,14 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class card extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $objImg;
-	protected $objContent;
-	protected $objReveal;
-	protected $objAction;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
@@ -26,6 +21,10 @@ class card extends createClass
 	protected $mode;
 	protected $size;
 	protected $js;
+	protected $objReveal;
+	protected $objImg;
+	protected $objContent;
+	protected $html;
 
 
 	public function __construct($arg = NULL){
@@ -48,6 +47,10 @@ class card extends createClass
 		$this->mode = !isset($arg['mode']) ? '0' : $arg['mode'];
 		$this->size = !isset($arg['size']) ? '1' : $arg['size'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->objReveal = NULL;
+		$this->objImg = NULL;
+		$this->objContent = NULL;
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

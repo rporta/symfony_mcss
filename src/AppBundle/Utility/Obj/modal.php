@@ -13,13 +13,16 @@ class modal extends createClass
 	protected $textColor;
 	protected $backgroundColor;
 	protected $float;
-	protected $js;
-	protected $html;
-	protected $class;
+	protected $center;
 	protected $valign;
-	protected $shadow;	
-	protected $footerFixed;
+	protected $js;
+	protected $class;
+	protected $shadow;
 	protected $button;
+	protected $footerFixed;
+	protected $bottonSheet;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -38,7 +41,9 @@ class modal extends createClass
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
 		$this->button = !isset($arg['button']) ? TRUE : $arg['button'];	
 		$this->footerFixed = !isset($arg['footerFixed']) ? NULL : $arg['footerFixed'];	
-		$this->bottonSheet = !isset($arg['bottonSheet']) ? NULL : $arg['bottonSheet'];	
+		$this->bottonSheet = !isset($arg['bottonSheet']) ? NULL : $arg['bottonSheet'];
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

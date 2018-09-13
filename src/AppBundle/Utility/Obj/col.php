@@ -6,10 +6,8 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class col extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $obj;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $s;
@@ -17,14 +15,16 @@ class col extends createClass
 	protected $l;
 	protected $xl;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
 	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -48,6 +48,8 @@ class col extends createClass
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];			
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

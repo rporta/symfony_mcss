@@ -8,21 +8,21 @@ class inputSwitch extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $activeBackgroundColor;
 	protected $disabledBackgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
+	protected $textAling;
+	protected $shadow;
 	protected $truncate;
-	protected $cardPanel;	
+	protected $cardPanel;
 	protected $hoverable;
 	protected $name;
 	protected $option;
 	protected $disabled;
 	protected $active;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -45,6 +45,7 @@ class inputSwitch extends createClass
 		$this->disabled = !isset($arg['disabled']) ? NULL : $arg['disabled'];		
 		$this->active = !isset($arg['active']) ? NULL : $arg['active'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

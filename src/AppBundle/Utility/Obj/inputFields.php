@@ -8,15 +8,14 @@ class inputFields extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $activeBackgroundColor;
 	protected $text;
-	protected $textAling;	
-	protected $shadow;	
+	protected $textAling;
+	protected $shadow;
 	protected $truncate;
-	protected $cardPanel;	
+	protected $cardPanel;
 	protected $hoverable;
 	protected $placeholder;
 	protected $name;
@@ -27,8 +26,9 @@ class inputFields extends createClass
 	protected $textSuccess;
 	protected $characterCounter;
 	protected $value;
-	protected $obj;
 	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -56,6 +56,8 @@ class inputFields extends createClass
 		$this->characterCounter = !isset($arg['characterCounter']) ? NULL : $arg['characterCounter'];		
 		$this->value = !isset($arg['value']) ? NULL : $arg['value'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

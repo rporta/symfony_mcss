@@ -7,21 +7,20 @@ use AppBundle\Utility\Obj\media;
 
 class parallax extends createClass
 {
-	protected $id;
 	protected $type;
+	protected $id;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $container;
+	protected $valign;
+	protected $textAling;
+	protected $float;
+	protected $shadow;
+	protected $truncate;
+	protected $cardPanel;
+	protected $js;
 	protected $html;
 	protected $obj;
-	protected $textColor;
-	protected $backgroundColor;	
-	protected $container;
-	protected $valign;	
-	protected $textAling;	
-	protected $float;	
-	protected $shadow;	
-	protected $truncate;	
-	protected $cardPanel;
-	protected $hoverable;
-	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -40,6 +39,8 @@ class parallax extends createClass
 		$this->truncate = !isset($arg['truncate']) ? NULL : $arg['truncate'];			
 		$this->cardPanel = !isset($arg['cardPanel']) ? NULL : $arg['cardPanel'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

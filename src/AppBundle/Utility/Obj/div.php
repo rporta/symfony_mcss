@@ -6,23 +6,23 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class div extends createClass
 {
-	protected $id;
 	protected $type;
-	protected $html;
-	protected $obj;
+	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $container;
-	protected $valign;	
-	protected $textAling;	
+	protected $valign;
+	protected $textAling;
 	protected $float;
 	protected $name;
-	protected $shadow;	
+	protected $shadow;
 	protected $truncate;
 	protected $cardPanel;
 	protected $hoverable;
 	protected $style;
 	protected $js;
+	protected $html;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -44,6 +44,8 @@ class div extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];			
 		$this->style = !isset($arg['style']) ? NULL : $arg['style'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

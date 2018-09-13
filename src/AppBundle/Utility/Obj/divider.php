@@ -10,9 +10,9 @@ class divider extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $backgroundColor;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -23,6 +23,7 @@ class divider extends createClass
 		$this->type = 'divider';
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

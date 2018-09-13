@@ -6,6 +6,7 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputButton extends createClass
 {
+
 	protected $id;
 	protected $type;
 	protected $textColor;
@@ -26,6 +27,7 @@ class inputButton extends createClass
 	protected $large;
 	protected $floating;
 	protected $flat;
+	protected $html;
 	protected $obj;
 
 	public function __construct($arg = NULL){
@@ -53,6 +55,8 @@ class inputButton extends createClass
 		$this->large = !isset($arg['large']) ? NULL : $arg['large'];
 		$this->floating = !isset($arg['floating']) ? NULL : $arg['floating'];
 		$this->flat = !isset($arg['flat']) ? NULL : $arg['flat'];
+		$this->html = NULL;
+		$this->obj = NULL;		
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

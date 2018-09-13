@@ -10,12 +10,12 @@ class pre extends createClass
 {
 	protected $id;
 	protected $type;
-	protected $html;
 	protected $textColor;
 	protected $backgroundColor;
 	protected $text;
-	protected $flowText;	
+	protected $flowText;
 	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -29,6 +29,7 @@ class pre extends createClass
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
 		$this->flowText = !isset($arg['flowText']) ? NULL : $arg['flowText'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){

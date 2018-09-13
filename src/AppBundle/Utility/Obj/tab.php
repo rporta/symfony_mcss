@@ -13,17 +13,15 @@ class tab extends createClass
 	protected $textColor;
 	protected $backgroundColor;
 	protected $float;
-	protected $dataAtive;
-	protected $js;
-	protected $html;
-	protected $class;
-	protected $waves;
+	protected $center;
 	protected $valign;
-	protected $shadow;	
-	protected $textAling;	
+	protected $js;
+	protected $class;
 	protected $mode;
-	protected $head;
+	protected $shadow;
 	protected $col;
+	protected $head;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -41,6 +39,9 @@ class tab extends createClass
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->mode = !isset($arg['mode']) ? NULL : $arg['mode'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
+		$this->col = NULL;
+		$this->head = NULL;
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
