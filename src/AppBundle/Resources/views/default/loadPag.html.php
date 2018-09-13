@@ -55,22 +55,50 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNav['edge'] = 'r';
 		$sideNav = new AppBundle\Utility\Obj\sideNav($sideNav);
 		$sideNav->addObj($button);
-		$a['text'] = 'sarasa';
-		$a['textAling'] = 'l';
-		$a = new AppBundle\Utility\Obj\a($a);
-			$icon_a['size'] = 1;
-			$icon_a['float'] = 'l';
-			$icon_a['icon'] = 'add_box';
-			$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
-		$a->addObj($icon_a);
+
+			$a['text'] = 'Crear Objeto';
+			$a['textAling'] = 'l';
+			$a = new AppBundle\Utility\Obj\a($a);
+				$icon_a['size'] = 1;
+				$icon_a['float'] = 'l';
+				$icon_a['icon'] = 'add';
+				$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
+			$a->addObj($icon_a);
 		$sideNav->addObj($a);
 
-		$a2 = clone $a;
-		$icon_a2 = clone $icon_a;
+			$a2['text'] = 'Modificar Objeto';
+			$a2['textAling'] = 'l';
+			$a2 = new AppBundle\Utility\Obj\a($a2);
 
+				$icon_a2 = clone $icon_a;
+				$icon_a2->icon = 'create';
 
-		$a3 = clone $a;
-		$icon_a3 = clone $icon_a;
+			$a2->addObj($icon_a2);
+
+		$sideNav->addObj($a2);
+
+			$a3['text'] = 'Eliminar Objeto';
+			$a3['textAling'] = 'l';
+			$a3 = new AppBundle\Utility\Obj\a($a3);
+
+				$icon_a3 = clone $icon_a;
+				$icon_a3->icon = 'remove';
+
+			$a3->addObj($icon_a3);
+
+		$sideNav->addObj($a3);
+
+			$a4['href'] = '/editpag';
+			$a4['text'] = 'Volver';
+			$a4['textAling'] = 'l';
+			$a4 = new AppBundle\Utility\Obj\a($a4);
+
+				$icon_a4 = clone $icon_a;
+				$icon_a4->icon = 'arrow_back';
+
+			$a4->addObj($icon_a4);
+
+		$sideNav->addObj($a4);
 		
 		$div_2->addObj($sideNav);
 	$header->addObj($div);
