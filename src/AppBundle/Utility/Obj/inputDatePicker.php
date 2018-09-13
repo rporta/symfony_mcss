@@ -6,31 +6,31 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputDatePicker extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $activeBackgroundColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;	
-	public $hoverable;
-	public $placeholder;
-	public $name;
-	public $mode;
-	public $active;
-	public $disabled;
-	public $textError;
-	public $textSuccess;
-	public $textToday;
-	public $textClear;
-	public $textClose;
-	public $value;
-	public $obj;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $activeBackgroundColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;	
+	protected $hoverable;
+	protected $placeholder;
+	protected $name;
+	protected $mode;
+	protected $active;
+	protected $disabled;
+	protected $textError;
+	protected $textSuccess;
+	protected $textToday;
+	protected $textClear;
+	protected $textClose;
+	protected $value;
+	protected $obj;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -173,5 +173,14 @@ class inputDatePicker extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

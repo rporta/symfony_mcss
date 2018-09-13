@@ -45,11 +45,9 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$iconButton = clone $iconFields;
 
 				$iconFields->icon = "create";
-				$iconFields->refreshInfo();
 
 				$iconButton->icon = "send";
 				$iconButton->float = "r";
-				$iconButton->refreshInfo();
 
 			$inputFields->addObj($iconFields);
 			$inputButton->addObj($iconButton);

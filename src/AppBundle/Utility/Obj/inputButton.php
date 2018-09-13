@@ -6,26 +6,27 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputButton extends createClass
 {
-	public $id;
-	public $type;
-	public $textColor;
-	public $backgroundColor;
-	public $text;
-	public $flowText;
-	public $href;
-	public $float;
-	public $dataAtive;
-	public $js;
-	public $html;
-	public $class;
-	public $waves;
-	public $valign;
-	public $mode;
-	public $submit;
-	public $name;
-	public $large;
-	public $floating;
-	public $obj;
+	protected $id;
+	protected $type;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $text;
+	protected $flowText;
+	protected $href;
+	protected $float;
+	protected $valign;
+	protected $dataActive;
+	protected $dataTarget;
+	protected $js;
+	protected $class;
+	protected $waves;
+	protected $mode;
+	protected $submit;
+	protected $name;
+	protected $large;
+	protected $floating;
+	protected $flat;
+	protected $obj;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -129,5 +130,14 @@ class inputButton extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

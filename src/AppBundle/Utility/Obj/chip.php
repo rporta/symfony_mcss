@@ -8,22 +8,22 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class chip extends createClass
 {
-	public $id;
-	public $type;
-	public $src;
-	public $alt;	
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $text;
-	public $mode;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $flowText;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $src;
+	protected $alt;	
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $text;
+	protected $mode;
+	protected $textAling;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $flowText;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -80,6 +80,15 @@ class chip extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }
 

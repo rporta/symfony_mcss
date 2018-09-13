@@ -6,23 +6,23 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputSelect extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;	
-	public $hoverable;
-	public $name;
-	public $mode;
-	public $active;
-	public $option;
-	public $group;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;	
+	protected $hoverable;
+	protected $name;
+	protected $mode;
+	protected $active;
+	protected $option;
+	protected $group;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -162,5 +162,14 @@ class inputSelect extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

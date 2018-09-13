@@ -8,19 +8,22 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class alert extends createClass
 {
-	public $id;
-	public $type;
-	public $textColor;
-	public $backgroundColor;
-	public $float;
-	public $js;
-	public $html;
-	public $class;
-	public $valign;
-	public $shadow;	
-	public $footerFixed;
-	public $button;
-	public $redirectPath;
+	protected $id;
+	protected $type;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $float;
+	protected $center;
+	protected $valign;
+	protected $class;
+	protected $shadow;
+	protected $button;
+	protected $footerFixed;
+	protected $bottonSheet;
+	protected $redirectPath;
+	protected $js;
+	protected $obj;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);			
@@ -33,13 +36,15 @@ class alert extends createClass
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
 		$this->center = !isset($arg['center']) ? NULL : $arg['center'];
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
-		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
 		$this->button = !isset($arg['button']) ? TRUE : $arg['button'];	
 		$this->footerFixed = !isset($arg['footerFixed']) ? NULL : $arg['footerFixed'];	
 		$this->bottonSheet = !isset($arg['bottonSheet']) ? NULL : $arg['bottonSheet'];	
-		$this->redirectPath = !isset($arg['redirectPath']) ? NULL : $arg['redirectPath'];	
+		$this->redirectPath = !isset($arg['redirectPath']) ? NULL : $arg['redirectPath'];
+		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->obj = NULL;	
+		$this->html = NULL;
 		$this->refreshInfo();			
 	}
 	public function refreshInfo(){
@@ -145,5 +150,14 @@ class alert extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

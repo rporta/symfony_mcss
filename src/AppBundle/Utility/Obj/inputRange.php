@@ -6,25 +6,25 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputRange extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $activeBackgroundColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $cardPanel;	
-	public $hoverable;
-	public $name;
-	public $mode;
-	public $active;
-	public $disabled;
-	public $value;
-	public $range;
-	public $obj;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $activeBackgroundColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $cardPanel;	
+	protected $hoverable;
+	protected $name;
+	protected $mode;
+	protected $active;
+	protected $disabled;
+	protected $value;
+	protected $range;
+	protected $obj;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -137,5 +137,14 @@ class inputRange extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

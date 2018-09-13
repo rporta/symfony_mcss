@@ -5,11 +5,11 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class pag extends createClass
 {	
-	public $type;
-	public $id;
-	public $obj;
-	public $textColor;
-	public $backgroundColor;
+	protected $type;
+	protected $id;
+	protected $obj;
+	protected $textColor;
+	protected $backgroundColor;
 	
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -141,4 +141,13 @@ class pag extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 }

@@ -8,22 +8,22 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class tab extends createClass
 {
-	public $id;
-	public $type;
-	public $textColor;
-	public $backgroundColor;
-	public $float;
-	public $dataAtive;
-	public $js;
-	public $html;
-	public $class;
-	public $waves;
-	public $valign;
-	public $shadow;	
-	public $textAling;	
-	public $mode;
-	public $head;
-	public $col;
+	protected $id;
+	protected $type;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $float;
+	protected $dataAtive;
+	protected $js;
+	protected $html;
+	protected $class;
+	protected $waves;
+	protected $valign;
+	protected $shadow;	
+	protected $textAling;	
+	protected $mode;
+	protected $head;
+	protected $col;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -113,5 +113,14 @@ class tab extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

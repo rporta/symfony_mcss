@@ -38,16 +38,13 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 
 			$div2->backgroundColor = "blue,5";
-			$div2->refreshInfo();
 			$div2->addObj($conteiner);
 
 
 			$div3->backgroundColor = "blue,8";
-			$div3->refreshInfo();
 			$div3->addObj($conteiner);
 
 			$div4->backgroundColor = "blue,10";
-			$div4->refreshInfo();
 			$div4->addObj($conteiner);
 
 		$carrousel->addObj($div);

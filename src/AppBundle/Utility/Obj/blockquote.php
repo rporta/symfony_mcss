@@ -8,20 +8,20 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class blockquote extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $borderColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $flowText;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $borderColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $flowText;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);			
@@ -69,6 +69,15 @@ class blockquote extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 	
 }
 

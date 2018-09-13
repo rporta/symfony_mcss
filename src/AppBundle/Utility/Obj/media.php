@@ -6,16 +6,16 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class media extends createClass
 {
-	public $id;
-	public $type;
-	public $src;
-	public $caption;
-	public $alt;
-	public $circle;
-	public $responsive;
-	public $embeds;
-	public $mode;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $src;
+	protected $caption;
+	protected $alt;
+	protected $circle;
+	protected $responsive;
+	protected $embeds;
+	protected $mode;
+	protected $js;
 	
 	public function __construct($arg = null){
 		$this->reset($arg);
@@ -101,5 +101,14 @@ class media extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

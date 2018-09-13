@@ -8,19 +8,20 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class badge extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $text;
-	public $float;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $text;
+	protected $float;
+	protected $textAling;
+	protected $shadow;
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $new;
+	protected $js;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);		
@@ -39,6 +40,7 @@ class badge extends createClass
 		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];		
 		$this->new = !isset($arg['new']) ? NULL : $arg['new'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->html = NULL;
 		$this->refreshInfo();
 	}
 	public function refreshInfo(){
@@ -66,6 +68,15 @@ class badge extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 	
 }
 

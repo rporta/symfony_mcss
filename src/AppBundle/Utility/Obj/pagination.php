@@ -9,16 +9,16 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class pagination extends createClass
 {
-	public $id;
-	public $type;	
-	public $textColor;
-	public $backgroundColor;
-	public $waves;
-	public $limit;
-	public $href;
-	public $active;
-	public $html;
-	public $js;	
+	protected $id;
+	protected $type;	
+	protected $textColor;
+	protected $backgroundColor;
+	protected $waves;
+	protected $limit;
+	protected $href;
+	protected $active;
+	protected $html;
+	protected $js;	
 	public function __construct($arg = NULL)
 	{
 		$this->reset($arg);

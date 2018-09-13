@@ -44,7 +44,6 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$iconButton = new AppBundle\Utility\Obj\icon();
 				$iconButton->icon = "send";
 				$iconButton->float = "r";
-				$iconButton->refreshInfo();
 
 			$inputButton->addObj($iconButton);
 

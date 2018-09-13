@@ -6,25 +6,25 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputFile extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $backgroundColor;
-	public $activeBackgroundColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $cardPanel;	
-	public $hoverable;
-	public $placeholder;
-	public $name;
-	public $multiple;
-	public $active;
-	public $disabled;
-	public $value;
-	public $obj;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $activeBackgroundColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $cardPanel;	
+	protected $hoverable;
+	protected $placeholder;
+	protected $name;
+	protected $multiple;
+	protected $active;
+	protected $disabled;
+	protected $value;
+	protected $obj;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -92,5 +92,14 @@ class inputFile extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

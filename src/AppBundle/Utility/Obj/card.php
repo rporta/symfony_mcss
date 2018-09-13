@@ -6,26 +6,26 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class card extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $objImg;
-	public $objContent;
-	public $objReveal;
-	public $objAction;
-	public $textColor;
-	public $backgroundColor;
-	public $valign;	
-	public $textAling;	
-	public $float;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $orientation;
-	public $mode;
-	public $size;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $objImg;
+	protected $objContent;
+	protected $objReveal;
+	protected $objAction;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $valign;	
+	protected $textAling;	
+	protected $float;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $orientation;
+	protected $mode;
+	protected $size;
+	protected $js;
 
 
 	public function __construct($arg = NULL){
@@ -290,6 +290,15 @@ class card extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }
 

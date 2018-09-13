@@ -6,20 +6,20 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class container extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $obj;
-	public $textColor;
-	public $backgroundColor;
-	public $valign;	
-	public $textAling;	
-	public $float;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $obj;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $valign;	
+	protected $textAling;	
+	protected $float;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $js;
 
 
 	public function __construct($arg = NULL){
@@ -108,6 +108,15 @@ class container extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }
 

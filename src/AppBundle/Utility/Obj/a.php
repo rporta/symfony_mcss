@@ -7,23 +7,24 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class a extends createClass
 {
-	public $id;
-	public $type;
-	public $textColor;
-	public $backgroundColor;
-	public $text;
-	public $textAling;
-	public $flowText;
-	public $href;
-	public $float;
-	public $dataAtive;
-	public $js;
-	public $html;
-	public $class;
-	public $waves;
-	public $valign;
-	public $obj;
-	public $toast;
+	protected $id;
+	protected $type;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $text;
+	protected $textAling;
+	protected $flowText;
+	protected $href;
+	protected $float;
+	protected $valign;
+	protected $dataActive;
+	protected $dataTarget;
+	protected $class;
+	protected $waves;
+	protected $toast;
+	protected $js;
+	protected $obj;
+	protected $html;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -41,10 +42,12 @@ class a extends createClass
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
 		$this->dataActive = !isset($arg['dataActive']) ? NULL : $arg['dataActive'];
 		$this->dataTarget = !isset($arg['dataTarget']) ? NULL : $arg['dataTarget'];
-		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];
 		$this->toast = !isset($arg['toast']) ? NULL : $arg['toast'];
+		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->obj = NULL;
+		$this->html = NULL;
 		$this->refreshInfo();		
 	}
 	public function refreshInfo(){
@@ -123,5 +126,14 @@ class a extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 }
 

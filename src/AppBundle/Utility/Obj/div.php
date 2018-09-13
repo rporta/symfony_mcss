@@ -6,23 +6,23 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class div extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $obj;
-	public $textColor;
-	public $backgroundColor;
-	public $container;
-	public $valign;	
-	public $textAling;	
-	public $float;
-	public $name;
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;
-	public $hoverable;
-	public $style;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $obj;
+	protected $textColor;
+	protected $backgroundColor;
+	protected $container;
+	protected $valign;	
+	protected $textAling;	
+	protected $float;
+	protected $name;
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;
+	protected $hoverable;
+	protected $style;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -117,6 +117,15 @@ class div extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }
 

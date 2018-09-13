@@ -8,18 +8,18 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class icon extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $icon;
-	public $size;
-	public $textColor;
-	public $shadow;	
-	public $cardPanel;
-	public $hoverable;
-	public $class;
-	public $float;	
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $icon;
+	protected $size;
+	protected $textColor;
+	protected $shadow;	
+	protected $cardPanel;
+	protected $hoverable;
+	protected $class;
+	protected $float;	
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);			
@@ -63,6 +63,14 @@ class icon extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
-
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 }
 

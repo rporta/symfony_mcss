@@ -6,11 +6,11 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class br extends createClass
 {
-	public $id;
-	public $type;
-	public $html;	
-	public $repeat;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;	
+	protected $repeat;
+	protected $js;
 
 	public function __construct($arg = NULL)
 	{
@@ -34,5 +34,14 @@ class br extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 	
 }

@@ -6,23 +6,23 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
 
 class inputSwitch extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $textColor;
-	public $activeBackgroundColor;
-	public $disabledBackgroundColor;
-	public $text;
-	public $textAling;	
-	public $shadow;	
-	public $truncate;
-	public $cardPanel;	
-	public $hoverable;
-	public $name;
-	public $option;
-	public $disabled;
-	public $active;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $textColor;
+	protected $activeBackgroundColor;
+	protected $disabledBackgroundColor;
+	protected $text;
+	protected $textAling;	
+	protected $shadow;	
+	protected $truncate;
+	protected $cardPanel;	
+	protected $hoverable;
+	protected $name;
+	protected $option;
+	protected $disabled;
+	protected $active;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -134,5 +134,14 @@ class inputSwitch extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }

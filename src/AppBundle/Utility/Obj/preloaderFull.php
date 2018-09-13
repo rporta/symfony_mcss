@@ -8,16 +8,16 @@ use AppBundle\Utility\Obj\CreateClass\createClass;
  */
 class preloaderFull extends createClass
 {
-	public $id;
-	public $type;
-	public $html;
-	public $backgroundColor;
-	public $layerBackgroundColor;
-	public $shadow;	
-	public $size;	
-	public $mode;
-	public $determinate;
-	public $js;
+	protected $id;
+	protected $type;
+	protected $html;
+	protected $backgroundColor;
+	protected $layerBackgroundColor;
+	protected $shadow;	
+	protected $size;	
+	protected $mode;
+	protected $determinate;
+	protected $js;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -140,5 +140,14 @@ class preloaderFull extends createClass
 		$id = $this->createID(5);
 		$this->id = "{$type}-{$id}";
 	}
+    public function __set($property, $value )
+    {
+        $this->$property = $value;
+        $this->refreshInfo();
+    }
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 
 }
