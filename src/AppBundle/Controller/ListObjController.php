@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utility\dirbase\dirBase;
+// use AppBundle\Service\Obj\ListObj;
 
 class ListObjController extends Controller
 {
@@ -23,13 +24,22 @@ class ListObjController extends Controller
             $path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
 
         }
-
+        // $message = $ListObj->getHappyMessage();
+        // xbug($message);
     	$post['editar_pagina'] = $request->attributes->get('pag');
 
     	$dirbase = new dirbase($path);
     	$filePag = $dirbase->getObj($post['editar_pagina'])->viewFile();
 
-        if(preg_match("|(.+[^\040])(new\040AppBundle.Utility.Obj.pag)|", $filePag, $hex))xbug($hex);
+        $reg_exp = "(\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\pag\\()((\\$)(.+)){0,1}(\\);)";
+
+        if(preg_match_all("|{$reg_exp}|", $filePag, $result)){
+            //nombre de objeto variable
+            $obj_pag = $result[2][0];
+            //nombre de array param
+            $param_pag = !empty($result[7][0]);
+
+        }
 
 
         return $this->render('AppBundle:default:listObj.html.php', array());

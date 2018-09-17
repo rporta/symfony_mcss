@@ -12,7 +12,9 @@ class EditPagController extends Controller
     public function indexAction(Request $request)
     {
     	$post = $request->request->all();
-    	
+    	$MessageGenerator = $this->container->get('Obj');
+
+         dump($MessageGenerator);
         if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){
             #path plantillas html
             $relativePath = "\\src\\AppBundle\\Resources\\views\\default";

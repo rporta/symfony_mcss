@@ -1,0 +1,4 @@
+services:
+    obj:
+        class: AppBundle\Service\Obj
+        public: true
