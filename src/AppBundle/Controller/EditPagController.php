@@ -12,7 +12,7 @@ class EditPagController extends Controller
     public function indexAction(Request $request)
     {
     	$post = $request->request->all();
-    	$MessageGenerator = $this->container->get('Obj');
+    	$MessageGenerator = $this->container->get('obj');
 
          dump($MessageGenerator);
         if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){

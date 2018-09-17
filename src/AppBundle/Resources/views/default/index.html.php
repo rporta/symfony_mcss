@@ -1,6 +1,6 @@
 <?php
 $pag['backgroundColor'] = "grey,0";
-$pag = new AppBundle\Utility\Obj\pag($asd);
+$pag = new AppBundle\Utility\Obj\pag($pag);
 
 	$br['repeat'] = 1;
 	$br = new AppBundle\Utility\Obj\br($br);
