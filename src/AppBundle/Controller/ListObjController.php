@@ -14,34 +14,35 @@ class ListObjController extends Controller
 
         if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){ 
             #path plantillas html Windows
+            $relativePathListObj = "\\src\\AppBundle\\Utility\\Obj";
             $relativePath = "\\src\\AppBundle\\Resources\\views\\default";
             $path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+            $pathListObj = str_replace("\\web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
 
         }
         else{
             #path plantillas html Linux
+            $relativePathListObj = "/src/AppBundle/Utility/Obj";
             $relativePath = "/src/AppBundle/Resources/views/default";
             $path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+            $pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
 
         }
-        // $message = $ListObj->getHappyMessage();
-        // xbug($message);
+        $serviceObj = $this->container->get('obj');
     	$post['editar_pagina'] = $request->attributes->get('pag');
 
-    	$dirbase = new dirbase($path);
-    	$filePag = $dirbase->getObj($post['editar_pagina'])->viewFile();
+        $dirbase = new dirbase($path);
+        $filePag = $dirbase->getObj($post['editar_pagina'])->viewFile();
 
-        $reg_exp = "(\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\pag\\()((\\$)(.+)){0,1}(\\);)";
+        
+        $objPag = $serviceObj->scanObjFile($filePag);
+        unset($dirbase);
+        $dirbase2 = new dirbase($pathListObj);
 
-        if(preg_match_all("|{$reg_exp}|", $filePag, $result)){
-            //nombre de objeto variable
-            $obj_pag = $result[2][0];
-            //nombre de array param
-            $param_pag = !empty($result[7][0]);
-
-        }
-
-
+        $objDir = $serviceObj->scanObjDir($dirbase2);
+        
+        xbug($objDir);
+        die();
         return $this->render('AppBundle:default:listObj.html.php', array());
     }
 

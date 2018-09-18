@@ -100,41 +100,39 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$dropdown['button'] = TRUE;
 			$dropdown = new AppBundle\Utility\Obj\dropdown();
 					
-				unset($a_1, $a_2, $a_3, $icon_1);
 
-				$a_1['textColor'] = 'grey,1';
-				$a_1['text'] = 'dropdown';
-				$a_1 = new AppBundle\Utility\Obj\a($a_1);
+				$a_4['textColor'] = 'grey,1';
+				$a_4['text'] = 'dropdown';
+				$a_4 = new AppBundle\Utility\Obj\a($a_4);
 
-					$icon_1['icon'] = "arrow_drop_down";
-					$icon_1['textColor'] = 'grey,1';
-					$icon_1['float'] = "r";
+					$icon_2['icon'] = "arrow_drop_down";
+					$icon_2['textColor'] = 'grey,1';
+					$icon_2['float'] = "r";
 					
-					$icon_1 = new AppBundle\Utility\Obj\icon($icon_1);
+					$icon_2 = new AppBundle\Utility\Obj\icon($icon_2);
 
-				$a_1->addObj($icon_1);
+				$a_4->addObj($icon_2);
 
-				unset($icon_1);
-				$a_2['textColor'] = 'grey,9';
-				$a_2['text'] = 'btn 1';
-				$a_2 = new AppBundle\Utility\Obj\a($a_2);
+				$a_5['textColor'] = 'grey,9';
+				$a_5['text'] = 'btn 1';
+				$a_5 = new AppBundle\Utility\Obj\a($a_5);
 
-					$icon_1['icon'] = "ac_unit";
-					$icon_1['textColor'] = 'grey,9';
-					$icon_1['float'] = "r";
+					$icon_3['icon'] = "ac_unit";
+					$icon_3['textColor'] = 'grey,9';
+					$icon_3['float'] = "r";
 					
-					$icon_1 = new AppBundle\Utility\Obj\icon($icon_1);
+					$icon_3 = new AppBundle\Utility\Obj\icon($icon_3);
 
-				$a_2->addObj($icon_1);
+				$a_5->addObj($icon_3);
 
-				$a_3['textColor'] = 'grey,9';
-				$a_3['text'] = 'btn 2';
-				$a_3 = new AppBundle\Utility\Obj\a($a_3);
-				$a_3->addObj($icon_1);
+				$a_6['textColor'] = 'grey,9';
+				$a_6['text'] = 'btn 2';
+				$a_6 = new AppBundle\Utility\Obj\a($a_6);
+				$a_6->addObj($icon_3);
 
-			$dropdown->addObj($a_1);
-			$dropdown->addObj($a_2);
-			$dropdown->addObj($a_3);
+			$dropdown->addObj($a_4);
+			$dropdown->addObj($a_5);
+			$dropdown->addObj($a_6);
 
 		$nav->addObj($dropdown);
 		$nav->addObj($dropdown);
