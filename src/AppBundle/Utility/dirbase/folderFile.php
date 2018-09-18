@@ -254,9 +254,6 @@ class folderFile
 	protected function __searchObj($arg){
 		foreach ($this->arrayObj as $key => $obj) {
 			$search = (explode("/", $obj->__getProperty('path')));
-			if (empty(end($search))){
-				unset($search[end(array_keys($search))]);
-			}
 			if (end($search) == $arg){
 				return $this->arrayObj[$key];
 			}
