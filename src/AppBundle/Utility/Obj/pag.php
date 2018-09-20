@@ -9,6 +9,7 @@ class pag extends createClass
 	protected $id;
 	protected $textColor;
 	protected $backgroundColor;
+	protected $js;
 	protected $obj;
 	
 	public function __construct($arg = NULL){
@@ -20,6 +21,7 @@ class pag extends createClass
 		$this->id = 'pag-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,1' : $arg['backgroundColor'];
+		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->obj = NULL;
 	}
 	public function render($arg = NULL){
@@ -107,6 +109,13 @@ class pag extends createClass
 					}
 				}
 				$objJs = array_unique($objJs);
+				if(!empty($this->js)){
+					foreach ($this->js as $key => $js) {
+						if(is_array($js)){ $objJs[] = implode("\n\t\t\t", $js);	}
+						else{$objJs[] = $js;}
+					}
+				}
+				$objJs = array_unique($objJs);
 				if(isset($objJs)) return implode("\n\t\t\t", $objJs);
 			}
 			else{
@@ -144,8 +153,12 @@ class pag extends createClass
 	}
     public function __set($property, $value )
     {
-        $this->$property = $value;
-        $this->refreshInfo();
+    	if($property == 'js'){
+        	$this->$property = array($value);
+    	}
+    	else{
+        	$this->$property = $value;
+    	}
     }
     public function __get($property)
     {
