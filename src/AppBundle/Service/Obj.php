@@ -98,7 +98,7 @@ class Obj
 		foreach ($arrayFiles as $key => $value) {
 			$filePag = $objDir->getObj($value)->viewFile();
 			if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
-				$result[$key]['obj'] = $out[3][0];
+				$result[$key]['type'] = $out[3][0];
 			}
 			$result[$key]['param'] = $this->getParamClass($filePag);
 			$result[$key]['action'] = $this->getActionClass($filePag);
