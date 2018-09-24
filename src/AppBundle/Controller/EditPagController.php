@@ -40,5 +40,10 @@ class EditPagController extends Controller
         }else{
     		return $this->render('AppBundle:default:editPag.html.php', array('selectFile' => $selectFile));
     	}
-    }	
+    }
+    public function editAction(Request $request){
+        $post = $request->attributes->get('pag');
+        $post = $request->attributes->get('action');
+        return $this->render('AppBundle:default:loadPag.html.php', array('post' => $post));
+    }
 }

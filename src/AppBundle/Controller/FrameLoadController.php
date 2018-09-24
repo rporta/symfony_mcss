@@ -12,6 +12,7 @@ class FrameLoadController extends Controller
     public function indexAction(Request $request)
     {
     	$post['editar_pagina'] = $request->attributes->get('pag');
-        return $this->render('AppBundle:default:'.$post['editar_pagina']);
+    	$post['editar_accion'] = $request->attributes->get('action');
+        return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => TRUE, 'action' => $post['editar_accion']));
     }	
 }

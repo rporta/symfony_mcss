@@ -179,4 +179,65 @@ $pag->addObj($preloaderFull);
 $pag->addObj($header);
 $pag->addObj($main);
 $pag->addObj($footer);
+if(!empty($editar)){
+	if(!empty($action)){
+		switch ($action) {
+			case 'add':
+				break;
+			case 'edit':
+				break;
+			case 'del':
+				$alert['mode'] = 1;
+				$alert['customJs'] = "";
+				$alert = new AppBundle\Utility\Obj\alert($alert);
+
+				$pa['text'] = "Desea Borrar este Objeto ?";
+				$pa['textAling'] = "c";
+				$pa = new AppBundle\Utility\Obj\p($pa);
+
+				$bca['class'] = "modal-action modal-close";
+				$bca['mode'] = 1;
+				$bca['text'] = "cerrar";
+				$bca = new AppBundle\Utility\Obj\inputButton($bca);
+
+				$alert->addObj($pa);
+				$alert->addObj($bca);
+
+				$pag->js = "$(document).click(function(e){
+					console.log(e);
+					console.log(e.target.outerHTML);
+					if( $(\"#alert-72197\").length){
+											
+					}
+					else{
+					/*agrego alerta*/
+					$('body').append(
+						'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea borrar este objeto : '+e.target.outerHTML+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+					);	
+					}
+
+
+					/*
+						alert(desea action en objeto) ? si : NO
+
+							SI:
+								ajax 
+						
+									data : e
+									url: /resolver/actual_pag/action
+
+									done
+						
+										crep un form con un editpag/pag/action
+
+										lo agrego al body
+
+										lo envio
+
+					 */
+				});";
+				break;
+		}
+	}
+}
 $pag->render();

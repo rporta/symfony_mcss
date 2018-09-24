@@ -61,4 +61,11 @@ $pag->addObj($preloaderFull);
 $pag->addObj($header);
 $pag->addObj($main);
 $pag->addObj($footer);
+if(!empty($editar)){
+	$pag->js = "$(document).click(function(e){
+	alert(e.target.nodeName);
+	console.log(e);
+	console.log(e.target.nodeName);
+	});";
+}
 $pag->render();

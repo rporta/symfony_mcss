@@ -10,6 +10,7 @@ class alert extends createClass
 {
 	protected $id;
 	protected $type;
+	protected $textAling;	
 	protected $textColor;
 	protected $backgroundColor;
 	protected $float;
@@ -17,7 +18,10 @@ class alert extends createClass
 	protected $valign;
 	protected $class;
 	protected $shadow;
+	protected $mode;	
+	protected $customJs;	
 	protected $button;
+	protected $hoverable;	
 	protected $footerFixed;
 	protected $bottonSheet;
 	protected $redirectPath;
@@ -31,6 +35,7 @@ class alert extends createClass
 	public function reset($arg = NULL){
 		$this->id = 'alert-'.$this->createID(5);
 		$this->type = 'alert';
+		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];				
 		$this->textColor = !isset($arg['textColor']) ? NULL : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? NULL : $arg['backgroundColor'];
 		$this->float = !isset($arg['float']) ? NULL : $arg['float'];
@@ -38,7 +43,10 @@ class alert extends createClass
 		$this->valign = !isset($arg['valign']) ? NULL : $arg['valign'];
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
+		$this->mode = !isset($arg['mode']) ? '0' : $arg['mode'];	
+		$this->customJs = !isset($arg['customJs']) ? NULL : $arg['customJs'];	
 		$this->button = !isset($arg['button']) ? TRUE : $arg['button'];	
+		$this->hoverable = !isset($arg['hoverable']) ? NULL : $arg['hoverable'];				
 		$this->footerFixed = !isset($arg['footerFixed']) ? NULL : $arg['footerFixed'];	
 		$this->bottonSheet = !isset($arg['bottonSheet']) ? NULL : $arg['bottonSheet'];	
 		$this->redirectPath = !isset($arg['redirectPath']) ? NULL : $arg['redirectPath'];
@@ -60,13 +68,15 @@ class alert extends createClass
 		$objFooter = $this->getObj('html:footer');
 		$footerFixed =  $this->modalFooterFixed($this->footerFixed);
 		$bottonSheet =  $this->modalBottonSheet($this->bottonSheet);
-		
+		$hoverable =  $this->hoverable($this->hoverable);
+		$textAling =  $this->textAling($this->textAling);
+
 		$shadow =  $this->shadow($this->shadow);	
 
 		$this->getObj('js');
 
-		$search = array("{ID}","{obj:html:content}","{obj:html:footer}","{TEXTCOLOR}","{BACKGROUNDCOLOR}","{VALIGN}","{FLOAT}","{SHADOW}", "{FOOTERFIXED}","{BOTTONSHEET}");
-		$replace = array("{$id}", "{$objContent}", "{$objFooter}", "{$textColor}", "{$backgroundColor}", "{$valign}", "{$float}", "{$shadow}", "{$footerFixed}", "{$bottonSheet}");
+		$search = array("{ID}","{obj:html:content}","{obj:html:footer}","{TEXTCOLOR}","{BACKGROUNDCOLOR}","{VALIGN}","{FLOAT}","{SHADOW}", "{FOOTERFIXED}","{BOTTONSHEET}", "{TEXTALING}" , "{HOVERABLE}");
+		$replace = array("{$id}", "{$objContent}", "{$objFooter}", "{$textColor}", "{$backgroundColor}", "{$valign}", "{$float}", "{$shadow}", "{$footerFixed}", "{$bottonSheet}", "{$textAling}", "{$hoverable}");
 				
 		$tempHtml = 
 		'<div id="{ID}" class="modal {TEXTCOLOR} {BACKGROUNDCOLOR} {VALIGN} {TEXTALING} {FLOAT} {HOVERABLE} {FOOTERFIXED} {BOTTONSHEET}">
@@ -118,6 +128,44 @@ class alert extends createClass
 			}
 		}
 		elseif($arg == 'js'){
+			$mode = $this->modeAlert($this->mode);
+
+			if ($mode = "redirect" ) {
+				//js
+				$id = $this->id;
+				if(!is_null($this->redirectPath)){
+					$pURL = $this->redirectPath;				
+					$js = "$('#{$id}').modal({complete: function() { document.location.href='{$pURL}'; }}); $('#{$id}').modal('open');";
+					if(!in_array($js, $this->js)){
+						$this->js[] = $js;
+					}			
+				}
+				else{
+					
+					$js = "$('#{$id}').modal(); $('#{$id}').modal('open');";
+					if(!in_array($js, $this->js)){
+						$this->js[] = $js;
+					}
+				}				
+			}elseif ($mode = "custom" ) {
+				//js
+				$id = $this->id;
+				if(!is_null($this->customJs)){
+					$custom = $this->customJs;	
+					$js = "$('#{$id}').modal({complete: function() { $custom }}); $('#{$id}').modal('open');";
+					if(!in_array($js, $this->js)){
+						$this->js[] = $js;
+					}			
+				}
+				else{
+					
+					$js = "$('#{$id}').modal();";
+					if(!in_array($js, $this->js)){
+						$this->js[] = $js;
+					}
+				}				
+			}
+
 			if(!empty($this->obj)){
 				foreach ($this->obj as $Obj) {
 					foreach ($Obj->js as $js) {

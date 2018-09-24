@@ -154,7 +154,7 @@ class pag extends createClass
     public function __set($property, $value )
     {
     	if($property == 'js'){
-        	$this->$property = array($value);
+        	$this->js[] = $value;
     	}
     	else{
         	$this->$property = $value;

@@ -4,17 +4,20 @@ index:
 create_pag:
     path:      /createpag
     defaults:  { _controller: AppBundle:CreatePag:index }
-edit_pag:
+select_pag:
     path:      /editpag
     defaults:  { _controller: AppBundle:EditPag:index }
+edit_pag:
+    path:      /editpag/{pag}
+    defaults:  { _controller: AppBundle:EditPag:edit }    
 load_pag:
-    path:      /loadpag/{pag}
+    path:      /loadpag/{pag}/{action}
     defaults:  { _controller: AppBundle:LoadPag:index }
 delete_pag:
     path:      /deletepag
     defaults:  { _controller: AppBundle:DeletePag:index }
 frame_load:
-    path:      /frameload/{pag}
+    path:      /frameload/{pag}/{action}
     defaults:  { _controller: AppBundle:FrameLoad:index }
 list_obj:
     path:     /listobj/{pag}

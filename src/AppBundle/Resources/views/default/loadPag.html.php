@@ -1,11 +1,12 @@
 <?php
 if(!empty($post)){
 	$editPag = $post['editar_pagina'];
-	$pathLoadPag = "/loadpag/{$editPag}";
+	$pathLoadPag = "/loadpag/{$editPag}/default";
+	$pathLoadPag = "/loadpag/{$editPag}/default";
 }
 
 
-$pag['backgroundColor'] = "grey,0";
+$pag['backgroundColor'] = "b-w-t,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
 
 	$preloaderFull['layerBackgroundColor'] = 'b-w-t,0';
@@ -34,6 +35,11 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		         		$(this).unwrap();
 		    		});
 				}
+				function loadlink2(arg){
+					$('div[name=proyectPag]').load(arg,function () {
+		         		$(this).unwrap();
+		    		});
+				}
 				loadlink();
 				// setInterval(function(){
 				//     loadlink() // this will run after every 5 seconds
@@ -57,7 +63,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNav->addObj($button);
 
 			$a['text'] = 'Agregar objeto';
-			$a['href'] = "#";
+			$a['dataTarget'] = $editPag;
 			// $a['href'] = '/listobj/'.$editPag;
 			$a['textAling'] = 'l';
 			$a = new AppBundle\Utility\Obj\a($a);
@@ -72,7 +78,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNav->addObj($a);
 
 			$a2->text = "Modificar objeto";
-			$a2->href = "#";
+			$a2->dataTarget = $editPag;
 
 				$icon_a2 = clone $icon_a;
 				$icon_a2->icon = "edit";
@@ -83,7 +89,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$sideNav->addObj($a2);
 			$a3->text = "Borrar objeto";
-			$a3->href = "#";
+			$a3->dataTarget = $editPag;
 
 				$icon_a3 = clone $icon_a;
 				$icon_a3->icon = "remove";
@@ -122,4 +128,28 @@ $pag->addObj($preloaderFull);
 $pag->addObj($header);
 $pag->addObj($main);
 $pag->addObj($footer);
+if(!empty($editar)){
+	$pag->js = "$(document).click(function(e){
+	alert(e.target.nodeName);
+	console.log(e);
+	console.log(e.target.nodeName);
+	});";
+}
+if(!empty($post)){
+	$pag->js = 
+	"$('a').click(function(e){
+		action = e.target.firstChild.data;
+		pag = e.target.dataset.target;
+		if(action == 'Agregar objeto'){
+			loadlink2('/loadpag/{$editPag}/add');
+		}
+		else if(action == 'Modificar objeto'){
+			loadlink2('/loadpag/{$editPag}/edit');
+		}
+		else if(action == 'Borrar objeto'){
+			loadlink2('/loadpag/{$editPag}/del');
+
+		}
+	});";	
+}
 $pag->render();

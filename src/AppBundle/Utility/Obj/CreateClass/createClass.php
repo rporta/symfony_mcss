@@ -116,6 +116,19 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}
+	protected function modeAlert($arg = NULL){
+		switch (strtolower((string)$arg)) {
+			case "0":
+			case "redirect":
+				$out = "redirect";
+				break;
+			case "1":
+			case "custom":
+				$out = "custom"; 
+				break;
+		}
+		return is_null($arg) ? NULL :$out;
+	}
 	protected function textAling($arg = NULL){
 		return is_null($arg) ? NULL : $this->float($arg).'-align';
 	}
