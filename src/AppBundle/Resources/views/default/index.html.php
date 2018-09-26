@@ -184,10 +184,23 @@ if(!empty($editar)){
 		switch ($action) {
 			case 'add':
 				$pag->js = 
-				"$(document).click(function(e){
+				"function getParent(e){
+					parent = e.parentNode.nodeName;
+					if(parent == 'NAV'){
+						return 1;
+					}
+					else if(parent == 'BODY'){
+						return 0;
+					}
+					else{
+						return getParent(e.parentNode);
+					}
+				}
+				$(document).click(function(e){
+					s = e;
+					isNav = getParent(s.target);
+					console.log(isNav);
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
-					console.log(e);
-					console.log(e.target.outerHTML);
 					if( $(\"#alert-72197\").length){
 											
 					}
@@ -237,8 +250,6 @@ if(!empty($editar)){
 				$pag->js = 
 				"$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
-					console.log(e);
-					console.log(e.target.outerHTML);
 					if( $(\"#alert-72197\").length){
 											
 					}
@@ -289,8 +300,6 @@ if(!empty($editar)){
 				$pag->js = 
 				"$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
-					console.log(e);
-					console.log(e.target.outerHTML);
 					if( $(\"#alert-72197\").length){
 											
 					}
