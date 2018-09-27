@@ -274,7 +274,8 @@ if(!empty($editar)){
 				break;
 			case 'edit':
 				$pag->js = 
-				"function getParent(e, lParentNode = 0){
+				"var ObjHtmlElement;
+				function getParent(e, lParentNode = 0){
 					lParentNode++;
 					parent = e.parentNode.nodeName;
 					if(parent == 'NAV'){
@@ -365,7 +366,9 @@ if(!empty($editar)){
 			case 'del':
 
 				$pag->js = 
-				"function getParent(e, lParentNode = 0){
+				"var ObjHtmlElement;
+				$('body').append('<form id=\"form-send\" action=\"/editpag\" method=\"POST\"><input type=\"hidden\" name=\"editar_pagina\" value=\"index.html.php\"></form>');
+				function getParent(e, lParentNode = 0){
 					lParentNode++;
 					parent = e.parentNode.nodeName;
 					if(parent == 'NAV'){
@@ -412,31 +415,14 @@ if(!empty($editar)){
 											
 					}
 					else{
+						appEnd = 
+
+						ObjHtmlElement = e.target;
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: element, dataType:\"JSON\" success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
 						);	
 					}
-
-
-					/*
-					# alert ( desea action en objeto ) ? si : NO
-
-						si:
-							ajax:
-					
-								data : e
-								url: /resolver/actual_pag/action
-
-								done
-					
-									creo un FORM  con action editpag/pag/action
-
-									lo agrego al body
-
-									submit
-
-					 */
 					}); 
 					window.onmouseover=function(e) {
 						if($('.modal-overlay').length){

@@ -22,3 +22,6 @@ frame_load:
 list_obj:
     path:     /listobj/{pag}
     defaults: { _controller: AppBundle:ListObj:index }
+ajax_del:
+    path:     /ajaxdel/{pag}
+    defaults: { _controller: AppBundle:AjaxDel:index }
