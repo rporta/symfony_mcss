@@ -184,30 +184,56 @@ if(!empty($editar)){
 		switch ($action) {
 			case 'add':
 				$pag->js = 
-				"function getParent(e){
+				"function getParent(e, lParentNode = 0){
+					lParentNode++;
 					parent = e.parentNode.nodeName;
 					if(parent == 'NAV'){
-						return 1;
+						return lParentNode;
 					}
 					else if(parent == 'BODY'){
 						return 0;
 					}
 					else{
-						return getParent(e.parentNode);
+						return getParent(e.parentNode, lParentNode);
 					}
 				}
+				function setHtmlSubElementNav(e, isNav, element){
+					if(isNav == 0){
+						return element;
+					}else{
+						isNav--;
+
+						nodeName = e.parentNode.nodeName;
+						className = e.parentNode.className;
+
+						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
+
+						tagEnd = \"<\/\"+nodeName+\">\";
+
+						element = tagIni+element+tagEnd;
+
+						return setHtmlSubElementNav(e.parentNode, isNav, element);		
+					}
+
+
+				}
 				$(document).click(function(e){
+					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
 					s = e;
 					isNav = getParent(s.target);
-					console.log(isNav);
-					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
+					if(isNav > 0){
+						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+						element = setHtmlSubElementNav(s.target, isNav, subElement);
+					}else{
+						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+					}
 					if( $(\"#alert-72197\").length){
 											
 					}
 					else{
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un elemento dentro de este objeto : '+e.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\")+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un elemento dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
 						);	
 					}
 
@@ -248,15 +274,56 @@ if(!empty($editar)){
 				break;
 			case 'edit':
 				$pag->js = 
-				"$(document).click(function(e){
+				"function getParent(e, lParentNode = 0){
+					lParentNode++;
+					parent = e.parentNode.nodeName;
+					if(parent == 'NAV'){
+						return lParentNode;
+					}
+					else if(parent == 'BODY'){
+						return 0;
+					}
+					else{
+						return getParent(e.parentNode, lParentNode);
+					}
+				}
+				function setHtmlSubElementNav(e, isNav, element){
+					if(isNav == 0){
+						return element;
+					}else{
+						isNav--;
+
+						nodeName = e.parentNode.nodeName;
+						className = e.parentNode.className;
+
+						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
+
+						tagEnd = \"<\/\"+nodeName+\">\";
+
+						element = tagIni+element+tagEnd;
+
+						return setHtmlSubElementNav(e.parentNode, isNav, element);		
+					}
+
+
+				}
+				$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
+					s = e;
+					isNav = getParent(s.target);
+					if(isNav > 0){
+						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+						element = setHtmlSubElementNav(s.target, isNav, subElement);
+					}else{
+						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+					}
 					if( $(\"#alert-72197\").length){
 											
 					}
 					else{
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea modificar este objeto : '+e.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\")+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un elemento dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
 						);	
 					}
 
@@ -298,15 +365,56 @@ if(!empty($editar)){
 			case 'del':
 
 				$pag->js = 
-				"$(document).click(function(e){
+				"function getParent(e, lParentNode = 0){
+					lParentNode++;
+					parent = e.parentNode.nodeName;
+					if(parent == 'NAV'){
+						return lParentNode;
+					}
+					else if(parent == 'BODY'){
+						return 0;
+					}
+					else{
+						return getParent(e.parentNode, lParentNode);
+					}
+				}
+				function setHtmlSubElementNav(e, isNav, element){
+					if(isNav == 0){
+						return element;
+					}else{
+						isNav--;
+
+						nodeName = e.parentNode.nodeName;
+						className = e.parentNode.className;
+
+						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
+
+						tagEnd = \"<\/\"+nodeName+\">\";
+
+						element = tagIni+element+tagEnd;
+
+						return setHtmlSubElementNav(e.parentNode, isNav, element);		
+					}
+
+
+				}
+				$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
+					s = e;
+					isNav = getParent(s.target);
+					if(isNav > 0){
+						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+						element = setHtmlSubElementNav(s.target, isNav, subElement);
+					}else{
+						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+					}
 					if( $(\"#alert-72197\").length){
 											
 					}
 					else{
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea borrar este objeto : '+e.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\")+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+							'<div id=\"alert-72197\" class=\" amber darken-3 modal\"><div class=\"modal-content center-align  amber darken-3\"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un elemento dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer  amber darken-3\"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
 						);	
 					}
 
