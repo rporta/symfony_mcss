@@ -180,7 +180,7 @@ $pag->addObj($header);
 $pag->addObj($main);
 $pag->addObj($footer);
 if(!empty($editar)){
-	if(!empty($action)){
+	if(!empty($action) && $action !== 'default'){
 		$pag->js = "$('body').append('<form style=\"display: none;\" id=\"form-send\" action=\"/editpag\" method=\"POST\"><input type=\"hidden\" name=\"editar_pagina\" value=\"index.html.php\"></form>');
 				window.onmouseover=function(e) {
 					if($('.modal-overlay').length){
