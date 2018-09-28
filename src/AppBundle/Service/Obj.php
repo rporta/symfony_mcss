@@ -39,7 +39,7 @@ class Obj
 		}		
 	}
 	public function getParam(&$result, $filePag){
-		$temp_reg_exp[] = "(\{PARAM}\[')(.+)('\])(\040+\=\040+)(.+)\;";
+		$temp_reg_exp[] = "(\{PARAM}\[.)(.+)(.\])(\040+\=\040+)(.+)\;";
 		$temp_reg_exp[] = "(\\$)({PARAM})(->)(.+)(\040+\=\040+)(.+)\;";
 		foreach ($result as $key => &$value) {
 			if(!empty($value['param'])){
@@ -49,7 +49,7 @@ class Obj
 						$param[$key1]['param'] = $value1;
 					}
 					foreach ($out[5] as $key2 => $value2) {
-						$param[$key2]['value'] = $value2;
+						$param[$key2]['value'] =  str_replace(array('"', "'"), "", $value2);
 					}
 					$result[$key]['param'] = $param;
 					unset($param);
@@ -63,7 +63,7 @@ class Obj
 						$param[$key1]['param'] = $value1;
 					}
 					foreach ($out2[6] as $key2 => $value2) {
-						$param[$key2]['value'] = $value2;
+						$param[$key2]['value'] = str_replace(array('"', "'"), "", $value2);
 					}
 					$result[$key]['param'] = $param;
 					unset($param);
