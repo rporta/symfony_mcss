@@ -181,100 +181,19 @@ $pag->addObj($main);
 $pag->addObj($footer);
 if(!empty($editar)){
 	if(!empty($action)){
-		switch ($action) {
-			case 'add':
-				$pag->js = 
-				"function getParent(e, lParentNode = 0){
-					lParentNode++;
-					parent = e.parentNode.nodeName;
-					if(parent == 'NAV'){
-						return lParentNode;
-					}
-					else if(parent == 'BODY'){
-						return 0;
-					}
-					else{
-						return getParent(e.parentNode, lParentNode);
-					}
-				}
-				function setHtmlSubElementNav(e, isNav, element){
-					if(isNav == 0){
-						return element;
+		$pag->js = "$('body').append('<form style=\"display: none;\" id=\"form-send\" action=\"/editpag\" method=\"POST\"><input type=\"hidden\" name=\"editar_pagina\" value=\"index.html.php\"></form>');
+				window.onmouseover=function(e) {
+					if($('.modal-overlay').length){
 					}else{
-						isNav--;
-
-						nodeName = e.parentNode.nodeName;
-						className = e.parentNode.className;
-
-						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
-
-						tagEnd = \"<\/\"+nodeName+\">\";
-
-						element = tagIni+element+tagEnd;
-
-						return setHtmlSubElementNav(e.parentNode, isNav, element);		
+						e.target.className = e.target.className + \" fifi teal accent-4 fifi\";
 					}
-
-
-				}
-				$(document).click(function(e){
-					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
-					s = e;
-					isNav = getParent(s.target);
-					if(isNav > 0){
-						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
-						element = setHtmlSubElementNav(s.target, isNav, subElement);
-					}else{
-						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
-					}
-					if( $(\"#alert-72197\").length){
-											
-					}
-					else{
-						/*agrego alerta*/
-						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un elemento dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
-						);	
-					}
-
-
-					/*
-					# alert ( desea action en objeto ) ? si : NO
-
-						si:
-							ajax:
-					
-								data : e
-								url: /resolver/actual_pag/action
-
-								done
-					
-									creo un FORM  con action editpag/pag/action
-
-									lo agrego al body
-
-									submit
-
-					 */
-					}); 
-					window.onmouseover=function(e) {
-						if($('.modal-overlay').length){
-						}else{
-							e.target.className = e.target.className + \" fifi teal accent-4 fifi\";
-						}
-					};
-					window.onmouseout=function(e) {
-						if($('.modal-overlay').length){
-						}else{	
-							e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");			  
-						}					
-					};
-					";
-				break;			
-				break;
-			case 'edit':
-				$pag->js = 
-				"var ObjHtmlElement;
+				};
+				window.onmouseout=function(e) {
+					if($('.modal-overlay').length){
+					}else{	
+						e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");			  
+					}					
+				};
 				function getParent(e, lParentNode = 0){
 					lParentNode++;
 					parent = e.parentNode.nodeName;
@@ -308,6 +227,40 @@ if(!empty($editar)){
 
 
 				}
+				function setObj(e, n = 0, obj = {}, parent = {}){
+					if(n == 0){
+						obj.id = e.id;
+						obj.nodeName = e.nodeName;
+						obj.className = e.className;
+						obj.parent = {};
+						n++;
+						return setObj(e.parentNode, n, obj);						
+					}
+					else{
+						if(e.nodeName == 'BODY'){
+
+							return {\"json\" : obj};
+						}
+						else{
+							parent.id = e.id;
+							parent.nodeName = e.nodeName;
+							parent.className = e.className;
+							parent.parent = {};
+
+							objString = JSON.stringify(obj);
+							parentString = JSON.stringify(parent);
+							
+							objString = objString.replace(\"{}\", parentString);
+							obj = JSON.parse(objString);
+							n++;
+							return setObj(e.parentNode, n, obj );					
+						}						
+					}					
+				}";
+		switch ($action) {
+			case 'add':
+				$pag->js = 
+				"
 				$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
 					s = e;
@@ -322,85 +275,53 @@ if(!empty($editar)){
 											
 					}
 					else{
+
+
+						ObjHtmlElement = setObj(e.target);
+
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea editar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");/*aca va el codigo ajax escucha el evento click del elemento id inputButton-ceab0 */<\/script><\/div>'
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
 						);	
 					}
-
-
-					/*
-					# alert ( desea action en objeto ) ? si : NO
-
-						si:
-							ajax:
-					
-								data : e
-								url: /resolver/actual_pag/action
-
-								done
-					
-									creo un FORM  con action editpag/pag/action
-
-									lo agrego al body
-
-									submit
-
-					 */
 					}); 
-					window.onmouseover=function(e) {
-						if($('.modal-overlay').length){
-						}else{
-							e.target.className = e.target.className + \" fifi teal accent-4 fifi\";
-						}
-					};
-					window.onmouseout=function(e) {
-						if($('.modal-overlay').length){
-						}else{	
-							e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");			  
-						}					
-					};
+
 					";
 				break;
+			case 'edit':
+				$pag->js = 
+				"
+				$(document).click(function(e){
+					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
+					s = e;
+					isNav = getParent(s.target);
+					if(isNav > 0){
+						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+						element = setHtmlSubElementNav(s.target, isNav, subElement);
+					}else{
+						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+					}
+					if( $(\"#alert-72197\").length){
+											
+					}
+					else{
+
+
+						ObjHtmlElement = setObj(e.target);
+
+						/*agrego alerta*/
+						$('body').append(
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea modificar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
+						);	
+					}
+					}); 
+
+					";
 				break;
 			case 'del':
 
 				$pag->js = 
-				"var ObjHtmlElement;
-				$('body').append('<form style=\"display: none;\" id=\"form-send\" action=\"/editpag\" method=\"POST\"><input type=\"hidden\" name=\"editar_pagina\" value=\"index.html.php\"></form>');
-				function getParent(e, lParentNode = 0){
-					lParentNode++;
-					parent = e.parentNode.nodeName;
-					if(parent == 'NAV'){
-						return lParentNode;
-					}
-					else if(parent == 'BODY'){
-						return 0;
-					}
-					else{
-						return getParent(e.parentNode, lParentNode);
-					}
-				}
-				function setHtmlSubElementNav(e, isNav, element){
-					if(isNav == 0){
-						return element;
-					}else{
-						isNav--;
-
-						nodeName = e.parentNode.nodeName;
-						className = e.parentNode.className;
-
-						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
-
-						tagEnd = \"<\/\"+nodeName+\">\";
-
-						element = tagIni+element+tagEnd;
-
-						return setHtmlSubElementNav(e.parentNode, isNav, element);		
-					}
-
-
-				}
+				"
 				$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
 					s = e;
@@ -415,27 +336,17 @@ if(!empty($editar)){
 											
 					}
 					else{
-						appEnd = 
 
-						ObjHtmlElement = e.target;
+
+						ObjHtmlElement = setObj(e.target);
+
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: element, dataType:\"JSON\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
 						);	
 					}
 					}); 
-					window.onmouseover=function(e) {
-						if($('.modal-overlay').length){
-						}else{
-							e.target.className = e.target.className + \" fifi teal accent-4 fifi\";
-						}
-					};
-					window.onmouseout=function(e) {
-						if($('.modal-overlay').length){
-						}else{	
-							e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");			  
-						}					
-					};
+
 					";
 				break;
 		}
