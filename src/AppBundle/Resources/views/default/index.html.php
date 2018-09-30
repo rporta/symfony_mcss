@@ -229,31 +229,44 @@ if(!empty($editar)){
 				}
 				function setObj(e, n = 0, obj = {}, parent = {}){
 					if(n == 0){
-						obj.id = e.id;
-						obj.nodeName = e.nodeName;
-						obj.className = e.className;
-						obj.parent = {};
-						n++;
-						return setObj(e.parentNode, n, obj);						
+						if(e.id.length == 0){
+							n++;
+							return setObj(e.parentNode, n, obj);
+						}
+						else{
+							obj.id = e.id;
+							obj.text = e.firstChild.data;
+							obj.nodeName = e.nodeName;
+							obj.className = e.className;
+							obj.parent = {};
+							n++;
+							return setObj(e.parentNode, n, obj);						
+						}
 					}
 					else{
 						if(e.nodeName == 'BODY'){
-
 							return {\"json\" : obj};
 						}
 						else{
-							parent.id = e.id;
-							parent.nodeName = e.nodeName;
-							parent.className = e.className;
-							parent.parent = {};
+							if(e.id.length == 0){
+								n++;
+								return setObj(e.parentNode, n, obj);								
+							}
+							else{							
+								parent.id = e.id;
+								parent.text = e.firstChild.data;
+								parent.nodeName = e.nodeName;
+								parent.className = e.className;
+								parent.parent = {};
 
-							objString = JSON.stringify(obj);
-							parentString = JSON.stringify(parent);
-							
-							objString = objString.replace(\"{}\", parentString);
-							obj = JSON.parse(objString);
-							n++;
-							return setObj(e.parentNode, n, obj );					
+								objString = JSON.stringify(obj);
+								parentString = JSON.stringify(parent);
+								
+								objString = objString.replace(\"{}\", parentString);
+								obj = JSON.parse(objString);
+								n++;
+								return setObj(e.parentNode, n, obj );					
+							}
 						}						
 					}					
 				}";
@@ -275,7 +288,6 @@ if(!empty($editar)){
 											
 					}
 					else{
-
 
 						ObjHtmlElement = setObj(e.target);
 
@@ -339,6 +351,7 @@ if(!empty($editar)){
 
 
 						ObjHtmlElement = setObj(e.target);
+						console.log(ObjHtmlElement);
 
 						/*agrego alerta*/
 						$('body').append(

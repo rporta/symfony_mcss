@@ -25,7 +25,8 @@ class AjaxDelController extends Controller
             $path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
             $pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
 
-        }    	
+        }
+        //traigo obj del	
     	$data = $request->request->all();
 
         $serviceObj = $this->container->get('obj');
@@ -34,10 +35,12 @@ class AjaxDelController extends Controller
         $dirbase = new dirbase($path);
         $filePag = $dirbase->getObj($post['editar_pagina'])->viewFile();
         unset($dirbase);
+        //traigo obj pag
         $objPag = $serviceObj->scanObjFile($filePag);
     
 
         $dirbase2 = new dirbase($pathListObj);
+        //traigo obj disponibles
         $objDir = $serviceObj->scanObjDir($dirbase2);
         unset($dirbase2);
         

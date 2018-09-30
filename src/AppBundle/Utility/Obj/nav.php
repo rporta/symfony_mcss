@@ -41,6 +41,7 @@ class nav extends createClass
 	{
 		$this->type = 'nav';
 		$this->id = 'nav-'.$this->createID(5);
+		$this->idJs = 'idJs-'.$this->createID(5);
 		$this->textColor = !isset($arg['textColor']) ? 'b-w-t,0' : $arg['textColor'];
 		$this->backgroundColor = !isset($arg['backgroundColor']) ? 'b-w-t,2' : $arg['backgroundColor'];
 		$this->container = !isset($arg['container']) ? NULL : $arg['container'];
@@ -63,6 +64,7 @@ class nav extends createClass
 	}
 	public function refreshInfo(){
 		$id = $this->id;
+		$idJs = $this->idJs;
 		$textColor =  $this->textColors($this->textColor);
 		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
 		$container =  $this->container($this->container);
@@ -88,7 +90,7 @@ class nav extends createClass
 		$search = array("{ID}", "{obj:html}", "{obj:html:Logo}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{CONTAINER}", "{VALIGN}", "{TEXTALING}", "{FLOAT}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{EXTENDED}");
 		$replace = array("{$id}", "{$objHtml}", "{$objHtmlLogo}", "{$textColor}", "{$backgroundColor}", "{$container}", "{$valign}", "{$textAling}", "{$float}", "{$shadow}", "{$truncate}", "{$cardPanel}", "{$hoverable}", "{$extended}");
 		$tempHtml = 
-		"<nav class='{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE} {EXTENDED}'>
+		"<nav id='{ID}' class='{TEXTCOLOR} {BACKGROUNDCOLOR} {CONTAINER} {VALIGN} {TEXTALING} {FLOAT} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE} {EXTENDED}'>
 			<div class='nav-wrapper'>
 				{obj:html:Logo}
 				{obj:html:mobileButton}
@@ -104,7 +106,7 @@ class nav extends createClass
 			$mobileBackgroundColor =  $this->backgroundColors($this->mobileBackgroundColor);
 
 			$objHtmlButton['class'] = "button-collapse";
-			$objHtmlButton['dataActive'] = $id;
+			$objHtmlButton['dataActive'] = $idJs;
 			$objHtmlButton['href'] = "#";
 			$objHtmlButton = new a($objHtmlButton);
 
@@ -120,7 +122,7 @@ class nav extends createClass
 
 			$objHtmlButton = $objHtmlButton->html;
 
-			$objHtml = "<ul id='{$id}' class='side-nav {$mobileBackgroundColor}'>";
+			$objHtml = "<ul id='{$idJs}' class='side-nav {$mobileBackgroundColor}'>";
 
 			$oldId = $this->classData['id'];
 

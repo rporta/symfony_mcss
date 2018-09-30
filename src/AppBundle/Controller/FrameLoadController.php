@@ -13,6 +13,6 @@ class FrameLoadController extends Controller
     {
     	$post['editar_pagina'] = $request->attributes->get('pag');
     	$post['editar_accion'] = $request->attributes->get('action');
-        return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => TRUE, 'action' => $post['editar_accion']));
+        return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => $post['editar_pagina'], 'action' => $post['editar_accion']));
     }	
 }
