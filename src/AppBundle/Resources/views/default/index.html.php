@@ -227,18 +227,19 @@ if(!empty($editar)){
 
 
 				}
-				function setObj(e, n = 0, obj = {}, parent = {}){
+				function setObj(e, n = 0, obj = [], parent = {}){
 					if(n == 0){
 						if(e.id.length == 0){
 							n++;
 							return setObj(e.parentNode, n, obj);
 						}
 						else{
-							obj.id = e.id;
-							obj.text = e.firstChild.data;
-							obj.nodeName = e.nodeName;
-							obj.className = e.className;
-							obj.parent = {};
+							propery = {}
+							propery.id = e.id;
+							propery.text = e.firstChild.data;
+							propery.nodeName = e.nodeName;
+							propery.className = e.className;
+							obj[n] = propery;
 							n++;
 							return setObj(e.parentNode, n, obj);						
 						}
@@ -249,21 +250,15 @@ if(!empty($editar)){
 						}
 						else{
 							if(e.id.length == 0){
-								n++;
 								return setObj(e.parentNode, n, obj);								
 							}
 							else{							
-								parent.id = e.id;
-								parent.text = e.firstChild.data;
-								parent.nodeName = e.nodeName;
-								parent.className = e.className;
-								parent.parent = {};
-
-								objString = JSON.stringify(obj);
-								parentString = JSON.stringify(parent);
-								
-								objString = objString.replace(\"{}\", parentString);
-								obj = JSON.parse(objString);
+								propery = {}
+								propery.id = e.id;
+								propery.text = e.firstChild.data;
+								propery.nodeName = e.nodeName;
+								propery.className = e.className;
+								obj[n] = propery;
 								n++;
 								return setObj(e.parentNode, n, obj );					
 							}
