@@ -10,26 +10,28 @@ class Obj extends ObjParam
 		$reg_exp[] = "(\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\)(.+)(\\()(.*)(\\)\\;)";
 		$reg_exp[] = "(\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\(.+)(\\()(.*)(\\)\\;)|clone\s+(\\$)(.+))";
 
-		if(preg_match_all("/{$reg_exp[1]}/", $filePag, $out)){
-			foreach ($out[2] as $key => $value) {
+		$reg_exp[] = "([^\/\/\040](\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\(.+)(\\()(.*)(\\)\\;)|clone\s+(\\$)(.+)))";
+
+		if(preg_match_all("/{$reg_exp[2]}/", $filePag, $out)){
+			foreach ($out[3] as $key => $value) {
 				$result[$key]['name'] = $value;
 			}
-			foreach ($out[5] as $key => $value) {
+			foreach ($out[6] as $key => $value) {
 				if(!empty($value)){	
 					$result[$key]['type'] = $value;
 				}
 				else{
 					//busco el tipo de objeto que se clona
-					preg_match_all("/(clone)(\s+)(\\$)(.+)(\\;)/", $out[4][$key], $name);
+					preg_match_all("/(clone)(\s+)(\\$)(.+)(\\;)/", $out[5][$key], $name);
 					$name = $name[4][0];
-					foreach ($out[2] as $keyx => $valuex) {
+					foreach ($out[3] as $keyx => $valuex) {
 						if($valuex == $name){
-							$result[$key]['type'] = $out[5][$keyx];
+							$result[$key]['type'] = $out[6][$keyx];
 						}
 					}
 				}
 			}
-			foreach ($out[7] as $key => $value) {
+			foreach ($out[8] as $key => $value) {
 				$result[$key]['param'] = $value;
 			}
 			$this->getParam($result, $filePag);
@@ -40,16 +42,19 @@ class Obj extends ObjParam
 		}		
 	}
 	public function getParam(&$result, $filePag){
-		$temp_reg_exp[] = "(\{PARAM}\[.)(.+)(.\])(\040+\=\040+)(.+)\;";
-		$temp_reg_exp[] = "(\\$)({PARAM})(->)(.+)(\040+\=\040+)(.+)\;";
+		$temp_reg_exp[] = "([^\/\/\040](\{PARAM}\[.)(.+)(.\])(\040+\=\040+)(.+)\;)";
+		$temp_reg_exp[] = "([^\/\/\040](\\$)({PARAM})(->)(.+)(\040+\=\040+)(.+)\;)";
+
+
+
 		foreach ($result as $key => &$value) {
 			if(!empty($value['param'])){
 				$reg_exp = str_replace("{PARAM}", $value['param'], $temp_reg_exp[0]);
 				if(preg_match_all("/{$reg_exp}/", $filePag, $out)){
-					foreach ($out[2] as $key1 => $value1) {
-						$param[$key1]['param'] = $value1;
+					foreach ($out[3] as $key1 => $value1) {
+						$param[$key1]['name'] = $value1;
 					}
-					foreach ($out[5] as $key2 => $value2) {
+					foreach ($out[6] as $key2 => $value2) {
 						$param[$key2]['value'] =  str_replace(array('"', "'"), "", $value2);
 					}
 					$result[$key]['param'] = $param;
@@ -60,10 +65,10 @@ class Obj extends ObjParam
 			else{
 				$reg_exp = str_replace("{PARAM}", $value['name'], $temp_reg_exp[1]);
 				if(preg_match_all("/{$reg_exp}/", $filePag, $out2)){
-					foreach ($out2[4] as $key1 => $value1) {
-						$param[$key1]['param'] = $value1;
+					foreach ($out2[5] as $key1 => $value1) {
+						$param[$key1]['name'] = $value1;
 					}
-					foreach ($out2[6] as $key2 => $value2) {
+					foreach ($out2[7] as $key2 => $value2) {
 						$param[$key2]['value'] = str_replace(array('"', "'"), "", $value2);
 					}
 					$result[$key]['param'] = $param;
@@ -73,16 +78,16 @@ class Obj extends ObjParam
 		}
 	}
 	public function getAction(&$result, $filePag){
-		$temp_reg_exp = "(\\$)({PARAM})(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\))";
+		$temp_reg_exp = "([^\/\/\040](\\$)({PARAM})(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
 		foreach ($result as $key => &$value) {
 			if(!empty($value['name'])){
 				$reg_exp = str_replace("{PARAM}", $value['name'], $temp_reg_exp);
 				if(preg_match_all("/{$reg_exp}/", $filePag, $out)){
 
-					foreach ($out[4] as $key1 => $value1) {
+					foreach ($out[5] as $key1 => $value1) {
 						$action[$key1]['action'] = $value1;
 					}
-					foreach ($out[7] as $key2 => $value2) {
+					foreach ($out[8] as $key2 => $value2) {
 						$action[$key2]['value'] = $value2;
 					}
 					$result[$key]['action'] = $action;
@@ -295,6 +300,7 @@ class Obj extends ObjParam
 		foreach ($json as $key => &$value) {
 			unset($value['id']);
 			unset($value['className']);
+			unset($value['text']);
 		}
 		return $json;
 	}
@@ -309,31 +315,62 @@ class Obj extends ObjParam
 		if(preg_match_all("/({$textColor})/", $arg, $out)){
 			$param[0]['name'] = 'textColor';
 			$param[0]['value'] = $this->textColor($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
+			
 		}
 		if(preg_match_all("/({$backgroundColor})/", $arg, $out)){
 			$param[1]['name'] = 'backgroundColor';
 			$param[1]['value'] = $this->backgroundColor($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
+			
 		}
 		if(preg_match_all("/({$textAling})/", $arg, $out)){
 			$param[2]['name'] = 'textAling';
 			$param[2]['value'] = $this->textAling($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
 		}
 		if(preg_match_all("/({$float})/", $arg, $out)){
 			$param[3]['name'] = 'float';
 			$param[3]['value'] = $this->float($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
 		}
 		if(preg_match_all("/({$waves})/", $arg, $out)){
 			$param[4]['name'] = 'waves';
 			$param[4]['value'] = $this->waves($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
 		}
 		if(preg_match_all("/({$shadow})/", $arg, $out)){
 			$param[5]['name'] = 'shadow';
 			$param[5]['value'] = $this->shadow($out[0][0]);
+			$arg = str_replace($out[0][0], "", $arg);
 		}
-		if($type == 'icon'){
+		if(preg_match_all("/(icon)/", $type)){
 			$param[5]['name'] = $type;
 			$param[5]['value'] = $text;			
 		}
+		if( $type == "a" || $type == "p" || $type == "pre" || $type == "h" || $type == "blockquote" || $type == "chip" || $type == "inputButton" || $type == "span"
+		){
+			$param[5]['name'] = 'text';
+			$param[5]['value'] = $text;			
+		}
 		return $param;
+	}
+	public function delObj($listObjDel, $listObjPag){
+		xbug($listObjDel);
+		xbug($listObjPag);
+		$objParamVal = 0;
+		foreach ($listObjPag as $objPag) {
+			foreach ($listObjDel as $objDel) {
+				if($objPag['type'] == $objDel['type']){
+					foreach ($objPag['param'] as $paraPag) {
+						foreach ($objDel['param'] as $paramDel) {
+							if($paraPag['name'] == $paramDel['name'] && $paraPag['value'] == $paramDel['value']){
+								$objParamVal++;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
