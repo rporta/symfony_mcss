@@ -230,7 +230,6 @@ if(!empty($editar)){
 				function setObj(e, n = 0, obj = [], parent = {}){
 					if(n == 0){
 						if(e.id.length == 0){
-							n++;
 							return setObj(e.parentNode, n, obj);
 						}
 						else{
