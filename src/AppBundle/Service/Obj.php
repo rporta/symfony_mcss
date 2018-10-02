@@ -116,29 +116,29 @@ class Obj extends ObjParam
 				$param[$i]['name'] = $value;
 				switch ($value) {
 					case 'textColor':
-						$param[$i]['value'] = $this->textColor();
+						$param[$i]['value'] = array_keys($this->textColor());
 						break;
 					case 'backgroundColor':
-						$param[$i]['value'] = $this->backgroundColor();
+						$param[$i]['value'] = array_keys($this->backgroundColor());
 						break;
 					case 'float':
-						$param[$i]['value'] = $this->float();
+						$param[$i]['value'] = array_keys($this->float());
 						break;
 					case 'textAling':
-						$param[$i]['value'] = $this->textAling();
+						$param[$i]['value'] = array_keys($this->textAling());
 						break;
 					case 'waves':
-						$param[$i]['value'] = $this->waves();
+						$param[$i]['value'] = array_keys($this->waves());
 						break;
 					case 'shadow':
-						$param[$i]['value'] = $this->shadow();
+						$param[$i]['value'] = array_keys($this->shadow());
 						break;
 					default:
 						switch ($type) {
 							case 'alert':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeAlert();
+										$param[$i]['value'] = array_keys($this->modeAlert());
 										break;
 
 								}
@@ -147,13 +147,13 @@ class Obj extends ObjParam
 							case 'card':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeCard();
+										$param[$i]['value'] = array_keys($this->modeCard());
 										break;
 									case 'orientation':
-										$param[$i]['value'] = $this->orientationCard();
+										$param[$i]['value'] = array_keys($this->orientationCard());
 										break;
 									case 'size':
-										$param[$i]['value'] = $this->sizeCard();
+										$param[$i]['value'] = array_keys($this->sizeCard());
 										break;
 
 								}
@@ -162,10 +162,10 @@ class Obj extends ObjParam
 							case 'preloaderFull':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modePreloader();
+										$param[$i]['value'] = array_keys($this->modePreloader());
 										break;
 									case 'size':
-										$param[$i]['value'] = $this->sizePreloader();
+										$param[$i]['value'] = array_keys($this->sizePreloader());
 										break;
 
 								}
@@ -173,7 +173,7 @@ class Obj extends ObjParam
 							case 'sideNav':
 								switch ($value) {
 									case 'edge':
-										$param[$i]['value'] = $this->edge();
+										$param[$i]['value'] = array_keys($this->edge());
 										break;
 
 								}
@@ -181,7 +181,7 @@ class Obj extends ObjParam
 							case 'icon':
 								switch ($value) {
 									case 'size':
-										$param[$i]['value'] = $this->sizeIcon();
+										$param[$i]['value'] = array_keys($this->sizeIcon());
 										break;
 
 								}
@@ -189,7 +189,7 @@ class Obj extends ObjParam
 							case 'table':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeTable();
+										$param[$i]['value'] = array_keys($this->modeTable());
 										break;
 
 								}
@@ -197,7 +197,7 @@ class Obj extends ObjParam
 							case 'media':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeMedia();
+										$param[$i]['value'] = array_keys($this->modeMedia());
 										break;
 
 								}
@@ -205,7 +205,7 @@ class Obj extends ObjParam
 							case 'chip':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeChip();
+										$param[$i]['value'] = array_keys($this->modeChip());
 										break;
 
 								}
@@ -213,7 +213,7 @@ class Obj extends ObjParam
 							case 'h':
 								switch ($value) {
 									case 'size':
-										$param[$i]['value'] = $this->sizeTitle();
+										$param[$i]['value'] = array_keys($this->sizeTitle());
 										break;
 
 								}
@@ -221,7 +221,7 @@ class Obj extends ObjParam
 							case 'inputButton':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputinputButton();
+										$param[$i]['value'] = array_keys($this->modeInputinputButton());
 										break;
 
 								}
@@ -229,7 +229,7 @@ class Obj extends ObjParam
 							case 'inputRange':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputRange();
+										$param[$i]['value'] = array_keys($this->modeInputRange());
 										break;
 
 								}
@@ -237,7 +237,7 @@ class Obj extends ObjParam
 							case 'InputSelect':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputSelect();
+										$param[$i]['value'] = array_keys($this->modeInputSelect());
 										break;
 
 								}
@@ -245,7 +245,7 @@ class Obj extends ObjParam
 							case 'InputRadioButtons':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputRadioButtons();
+										$param[$i]['value'] = array_keys($this->modeInputRadioButtons());
 										break;
 
 								}
@@ -253,7 +253,7 @@ class Obj extends ObjParam
 							case 'InputCheckboxes':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputCheckboxes();
+										$param[$i]['value'] = array_keys($this->modeInputCheckboxes());
 										break;
 
 								}
@@ -261,7 +261,7 @@ class Obj extends ObjParam
 							case 'InputFields':
 								switch ($value) {
 									case 'mode':
-										$param[$i]['value'] = $this->modeInputFields();
+										$param[$i]['value'] = array_keys($this->modeInputFields());
 										break;
 
 								}
@@ -286,14 +286,54 @@ class Obj extends ObjParam
 		}
 
 	}
-	/**
-	 * [jsonToObj description] - convierte data Json   
-	 * @param  [type] $json [description]
-	 * @param  [type] $list [description]
-	 * @return [type]       [description]
-	 */
-	public function jsonSetParam($json, $list){	
+	public function jsonSetParam($json){
+		foreach ($json as $key => &$value) {
+			$value['type'] = explode("-", $value['id'])[0];
+			$text = empty($value['text']) ? NULL : $value['text'] ;
+			$value['param'] = $this->classToParam($value['className'], $value['type'], $text);
+		}
+		foreach ($json as $key => &$value) {
+			unset($value['id']);
+			unset($value['className']);
+		}
 		return $json;
 	}
+	public function classToParam($arg, $type, $text = NULL){
+		$textColor = implode("|", $this->textColor());
+		$backgroundColor = implode("|", $this->backgroundColor());
+		$textAling = implode("|", $this->textAling());
+		$float = implode("|", $this->float());
+		$waves = implode("|", $this->waves());
+		$shadow = implode("|", $this->shadow());
 
+		if(preg_match_all("/({$textColor})/", $arg, $out)){
+			$param[0]['name'] = 'textColor';
+			$param[0]['value'] = $this->textColor($out[0][0]);
+		}
+		if(preg_match_all("/({$backgroundColor})/", $arg, $out)){
+			$param[1]['name'] = 'backgroundColor';
+			$param[1]['value'] = $this->backgroundColor($out[0][0]);
+		}
+		if(preg_match_all("/({$textAling})/", $arg, $out)){
+			$param[2]['name'] = 'textAling';
+			$param[2]['value'] = $this->textAling($out[0][0]);
+		}
+		if(preg_match_all("/({$float})/", $arg, $out)){
+			$param[3]['name'] = 'float';
+			$param[3]['value'] = $this->float($out[0][0]);
+		}
+		if(preg_match_all("/({$waves})/", $arg, $out)){
+			$param[4]['name'] = 'waves';
+			$param[4]['value'] = $this->waves($out[0][0]);
+		}
+		if(preg_match_all("/({$shadow})/", $arg, $out)){
+			$param[5]['name'] = 'shadow';
+			$param[5]['value'] = $this->shadow($out[0][0]);
+		}
+		if($type == 'icon'){
+			$param[5]['name'] = $type;
+			$param[5]['value'] = $text;			
+		}
+		return $param;
+	}
 }

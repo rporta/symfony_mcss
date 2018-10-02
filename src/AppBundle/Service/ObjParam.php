@@ -280,8 +280,8 @@ class ObjParam
 
 		$textColor['b-w-t,0'] = "black-text";
 		$textColor['b-w-t,1'] = "white-text";
-		if(is_null($arg)) return array_keys($textColor);
-		foreach ($backgroundColor as $key => $value) {
+		if(is_null($arg)) return ($textColor);
+		foreach ($textColor as $key => $value) {
 			if($value == $arg){
 				return $key;
 			}
@@ -564,7 +564,7 @@ class ObjParam
 		$backgroundColor['b-w-t,0'] = "black";
 		$backgroundColor['b-w-t,1'] = "white";
 		$backgroundColor['b-w-t,2'] = "transparent";
-		if(is_null($arg)) return array_keys($backgroundColor);
+		if(is_null($arg)) return ($backgroundColor);
 		foreach ($backgroundColor as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -575,7 +575,7 @@ class ObjParam
 		$float['l'] = "left";
 		$float['c'] = "center";
 		$float['r'] = "right";
-		if(is_null($arg)) return array_keys($float);
+		if(is_null($arg)) return ($float);
 		foreach ($float as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -586,7 +586,7 @@ class ObjParam
 		$textAling['l'] = "left-align";
 		$textAling['c'] = "center-align";
 		$textAling['r'] = "right-align";
-		if(is_null($arg)) return array_keys($textAling);
+		if(is_null($arg)) return ($textAling);
 		foreach ($textAling as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -602,7 +602,7 @@ class ObjParam
 		$waves[] = "waves-effect waves-purple";
 		$waves[] = "waves-effect waves-green";
 		$waves[] = "waves-effect waves-teal";
-		if(is_null($arg)) return array_keys($waves);
+		if(is_null($arg)) return ($waves);
 		foreach ($waves as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -615,7 +615,7 @@ class ObjParam
 		$shadow[] = "z-depth-3";
 		$shadow[] = "z-depth-4";
 		$shadow[] = "z-depth-5";
-		if(is_null($arg)) return array_keys($shadow);
+		if(is_null($arg)) return ($shadow);
 		foreach ($shadow as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -625,7 +625,7 @@ class ObjParam
 	protected function modeAlert($arg = NULL){
 		$modeAlert['redirect'] = "redirect";
 		$modeAlert['custom'] = "custom";
-		if(is_null($arg)) return array_keys($modeAlert);
+		if(is_null($arg)) return ($modeAlert);
 		foreach ($modeAlert as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -635,7 +635,7 @@ class ObjParam
 	protected function modeCard($arg = NULL){
 		$modeCard['basic'] = "basic";
 		$modeCard['reveal'] = "reveal";
-		if(is_null($arg)) return array_keys($modeCard);
+		if(is_null($arg)) return ($modeCard);
 		foreach ($modeCard as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -644,7 +644,7 @@ class ObjParam
 	}
 	protected function orientationCard($arg = NULL){
 		$orientationCard['horizontal'] = "horizontal";
-		if(is_null($arg)) return array_keys($orientationCard);
+		if(is_null($arg)) return ($orientationCard);
 		foreach ($orientationCard as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -655,7 +655,7 @@ class ObjParam
 		$modePreloader['linear'] = "linear";
 		$modePreloader['circular'] = "circular";
 		$modePreloader['circularFlashing'] = "circularFlashing";
-		if(is_null($arg)) return array_keys($modePreloader);
+		if(is_null($arg)) return ($modePreloader);
 		foreach ($modePreloader as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -666,7 +666,7 @@ class ObjParam
 		$sizeCard['s'] = "small";
 		$sizeCard['m'] = "medium";
 		$sizeCard['l'] = "large";
-		if(is_null($arg)) return array_keys($sizeCard);
+		if(is_null($arg)) return ($sizeCard);
 		foreach ($sizeCard as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -676,7 +676,7 @@ class ObjParam
 	protected function edge($arg = NULL){
 		$edge['l'] = "left";
 		$edge['r'] = "right";
-		if(is_null($arg)) return array_keys($edge);
+		if(is_null($arg)) return ($edge);
 		foreach ($edge as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -688,7 +688,7 @@ class ObjParam
 		$sizeIcon['s'] = "small";
 		$sizeIcon['m'] = "medium";
 		$sizeIcon['l'] = "large";
-		if(is_null($arg)) return array_keys($sizeIcon);
+		if(is_null($arg)) return ($sizeIcon);
 		foreach ($sizeIcon as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -699,7 +699,7 @@ class ObjParam
 		$sizePreloader['s'] = "small";
 		$sizePreloader['m'] = "medium";
 		$sizePreloader['b'] = "big";
-		if(is_null($arg)) return array_keys($sizePreloader);
+		if(is_null($arg)) return ($sizePreloader);
 		foreach ($sizePreloader as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -711,7 +711,7 @@ class ObjParam
 		$sizePreloader['striped'] = "striped";
 		$sizePreloader['highlight'] = "highlight";
 		$sizePreloader['responsive-table'] = "responsive-table";
-		if(is_null($arg)) return array_keys($sizePreloader);
+		if(is_null($arg)) return ($sizePreloader);
 		foreach ($sizePreloader as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -722,7 +722,7 @@ class ObjParam
 		$modeMedia['img'] = "img";
 		$modeMedia['MaterialBox'] = "MaterialBox";
 		$modeMedia['video'] = "video";
-		if(is_null($arg)) return array_keys($modeMedia);
+		if(is_null($arg)) return ($modeMedia);
 		foreach ($modeMedia as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -732,7 +732,7 @@ class ObjParam
 	protected function modeChip($arg = NULL){
 		$modeMedia['Contactos'] = "Contactos";
 		$modeMedia['Etiquetas'] = "Etiquetas";
-		if(is_null($arg)) return array_keys($modeMedia);
+		if(is_null($arg)) return ($modeMedia);
 		foreach ($modeMedia as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -747,7 +747,7 @@ class ObjParam
 		$sizeTitle[5] = "5";
 		$sizeTitle[6] = "6";
 
-		if(is_null($arg)) return array_keys($sizeTitle);
+		if(is_null($arg)) return ($sizeTitle);
 		foreach ($sizeTitle as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -757,7 +757,7 @@ class ObjParam
 	protected function modeInputinputButton($arg = NULL){
 		$modeInputinputButton['a'] = "a";
 		$modeInputinputButton['button'] = "button";
-		if(is_null($arg)) return array_keys($modeInputinputButton);
+		if(is_null($arg)) return ($modeInputinputButton);
 		foreach ($modeInputinputButton as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -767,7 +767,7 @@ class ObjParam
 	protected function modeInputRange($arg = NULL){
 		$modeInputRange['noUiSlider'] = "noUiSlider";
 		$modeInputRange['HTML5 Range'] = "HTML5 Range";
-		if(is_null($arg)) return array_keys($modeInputRange);
+		if(is_null($arg)) return ($modeInputRange);
 		foreach ($modeInputRange as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -778,7 +778,7 @@ class ObjParam
 		$modeInputSelect['single'] = "single";
 		$modeInputSelect['icon'] = "icon";
 		$modeInputSelect['browser'] = "browser";
-		if(is_null($arg)) return array_keys($modeInputSelect);
+		if(is_null($arg)) return ($modeInputSelect);
 		foreach ($modeInputSelect as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -788,7 +788,7 @@ class ObjParam
 	protected function modeInputRadioButtons($arg = NULL){
 		$modeInputRadioButtons['default'] = "";
 		$modeInputRadioButtons['gap'] = "with-gap";
-		if(is_null($arg)) return array_keys($modeInputRadioButtons);
+		if(is_null($arg)) return ($modeInputRadioButtons);
 		foreach ($modeInputRadioButtons as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -798,7 +798,7 @@ class ObjParam
 	protected function modeInputCheckboxes($arg = NULL){
 		$modeInputCheckboxes['default'] = "";
 		$modeInputCheckboxes['filled'] = "filled-in";
-		if(is_null($arg)) return array_keys($modeInputCheckboxes);
+		if(is_null($arg)) return ($modeInputCheckboxes);
 		foreach ($modeInputCheckboxes as $key => $value) {
 			if($value == $arg){
 				return $key;
@@ -809,7 +809,7 @@ class ObjParam
 		$modeInputFields['text'] = "text";
 		$modeInputFields['password'] = "password";
 		$modeInputFields['email'] = "email";
-		if(is_null($arg)) return array_keys($modeInputFields);
+		if(is_null($arg)) return ($modeInputFields);
 		foreach ($modeInputFields as $key => $value) {
 			if($value == $arg){
 				return $key;
