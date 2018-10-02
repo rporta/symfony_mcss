@@ -2,8 +2,9 @@
 namespace AppBundle\Service;
 
 use AppBundle\Utility\dirbase\dirBase;
+use AppBundle\Service\ObjParam;
 
-class Obj
+class Obj extends ObjParam
 {
 	public function scanObjFile($filePag){
 		$reg_exp[] = "(\\$)(.+)(\s+\\=\s+)(new\s+AppBundle\\\Utility\\\Obj\\\)(.+)(\\()(.*)(\\)\\;)";
@@ -100,17 +101,176 @@ class Obj
 			if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
 				$result[$key]['type'] = $out[3][0];
 			}
-			$result[$key]['param'] = $this->getParamClass($filePag);
+			$result[$key]['param'] = $this->getParamClass($filePag, $result[$key]['type']);
 			$result[$key]['action'] = $this->getActionClass($filePag);
 		}
 
 		return $result;
 	}
-	public function getParamClass($filePag){
+	public function getParamClass($filePag, $type){
 		$temp_reg_exp = "(\\$)([a-zA-Z]+)(->)([a-zA-Z]+)(\s+\=\s+)(!isset)";
 
 		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
-			return $out[4];
+			foreach ($out[4] as $i => $value) {
+
+				$param[$i]['name'] = $value;
+				switch ($value) {
+					case 'textColor':
+						$param[$i]['value'] = $this->textColor();
+						break;
+					case 'backgroundColor':
+						$param[$i]['value'] = $this->backgroundColor();
+						break;
+					case 'float':
+						$param[$i]['value'] = $this->float();
+						break;
+					case 'textAling':
+						$param[$i]['value'] = $this->textAling();
+						break;
+					case 'waves':
+						$param[$i]['value'] = $this->waves();
+						break;
+					case 'shadow':
+						$param[$i]['value'] = $this->shadow();
+						break;
+					default:
+						switch ($type) {
+							case 'alert':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeAlert();
+										break;
+
+								}
+								break;
+							
+							case 'card':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeCard();
+										break;
+									case 'orientation':
+										$param[$i]['value'] = $this->orientationCard();
+										break;
+									case 'size':
+										$param[$i]['value'] = $this->sizeCard();
+										break;
+
+								}
+								break;
+							case 'preloader':
+							case 'preloaderFull':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modePreloader();
+										break;
+									case 'size':
+										$param[$i]['value'] = $this->sizePreloader();
+										break;
+
+								}
+								break;
+							case 'sideNav':
+								switch ($value) {
+									case 'edge':
+										$param[$i]['value'] = $this->edge();
+										break;
+
+								}
+								break;
+							case 'icon':
+								switch ($value) {
+									case 'size':
+										$param[$i]['value'] = $this->sizeIcon();
+										break;
+
+								}
+								break;
+							case 'table':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeTable();
+										break;
+
+								}
+								break;
+							case 'media':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeMedia();
+										break;
+
+								}
+								break;
+							case 'chip':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeChip();
+										break;
+
+								}
+								break;
+							case 'h':
+								switch ($value) {
+									case 'size':
+										$param[$i]['value'] = $this->sizeTitle();
+										break;
+
+								}
+								break;
+							case 'inputButton':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputinputButton();
+										break;
+
+								}
+								break;
+							case 'inputRange':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputRange();
+										break;
+
+								}
+								break;
+							case 'InputSelect':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputSelect();
+										break;
+
+								}
+								break;
+							case 'InputRadioButtons':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputRadioButtons();
+										break;
+
+								}
+								break;
+							case 'InputCheckboxes':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputCheckboxes();
+										break;
+
+								}
+								break;
+							case 'InputFields':
+								switch ($value) {
+									case 'mode':
+										$param[$i]['value'] = $this->modeInputFields();
+										break;
+
+								}
+								break;
+						}
+						break;
+				}
+			}
+			return $param;
 		}
 
 	}
@@ -125,5 +285,15 @@ class Obj
 			return $result;
 		}
 
-	}	
+	}
+	/**
+	 * [jsonToObj description] - convierte data Json   
+	 * @param  [type] $json [description]
+	 * @param  [type] $list [description]
+	 * @return [type]       [description]
+	 */
+	public function jsonSetParam($json, $list){	
+		return $json;
+	}
+
 }
