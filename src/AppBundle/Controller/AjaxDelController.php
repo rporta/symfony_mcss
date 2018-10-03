@@ -43,7 +43,13 @@ class AjaxDelController extends Controller
         //traigo obj disponibles
         $objDir = $serviceObj->scanObjDir($dirbase2);
         unset($dirbase2);
-        
-   		return $this->json(array('objDel' => $data['json'], 'objPag' => $objPag, 'objList' => $objDir));
+     
+        $objDel = $serviceObj->jsonSetParam($data['json']);
+
+        $objPag = $serviceObj->delObj($objDel, $objPag, $objDir);
+
+        die();
+        // return $this->json($objPag2);
+   		// return $this->json(array('objDel' => $data['json'], 'objPag' => $objPag, 'objPag2' => $objPag2, 'objList' => $objDir));
     }		
 }

@@ -1,4 +1,5 @@
 <?php
+// // $pag['mode'] = "grey,0";
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
 
@@ -32,7 +33,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$conteiner->addObj($p);
 				$conteiner->addObj($br);
 				$conteiner->addObj($p);
-				$conteiner->addObj($br);
+				// $conteiner->addObj($br);
 
 			$div->addObj($conteiner);
 
@@ -140,7 +141,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$header->addObj($nav);
 
 	// $main['container'] = TRUE;
-	$main['shadow'] = "0";
+	$main['shadow'] = "1";
 	$main = new AppBundle\Utility\Obj\main($main);
 
 		$card['mode'] = "1";
@@ -227,7 +228,7 @@ if(!empty($editar)){
 
 
 				}
-				function setObj(e, n = 0, obj = [], parent = {}){
+				function setObj(e, n = 0, obj = []){
 					if(n == 0){
 						if(e.id.length == 0){
 							return setObj(e.parentNode, n, obj);
@@ -236,7 +237,7 @@ if(!empty($editar)){
 							propery = {}
 							propery.id = e.id;
 							propery.text = e.firstChild.data;
-							propery.nodeName = e.nodeName;
+							/*propery.nodeName = e.nodeName;*/
 							propery.className = e.className;
 							obj[n] = propery;
 							n++;
@@ -245,6 +246,7 @@ if(!empty($editar)){
 					}
 					else{
 						if(e.nodeName == 'BODY'){
+							obj.reverse();
 							return {\"json\" : obj};
 						}
 						else{
@@ -255,7 +257,7 @@ if(!empty($editar)){
 								propery = {}
 								propery.id = e.id;
 								propery.text = e.firstChild.data;
-								propery.nodeName = e.nodeName;
+								/*propery.nodeName = e.nodeName;*/
 								propery.className = e.className;
 								obj[n] = propery;
 								n++;

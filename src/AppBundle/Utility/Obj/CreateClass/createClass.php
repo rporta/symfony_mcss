@@ -96,9 +96,6 @@ class createClass
 		}
 
 	}
-	protected function toast($arg = NULL, $arg2 = 4000){
-		return is_null($arg) ? NULL : $tmp = "Materialize.toast('{$arg}', {$arg2});";
-	}
 	protected function float($arg = NULL){
 		switch (strtolower((string)$arg)) {
 			case "0":
@@ -283,10 +280,6 @@ class createClass
 	}
 	protected function orientationCard($arg){
 		switch (strtolower((string)$arg)) {
-			// case 'v':
-			// case 'vertical':
-			// 	$out = "vertical"; 
-			// 	break;
 			case 'h':
 			case 'horizontal':
 				$out = "horizontal"; 
@@ -328,9 +321,6 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}
-	protected function submitInputButton($arg){
-		return is_null($arg) ? NULL :  "type='submit'";
-	}	
 	protected function modeInputinputButton($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
@@ -430,6 +420,15 @@ class createClass
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
+	protected function sizeTitle($arg = NULL){
+		return is_null($arg) ? NULL : ($arg <= 6 && $arg >= 1 ? $arg : "1");
+	}
+	protected function toast($arg = NULL, $arg2 = 4000){
+		return is_null($arg) ? NULL : $tmp = "Materialize.toast('{$arg}', {$arg2});";
+	}
+	protected function submitInputButton($arg){
+		return is_null($arg) ? NULL :  "type='submit'";
+	}	
 	protected function truncate($arg = NULL){
 		return is_null($arg) ? NULL :  "truncate";
 	}
@@ -474,9 +473,6 @@ class createClass
 	}
 	protected function newBadge($arg = NULL){
 		return is_null($arg) ? NULL : "new";
-	}
-	protected function sizeTitle($arg = NULL){
-		return is_null($arg) ? NULL : ($arg <= 6 && $arg >= 1 ? $arg : "1");
 	}
 	protected function formFiles($arg = NULL){
 		return is_null($arg) ? NULL : "enctype='multipart/form-data'";

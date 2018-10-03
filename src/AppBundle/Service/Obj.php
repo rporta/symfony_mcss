@@ -85,7 +85,7 @@ class Obj extends ObjParam
 				if(preg_match_all("/{$reg_exp}/", $filePag, $out)){
 
 					foreach ($out[5] as $key1 => $value1) {
-						$action[$key1]['action'] = $value1;
+						$action[$key1]['name'] = $value1;
 					}
 					foreach ($out[8] as $key2 => $value2) {
 						$action[$key2]['value'] = $value2;
@@ -284,7 +284,7 @@ class Obj extends ObjParam
 
 		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
 			foreach ($out[5] as $key => $value) {
-				$result[$key]['action'] = $value;
+				$result[$key]['name'] = $value;
 				if(!empty($out[8][$key]))$result[$key]['param'] = $out[8][$key];
 		}
 			return $result;
@@ -355,22 +355,71 @@ class Obj extends ObjParam
 		}
 		return $param;
 	}
-	public function delObj($listObjDel, $listObjPag){
-		xbug($listObjDel);
-		xbug($listObjPag);
+	public function delObj($listObjDel, $listObjPag, $listObjDir){
+		// xbug($listObjDel);
+		// xbug($listObjPag);
+		// xbug($listObjDir);
 		$objParamVal = 0;
-		foreach ($listObjPag as $objPag) {
-			foreach ($listObjDel as $objDel) {
-				if($objPag['type'] == $objDel['type']){
-					foreach ($objPag['param'] as $paraPag) {
-						foreach ($objDel['param'] as $paramDel) {
-							if($paraPag['name'] == $paramDel['name'] && $paraPag['value'] == $paramDel['value']){
+		foreach ($listObjDel as $objDel) {
+			foreach ($listObjPag as $i => $objPag) {
+				if($objDel['type'] == $objPag['type']){
+					foreach ($objDel['param'] as $paramDel) {
+						foreach ($objPag['param'] as $paraPag) {
+							if($paramDel['name'] == $paraPag['name'] && $paramDel['value'] == $paraPag['value']){
 								$objParamVal++;
 							}
 						}
 					}
+					if($objParamVal > 0){
+						foreach ($objPag['action'] as $action) {
+							if(preg_match_all("/(add)/", $action['name'])){
+								$nameObj[] = $action['value'];
+							}
+							
+						}
+						break 2;
+					}else{
+						break 2;
+					}
 				}
 			}
 		}
+		if(!empty($nameObj)){	
+			$objParamVal = 0;
+			for ($j=0; $j < count($listObjDel); $j++) {
+
+				foreach ($listObjDel as $objDel) {
+					foreach ($listObjPag as $i => $objPag) {
+						foreach ($nameObj as $name) {
+							if($name == $objPag['name'] && $objDel['type'] == $objPag['type']){
+								foreach ($objDel['param'] as $paramDel) {
+									foreach ($objPag['param'] as $paraPag) {
+										if($paramDel['name'] == $paraPag['name'] && $paramDel['value'] == $paraPag['value']){
+											xbug("{$objDel['type']} | {$paraPag['name']} | {$paramDel['value']} | {$name}");
+											$objParamVal++;
+										}
+									}
+								}
+								xbug($objParamVal);
+								if($objParamVal > 0 ){
+									foreach ($objPag['action'] as $action) {
+										if(preg_match_all("/(add)/", $action['name'])){
+											$nameObj[] = $action['value'];
+										}
+										
+									}
+									break 2;
+								}else{
+									break 2;
+								}						
+							}
+						}
+					}
+				}
+				$objParamVal = 0;
+			}
+
+		}
+		if(!empty($nameObj)) xbug($nameObj);
 	}
 }
