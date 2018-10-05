@@ -359,67 +359,125 @@ class Obj extends ObjParam
 		// xbug($listObjDel);
 		// xbug($listObjPag);
 		// xbug($listObjDir);
-		$objParamVal = 0;
-		foreach ($listObjDel as $objDel) {
+		$compare = $this->compareParamValue($listObjDel[0], $listObjPag);
+		if(count($listObjDel) > 1){
+			$maxKeyDel = max(array_keys($listObjDel));
+			if($compare > 0){
+				$name = $this->getNameByType($listObjDel[0], $listObjPag);
+				foreach ($listObjDel as $i => $ObjDel) {
+					if($i > 0 && $i < $maxKeyDel){
+						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name);
+					}
+					if($i == $maxKeyDel){
+						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name[0]);
+					}
+				}
+			}		
+		}else{
+			$name = $this->getNameByType2($listObjDel[0], $listObjPag);
+		}
+		xbug($name);
+	}
+	public function getNameByType2($objDel, $listObjPag){
+		$name = array();
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				$name = $objPag['name']; 
+			}
+		}
+		return $name;
+	}
+	public function getNameAndCompareParamValue($objDel, $listObjPag, $name){
+		//primero
+		if(is_array($name)){		
+			$listCompare = array();
 			foreach ($listObjPag as $i => $objPag) {
-				if($objDel['type'] == $objPag['type']){
-					foreach ($objDel['param'] as $paramDel) {
-						foreach ($objPag['param'] as $paraPag) {
-							if($paramDel['name'] == $paraPag['name'] && $paramDel['value'] == $paraPag['value']){
-								$objParamVal++;
+				$info = array('name' => NULL, 'compare' => 0);
+				if($objPag['type'] == $objDel['type'] && in_array($objPag['name'], $name)){
+					foreach ($objPag['param'] as $j => $paramPag) {
+						foreach ($objDel['param'] as $k => $paramDel) {
+							if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
+								$info['name'] = $objPag['name'];
+								$info['compare']++;
 							}
 						}
 					}
-					if($objParamVal > 0){
-						foreach ($objPag['action'] as $action) {
-							if(preg_match_all("/(add)/", $action['name'])){
-								$nameObj[] = $action['value'];
-							}
-							
-						}
-						break 2;
-					}else{
-						break 2;
-					}
+					$listCompare[] = $info;
 				}
 			}
+			$name = $this->getNameMaxCompare($listCompare);
+			$listName = $this->getNameByChild($name, $listObjPag);
+			return $listName;
 		}
-		if(!empty($nameObj)){	
-			$objParamVal = 0;
-			for ($j=0; $j < count($listObjDel); $j++) {
-
-				foreach ($listObjDel as $objDel) {
-					foreach ($listObjPag as $i => $objPag) {
-						foreach ($nameObj as $name) {
-							if($name == $objPag['name'] && $objDel['type'] == $objPag['type']){
-								foreach ($objDel['param'] as $paramDel) {
-									foreach ($objPag['param'] as $paraPag) {
-										if($paramDel['name'] == $paraPag['name'] && $paramDel['value'] == $paraPag['value']){
-											xbug("{$objDel['type']} | {$paraPag['name']} | {$paramDel['value']} | {$name}");
-											$objParamVal++;
-										}
-									}
-								}
-								xbug($objParamVal);
-								if($objParamVal > 0 ){
-									foreach ($objPag['action'] as $action) {
-										if(preg_match_all("/(add)/", $action['name'])){
-											$nameObj[] = $action['value'];
-										}
-										
-									}
-									break 2;
-								}else{
-									break 2;
-								}						
+		//ultimo
+		else{
+			$compare = 0;
+			foreach ($listObjPag as $i => $objPag) {
+				if($objPag['type'] == $objDel['type'] && $objPag['name'] == $name){
+					foreach ($objPag['param'] as $j => $paramPag) {
+						foreach ($objDel['param'] as $k => $paramDel) {
+							if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
+								$compare++;							
 							}
 						}
 					}
 				}
-				$objParamVal = 0;
 			}
-
+			if($compare > 0){
+				return $name;			
+			}
+			else{
+				return NULL;
+			}
 		}
-		if(!empty($nameObj)) xbug($nameObj);
+	}
+	public function getNameByChild($name, $listObjPag){
+		$out = array();
+		foreach ($listObjPag as $objPag) {
+			if($objPag['name'] == $name){
+				foreach ($objPag['action'] as $j => $actionPag) {
+					if(preg_match_all("/(add)/", $actionPag['name'])) $out[] = $actionPag['value'];
+				}
+			}
+		}
+		return $out;
+	}
+	public function getNameMaxCompare($listCompare){
+		$compare = array();
+		foreach ($listCompare as $info) {
+			$compare[] = $info['compare'];
+		}
+		$maxValue = max($compare);
+		foreach ($listCompare as $k => $info) {
+			if($info['compare'] == $maxValue){
+				$name = $listCompare[$k]['name'];
+			}
+		}
+		return $name;	
+	}
+	public function compareParamValue($objDel, $listObjPag){		
+		$compare = 0;
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				foreach ($objPag['param'] as $j => $paramPag) {
+					foreach ($objDel['param'] as $k => $paramDel) {
+						if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']) $compare++;
+					}
+				}
+			}
+		}
+		return $compare;
+	}
+
+	public function getNameByType($objDel, $listObjPag){
+		$name = array();
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				foreach ($objPag['action'] as $j => $actionPag) {
+					if(preg_match_all("/(add)/", $actionPag['name'])) $name[] = $actionPag['value'];
+				}
+			}
+		}
+		return $name;
 	}
 }
