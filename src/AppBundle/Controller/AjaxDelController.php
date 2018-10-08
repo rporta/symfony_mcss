@@ -45,8 +45,7 @@ class AjaxDelController extends Controller
         unset($dirbase2);
      
         $objDel = $serviceObj->jsonSetParam($data['json']);
-
-        $objPag = $serviceObj->delObj($objDel, $objPag, $objDir);
+        $objPag = $serviceObj->getName($objDel, $objPag, $objDir);
 
         die();
         // return $this->json($objPag2);

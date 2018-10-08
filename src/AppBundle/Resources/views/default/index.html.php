@@ -237,6 +237,7 @@ if(!empty($editar)){
 							propery = {}
 							propery.id = e.id;
 							propery.text = e.firstChild.data;
+							propery.datasetActivate = e.dataset.activates;
 							/*propery.nodeName = e.nodeName;*/
 							propery.className = e.className;
 							obj[n] = propery;
@@ -257,6 +258,7 @@ if(!empty($editar)){
 								propery = {}
 								propery.id = e.id;
 								propery.text = e.firstChild.data;
+								propery.datasetActivate = e.dataset.activates;
 								/*propery.nodeName = e.nodeName;*/
 								propery.className = e.className;
 								obj[n] = propery;
@@ -344,8 +346,7 @@ if(!empty($editar)){
 											
 					}
 					else{
-
-
+						console.log(e.target);
 						ObjHtmlElement = setObj(e.target);
 						console.log(ObjHtmlElement);
 

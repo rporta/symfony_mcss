@@ -292,17 +292,32 @@ class Obj extends ObjParam
 
 	}
 	public function jsonSetParam($json){
-		foreach ($json as $key => &$value) {
-			$value['type'] = explode("-", $value['id'])[0];
-			$text = empty($value['text']) ? NULL : $value['text'] ;
-			$value['param'] = $this->classToParam($value['className'], $value['type'], $text);
+		$json2 = array();
+		foreach ($json as $key => $value) {
+			$tmpType = explode("-", $value['id'])[0];
+			if($tmpType == 'a'){
+				if(empty($value['datasetActivate'])){
+					$json2[]['type'] = explode("-", $value['id'])[0];
+					$text = empty($value['text']) ? NULL : $value['text'] ;
+					$maxKeyDel = max(array_keys($json2));
+					$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+				}
+				else{
+					$json2[]['type'] = explode("-", $value['datasetActivate'])[0];
+					$json2[]['type'] = explode("-", $value['id'])[0];
+					$text = empty($value['text']) ? NULL : $value['text'] ;
+					$maxKeyDel = max(array_keys($json2));
+					$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+				}
+			}else{
+
+				$json2[]['type'] = explode("-", $value['id'])[0];
+				$text = empty($value['text']) ? NULL : $value['text'];
+				$maxKeyDel = max(array_keys($json2));
+				$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+			}
 		}
-		foreach ($json as $key => &$value) {
-			unset($value['id']);
-			unset($value['className']);
-			unset($value['text']);
-		}
-		return $json;
+		return $json2;
 	}
 	public function classToParam($arg, $type, $text = NULL){
 		$textColor = implode("|", $this->textColor());
@@ -355,8 +370,8 @@ class Obj extends ObjParam
 		}
 		return $param;
 	}
-	public function delObj($listObjDel, $listObjPag, $listObjDir){
-		// xbug($listObjDel);
+	public function getName($listObjDel, $listObjPag, $listObjDir){
+		xbug($listObjDel);
 		// xbug($listObjPag);
 		// xbug($listObjDir);
 		$compare = $this->compareParamValue($listObjDel[0], $listObjPag);
@@ -368,8 +383,8 @@ class Obj extends ObjParam
 					if($i > 0 && $i < $maxKeyDel){
 						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name);
 					}
-					if($i == $maxKeyDel){
-						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name[0]);
+					if($i == $maxKeyDel){				
+						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name, true);
 					}
 				}
 			}		
@@ -387,48 +402,31 @@ class Obj extends ObjParam
 		}
 		return $name;
 	}
-	public function getNameAndCompareParamValue($objDel, $listObjPag, $name){
-		//primero
-		if(is_array($name)){		
-			$listCompare = array();
-			foreach ($listObjPag as $i => $objPag) {
-				$info = array('name' => NULL, 'compare' => 0);
-				if($objPag['type'] == $objDel['type'] && in_array($objPag['name'], $name)){
+	public function getNameAndCompareParamValue($objDel, $listObjPag, $name, $end = NULL){
+		$listCompare = array();
+		foreach ($listObjPag as $i => $objPag) {
+			$info = array('name' => NULL, 'compare' => 0);
+			if($objPag['type'] == $objDel['type'] && in_array($objPag['name'], $name)){
+				$info['compare']++;
+				$info['name'] = $objPag['name'];
+				if(is_array($objPag['param'])){					
 					foreach ($objPag['param'] as $j => $paramPag) {
 						foreach ($objDel['param'] as $k => $paramDel) {
 							if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
-								$info['name'] = $objPag['name'];
 								$info['compare']++;
 							}
 						}
 					}
-					$listCompare[] = $info;
 				}
+				$listCompare[] = $info;
 			}
-			$name = $this->getNameMaxCompare($listCompare);
+		}
+		$name = $this->getNameMaxCompare($listCompare);
+		if(is_null($end)){
 			$listName = $this->getNameByChild($name, $listObjPag);
 			return $listName;
-		}
-		//ultimo
-		else{
-			$compare = 0;
-			foreach ($listObjPag as $i => $objPag) {
-				if($objPag['type'] == $objDel['type'] && $objPag['name'] == $name){
-					foreach ($objPag['param'] as $j => $paramPag) {
-						foreach ($objDel['param'] as $k => $paramDel) {
-							if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
-								$compare++;							
-							}
-						}
-					}
-				}
-			}
-			if($compare > 0){
-				return $name;			
-			}
-			else{
-				return NULL;
-			}
+		}else{
+			return $name;
 		}
 	}
 	public function getNameByChild($name, $listObjPag){
