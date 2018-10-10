@@ -370,8 +370,32 @@ class Obj extends ObjParam
 		}
 		return $param;
 	}
+	public function delObj($name, $listObjPag){
+		$key = NULL;
+		foreach ($listObjPag as $k => $v) {
+			if($v['name'] == $name){
+				$key = $k;
+			}
+		}
+		if(!is_null($key)){
+			foreach ($listObjPag as $k => &$v) {
+				if(!empty($v['action'])){
+					foreach ($v['action'] as $k2 => $v2) {
+						if(preg_match_all("/(add)/", $v2['name'])){
+							if($v2['value'] == $name) unset($listObjPag[$k]['action'][$k2]);
+						}
+						
+					}
+				}
+			}
+			unset($listObjPag[$key]);
+			return $listObjPag;
+		}else{
+			return FALSE;
+		}
+	}
 	public function getName($listObjDel, $listObjPag, $listObjDir){
-		xbug($listObjDel);
+		// xbug($listObjDel);
 		// xbug($listObjPag);
 		// xbug($listObjDir);
 		$compare = $this->compareParamValue($listObjDel[0], $listObjPag);
@@ -391,7 +415,7 @@ class Obj extends ObjParam
 		}else{
 			$name = $this->getNameByType2($listObjDel[0], $listObjPag);
 		}
-		xbug($name);
+		return $name;
 	}
 	public function getNameByType2($objDel, $listObjPag){
 		$name = array();
