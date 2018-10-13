@@ -37,7 +37,7 @@ class AjaxDelController extends Controller
         unset($dirbase);
         //traigo obj pag
         $objPag = $serviceObj->scanObjFile($filePag);
-        xbug($objPag);
+        // xbug($objPag);
 
         $dirbase2 = new dirbase($pathListObj);
         //traigo obj disponibles
@@ -47,7 +47,7 @@ class AjaxDelController extends Controller
         $objDel = $serviceObj->jsonSetParam($data['json']);
         $nameObjDel = $serviceObj->getName($objDel, $objPag, $objDir);
 
-        xbug($nameObjDel);
+        // xbug($nameObjDel);
         $objPag = $serviceObj->delObj($nameObjDel, $objPag);
 
         xbug($objPag);
