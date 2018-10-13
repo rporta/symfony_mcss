@@ -371,7 +371,7 @@ class Obj extends ObjParam
 		return $param;
 	}
 	public function delObj($name, $listObjPag){
-		$key = $sec = NULL;
+		$key = NULL;
 		foreach ($listObjPag as $k => $v) {
 			if($v['name'] == $name){
 				$key = $k;
