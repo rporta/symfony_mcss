@@ -364,199 +364,229 @@ class Obj extends ObjParam
 			$param[5]['name'] = $type;
 			$param[5]['value'] = $text;			
 		}
-		if( $type == "a" || $type == "p" || $type == "pre" || $type == "h" || $type == "blockquote" || $type == "chip" || $type == "inputButton" || $type == "span"
-	){
+		if( $type == "a" || $type == "p" || $type == "pre" || $type == "h" || $type == "blockquote" || $type == "chip" || $type == "inputButton" || $type == "span"){
 			$param[5]['name'] = 'text';
-		$param[5]['value'] = $text;			
-	}
-	return $param;
-}
-public function delObj($name, $listObjPag){
-	$key = NULL;
-	foreach ($listObjPag as $k => $v) {
-		if($v['name'] == $name){
-			$key = $k;
+			$param[5]['value'] = $text;			
 		}
+		return $param;
 	}
-	if(!is_null($key)){
-		foreach ($listObjPag as $k => &$v) {
-			if(!empty($v['action'])){
-				foreach ($v['action'] as $k2 => $v2) {
-					if(preg_match_all("/(add)/", $v2['name'])){
-						if($v2['value'] == $name) unset($listObjPag[$k]['action'][$k2]);
-					}
-
-				}
-				$keys = array_flip(array_keys($v['action']));
-				$v['action'] = array_combine($keys, $v['action']);
+	public function delObj($name, $listObjPag){
+		$key = NULL;
+		foreach ($listObjPag as $k => $v) {
+			if($v['name'] == $name){
+				$key = $k;
 			}
 		}
-		unset($listObjPag[$key]);
-		$keys = array_flip(array_keys($listObjPag));
-		$listObjPag = array_combine($keys, $listObjPag);
-		return $listObjPag;
-	}else{
-		return FALSE;
+		if(!is_null($key)){
+			foreach ($listObjPag as $k => &$v) {
+				if(!empty($v['action'])){
+					foreach ($v['action'] as $k2 => $v2) {
+						if(preg_match_all("/(add)/", $v2['name'])){
+							if($v2['value'] == $name) unset($listObjPag[$k]['action'][$k2]);
+						}
+
+					}
+					$keys = array_flip(array_keys($v['action']));
+					$v['action'] = array_combine($keys, $v['action']);
+				}
+			}
+			unset($listObjPag[$key]);
+			$keys = array_flip(array_keys($listObjPag));
+			$listObjPag = array_combine($keys, $listObjPag);
+			/*elimino objeto : editJs*/
+			foreach ($listObjPag as $k =>&$oP) {
+				if($oP['type'] == "editJs"){
+					unset($listObjPag[$k]);
+				}
+			}
+			/*elimino objeto : editJs*/		
+			return $listObjPag;
+		}else{
+			return FALSE;
+		}
 	}
-}
-public function getName($listObjDel, $listObjPag, $listObjDir){
+	public function getName($listObjDel, $listObjPag, $listObjDir){
 		// xbug($listObjDel);
 		// xbug($listObjPag);
 		// xbug($listObjDir);
-	$compare = $this->compareParamValue($listObjDel[0], $listObjPag);
-	if(count($listObjDel) > 1){
-		$maxKeyDel = max(array_keys($listObjDel));
-		if($compare > 0){
-			$name = $this->getNameByType($listObjDel[0], $listObjPag);
-			foreach ($listObjDel as $i => $ObjDel) {
-				if($i > 0 && $i < $maxKeyDel){
-					$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name);
+		$compare = $this->compareParamValue($listObjDel[0], $listObjPag);
+		if(count($listObjDel) > 1){
+			$maxKeyDel = max(array_keys($listObjDel));
+			if($compare > 0){
+				$name = $this->getNameByType($listObjDel[0], $listObjPag);
+				foreach ($listObjDel as $i => $ObjDel) {
+					if($i > 0 && $i < $maxKeyDel){
+						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name);
+					}
+					if($i == $maxKeyDel){				
+						$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name, true);
+					}
 				}
-				if($i == $maxKeyDel){				
-					$name = $this->getNameAndCompareParamValue($ObjDel, $listObjPag, $name, true);
-				}
-			}
-		}		
-	}else{
-		$name = $this->getNameByType2($listObjDel[0], $listObjPag);
-	}
-	return $name;
-}
-public function getNameByType2($objDel, $listObjPag){
-	$name = array();
-	foreach ($listObjPag as $i => $objPag) {
-		if($objPag['type'] == $objDel['type']){
-			$name = $objPag['name']; 
+			}		
+		}else{
+			$name = $this->getNameByType2($listObjDel[0], $listObjPag);
 		}
+		return $name;
 	}
-	return $name;
-}
-public function getNameAndCompareParamValue($objDel, $listObjPag, $name, $end = NULL){
-	$listCompare = array();
-	foreach ($listObjPag as $i => $objPag) {
-		$info = array('name' => NULL, 'compare' => 0);
-		if($objPag['type'] == $objDel['type'] && in_array($objPag['name'], $name)){
-			$info['compare']++;
-			$info['name'] = $objPag['name'];
-			if(is_array($objPag['param'])){					
-				foreach ($objPag['param'] as $j => $paramPag) {
-					foreach ($objDel['param'] as $k => $paramDel) {
-						if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
-							$info['compare']++;
+	public function getNameByType2($objDel, $listObjPag){
+		$name = array();
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				$name = $objPag['name']; 
+			}
+		}
+		return $name;
+	}
+	public function getNameAndCompareParamValue($objDel, $listObjPag, $name, $end = NULL){
+		$listCompare = array();
+		foreach ($listObjPag as $i => $objPag) {
+			$info = array('name' => NULL, 'compare' => 0);
+			if($objPag['type'] == $objDel['type'] && in_array($objPag['name'], $name)){
+				$info['compare']++;
+				$info['name'] = $objPag['name'];
+				if(is_array($objPag['param'])){					
+					foreach ($objPag['param'] as $j => $paramPag) {
+						foreach ($objDel['param'] as $k => $paramDel) {
+							if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']){
+								$info['compare']++;
+							}
 						}
 					}
 				}
+				$listCompare[] = $info;
 			}
-			$listCompare[] = $info;
+		}
+		$name = $this->getNameMaxCompare($listCompare);
+		if(is_null($end)){
+			$listName = $this->getNameByChild($name, $listObjPag);
+			return $listName;
+		}else{
+			return $name;
 		}
 	}
-	$name = $this->getNameMaxCompare($listCompare);
-	if(is_null($end)){
-		$listName = $this->getNameByChild($name, $listObjPag);
-		return $listName;
-	}else{
+	public function getNameByChild($name, $listObjPag){
+		$out = array();
+		foreach ($listObjPag as $objPag) {
+			if($objPag['name'] == $name){
+				foreach ($objPag['action'] as $j => $actionPag) {
+					if(preg_match_all("/(add)/", $actionPag['name'])) $out[] = $actionPag['value'];
+				}
+			}
+		}
+		return $out;
+	}
+	public function getNameMaxCompare($listCompare){
+		$compare = array();
+		foreach ($listCompare as $info) {
+			$compare[] = $info['compare'];
+		}
+		$maxValue = max($compare);
+		foreach ($listCompare as $k => $info) {
+			if($info['compare'] == $maxValue){
+				$name = $listCompare[$k]['name'];
+			}
+		}
+		return $name;	
+	}
+	public function compareParamValue($objDel, $listObjPag){		
+		$compare = 0;
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				foreach ($objPag['param'] as $j => $paramPag) {
+					foreach ($objDel['param'] as $k => $paramDel) {
+						if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']) $compare++;
+					}
+				}
+			}
+		}
+		return $compare;
+	}
+
+	public function getNameByType($objDel, $listObjPag){
+		$name = array();
+		foreach ($listObjPag as $i => $objPag) {
+			if($objPag['type'] == $objDel['type']){
+				foreach ($objPag['action'] as $j => $actionPag) {
+					if(preg_match_all("/(add)/", $actionPag['name'])) $name[] = $actionPag['value'];
+				}
+			}
+		}
 		return $name;
 	}
-}
-public function getNameByChild($name, $listObjPag){
-	$out = array();
-	foreach ($listObjPag as $objPag) {
-		if($objPag['name'] == $name){
-			foreach ($objPag['action'] as $j => $actionPag) {
-				if(preg_match_all("/(add)/", $actionPag['name'])) $out[] = $actionPag['value'];
-			}
-		}
-	}
-	return $out;
-}
-public function getNameMaxCompare($listCompare){
-	$compare = array();
-	foreach ($listCompare as $info) {
-		$compare[] = $info['compare'];
-	}
-	$maxValue = max($compare);
-	foreach ($listCompare as $k => $info) {
-		if($info['compare'] == $maxValue){
-			$name = $listCompare[$k]['name'];
-		}
-	}
-	return $name;	
-}
-public function compareParamValue($objDel, $listObjPag){		
-	$compare = 0;
-	foreach ($listObjPag as $i => $objPag) {
-		if($objPag['type'] == $objDel['type']){
-			foreach ($objPag['param'] as $j => $paramPag) {
-				foreach ($objDel['param'] as $k => $paramDel) {
-					if($paramPag['name'] == $paramDel['name'] && $paramPag['value'] == $paramDel['value']) $compare++;
-				}
-			}
-		}
-	}
-	return $compare;
-}
-
-public function getNameByType($objDel, $listObjPag){
-	$name = array();
-	foreach ($listObjPag as $i => $objPag) {
-		if($objPag['type'] == $objDel['type']){
-			foreach ($objPag['action'] as $j => $actionPag) {
-				if(preg_match_all("/(add)/", $actionPag['name'])) $name[] = $actionPag['value'];
-			}
-		}
-	}
-	return $name;
-}
-public function createPhp($listObjPag, $filePag, $nameObjDel){
-	$code = array();
-	$code[] = "<?php \n";
-	foreach ($listObjPag as $v) {
-		if(!empty($v['param'])){
-			foreach ($v['param'] as $vParam) {
-				if(preg_match_all("/(array)/", $vParam['value']) ){
-					$tempValue = str_replace('array(', '', $vParam['value']);
-					$tempValue = str_replace(')', '', $tempValue);
-					$arrayTempValue = explode(",", $tempValue);
-					$tempValue = $return = array();
-					foreach ($arrayTempValue as $key => $value) {
-						if($key % 2 == 0){
-							$tempValue[] = "'".trim($value);
-						}else{
-							$tempValue[] = trim($value)."'";
-							$return[] = implode(",", $tempValue);
-							$tempValue = array();
-						}					
+	public function createPhp($listObjPag, $filePag, $nameObjDel){
+		$code = array();
+		$code[] = "<?php \n";
+		foreach ($listObjPag as $v) {
+			if(!empty($v['param'])){
+				foreach ($v['param'] as $vParam) {
+					if(preg_match_all("/(array)/", $vParam['value']) ){
+						$tempValue = str_replace('array(', '', $vParam['value']);
+						$tempValue = str_replace(')', '', $tempValue);
+						$arrayTempValue = explode(",", $tempValue);
+						$tempValue = $return = array();
+						foreach ($arrayTempValue as $key => $value) {
+							if($key % 2 == 0){
+								$tempValue[] = "'".trim($value);
+							}else{
+								$tempValue[] = trim($value)."'";
+								$return[] = implode(",", $tempValue);
+								$tempValue = array();
+							}					
+						}
+						$return = implode(",", $return);
+						$return = "array({$return});";
+						$code[] = "\${$v['name']}['{$vParam['name']}'] = {$return} \n";
+					}else{
+						$code[] = "\${$v['name']}['{$vParam['name']}'] = '{$vParam['value']}'; \n";
 					}
-					$return = implode(",", $return);
-					$return = "array({$return});";
-					$code[] = "\${$v['name']}['{$vParam['name']}'] = {$return} \n";
+				}
+				$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(\${$v['name']}); \n";
+			}else{
+				$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(); \n";
+			}
+			$code[] = "\n";
+		}
+		// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el gravado 
+		$temp_reg_exp = "([^\/\/\040](\\$)(.+)(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
+		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
+			foreach ($out[0] as $a) {
+				if(preg_match_all("/($nameObjDel)/", $a)){
+
 				}else{
-					$code[] = "\${$v['name']}['{$vParam['name']}'] = '{$vParam['value']}'; \n";
+					$code[] = "{$a};\n";
 				}
 			}
-			$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(\${$v['name']}); \n";
-		}else{
-			$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(); \n";
 		}
-		$code[] = "\n";
-	}
-	// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el gravado 
-	$temp_reg_exp = "([^\/\/\040](\\$)(.+)(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
-	if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
-		foreach ($out[0] as $a) {
-			if(preg_match_all("/($nameObjDel)/", $a)){
-	
-			}else{
-				$code[] = "{$a};\n";
+		$code[] = 
+
+		/*codigo edicion*/
+		"
+		if(!empty(\$editar)){
+		if(!empty(\$action) && \$action !== 'default'){
+			\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);
+			\$pag->js = \$editJs->getJs('default');
+			switch (\$action) {
+				case 'add':
+					\$pag->js = \$editJs->getJs('add'); 
+					break;
+				case 'edit':
+					\$pag->js = \$editJs->getJs('edit');				
+					break;
+				case 'del':
+					\$pag->js = \$editJs->getJs('del');				
+					break;
 			}
 		}
-	}
-	foreach ($listObjPag as $v) {
-		if($v['type'] == 'pag'){
-			$code[] = "\${$v['name']}->render();";
 		}
+		";
+		/*codigo edicion*/
+
+		foreach ($listObjPag as $v) {
+			if($v['type'] == 'pag'){
+				$code[] = "\${$v['name']}->render();";
+			}
+		}
+		$code = implode("", $code);
+		return $code;
 	}
-	$code = implode("", $code);
-	return $code;
-}
 }

@@ -108,14 +108,14 @@ class pag extends createClass
 						}
 					}
 				}
-				$objJs = array_unique($objJs);
+				if(!empty($objJs)) array_unique($objJs);
 				if(!empty($this->js)){
 					foreach ($this->js as $key => $js) {
 						if(is_array($js)){ $objJs[] = implode("\n\t\t\t", $js);	}
 						else{$objJs[] = $js;}
 					}
 				}
-				$objJs = array_unique($objJs);
+				if(!empty($objJs)) array_unique($objJs);
 				if(isset($objJs)) return implode("\n\t\t\t", $objJs);
 			}
 			else{
