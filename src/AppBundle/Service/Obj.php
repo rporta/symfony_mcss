@@ -399,6 +399,8 @@ class Obj extends ObjParam
 					unset($listObjPag[$k]);
 				}
 			}
+			$keys = array_flip(array_keys($listObjPag));
+			$listObjPag = array_combine($keys, $listObjPag);
 			/*elimino objeto : editJs*/		
 			return $listObjPag;
 		}else{
