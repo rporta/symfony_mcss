@@ -1,10 +1,3 @@
-pendientes :
+Service Obj
+	desde el front end hay que definir que tipo de objetos se pueden borrar, puesto que  al borrar un elemento en la pagina puede que no se espere el resultado correcto de la operacion, porque rompe la estructura de codigo y se visualiza mal, ejemplo al eliminar el logo de un modelo tipo nav con logo puede fallar, 
 
-	chips
-	FeatureDiscovery
-	ScrollFire
-
-	dialog
-	pushpin
-	Scrollspy
-	Transitions

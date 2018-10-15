@@ -33,7 +33,8 @@ class AjaxDelController extends Controller
     	$post['editar_pagina'] = $request->attributes->get('pag');
 
         $dirbase = new dirbase($path);
-        $filePag = $dirbase->getObj($post['editar_pagina'])->viewFile();
+        $file = $dirbase->getObj($post['editar_pagina']);
+        $filePag = $file->viewFile();
         unset($dirbase);
         //traigo obj pag
         $objPag = $serviceObj->scanObjFile($filePag);
@@ -47,12 +48,14 @@ class AjaxDelController extends Controller
         $objDel = $serviceObj->jsonSetParam($data['json']);
         $nameObjDel = $serviceObj->getName($objDel, $objPag, $objDir);
 
-        // xbug($nameObjDel);
         $objPag = $serviceObj->delObj($nameObjDel, $objPag);
 
-        xbug($objPag);
-        die();
-        // return $this->json($objPag2);
-   		// return $this->json(array('objDel' => $data['json'], 'objPag' => $objPag, 'objPag2' => $objPag2, 'objList' => $objDir));
+        $codePhp = $serviceObj->createPhp($objPag, $filePag, $nameObjDel);
+        
+        $file->truncateFile();
+        $file->editFile($codePhp);
+
+        
+        return $this->json("objeto ({$nameObjDel}) eliminado con exito");
     }		
 }
