@@ -84,15 +84,27 @@ class editJs extends createClass
 							return setObj(e.parentNode, n, obj);
 						}
 						else{
-							propery = {}
-							propery.id = e.id;
-							propery.text = e.firstChild.data;
-							propery.datasetActivate = e.dataset.activates;
-							/*propery.nodeName = e.nodeName;*/
-							propery.className = e.className;
-							obj[n] = propery;
-							n++;
-							return setObj(e.parentNode, n, obj);						
+							propery = {};
+							type = e.id.split(\"-\");
+							if(type[0] == 'media'){
+								propery.id = e.id;
+								propery.className = e.className;
+								propery.url = e.currentSrc;
+
+								obj[n] = propery;
+								n++;
+								return setObj(e.parentNode, n, obj);
+							}
+							else{
+								propery.id = e.id;
+								propery.text = e.firstChild.data;
+								propery.datasetActivate = e.dataset.activates;
+								/*propery.nodeName = e.nodeName;*/
+								propery.className = e.className;
+								obj[n] = propery;
+								n++;
+								return setObj(e.parentNode, n, obj);	
+							}						
 						}
 					}
 					else{

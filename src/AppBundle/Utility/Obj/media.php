@@ -47,9 +47,9 @@ class media extends createClass
 			$src = $this->srcMedia($this->src);
 			$alt = $this->altMedia($this->alt);
 
-			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}");
-			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}");
-			$tempHtml = "<img class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT}>";
+			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{ID}");
+			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$id}");
+			$tempHtml = "<img id='{ID}' class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT}>";
 			$tempHtml = str_replace($search, $replace, $tempHtml);
 			
 			$this->html = $tempHtml;
@@ -63,9 +63,9 @@ class media extends createClass
 
 			$center = is_null($this->center) ? NULL : "style='margin: 0% auto;'";
 
-			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CAPTION}", "{CENTER}");
-			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$caption}", "{$center}");
-			$tempHtml = "<img class='materialboxed {CIRCLE} {RESPONSIVE}' {CAPTION} {SRC} {ALT} {CENTER}>";
+			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CAPTION}", "{CENTER}", "{ID}");
+			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$caption}", "{$center}", "{$id}");
+			$tempHtml = "<img id='{ID}' class='materialboxed {CIRCLE} {RESPONSIVE}' {CAPTION} {SRC} {ALT} {CENTER}>";
 			$tempHtml = str_replace($search, $replace, $tempHtml);
 			
 			$this->html = $tempHtml;
@@ -75,10 +75,10 @@ class media extends createClass
 			$src = $this->srcMedia($this->src);
 			if ($this->_embeds == FALSE){
 
-				$search = '{SRC}';
-				$replace = $src;
+				$search = array('{SRC}', '{ID}');
+				$replace =  array($src, $id);
 				$tempHtml = 
-				"<video class='responsive-video' controls>
+				"<video id='{ID}' class='responsive-video' controls>
 					<source {SRC} type='video/mp4'>
 				</video>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
@@ -87,10 +87,10 @@ class media extends createClass
 			}
 			else{
 
-				$search = '{SRC}';
-				$replace = $src;
+				$search = array('{SRC}', '{ID}');
+				$replace =  array($src, $id);
 				$tempHtml = 
-				"<div class='video-container'>
+				"<div id='{ID}' class='video-container'>
 					<iframe {SRC} frameborder='0' allowfullscreen></iframe>
 				</div>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
