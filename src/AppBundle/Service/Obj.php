@@ -310,7 +310,15 @@ class Obj extends ObjParam
 					$maxKeyDel = max(array_keys($json2));
 					$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
 				}
-			}else{
+			}
+			if($tmpType == 'media'){
+				$json2[]['type'] = explode("-", $value['id'])[0];
+				$maxKeyDel = max(array_keys($json2));
+				$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+				array_push($json2[$maxKeyDel]['param'], array('name' => 'src' ,'value' => $value['url']));
+
+			}
+			else{
 
 				$json2[]['type'] = explode("-", $value['id'])[0];
 				$text = empty($value['text']) ? NULL : $value['text'];
@@ -368,7 +376,7 @@ class Obj extends ObjParam
 			$param[5]['name'] = 'text';
 			$param[5]['value'] = $text;			
 		}
-		return $param;
+		return empty($param) ? array() : $param;
 	}
 	public function delObj($name, $listObjPag){
 		$key = NULL;
