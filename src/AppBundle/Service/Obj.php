@@ -526,6 +526,7 @@ class Obj extends ObjParam
 	public function createPhp($listObjPag, $filePag, $nameObjDel){
 		$code = array();
 		$code[] = "<?php \n";
+		$code[] = "\n/* obj */\n\n";
 		foreach ($listObjPag as $v) {
 			if(!empty($v['param'])){
 				foreach ($v['param'] as $vParam) {
@@ -554,46 +555,47 @@ class Obj extends ObjParam
 			}else{
 				$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(); \n";
 			}
-			$code[] = "\n";
 		}
 		// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el gravado 
+		$code[] = "\n/* actions */\n";
 		$temp_reg_exp = "([^\/\/\040](\\$)(.+)(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
 		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
 			foreach ($out[0] as $a) {
 				if(preg_match_all("/($nameObjDel)/", $a)){
 
 				}else{
-					$code[] = "{$a};\n";
+					$code[] = "{$a};";
 				}
 			}
 		}
+		$code[] = "\n\n/* edit */\n";
 		$code[] = 
 
 		/*codigo edicion*/
-		"
-		if(!empty(\$editar)){
-		if(!empty(\$action) && \$action !== 'default'){
-			\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);
-			\$pag->js = \$editJs->getJs('default');
-			switch (\$action) {
-				case 'add':
-					\$pag->js = \$editJs->getJs('add'); 
-					break;
-				case 'edit':
-					\$pag->js = \$editJs->getJs('edit');				
-					break;
-				case 'del':
-					\$pag->js = \$editJs->getJs('del');				
-					break;
-			}
-		}
-		}
-		";
+		"\nif(!empty(\$editar)){\n".
+			"\tif(!empty(\$action) && \$action !== 'default'){\n".
+				"\t\t\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);\n".
+				"\t\t\$pag->js = \$editJs->getJs('default');\n".
+				"\t\t\tswitch (\$action) {\n".
+					"\t\t\t\tcase 'add':\n".
+						"\t\t\t\t\t\$pag->js = \$editJs->getJs('add'); \n".
+					"\t\t\t\tbreak;\n".
+					"\t\t\t\tcase 'edit':\n".
+						"\t\t\t\t\t\$pag->js = \$editJs->getJs('edit');\n".
+					"\t\t\t\tbreak;\n".
+					"\t\t\t\tcase 'del':\n".
+						"\t\t\t\t\t\$pag->js = \$editJs->getJs('del');\n".
+					"\t\t\t\tbreak;\n".
+				"\t\t}\n".
+			"\t}\n".
+		"}\n";
 		/*codigo edicion*/
+
 
 		foreach ($listObjPag as $v) {
 			if($v['type'] == 'pag'){
-				$code[] = "\${$v['name']}->render();";
+				$code[] = "\n/* final action */\n\n";
+				$code[] = "\${$v['name']}->render();\n";
 			}
 		}
 		$code = implode("", $code);

@@ -46,8 +46,8 @@ class AjaxDelController extends Controller
         unset($dirbase2);
      
         $objDel = $serviceObj->jsonSetParam($data['json']);
-        $nameObjDel = $serviceObj->getName($objDel, $objPag, $objDir);
 
+        $nameObjDel = $serviceObj->getName($objDel, $objPag, $objDir);
         $objPag = $serviceObj->delObj($nameObjDel, $objPag);
 
         $codePhp = $serviceObj->createPhp($objPag, $filePag, $nameObjDel);
