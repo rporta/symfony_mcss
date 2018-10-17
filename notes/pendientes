@@ -1,3 +1,9 @@
-Service Obj
+Service Obj :
+
 	desde el front end hay que definir que tipo de objetos se pueden borrar, puesto que  al borrar un elemento en la pagina puede que no se espere el resultado correcto de la operacion, porque rompe la estructura de codigo y se visualiza mal, ejemplo al eliminar el logo de un modelo tipo nav con logo puede fallar, 
 
+Controladores :
+
+	se debe crear un controlador que reciba el json que representa el objeto que se desea modificar,
+	este debe retornar la vista modo edicion de ese objeto (un form con la info de este objeto a modificar y la opcion de agregar objetos esta debe guardar y enviar la informacion a otro controlador por ajax)
+	se debe crear un controlador que reciba el json ya modificado y reconstrulla la pagina.
