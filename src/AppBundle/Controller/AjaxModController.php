@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utility\dirbase\dirBase;
 
-class AjaxDelController extends Controller
+class AjaxModController extends Controller
 {
     public function indexAction(Request $request)
     {
@@ -26,7 +26,7 @@ class AjaxDelController extends Controller
             $pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
 
         }
-        //traigo obj del	
+        //traigo obj mod	
     	$data = $request->request->all();
 
         $serviceObj = $this->container->get('obj');
@@ -36,27 +36,22 @@ class AjaxDelController extends Controller
         $file = $dirbase->getObj($post['editar_pagina']);
         $filePag = $file->viewFile();
         unset($dirbase);
+
         //traigo obj pag
         $objPag = $serviceObj->scanObjFile($filePag);
-        // xbug($objPag);
 
         $dirbase2 = new dirbase($pathListObj);
+
         //traigo obj disponibles
         $objDir = $serviceObj->scanObjDir($dirbase2);
         unset($dirbase2);
      
-        $objDel = $serviceObj->jsonSetParam($data['json']);
+        $objMod = $serviceObj->jsonSetParam($data['json']);
 
-        $nameObjDel = $serviceObj->getName($objDel, $objPag, $objDir);
+        $nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
+        xbug($nameObjMod);
+        die();        
+        return $this->json("objeto ({$nameObjMod}) modificado con exito");
+    }
 
-        $objPag = $serviceObj->delObj($nameObjDel, $objPag);
-
-        $codePhp = $serviceObj->createPhp($objPag, $filePag, $nameObjDel);
-        
-        $file->truncateFile();
-        $file->editFile($codePhp);
-
-        
-        return $this->json("objeto ({$nameObjDel}) eliminado con exito");
-    }		
 }

@@ -298,32 +298,25 @@ class Obj extends ObjParam
 			$tmpType = explode("-", $value['id'])[0];
 			if($tmpType == 'a'){
 				if(empty($value['datasetActivate'])){
-					$json2[]['type'] = explode("-", $value['id'])[0];
+					$json2[$key]['type'] = explode("-", $value['id'])[0];
 					$text = empty($value['text']) ? NULL : $value['text'] ;
-					$maxKeyDel = max(array_keys($json2));
-					$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+					$json2[$key]['param'] = $this->classToParam($value['className'], $json2[$key]['type'], $text);
 				}
 				else{
-					$json2[]['type'] = explode("-", $value['datasetActivate'])[0];
-					$json2[]['type'] = explode("-", $value['id'])[0];
+					$json2[$key]['type'] = explode("-", $value['datasetActivate'])[0];
 					$text = empty($value['text']) ? NULL : $value['text'] ;
-					$maxKeyDel = max(array_keys($json2));
-					$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+					$json2[$key]['param'] = $this->classToParam($value['className'], $json2[$key]['type'], $text);
 				}
 			}
 			if($tmpType == 'media'){
-				$json2[]['type'] = explode("-", $value['id'])[0];
-				$maxKeyDel = max(array_keys($json2));
-				$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
-				array_push($json2[$maxKeyDel]['param'], array('name' => 'src' ,'value' => $value['url']));
-
+				$json2[$key]['type'] = explode("-", $value['id'])[0];
+				$json2[$key]['param'] = $this->classToParam($value['className'], $json2[$key]['type'], $text);
+				array_push($json2[$key]['param'], array('name' => 'src' ,'value' => $value['url']));
 			}
 			else{
-
-				$json2[]['type'] = explode("-", $value['id'])[0];
+				$json2[$key]['type'] = explode("-", $value['id'])[0];
 				$text = empty($value['text']) ? NULL : $value['text'];
-				$maxKeyDel = max(array_keys($json2));
-				$json2[$maxKeyDel]['param'] = $this->classToParam($value['className'], $json2[$maxKeyDel]['type'], $text);
+				$json2[$key]['param'] = $this->classToParam($value['className'], $json2[$key]['type'], $text);
 			}
 		}
 		return $json2;
