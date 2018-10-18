@@ -49,7 +49,10 @@ class AjaxModController extends Controller
         $objMod = $serviceObj->jsonSetParam($data['json']);
 
         $nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
-        xbug($nameObjMod);
+        $obj = $serviceObj->getObj($nameObjMod, $objPag);
+        $objFull = $serviceObj->getObjType($obj, $objDir);
+        xbug($obj);
+        xbug($objFull);
         die();        
         return $this->json("objeto ({$nameObjMod}) modificado con exito");
     }

@@ -408,6 +408,20 @@ class Obj extends ObjParam
 			return FALSE;
 		}
 	}
+	public function getObj($name, $listObjPag){
+		foreach ($listObjPag as $value) {
+			if($value['name'] == $name){
+				return $value;
+			}
+		}
+	}
+	public function getObjType($obj, $listObjDir){
+		foreach ($listObjDir as $v) {
+			if($v['type'] == $obj['type']){
+				return $v;
+			}
+		}
+	}
 	public function getName($listObjDel, $listObjPag, $listObjDir){
 		// xbug($listObjDel);
 		// xbug($listObjPag);

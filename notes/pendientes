@@ -4,6 +4,31 @@ Service Obj :
 
 Controladores :
 
-	se debe crear un controlador que reciba el json que representa el objeto que se desea modificar,
-	este debe retornar la vista modo edicion de ese objeto (un form con la info de este objeto a modificar y la opcion de agregar objetos esta debe guardar y enviar la informacion a otro controlador por ajax)
-	se debe crear un controlador que reciba el json ya modificado y reconstrulla la pagina.
+	cuando el modal esta abierto y pregunta desea modificar objeto?, 
+	al apretar aceptar dispara el ajax al controlador AjaxMod,
+	cuando finaliza el ajax debe eliminar el modal actual,
+	y abrir otro modal(footer : modificar, cancelar) este modal no debe activar el modo seleccion
+	y en el cuerpo con la informacion que devuelve el controlador AjaxMod,
+
+	[esto es una funcion a un boton en particular dentro del modal][ajax]
+	si toca modificar se debe enviar la informacion en un ajax a otro controlador que procesa el la respuesta para generar el php, 
+	al finalizar el ajax, se debe ejecutar : $("#form-send").submit(); 
+
+	[esto es la funcion complete del modal]
+	si toca cancelar, se debe elimiar el modal actual y reestablecer el modo seleccion  
+
+	* se debe crear el controlador AjaxMod :
+		este controlador recibe el json (obj que se desea modificar)
+		debe retornar un form + script (debe ser el tipo de objeto que es con los parametros cargados, 
+		hay que resolver interfaz actions...)
+
+	* se debe crear un controlador X :
+		este controlador recibe el json(obj modificado)
+		dentro del array de la lista de objetos de la pagina, se debe buscar y reemplazar el objeto modificado por el que llega de ajax.
+		se debe generar el codigo php y retornar un json diciendo modificacion exitosa
+
+
+
+
+
+		
