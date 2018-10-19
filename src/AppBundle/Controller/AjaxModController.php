@@ -51,8 +51,9 @@ class AjaxModController extends Controller
         $nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
         $obj = $serviceObj->getObj($nameObjMod, $objPag);
         $objFull = $serviceObj->getObjType($obj, $objDir);
-        xbug($obj);
-        xbug($objFull);
+        // xbug($obj);
+        // xbug($objFull);
+        return $this->render('AppBundle:default:temp.html.php', array('obj' => $obj, 'objFull' => $objFull));
         die();        
         return $this->json("objeto ({$nameObjMod}) modificado con exito");
     }
