@@ -1,6 +1,9 @@
 index:
     path:      /
     defaults:  { _controller: AppBundle:Default:index }
+temp:
+    path:      /temp
+    defaults:  { _controller: AppBundle:Default:temp }
 create_pag:
     path:      /createpag
     defaults:  { _controller: AppBundle:CreatePag:index }

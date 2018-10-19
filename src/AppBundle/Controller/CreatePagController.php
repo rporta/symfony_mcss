@@ -32,13 +32,22 @@ class CreatePagController extends Controller
 
 			$tempHtml = 
 "<?
+
+/* obj */
+
 \$pag['backgroundColor'] = 'grey,0';
 \$pag = new AppBundle\Utility\Obj\pag(\$pag);
 \$h['textAling'] = 'c';
 \$h['textColor'] = 'red,3';
 \$h['text'] = 'Nueva Pagina ({$post['nueva_pagina']})';
 \$h = new AppBundle\\Utility\\Obj\\h(\$h);
+
+/* actions */
+
 \$pag->addObj(\$h);
+
+/* edit */
+
 if(!empty(\$editar)){
 	if(!empty(\$action) && \$action !== 'default'){
 		\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);
@@ -56,6 +65,9 @@ if(!empty(\$editar)){
 		}
 	}
 }
+
+/* final action */
+
 \$pag->render();";
 	    	$dirbase->createFile($newpag, $tempHtml);
 
