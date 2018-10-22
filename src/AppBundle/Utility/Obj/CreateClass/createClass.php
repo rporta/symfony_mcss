@@ -55,7 +55,8 @@ class createClass
 		}
 		else{
 			$key = explode(",", $arg);
-			return $out[$key[0]][$key[1]];
+			if(empty($out[$key[0]][$key[1]])){ return NULL;}
+			else{ return $out[$key[0]][$key[1]];}
 		}
 	}
 	protected function backgroundColors($arg = null){
