@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utility\dirbase\dirBase;
+use AppBundle\Utility\Obj\tempElement;
 
 class AjaxModController extends Controller
 {
@@ -51,11 +52,13 @@ class AjaxModController extends Controller
         $nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
         $obj = $serviceObj->getObj($nameObjMod, $objPag);
         $objFull = $serviceObj->getObjType($obj, $objDir);
-        // xbug($obj);
-        // xbug($objFull);
-        return $this->render('AppBundle:default:temp.html.php', array('obj' => $obj, 'objFull' => $objFull));
-        die();        
-        return $this->json("objeto ({$nameObjMod}) modificado con exito");
+
+
+        $tempElement['obj'] = $obj;
+        $tempElement['objFull'] = $objFull;
+        $tempElement = new tempElement($tempElement);
+        // xbug($tempElement->html);
+        return $this->json(array($tempElement->html));
     }
 
 }
