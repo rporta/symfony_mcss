@@ -108,8 +108,8 @@ class inputFields extends createClass
 				}
 			</style>
 			{obj:html}
-			<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE} {ACTIVE} ">
-			<label {TEXTERROR} {TEXTSUCCESS} for="{TEXT}">{TEXT} </label>
+			<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
+			<label class="{ACTIVE}" {TEXTERROR} {TEXTSUCCESS} for="{TEXT}">{TEXT} </label>
         </div>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
