@@ -6,13 +6,13 @@ Controladores :
 
 	cuando el modal esta abierto y pregunta desea modificar objeto?, 
 	al apretar aceptar dispara el ajax al controlador AjaxMod,
-	cuando finaliza el ajax debe eliminar el modal actual,
-	y abrir otro modal(footer : modificar, cancelar) este modal no debe activar el modo seleccion
-	y en el cuerpo con la informacion que devuelve el controlador AjaxMod,
+	cuando finaliza el ajax reemplazar lo que existe en el modal actual, se debe modificar el boton aceptar por modificar (footer : modificar, cancelar)
+	
 
 	[esto es una funcion a un boton en particular dentro del modal][ajax]
 	si toca modificar se debe enviar la informacion en un ajax a otro controlador que procesa el la respuesta para generar el php, 
-	al finalizar el ajax, se debe ejecutar : $("#form-send").submit(); 
+	al finalizar el ajax, 
+	se debe ejecutar : $("#form-send").submit(); 
 
 	[esto es la funcion complete del modal]
 	si toca cancelar, se debe elimiar el modal actual y reestablecer el modo seleccion  
