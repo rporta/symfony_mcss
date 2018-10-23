@@ -113,6 +113,28 @@ class Obj extends ObjParam
 
 		return $result;
 	}
+	public function orderKey($arg){
+		$out = array();
+		$nOld = 0;
+		foreach ($arg as $v) {
+			$n = explode(",", $v)[1];
+			if($n > 0){
+				if($n - 1 == $nOld){
+					$out[] = $v;
+				}elseif($n - 1 == $nOld + 1){
+					$tempV = explode(",", $v)[0];
+					$out[] = $tempV.",".($n - 1);
+				}else{
+					continue;
+				}
+			}else{
+				$out[] = $v;
+			}
+			$nOld = explode(",", $v)[1];
+		}
+		return $out;
+	}
+
 	public function getParamClass($filePag, $type){
 		$temp_reg_exp = "(\\$)([a-zA-Z]+)(->)([a-zA-Z]+)(\s+\=\s+)(!isset)";
 
@@ -122,10 +144,10 @@ class Obj extends ObjParam
 				$param[$i]['name'] = $value;
 				switch ($value) {
 					case 'textColor':
-					$param[$i]['value'] = array_keys($this->textColor());
+					$param[$i]['value'] = $this->orderKey(array_keys($this->textColor()));
 					break;
 					case 'backgroundColor':
-					$param[$i]['value'] = array_keys($this->backgroundColor());
+					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
 					break;
 					case 'float':
 					$param[$i]['value'] = array_keys($this->float());
