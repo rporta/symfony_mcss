@@ -3,8 +3,10 @@
 namespace AppBundle\Utility\Obj;
 
 use AppBundle\Utility\Obj\CreateClass\createClass;
-use AppBundle\Utility\Obj\container;
-use AppBundle\Utility\Obj\h;
+use AppBundle\Utility\Obj\div;
+use AppBundle\Utility\Obj\p;
+use AppBundle\Utility\Obj\br;
+use AppBundle\Utility\Obj\divider;
 use AppBundle\Utility\Obj\form;
 use AppBundle\Utility\Obj\inputSelect;
 use AppBundle\Utility\Obj\inputTextarea;
@@ -41,15 +43,20 @@ class tempElement extends createClass
 		$obj = $this->obj;
 		$objFull = $this->objFull;
 
-		$container = new container();
+		$container = new div();
 
+		$type['textAling'] = 'l';
 		$type['size'] = '2';
 		$type['text'] = "Type : {$objFull['type']}";
-		$type = new h($type);
+		$type = new p($type);
+		$divider['backgroundColor'] = "grey,3";
+		$divider = new divider($divider);
+		$br = new br();
 
+		$name['textAling'] = 'l';
 		$name['size'] = '2';
 		$name['text'] = "Name : {$obj['name']}";
-		$name = new h($name);
+		$name = new p($name);
 
 		$form['method'] = "POST";
 		$form = new form($form);
@@ -131,8 +138,11 @@ class tempElement extends createClass
 
 		/* action */
 
+		$container->addObj($br);
+		$container->addObj($divider);
 		$container->addObj($type);
 		$container->addObj($name);
+		$container->addObj($br);
 		if(!empty($inputS)){
 			foreach ($inputS as $is) {
 				$form->addObj($is);

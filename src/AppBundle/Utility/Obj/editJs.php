@@ -62,10 +62,15 @@ class editJs extends createClass
 					if(isNav == 0){
 						return element;
 					}else{
-						isNav--;
 
 						nodeName = e.parentNode.nodeName;
-						className = e.parentNode.className;
+
+						if(isNav == 1){
+							className = e.parentNode.className.replace(\"right\", \"\");
+							className = className.replace(\"left\", \"\");
+						}else{
+							className = e.parentNode.className
+						}
 
 						tagIni = \"<\" + nodeName + \" class='\"+ className +\"' >\";
 
@@ -73,6 +78,7 @@ class editJs extends createClass
 
 						element = tagIni+element+tagEnd;
 
+						isNav--;
 						return setHtmlSubElementNav(e.parentNode, isNav, element);		
 					}
 
@@ -179,7 +185,7 @@ class editJs extends createClass
 
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea modificar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxmod/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(data) { Materialize.updateTextFields(); $(\".modal-content\")[0].innerHTML = data[0]; $(\"select\").material_select(); } });});<\/script><\/div>'
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea modificar este objeto : <\/p><br>'+element+'<\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxmod/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(data) { Materialize.updateTextFields(); $(\".modal-content\")[0].innerHTML += data[0]; $(\"select\").material_select(); } });});<\/script><\/div>'
 						);	
 					}
 					}); 
