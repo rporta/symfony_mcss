@@ -78,6 +78,7 @@ class tempElement extends createClass
 							}else{
 								$temp[] = array('active' => TRUE, 'text' => $o, 'value' => $o);
 							}
+							continue 2;
 						}else{
 							$insert = TRUE;
 						}
