@@ -105,10 +105,10 @@ class inputSelect extends createClass
 		$mode = $this->modeInputSelect($this->mode);
 
 		if($mode == 'icon'){
-			$tempHtml = '<option {ACTIVE} value="{VALUE}" data-icon="{HREF}" class="circle {ALIGN}">{TEXT}</option>';
+			$tempHtml = '<option {ACTIVE} value="{VALUE}" data-icon="{HREF}" class="circle {ALIGN} {BACKGROUNDCOLORS}">{TEXT}</option>';
 		}
 		else{
-			$tempHtml = '<option {ACTIVE} value="{VALUE}">{TEXT}</option>';
+			$tempHtml = '<option {ACTIVE} value="{VALUE}" class="{BACKGROUNDCOLORS}">{TEXT}</option>';
 		}
 
 		if($group){
@@ -120,15 +120,17 @@ class inputSelect extends createClass
 					$value = NULL;
 					$href = NULL;
 					$aling = NULL;
+					$backgroundColors = NULL;
 					foreach ($option as $property => $data) {
 						if($property == 'active') $active = 'selected';
 						if($property == 'text') $text = $data;
 						if($property == 'value') $value = $data;					
 						if($property == 'href') $href = $data;					
 						if($property == 'aling') $aling = $this->float($data);
+						if($property == 'backgroundColors') $backgroundColors = $this->backgroundColors($data);
 					}
-					$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}");
-					$replace = array($text, $value, $href, $aling, $active);
+					$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}", "{BACKGROUNDCOLORS}");
+					$replace = array($text, $value, $href, $aling, $active, $backgroundColors);
 					$objHtml[] = str_replace($search, $replace, $tempHtml);
 				}
 				$objHtml[] = '</optgroup>';
@@ -141,15 +143,17 @@ class inputSelect extends createClass
 				$value = NULL;
 				$href = NULL;
 				$aling = NULL;
+				$backgroundColors = NULL;
 				foreach ($option as $property => $data) {
 					if($property == 'active') $active = 'selected';
 					if($property == 'text') $text = $data;
 					if($property == 'value') $value = $data;					
 					if($property == 'href') $href = $data;					
 					if($property == 'aling') $aling = $this->float($data);					
+					if($property == 'backgroundColors') $backgroundColors = $this->backgroundColors($data);					
 				}
-				$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}");
-				$replace = array($text, $value, $href, $aling, $active);
+				$search = array("{TEXT}", "{VALUE}", "{HREF}", "{ALIGN}", "{ACTIVE}", "{BACKGROUNDCOLORS}");
+				$replace = array($text, $value, $href, $aling, $active, $backgroundColors);
 				$objHtml[] = str_replace($search, $replace, $tempHtml);
 			}
 		}
