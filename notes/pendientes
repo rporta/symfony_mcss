@@ -27,8 +27,26 @@ Controladores :
 		dentro del array de la lista de objetos de la pagina, se debe buscar y reemplazar el objeto modificado por el que llega de ajax.
 		se debe generar el codigo php y retornar un json diciendo modificacion exitosa
 
+	# en las acciones del obj tempElement
+	estas deben estar representadas por 1 checkbox (hidden) 2 input en linea select multiple bloqueados
+		1 input debe tener lista de metodos 
+		2 input debe tener lista de objetos [nombre, tipo]
+
+	al apregar en los botones (agregar, modificar, borrar) se debe cambiar el texto a confirmar 
+
+	si es agregar al final de la lista se debe crear un nuevo registro 
+		estas deben estar representadas por 1 checkbox (hidden) 2 input en linea select multiple
+			1 input debe tener lista de metodos 
+			2 input debe tener lista de objetos [nombre, tipo]
+
+	si es borrar se deben mostrar los input ocultos
+
+	si es modificar se deben habilitar los select multiples (hay que pensar en modificar el orden)
+
+	**la idea es que esta informacion se agrege al formulario para ser enviado (por ajax) a un controlador,
+	este controlador recibe el objeto modificado y deberia  reemplazar el objeto original en todos los objetos de la pagina.
+	finalmente este controlador debe reescribir el codigo y reembiar a la pagina edit. 
 
 
 
 
-		

@@ -57,7 +57,6 @@ class AjaxModController extends Controller
         $tempElement['obj'] = $obj;
         $tempElement['objFull'] = $objFull;
         $tempElement = new tempElement($tempElement);
-        // xbug($tempElement->html);
         return $this->json(array($tempElement->html));
     }
 

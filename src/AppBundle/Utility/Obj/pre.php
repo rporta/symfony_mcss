@@ -16,6 +16,7 @@ class pre extends createClass
 	protected $flowText;
 	protected $js;
 	protected $html;
+	protected $textAling;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -29,6 +30,7 @@ class pre extends createClass
 		$this->text = !isset($arg['text']) ? '' : $arg['text'];
 		$this->flowText = !isset($arg['flowText']) ? NULL : $arg['flowText'];		
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
+		$this->textAling = !isset($arg['textAling']) ? NULL : $arg['textAling'];
 		$this->html = NULL;
 		$this->refreshInfo();			
 	}
@@ -36,11 +38,13 @@ class pre extends createClass
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
 		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
-		$text = $this->text;
-		$flowText =  $this->flowText($this->flowText);		
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{FLOWTEXT}");
-		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$flowText}");
-		$tempHtml = '<pre id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {FLOWTEXT}">{TEXT}</pre>';
+		$text = is_array($this->text) ? var_export($this->text, TRUE) : $this->text;
+		$flowText =  $this->flowText($this->flowText);
+		$textAling =  $this->textAling($this->textAling);
+
+		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{FLOWTEXT}", "{TEXTALING}");
+		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$flowText}", "{$textAling}");
+		$tempHtml = '<pre id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {FLOWTEXT} {TEXTALING}">{TEXT}</pre>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

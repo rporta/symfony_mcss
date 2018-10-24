@@ -4,15 +4,20 @@ namespace AppBundle\Utility\Obj;
 
 use AppBundle\Utility\Obj\CreateClass\createClass;
 use AppBundle\Utility\Obj\div;
+use AppBundle\Utility\Obj\a;
 use AppBundle\Utility\Obj\p;
 use AppBundle\Utility\Obj\h;
 use AppBundle\Utility\Obj\br;
+use AppBundle\Utility\Obj\icon;
 use AppBundle\Utility\Obj\divider;
 use AppBundle\Utility\Obj\form;
 use AppBundle\Utility\Obj\inputSelect;
 use AppBundle\Utility\Obj\inputTextarea;
 use AppBundle\Utility\Obj\inputFields;
 use AppBundle\Utility\Obj\inputCheckboxes;
+use AppBundle\Utility\Obj\row;
+use AppBundle\Utility\Obj\col;
+use AppBundle\Utility\Obj\pre;
 /**
  * 
  */
@@ -44,6 +49,11 @@ class tempElement extends createClass
 		$obj = $this->obj;
 		$objFull = $this->objFull;
 
+		$xbug = new pre();
+		$xbug->textAling = 'l';
+		$xbug->textColor = 'light-green,12';
+		$xbug->backgroundColor = "b-w-t,0";
+		$xbug->text = $obj;
 		/* obj */
 
 		$container = new div();
@@ -149,9 +159,34 @@ class tempElement extends createClass
 				$inputC[] = new inputCheckboxes($optionCheckboxes);	
 			}	
 		}
+		$col = array();
+		$row = new row();
+		$col['i'] = new col();
+		$col['i']->s = "4";
+		$col['i']->m = "4";
+		$col['i']->l = "4";
+		$col['i']->xl = "4";
+		$col['i']->textAling = "c";
+		$col['l'] = clone $col['i'];
+		$col['c'] = clone $col['i'];
+
+		$icon = new icon();
+		$icon->float = "r";
+
+		$aAdd = new a();
+		$aAdd->class = 'btn';
+		$aAdd->text = 'agregar';
+		$aAdd->backgroundColor = 'green,7';
+		$aDel = clone $aAdd;
+		$aDel->text = 'borrar';
+		$aDel->backgroundColor = 'red,5';
+		$aMod = clone $aAdd;
+		$aMod->text = 'modificar';
+		$aMod->backgroundColor = 'blue,5';
 
 		/* action */
 
+		$container->addObj($xbug);
 		$container->addObj($br);
 		$container->addObj($divider);
 		$container->addObj($title);
@@ -183,6 +218,24 @@ class tempElement extends createClass
 		$container->addObj($divider);
 		$container->addObj($title2);
 		$container->addObj($br);
+		$icon->icon = "add";
+		$aAdd->addObj($icon);
+		$icon->icon = "delete";
+		$aDel->addObj($icon);
+		$icon->icon = "edit";
+		$aMod->addObj($icon);
+		$col['i']->addObj($aAdd);
+		$col['c']->addObj($aMod);
+		$col['l']->addObj($aDel);
+		$row->addObj($col['i']);
+		$row->addObj($col['c']);
+		$row->addObj($col['l']);
+		$container->addObj($row);
+		$container->addObj($br);
+		foreach ($obj['action'] as $k => $a) {
+			$a['name'];
+			$a['value'];
+		}
 
 		/* set property */
 
