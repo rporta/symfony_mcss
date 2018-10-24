@@ -55,7 +55,7 @@ class preloaderFull extends createClass
 				$search = array("{ID}", "{SHADOW}", "{LAYERBACKGROUNDCOLOR}", "{BACKGROUNDCOLOR:0}", "{BACKGROUNDCOLOR:1}", "{DETERMINATE}");
 				$replace = array($id, $shadow, $layerBackgroundColor, $backgroundColor[0], $backgroundColor[1], $determinate);
 				$tempHtml = 
-				"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='progress {SHADOW} {BACKGROUNDCOLOR:0}'>
+				"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9999; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='progress {SHADOW} {BACKGROUNDCOLOR:0}'>
 					<div class='determinate  {BACKGROUNDCOLOR:1}' style='width: {DETERMINATE}%'></div>
 				</div></div></div>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
@@ -64,7 +64,7 @@ class preloaderFull extends createClass
 				$search = array("{ID}", "{SHADOW}", "{LAYERBACKGROUNDCOLOR}", "{BACKGROUNDCOLOR:0}", "{BACKGROUNDCOLOR:1}");
 				$replace = array($id, $shadow, $layerBackgroundColor, $backgroundColor[0], $backgroundColor[1]);
 				$tempHtml = 
-				"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='progress {SHADOW} {BACKGROUNDCOLOR:0}'>
+				"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9999; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='progress {SHADOW} {BACKGROUNDCOLOR:0}'>
 					<div class='indeterminate  {BACKGROUNDCOLOR:1}'></div>
 				</div></div></div>";
 				$tempHtml = str_replace($search, $replace, $tempHtml);
@@ -82,7 +82,7 @@ class preloaderFull extends createClass
 			$search = array("{ID}", "{SIZE}", "{LAYERBACKGROUNDCOLOR}","{BACKGROUNDCOLOR}");
 			$replace = array($id, $size, $layerBackgroundColor, $backgroundColor);			
 			$tempHtml = 
-			"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>
+			"<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9999; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>
 				<div class='spinner-layer' style='border-color: {BACKGROUNDCOLOR};'>
 					<div class='circle-clipper left'>
 						<div class='circle'></div>
@@ -99,7 +99,7 @@ class preloaderFull extends createClass
 		}
 		elseif ($mode == 'circularFlashing'){
 			$size = $this->sizePreloader($this->size);
-			$tempHtml = "<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>";
+			$tempHtml = "<div id={ID} class='section {LAYERBACKGROUNDCOLOR}' style='position: fixed; top: 0px; z-index: 9999; width: 100%; height: 100%;'><div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);' class='container  center-align'><div class='preloader-wrapper {SIZE} active'>";
 			$arrayTempHtml[] = str_replace(array("{ID}" ,"{SIZE}", "{LAYERBACKGROUNDCOLOR}"), array($id, $size, $layerBackgroundColor), $tempHtml);
 			$spinnerColor = array("spinner-blue", "spinner-red", "spinner-yellow", "spinner-green");
 			$i = 0;
@@ -131,9 +131,16 @@ class preloaderFull extends createClass
 		$this->html = $tempHtml;
 	}
 	public function createJs($id){
-		$effect =  "fadeOut(500)";
-		$code = " $('#{$id}').{$effect}; ";
-		$js = " setTimeout(function(){".$code."},1); ";
+	$js = 
+	"var pF = $('#{$id}');
+	preloaderFull = function (arg, pF){
+		if(arg == 'on'){
+			pF.fadeIn(500);
+		}else if(arg == 'off'){
+			pF.fadeOut(500);
+		}
+	}
+	setTimeout(function(){preloaderFull('off', pF); },1); ";
 		return $js;
 	}
 	public function refreshId(){
