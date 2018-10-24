@@ -70,7 +70,7 @@ class inputSelect extends createClass
 			$tempHtml = 
 			'<div class="input-field">
 				<select {NAME} id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
+					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 				<label for="{TEXT}">{TEXT}</label>
@@ -80,7 +80,7 @@ class inputSelect extends createClass
 			$tempHtml = 
 			'<div class="input-field">
 				<select {NAME} id="{ID}" class="icons {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
+					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 				<label for="{TEXT}">{TEXT}</label>
@@ -91,7 +91,7 @@ class inputSelect extends createClass
 			'<div>
 				<label for="{TEXT}">{TEXT}</label>
 				<select {NAME} id="{ID}" class="browser-default {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-					<option value="" disabled {DEFAULT:ACTIVE}>Seleccione una opcion</option>
+					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
 	        </div>';

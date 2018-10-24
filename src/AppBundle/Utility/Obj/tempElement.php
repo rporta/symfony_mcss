@@ -18,6 +18,7 @@ use AppBundle\Utility\Obj\inputCheckboxes;
 use AppBundle\Utility\Obj\row;
 use AppBundle\Utility\Obj\col;
 use AppBundle\Utility\Obj\pre;
+use AppBundle\Utility\Obj\table;
 /**
  * 
  */
@@ -184,9 +185,13 @@ class tempElement extends createClass
 		$aMod->text = 'modificar';
 		$aMod->backgroundColor = 'blue,5';
 
+		$table = new table();
+		$table->center = TRUE;
+		$textNullAction = new p();
+		$textNullAction->text = 'No se encontraron acciones en este objeto';
 		/* action */
 
-		$container->addObj($xbug);
+		// $container->addObj($xbug);
 		$container->addObj($br);
 		$container->addObj($divider);
 		$container->addObj($title);
@@ -232,11 +237,19 @@ class tempElement extends createClass
 		$row->addObj($col['l']);
 		$container->addObj($row);
 		$container->addObj($br);
-		foreach ($obj['action'] as $k => $a) {
-			$a['name'];
-			$a['value'];
+		if(is_array($obj['action'])){
+			$table->addHead('Posicion');
+			$table->addHead('Acciones');
+			$table->addHead('Objetos');
+			foreach ($obj['action'] as $k => $a) {
+				$table->addRow(array($k, $a['name'], $a['value']));
+			}
+			$container->addObj($table);
+		}else{
+			$container->addObj($textNullAction);
 		}
-
+		$container->addObj($br);
+		
 		/* set property */
 
 		$out = $container->html;

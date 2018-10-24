@@ -41,12 +41,17 @@ Controladores :
 
 	si es borrar se deben mostrar los input ocultos
 
-	si es modificar se deben habilitar los select multiples (hay que pensar en modificar el orden)
+	si es modificar se deben habilitar los select multiples (hay que pensar en modificar el orden *** Sabrina opina de arrastrar la accion mantener click y que se muevan las opciones al soltar se deberia confirmar la posicion)
 
 	**la idea es que esta informacion se agrege al formulario para ser enviado (por ajax) a un controlador,
 	este controlador recibe el objeto modificado y deberia  reemplazar el objeto original en todos los objetos de la pagina.
 	finalmente este controlador debe reescribir el codigo y reembiar a la pagina edit. 
 
+
+	**al utilizar la herramienta agregar objeto pueden pasar dos cosas, 
+		1- se puede habilitar el modo selector, para hacer click en un objeto de la pagina y que luego le pregunte si quiere agregar un nuevo objeto dentro de este,
+			si dice que si, se actualiza la pagina y me trae la lista de objetos disponibles para crear, una vez que confirme el objeto que deseo crear, paso a definir los parametros y las acciones, una vez finalizado se toca en el boton confirmar y se regenera el codigo.(objeto visible)
+		2-no se habilita el modo selector, se actualiza la pagina y me trae la lista de objetos disponibles para crear, una vez que confirme el objeto que deseo crear, paso a definir los parametros y las acciones, una vez finalizado se toca en el boton confirmar y se regenera el codigo.(objeto oculto)
 
 
 

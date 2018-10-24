@@ -22,6 +22,7 @@ class table extends createClass
 	protected $html;
 	protected $head;
 	protected $row;
+	protected $waves;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -39,6 +40,7 @@ class table extends createClass
 		$this->class = !isset($arg['class']) ? NULL : $arg['class'];
 		$this->mode = !isset($arg['mode']) ? NULL : $arg['mode'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
+		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];		
 		$this->html = NULL;
 		$this->head = NULL;
 		$this->row = NULL;
