@@ -47,6 +47,7 @@ class pag extends createClass
 		"		<script src='/js/materialize.min.js'></script>\n".
 		"		<script src='/js/nouislider.js'></script>\n".
 		"		<script >\n".
+		"		var pF = null;".
 		"		$( document ).ready(function() {\n".
 		"			{obj:js}\n".
 		"		});\n".

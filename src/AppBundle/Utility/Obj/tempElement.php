@@ -5,6 +5,7 @@ namespace AppBundle\Utility\Obj;
 use AppBundle\Utility\Obj\CreateClass\createClass;
 use AppBundle\Utility\Obj\div;
 use AppBundle\Utility\Obj\p;
+use AppBundle\Utility\Obj\h;
 use AppBundle\Utility\Obj\br;
 use AppBundle\Utility\Obj\divider;
 use AppBundle\Utility\Obj\form;
@@ -165,6 +166,9 @@ class tempElement extends createClass
 			}
 		}
 		$container->addObj($form);
+		$container->addObj($br);
+		$container->addObj($divider);
+		$container->addObj($br);
 
 		$out = $container->html;
 

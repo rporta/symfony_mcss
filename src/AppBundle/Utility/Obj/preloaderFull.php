@@ -132,7 +132,7 @@ class preloaderFull extends createClass
 	}
 	public function createJs($id){
 	$js = 
-	"var pF = $('#{$id}');
+	"pF = $('#{$id}');
 	preloaderFull = function (arg, pF){
 		if(arg == 'on'){
 			pF.fadeIn(500);
