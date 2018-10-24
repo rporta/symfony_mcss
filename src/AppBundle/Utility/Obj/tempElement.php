@@ -44,26 +44,38 @@ class tempElement extends createClass
 		$obj = $this->obj;
 		$objFull = $this->objFull;
 
-		$container = new div();
+		/* obj */
 
-		$type['textAling'] = 'l';
-		$type['size'] = '2';
-		$type['text'] = "Type : {$objFull['type']}";
-		$type = new p($type);
+		$container = new div();
+		$title['textAling'] = 'c';
+		$title['textColor'] = 'grey,7';
+		$title['size'] = '2';
+		$title['text'] = "Parametros :";
+		$title = new h($title);
+		$title2 = clone $title; 
+		$title2->text = "Acciones :";
 		$divider['backgroundColor'] = "grey,3";
 		$divider = new divider($divider);
 		$br = new br();
-
-		$name['textAling'] = 'l';
-		$name['size'] = '2';
-		$name['text'] = "Name : {$obj['name']}";
-		$name = new p($name);
-
 		$form['method'] = "POST";
 		$form = new form($form);
-
 		$inputS = $inputT = $inputC = $inputF = array();
-
+		$optionFields = array();
+		$optionFields['active'] = TRUE;
+		$optionFields['disabled'] = TRUE;
+		$optionFields['name'] = 'type';
+		$optionFields['text'] = 'type';
+		$optionFields['value'] = $objFull['type'];
+		$inputType = new inputFields($optionFields);		
+		unset($optionFields);
+		$optionFields = array();
+		$optionFields['active'] = TRUE;
+		$optionFields['disabled'] = TRUE;
+		$optionFields['name'] = 'name';
+		$optionFields['text'] = 'name';
+		$optionFields['value'] = $obj['name'];
+		$inputName = new inputFields($optionFields);		
+		unset($optionFields);
 		foreach ($objFull['param'] as $v) {
 			if(!empty($v['value']) && is_array($v['value'])){
 				$optionSelect = array();
@@ -142,9 +154,10 @@ class tempElement extends createClass
 
 		$container->addObj($br);
 		$container->addObj($divider);
-		$container->addObj($type);
-		$container->addObj($name);
+		$container->addObj($title);
 		$container->addObj($br);
+		$form->addObj($inputType);
+		$form->addObj($inputName);
 		if(!empty($inputS)){
 			foreach ($inputS as $is) {
 				$form->addObj($is);
@@ -168,10 +181,12 @@ class tempElement extends createClass
 		$container->addObj($form);
 		$container->addObj($br);
 		$container->addObj($divider);
+		$container->addObj($title2);
 		$container->addObj($br);
 
-		$out = $container->html;
+		/* set property */
 
+		$out = $container->html;
 		$this->html = $out;
 	}
 
