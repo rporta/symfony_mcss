@@ -23,6 +23,7 @@ class table extends createClass
 	protected $head;
 	protected $row;
 	protected $waves;
+	protected $sortable;
 
 	public function __construct($arg = NULL){
 		$this->reset($arg);
@@ -41,6 +42,7 @@ class table extends createClass
 		$this->mode = !isset($arg['mode']) ? NULL : $arg['mode'];
 		$this->shadow = !isset($arg['shadow']) ? NULL : $arg['shadow'];
 		$this->waves = !isset($arg['waves']) ? NULL : $arg['waves'];		
+		$this->sortable = !isset($arg['sortable']) ? NULL : $arg['sortable'];		
 		$this->html = NULL;
 		$this->head = NULL;
 		$this->row = NULL;
@@ -60,13 +62,48 @@ class table extends createClass
 		$row = $this->getObj('html:row');
 		$mode = $this->modeTable($this->mode);
 		$shadow =  $this->shadow($this->shadow);	
+		$sortable = $this->sortable;
+		
+
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{MODE}", "{CLASS}", "{HEAD}", "{ROW}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{CENTER}", "{SHADOW}");
 		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$mode}", "{$class}", "{$head}", "{$row}", "{$waves}", "{$float}", "{$valign}", "{$center}", "{$shadow}");
-		$tempHtml = '<table id="{ID}" class="{MODE} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {CENTER} {SHADOW}"><thead>{HEAD}</thead>
+		$tempHtml = 
+		'<style>
+			tr:after {  position:absolute; height:100%; width:100%; top:0px; left:0px; content:\' \'; z-index:-1; }
+			tr { -moz-transition:border-top-width 0.1s ease-in; -webkit-transition:border-top-width 0.1s ease-in; border-top:0px solid rgba(0,0,0,0); 
+			 position:relative; z-index:1; 
+			}
+			.marker { opacity:0.0; }
+		</style>
+		<style name="impostor_size">
+			.marker + tr { border-top-width:0px; }
+		</style>
+		<table id="{ID}" class="{MODE} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {CENTER} {SHADOW}"><thead>{HEAD}</thead>
 			<tbody>{ROW}</tbody>
 		</table>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
+
+		if(!is_null($sortable)){
+			$this->js[] = 
+			" 
+			var stylesheet = $('style[name=impostor_size]')[0].sheet;
+			var rule = stylesheet.rules ? stylesheet.rules[0].style : stylesheet.cssRules[0].style;
+			var setPadding = function(atHeight) {
+			    rule.cssText = 'border-top-width: '+atHeight+'px'; 
+			};
+			$($('#{$id}')[0].children[1]).sortable({
+			    'placeholder':'marker',
+			    'start':function(ev, ui) {
+			        setPadding(ui.item.height());
+			    },
+			    'stop':function(ev, ui) {
+			        var next = ui.item.next();
+			        next.css({'-moz-transition':'none', '-webkit-transition':'none', 'transition':'none'});
+			        setTimeout(next.css.bind(next, {'-moz-transition':'border-top-width 0.1s ease-in', '-webkit-transition':'border-top-width 0.1s ease-in', 'transition':'border-top-width 0.1s ease-in'}));
+			    }
+			}); ";
+		}
 
 		$this->html = $tempHtml;
 	}

@@ -187,6 +187,7 @@ class tempElement extends createClass
 
 		$table = new table();
 		$table->center = TRUE;
+		$table->sortable = TRUE;
 		$textNullAction = new p();
 		$textNullAction->text = 'No se encontraron acciones en este objeto';
 		/* action */
@@ -237,25 +238,44 @@ class tempElement extends createClass
 		$row->addObj($col['l']);
 		$container->addObj($row);
 		$container->addObj($br);
-		if(is_array($obj['action'])){
-			$table->addHead('Posicion');
-			$table->addHead('Acciones');
-			$table->addHead('Objetos');
-			foreach ($obj['action'] as $k => $a) {
-				$table->addRow(array($k, $a['name'], $a['value']));
+		if(!empty($obj['action'])){
+			if(is_array($obj['action'])){
+				$table->addHead('Posicion');
+				$table->addHead('Acciones');
+				$table->addHead('Objetos');
+				foreach ($obj['action'] as $k => $a) {
+					$table->addRow(array($k, $a['name'], $a['value']));
+				}
+				$container->addObj($table);
+			}else{
+				$container->addObj($textNullAction);
 			}
-			$container->addObj($table);
-		}else{
-			$container->addObj($textNullAction);
 		}
 		$container->addObj($br);
 		
 		/* set property */
-
+		$this->getObj('js', $container->js);
 		$out = $container->html;
 		$this->html = $out;
 	}
-
+	public function getObj($arg, $arg2 = NULL){
+		$arg = strtolower((string)$arg);
+		if($arg == 'html'){
+			if(!empty($this->obj)){
+				foreach ($this->obj as $idObj) {
+					$objHtml[] = $idObj->html;
+				}
+				$objHtml = implode("", $objHtml);
+			}
+			else{
+				$objHtml = "";
+			}
+			return $objHtml;
+		}
+		elseif($arg == 'js'){
+			$this->js[] = implode("",$arg2);
+		}
+	}
 	public function refreshId(){
 		$type = $this->type;
 		$id = $this->createID(5);

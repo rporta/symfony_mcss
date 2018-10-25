@@ -44,6 +44,7 @@ class pag extends createClass
 		"	<body id='{ID}' class='{TEXTCOLOR} {BACKGROUNDCOLOR}'>\n".
 	    "    	{obj:html}\n".
 		"		<script src='/js/jquery-3.2.1.min.js'></script>\n".
+		"		<script src='/js/jqueryui-1.8.18.js'></script>\n".
 		"		<script src='/js/materialize.min.js'></script>\n".
 		"		<script src='/js/nouislider.js'></script>\n".
 		"		<script >\n".
