@@ -240,11 +240,10 @@ class tempElement extends createClass
 		$container->addObj($br);
 		if(!empty($obj['action'])){
 			if(is_array($obj['action'])){
-				$table->addHead('Posicion');
 				$table->addHead('Acciones');
 				$table->addHead('Objetos');
 				foreach ($obj['action'] as $k => $a) {
-					$table->addRow(array($k, $a['name'], $a['value']));
+					$table->addRow(array($a['name'], $a['value']));
 				}
 				$container->addObj($table);
 			}else{
