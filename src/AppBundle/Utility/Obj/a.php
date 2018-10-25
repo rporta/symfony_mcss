@@ -70,7 +70,7 @@ class a extends createClass
 		$this->getObj('js');		
 		
 		if(!is_null($toast)){
-			$this->js[] = "$( '#$id' ).click(function() {".$toast."});";
+			$this->js[] = "$('#{$id}').click(function() {".$toast."});";
 		}
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}", "{TEXTALING}");
