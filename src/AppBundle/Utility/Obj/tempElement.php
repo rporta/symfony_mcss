@@ -30,6 +30,7 @@ class tempElement extends createClass
 	protected $editar;
 	protected $objPag;
 	protected $objFull;
+	protected $editarPagina;
 	protected $obj;
 	protected $html;
 
@@ -44,6 +45,7 @@ class tempElement extends createClass
 		$this->obj = $arg['obj'];
 		$this->objFull = $arg['objFull'];
 		$this->objPag = $arg['objPag'];
+		$this->editarPagina = $arg['editar_pagina'];
 		$this->html = NULL;
 		$this->refreshInfo();			
 	}
@@ -52,6 +54,7 @@ class tempElement extends createClass
 		$obj = $this->obj;
 		$objFull = $this->objFull;
 		$objPag = $this->objPag;
+		$editarPagina = $this->editarPagina;
 
 		$xbug = new pre();
 		$xbug->textAling = 'l';
@@ -75,6 +78,13 @@ class tempElement extends createClass
 		$form['method'] = "POST";
 		$form = new form($form);
 		$inputS = $inputT = $inputC = $inputF = array();
+		$optionFields = array();
+		$optionFields['mode'] = '3';
+		$optionFields['name'] = 'editar_pagina';
+		$optionFields['text'] = 'editar_pagina';
+		$optionFields['value'] = $editarPagina;
+		$inputEditarPagina = new inputFields($optionFields);		
+		unset($optionFields);
 		$optionFields = array();
 		$optionFields['active'] = TRUE;
 		$optionFields['disabled'] = TRUE;
@@ -201,6 +211,7 @@ class tempElement extends createClass
 		$container->addObj($divider);
 		$container->addObj($title);
 		$container->addObj($br);
+		$form->addObj($inputEditarPagina);
 		$form->addObj($inputType);
 		$form->addObj($inputName);
 		if(!empty($inputS)){
@@ -333,4 +344,3 @@ class tempElement extends createClass
     }
 
 }
-

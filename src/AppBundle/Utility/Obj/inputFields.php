@@ -89,28 +89,31 @@ class inputFields extends createClass
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{HEXCOLOR}", "{BACKGROUNDCOLOR}", "{ACTIVECOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{PLACEHOLDER}", "{NAME}", "{obj:html}", "{ACTIVE}", "{DISABLED}", "{TEXTERROR}", "{TEXTSUCCESS}", "{CHARACTERCOUNTER}", "{VALUE}");
 		$replace = array($id, $textColor, $hexColor, $backgroundColor, $activeBackgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $placeholder, $name, $objHtml, $active, $disabled, $textError, $textSuccess, $characterCounter, $value);
-
-		$tempHtml = 
-		'<div class="input-field">
-			<style>
-				.input-field .prefix.active {
-					color: {ACTIVECOLOR};
-				}
-				input[type="{MODE}"]:not(.browser-default):focus:not([readonly]) + label{
-					color: {ACTIVECOLOR};
-				}
-				input[type="{MODE}"]:not(.browser-default):focus:not([readonly]){
-					border-bottom: 1px solid {HEXCOLOR};
-					box-shadow: 0 1px 0 0 {HEXCOLOR};
-				}
-				input[type="{MODE}"]:not(.browser-default){
-					border-bottom: 1px solid {HEXCOLOR};
-				}
-			</style>
-			{obj:html}
-			<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
-			<label class="{ACTIVE}" {TEXTERROR} {TEXTSUCCESS} for="{TEXT}">{TEXT} </label>
-        </div>';
+		if($mode == "hidden"){
+			$tempHtml = '<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">';
+		}else{
+			$tempHtml = 
+			'<div class="input-field">
+				<style>
+					.input-field .prefix.active {
+						color: {ACTIVECOLOR};
+					}
+					input[type="{MODE}"]:not(.browser-default):focus:not([readonly]) + label{
+						color: {ACTIVECOLOR};
+					}
+					input[type="{MODE}"]:not(.browser-default):focus:not([readonly]){
+						border-bottom: 1px solid {HEXCOLOR};
+						box-shadow: 0 1px 0 0 {HEXCOLOR};
+					}
+					input[type="{MODE}"]:not(.browser-default){
+						border-bottom: 1px solid {HEXCOLOR};
+					}
+				</style>
+				{obj:html}
+				<input {PLACEHOLDER} {NAME} {DISABLED} {CHARACTERCOUNTER} {VALUE} id="{ID}" type="{MODE}" class="validate {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
+				<label class="{ACTIVE}" {TEXTERROR} {TEXTSUCCESS} for="{TEXT}">{TEXT} </label>
+			</div>';
+		}
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

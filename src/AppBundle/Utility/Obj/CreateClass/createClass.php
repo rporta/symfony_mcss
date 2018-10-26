@@ -319,6 +319,10 @@ class createClass
 			case 'email':
 				$out = "email"; 
 				break;		
+			case '3':
+			case 'hidden':
+				$out = "hidden"; 
+				break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}

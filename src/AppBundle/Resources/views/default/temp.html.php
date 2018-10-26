@@ -1,5 +1,5 @@
 <?
-$pag['backgroundColor'] = 'red,5';
+$pag['backgroundColor'] = 'b-w-t,0';
 $pag = new AppBundle\Utility\Obj\pag($pag);
 
 /* edit */

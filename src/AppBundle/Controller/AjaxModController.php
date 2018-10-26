@@ -57,8 +57,15 @@ class AjaxModController extends Controller
 		$tempElement['obj'] = $obj;
 		$tempElement['objFull'] = $objFull;
 		$tempElement['objPag'] = $objPag;
+		$tempElement['editar_pagina'] = $post['editar_pagina'];
 		$tempElement = new tempElement($tempElement);
 		return $this->json(array($tempElement->html, $tempElement->js[0], $tempElement->id));
 	}
+	public function modAction(Request $request){
+    	$post = $request->request->all();
 
+    	xbug($post);
+
+    	return $this->render('AppBundle:default:temp.html.php');
+	}
 }
