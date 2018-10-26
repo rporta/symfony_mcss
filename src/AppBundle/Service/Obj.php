@@ -417,6 +417,15 @@ class Obj extends ObjParam
 		}
 		return empty($param) ? array() : $param;
 	}
+	public function modObj($objMod, $listObjPag){
+		foreach ($listObjPag as &$o) {
+			if($o['name'] == $objMod['name'] && $o['type'] == $objMod['type']){
+				$o = $objMod;
+			}
+		}
+		return $listObjPag;
+	}
+
 	public function delObj($name, $listObjPag){
 		$key = NULL;
 		foreach ($listObjPag as $k => $v) {
@@ -609,7 +618,7 @@ class Obj extends ObjParam
 				$code[] = "\${$v['name']} = new AppBundle\\Utility\\Obj\\{$v['type']}(); \n";
 			}
 		}
-		// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el gravado 
+		// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el grabado 
 		$code[] = "\n/* actions */\n";
 		$temp_reg_exp = "([^\/\/\040](\\$)(.+)(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
 		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
