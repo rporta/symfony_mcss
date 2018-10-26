@@ -42,8 +42,7 @@ class EditPagController extends Controller
     	}
     }
     public function editAction(Request $request){
-        $post = $request->attributes->get('pag');
-        $post = $request->attributes->get('action');
+        $post['editar_pagina'] = $request->attributes->get('pag');
         return $this->render('AppBundle:default:loadPag.html.php', array('post' => $post));
     }
 }

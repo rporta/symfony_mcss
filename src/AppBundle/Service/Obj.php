@@ -36,7 +36,9 @@ class Obj extends ObjParam
 			}
 			$this->getParam($result, $filePag);
 			$this->getAction($result, $filePag);
-			// xbug($result);
+			//se elmina objet editJs
+			$end = end($result);
+			if($end['type'] == 'editJs') array_pop($result);
 			return $result;
 		}else{
 			return NULL;

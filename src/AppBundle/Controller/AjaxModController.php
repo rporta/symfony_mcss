@@ -87,16 +87,14 @@ class AjaxModController extends Controller
         unset($dirbase);
         //traigo obj pag
 		$objPag = $serviceObj->scanObjFile($filePag);
-
+		
         //traigo objMod
         $objMod = $serviceObj->formSetParam($post);
 
         $objPag = $serviceObj->modObj($objMod, $objPag);
 
-    	xbug($objPag);
         //pendiente crear el codigo de la pagina
-
     	//se debe redireccionar a la pag edit, con la pagina q se habia seleccionado
-    	return $this->render('AppBundle:default:temp.html.php');
+    	return $this->redirectToRoute('edit_pag', array('pag' => $post['editar_pagina']));
 	}
 }
