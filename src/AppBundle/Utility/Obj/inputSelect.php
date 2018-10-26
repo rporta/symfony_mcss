@@ -20,6 +20,7 @@ class inputSelect extends createClass
 	protected $mode;
 	protected $option;
 	protected $group;
+	protected $disabled;
 	protected $js;
 	protected $html;
 
@@ -41,7 +42,8 @@ class inputSelect extends createClass
 		$this->name = !isset($arg['name']) ? NULL : $arg['name'];			
 		$this->mode = !isset($arg['mode']) ? 'single' : $arg['mode'];			
 		$this->option = !isset($arg['option']) ? NULL : $arg['option'];			
-		$this->group = !isset($arg['group']) ? FALSE : $arg['group'];			
+		$this->group = !isset($arg['group']) ? FALSE : $arg['group'];
+		$this->disabled = !isset($arg['disabled']) ? NULL : $arg['disabled'];			
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->html = NULL;
 		$this->refreshInfo();			
@@ -60,16 +62,17 @@ class inputSelect extends createClass
 		$mode =  $this->modeInputSelect($this->mode);
 		$optionHtml = $this->getOptions($this->option);
 		$defautlActive = !strpos($optionHtml, 'disabled') ? 'selected' : NULL ;
+		$disabled =  $this->disabledInputFields($this->disabled);
 
 		$this->js[] =  " $('select').material_select(); ";
 
-		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{OPTION:HTML}", "{DEFAULT:ACTIVE}");
-		$replace = array($id, $textColor, $backgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $name, $optionHtml, $defautlActive);
+		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{TEXTALING}", "{SHADOW}", "{TRUNCATE}", "{CARDPANEL}", "{HOVERABLE}", "{MODE}", "{NAME}", "{OPTION:HTML}", "{DEFAULT:ACTIVE}", "{DISABLED}");
+		$replace = array($id, $textColor, $backgroundColor, $text, $textAling, $shadow, $truncate, $cardPanel, $hoverable, $mode, $name, $optionHtml, $defautlActive, $disabled);
 
         if($mode == 'single'){
 			$tempHtml = 
 			'<div class="input-field">
-				<select {NAME} id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
+				<select {DISABLED} {NAME} id="{ID}" class="{TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
 					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
@@ -79,7 +82,7 @@ class inputSelect extends createClass
         elseif($mode == 'icon'){
 			$tempHtml = 
 			'<div class="input-field">
-				<select {NAME} id="{ID}" class="icons {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
+				<select {DISABLED} {NAME} id="{ID}" class="icons {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
 					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>
@@ -90,7 +93,7 @@ class inputSelect extends createClass
 			$tempHtml = 
 			'<div>
 				<label for="{TEXT}">{TEXT}</label>
-				<select {NAME} id="{ID}" class="browser-default {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
+				<select {DISABLED} {NAME} id="{ID}" class="browser-default {TEXTCOLOR} {BACKGROUNDCOLOR} {TEXTALING} {SHADOW} {TRUNCATE} {CARDPANEL} {HOVERABLE}">
 					<option value="" {DEFAULT:ACTIVE}>Seleccione una opcion</option>
 					{OPTION:HTML}
 				</select>

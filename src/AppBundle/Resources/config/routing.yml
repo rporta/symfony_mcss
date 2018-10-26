@@ -28,7 +28,6 @@ list_obj:
 ajax_del:
     path:     /ajaxdel/{pag}
     defaults: { _controller: AppBundle:AjaxDel:index }
-
 ajax_mod:
     path:     /ajaxmod/{pag}
     defaults: { _controller: AppBundle:AjaxMod:index }

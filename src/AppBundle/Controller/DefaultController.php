@@ -13,6 +13,10 @@ class DefaultController extends Controller
     	return $this->render('AppBundle:default:index.html.php');
     }
     public function tempAction(Request $request){
+    	$post = $request->request->all();
+
+    	xbug($post);
+
     	return $this->render('AppBundle:default:temp.html.php');
     }
 }

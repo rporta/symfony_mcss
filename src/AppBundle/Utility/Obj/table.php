@@ -72,7 +72,7 @@ class table extends createClass
 		'<style>
 			tr:after {  position:absolute; height:100%; width:100%; top:0px; left:0px; content:\' \'; z-index:-1; }
 			tr { -moz-transition:border-top-width 0.1s ease-in; -webkit-transition:border-top-width 0.1s ease-in; border-top:0px solid rgba(0,0,0,0); 
-			 position:relative; z-index:1; 
+			 position:relative; 
 			}
 			.marker { opacity:0.0; }
 		</style>
@@ -92,6 +92,7 @@ class table extends createClass
 			var setPadding = function(atHeight) {
 			    rule.cssText = 'border-top-width: '+atHeight+'px'; 
 			};
+			console.log($($('#{$id}')[0].children[1]));
 			$($('#{$id}')[0].children[1]).sortable({
 			    'placeholder':'marker',
 			    'start':function(ev, ui) {

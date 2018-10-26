@@ -28,6 +28,7 @@ class tempElement extends createClass
 	protected $type;
 	protected $js;
 	protected $editar;
+	protected $objPag;
 	protected $objFull;
 	protected $obj;
 	protected $html;
@@ -42,6 +43,7 @@ class tempElement extends createClass
 		$this->js = !isset($arg['js']) ? array() : array($arg['js']);
 		$this->obj = $arg['obj'];
 		$this->objFull = $arg['objFull'];
+		$this->objPag = $arg['objPag'];
 		$this->html = NULL;
 		$this->refreshInfo();			
 	}
@@ -49,12 +51,13 @@ class tempElement extends createClass
 
 		$obj = $this->obj;
 		$objFull = $this->objFull;
+		$objPag = $this->objPag;
 
 		$xbug = new pre();
 		$xbug->textAling = 'l';
 		$xbug->textColor = 'light-green,12';
 		$xbug->backgroundColor = "b-w-t,0";
-		$xbug->text = $obj;
+		$xbug->text = $objPag;
 		/* obj */
 
 		$container = new div();
@@ -68,6 +71,7 @@ class tempElement extends createClass
 		$divider['backgroundColor'] = "grey,3";
 		$divider = new divider($divider);
 		$br = new br();
+		$form['action'] = "/temp";
 		$form['method'] = "POST";
 		$form = new form($form);
 		$inputS = $inputT = $inputC = $inputF = array();
@@ -219,11 +223,11 @@ class tempElement extends createClass
 				$form->addObj($ic);
 			}
 		}
-		$container->addObj($form);
-		$container->addObj($br);
-		$container->addObj($divider);
-		$container->addObj($title2);
-		$container->addObj($br);
+		
+		$form->addObj($br);
+		$form->addObj($divider);
+		$form->addObj($title2);
+		$form->addObj($br);
 		$icon->icon = "add";
 		$aAdd->addObj($icon);
 		$icon->icon = "delete";
@@ -236,22 +240,60 @@ class tempElement extends createClass
 		$row->addObj($col['i']);
 		$row->addObj($col['c']);
 		$row->addObj($col['l']);
-		$container->addObj($row);
-		$container->addObj($br);
+		$form->addObj($row);
+		$form->addObj($br);
 		if(!empty($obj['action'])){
 			if(is_array($obj['action'])){
+				$table->addHead('mover');
 				$table->addHead('Acciones');
 				$table->addHead('Objetos');
+
+				$icon->icon = "swap_vert";
+				$icon->float = NULL;
+				$icon->size = 1;
+				$icon->textColor = 'cyan,3';
+
+				$inputSelectAction = $inputSelectObjet = array();
+
 				foreach ($obj['action'] as $k => $a) {
-					$table->addRow(array($a['name'], $a['value']));
+					$temp = array();
+					foreach ($objFull['action'] as $kF => $aF) {
+						if($a['name'] == $aF['name']){
+							$temp[] = array('active' => TRUE, 'text' => $aF['name'], 'value' => $aF['name']);
+						}else{
+							$temp[] = array('text' => $aF['name'], 'value' => $aF['name']);
+						}
+					}
+					// $optionSelect['disabled'] = TRUE;
+					$optionSelect['name'] = "{$k}-action";
+					$optionSelect['text'] = $aF['name'];
+					$optionSelect['option'] = $temp;
+					$inputSelectAction[$k] = new inputSelect($optionSelect);
+
+					$temp = array();
+					foreach ($objPag as $oP) {
+						if($oP['name'] == $a['value']){
+							$temp[] = array('active' => TRUE, 'text' => "type : {$oP['type']} | name : {$oP['name']} ", 'value' => $oP['name']);
+						}else{
+							$temp[] = array('text' => "type : {$oP['type']} | name : {$oP['name']} ", 'value' => $oP['name']);
+						}
+					}
+					// $optionSelect['disabled'] = TRUE;
+					$optionSelect['name'] = "{$k}-objet";
+					$optionSelect['text'] = $aF['name'];
+					$optionSelect['option'] = $temp;
+					$inputSelectObjet[$k] = new inputSelect($optionSelect);
+
+					$table->addRow(array($icon->html ,$inputSelectAction[$k]->html, $inputSelectObjet[$k]->html));
 				}
-				$container->addObj($table);
+				$form->addObj($table);
 			}else{
-				$container->addObj($textNullAction);
+				$form->addObj($textNullAction);
 			}
 		}
-		$container->addObj($br);
-		
+		$form->addObj($br);
+		$container->addObj($form);
+		$this->id = $form->id;
 		/* set property */
 		$this->getObj('js', $container->js);
 		$out = $container->html;
