@@ -74,7 +74,7 @@ class tempElement extends createClass
 		$divider['backgroundColor'] = "grey,3";
 		$divider = new divider($divider);
 		$br = new br();
-		$form['action'] = "/temp";
+		$form['action'] = "/ajaxprocess";
 		$form['method'] = "POST";
 		$form = new form($form);
 		$inputS = $inputT = $inputC = $inputF = array();
@@ -91,7 +91,7 @@ class tempElement extends createClass
 		$optionFields['name'] = 'type';
 		$optionFields['text'] = 'type';
 		$optionFields['value'] = $objFull['type'];
-		$inputType = new inputFields($optionFields);		
+		$inputTypeH = new inputFields($optionFields);		
 		unset($optionFields);
 		$optionFields = array();
 		$optionFields['active'] = TRUE;
@@ -99,8 +99,24 @@ class tempElement extends createClass
 		$optionFields['name'] = 'name';
 		$optionFields['text'] = 'name';
 		$optionFields['value'] = $obj['name'];
+		$inputNameH = new inputFields($optionFields);		
+		unset($optionFields);
+
+		$optionFields = array();
+		$optionFields['mode'] = '3';
+		$optionFields['name'] = 'type';
+		$optionFields['text'] = 'type';
+		$optionFields['value'] = $objFull['type'];
+		$inputType = new inputFields($optionFields);		
+		unset($optionFields);
+		$optionFields = array();
+		$optionFields['mode'] = '3';
+		$optionFields['name'] = 'name';
+		$optionFields['text'] = 'name';
+		$optionFields['value'] = $obj['name'];
 		$inputName = new inputFields($optionFields);		
 		unset($optionFields);
+
 		foreach ($objFull['param'] as $v) {
 			if(!empty($v['value']) && is_array($v['value'])){
 				$optionSelect = array();
@@ -212,6 +228,8 @@ class tempElement extends createClass
 		$container->addObj($title);
 		$container->addObj($br);
 		$form->addObj($inputEditarPagina);
+		$form->addObj($inputTypeH);
+		$form->addObj($inputNameH);
 		$form->addObj($inputType);
 		$form->addObj($inputName);
 		if(!empty($inputS)){

@@ -62,9 +62,37 @@ class AjaxModController extends Controller
 		return $this->json(array($tempElement->html, $tempElement->js[0], $tempElement->id));
 	}
 	public function modAction(Request $request){
+		if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){ 
+			#path plantillas html Windows
+			$relativePathListObj = "\\src\\AppBundle\\Utility\\Obj";
+			$relativePath = "\\src\\AppBundle\\Resources\\views\\default";
+			$path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+			$pathListObj = str_replace("\\web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
+		}
+		else{
+			#path plantillas html Linux
+			$relativePathListObj = "/src/AppBundle/Utility/Obj";
+			$relativePath = "/src/AppBundle/Resources/views/default";
+			$path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+			$pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
+		}
+
     	$post = $request->request->all();
 
-    	xbug($post);
+        $serviceObj = $this->container->get('obj');
+
+        $dirbase = new dirbase($path);
+        $file = $dirbase->getObj($post['editar_pagina']);
+        $filePag = $file->viewFile();
+        unset($dirbase);
+        //traigo obj pag
+		$objPag = $serviceObj->scanObjFile($filePag);
+
+        //traigo objMod
+        $objMod = $serviceObj->formSetParam($post);
+
+    	// xbug($objPag);
+    	xbug($objMod);
 
     	return $this->render('AppBundle:default:temp.html.php');
 	}

@@ -314,6 +314,30 @@ class Obj extends ObjParam
 		}
 
 	}
+	public function formSetParam($data){
+		$out = array();
+		$out['name'] = $data['name'];
+		$out['type'] = $data['type'];
+		$out['param'] = array();
+		$out['acction'] = array();
+		foreach ($data as $k => $v) {
+			if($k !== 'editar_pagina' && !empty($v)){			
+				if(strpos($k, '-') === FALSE){
+					array_push($out['param'], array('name' => $k, 'value' => $v));
+				}
+				else{
+					$compare = explode("-", $k);
+					if($compare[1] == 'action'){
+						$name = $v;
+					}else{
+						array_push($out['acction'], array('name' => $name, 'value' => $v));
+					}
+				}
+			}
+		}
+		if(empty($out['acction'])) unset($out['acction']);
+		return $out;
+	}
 	public function jsonSetParam($json){
 		$json2 = array();
 		foreach ($json as $key => $value) {

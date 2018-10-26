@@ -31,3 +31,6 @@ ajax_del:
 ajax_mod:
     path:     /ajaxmod/{pag}
     defaults: { _controller: AppBundle:AjaxMod:index }
+ajaxprocess:
+    path:     /ajaxprocess
+    defaults: { _controller: AppBundle:AjaxMod:mod }
