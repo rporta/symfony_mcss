@@ -117,7 +117,7 @@ class Obj extends ObjParam
 	}
 	public function orderKey($arg){
 		$out = array();
-		$nOld = 0;
+		$nOld = $p = 0;
 		foreach ($arg as $v) {
 			$n = explode(",", $v)[1];
 			if($n > 0){
@@ -125,9 +125,13 @@ class Obj extends ObjParam
 					$out[] = $v;
 				}elseif($n - 1 == $nOld + 1){
 					$tempV = explode(",", $v)[0];
-					$out[] = $tempV.",".($n - 1);
-				}else{
-					continue;
+					if($p == 0){
+						$out[] = $tempV.",".($n - 1);
+						$out[] = $tempV.",".($n);
+						$p = 1;
+					}else{
+						$out[] = $tempV.",".($n - 1);
+					}
 				}
 			}else{
 				$out[] = $v;
