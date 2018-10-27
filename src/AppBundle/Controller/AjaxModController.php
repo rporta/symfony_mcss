@@ -90,11 +90,16 @@ class AjaxModController extends Controller
 		
         //traigo objMod
         $objMod = $serviceObj->formSetParam($post);
-
         $objPag = $serviceObj->modObj($objMod, $objPag);
 
+        //se coloco la cadena 'nomevasaencontrarnunca' para que objPag no elimine los metodos
+        $codePhp = $serviceObj->createPhp($objPag, $filePag, 'nomevasaencontrarnunca');
+        
+        $file->truncateFile();
+        $file->editFile($codePhp);
+
+
         //pendiente crear el codigo de la pagina
-    	//se debe redireccionar a la pag edit, con la pagina q se habia seleccionado
     	return $this->redirectToRoute('edit_pag', array('pag' => $post['editar_pagina']));
 	}
 }
