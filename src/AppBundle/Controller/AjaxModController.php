@@ -93,7 +93,7 @@ class AjaxModController extends Controller
         $objPag = $serviceObj->modObj($objMod, $objPag);
 
         //se coloco la cadena 'nomevasaencontrarnunca' para que objPag no elimine los metodos
-        $codePhp = $serviceObj->createPhp($objPag, $filePag, 'nomevasaencontrarnunca');
+        $codePhp = $serviceObj->createPhp($objPag);
         
         $file->truncateFile();
         $file->editFile($codePhp);

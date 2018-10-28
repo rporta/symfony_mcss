@@ -327,7 +327,7 @@ class Obj extends ObjParam
 		$out['name'] = $data['name'];
 		$out['type'] = $data['type'];
 		$out['param'] = array();
-		$out['acction'] = array();
+		$out['action'] = array();
 		foreach ($data as $k => $v) {
 			if($k !== 'editar_pagina' && !empty($v)){			
 				if(strpos($k, '-') === FALSE){
@@ -338,12 +338,12 @@ class Obj extends ObjParam
 					if($compare[1] == 'action'){
 						$name = $v;
 					}else{
-						array_push($out['acction'], array('name' => $name, 'value' => $v));
+						array_push($out['action'], array('name' => $name, 'value' => $v));
 					}
 				}
 			}
 		}
-		if(empty($out['acction'])) unset($out['acction']);
+		if(empty($out['action'])) unset($out['action']);
 		return $out;
 	}
 	public function jsonSetParam($json){
@@ -593,7 +593,83 @@ class Obj extends ObjParam
 		}
 		return $name;
 	}
-	public function createPhp($listObjPag, $filePag, $nameObjDel){
+	public function createAction($data, &$temp, $search, $f = 0, $j = 0){
+		// if($f > 0){
+		// 	xbug("interacion : {$f}");
+		// 	xbug($temp);
+		// 	xbug("/////////////////////////////////////////////");
+		// }
+		$f++;
+		if(is_array($search)){
+			foreach ($data as $i => &$d) {
+				if($d[0] == $search[0]){
+					$temp[] = $d;
+					$search = $d[2];
+					unset($data[$i]);
+					return $this->createAction($data, $temp, $search, $f);
+				}
+			}
+		}
+		else{
+			if(!empty($data)){				
+				foreach ($data as $i => &$d) {
+					if($d[0] == $search){
+						if($d[0] == 'pag'){
+							$temp[] = $d;
+						}else{
+							array_unshift($temp, $d);
+						}
+						$search = $d[2];
+						unset($data[$i]);
+						return $this->createAction($data, $temp, $search, $f);
+					}
+					else{
+						$find = FALSE;					
+					}
+				}
+			}
+			else{
+				//salir
+				return;
+			}
+			if(!$find){
+				if(!empty($temp[$j][0])){
+					foreach ($data as $i => &$d) {
+						if($d[0] == $temp[$j][0]){
+							if($d[0] == 'pag'){
+								$temp[] = $d;
+							}else{
+								array_unshift($temp, $d);
+							}
+							$search = $d[2];
+							unset($data[$i]);
+							return $this->createAction($data, $temp, $search, $f);
+						}
+						else{
+							$find = FALSE;
+						}
+					}
+					if(!$find){
+						$j++;
+						return $this->createAction($data, $temp, $search, $f, $j);
+					}
+				}
+				else{					
+					foreach ($data as $i => &$d) {
+						if($d[0] == 'pag'){
+							$temp[] = $d;
+						}else{
+							array_unshift($temp, $d);
+						}
+						$search = $d[2];
+						unset($data[$i]);
+						return $this->createAction($data, $temp, $search, $f);
+					}				
+				}
+			}
+		}
+	}
+	public function createPhp($listObjPag){
 		$code = array();
 		$code[] = "<?php \n";
 		$code[] = "\n/* obj */\n\n";
@@ -628,36 +704,48 @@ class Obj extends ObjParam
 		}
 		// xbug(htmlentities($filePag)); //aca se debe realizar una explresion regular para sacar los metodos y agregarlos a la variable code, con eso deberia sacarse die para que el servicio retorne su valor, con el fin de que se ejecute el grabado 
 		$code[] = "\n/* actions */\n";
-		$temp_reg_exp = "([^\/\/\040](\\$)(.+)(->)([a-zA-Z]+)(\\()(\\$)(.+)(\\)))";
-		if(preg_match_all("/{$temp_reg_exp}/", $filePag, $out)){
-			foreach ($out[0] as $a) {
-				if(preg_match_all("/($nameObjDel)/", $a)){
 
-				}else{
-					$code[] = "{$a};";
+		foreach ($listObjPag as $v) {
+			if(!empty($v['action'])){
+				if($v['type'] == 'pag'){
+					$r = $v['action'];	
+				}
+				else{
+					$r = array_reverse($v['action']);					
+				}
+				foreach ($r as $vParam) {
+					$data[] =  array($v['name'], $vParam['name'], $vParam['value']); 
 				}
 			}
 		}
+		$temp = array();
+
+		$this->createAction($data, $temp, $data[0]);
+		foreach ($temp as $d) {
+			$code[] = "\${$d[0]}->{$d[1]}(\${$d[2]}); \n";
+		}
+			
+
 		$code[] = "\n\n/* edit */\n";
 		$code[] = 
 
 		/*codigo edicion*/
 		"\nif(!empty(\$editar)){\n".
-			"\tif(!empty(\$action) && \$action !== 'default'){\n".
-				"\t\t\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);\n".
-				"\t\t\$pag->js = \$editJs->getJs('default');\n".
-				"\t\t\tswitch (\$action) {\n".
-					"\t\t\t\tcase 'add':\n".
-						"\t\t\t\t\t\$pag->js = \$editJs->getJs('add'); \n".
-					"\t\t\t\tbreak;\n".
-					"\t\t\t\tcase 'edit':\n".
-						"\t\t\t\t\t\$pag->js = \$editJs->getJs('edit');\n".
-					"\t\t\t\tbreak;\n".
-					"\t\t\t\tcase 'del':\n".
-						"\t\t\t\t\t\$pag->js = \$editJs->getJs('del');\n".
-					"\t\t\t\tbreak;\n".
-				"\t\t}\n".
-			"\t}\n".
+		"\tif(!empty(\$action) && \$action !== 'default'){\n".
+		"\t\t\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);\n".
+		"\t\t\$pag->js = \$editJs->getJs('default');\n".
+		"\t\t\tswitch (\$action) {\n".
+		"\t\t\t\tcase 'add':\n".
+		"\t\t\t\t\t\$pag->js = \$editJs->getJs('add'); \n".
+		"\t\t\t\tbreak;\n".
+		"\t\t\t\tcase 'edit':\n".
+		"\t\t\t\t\t\$pag->js = \$editJs->getJs('edit');\n".
+		"\t\t\t\tbreak;\n".
+		"\t\t\t\tcase 'del':\n".
+		"\t\t\t\t\t\$pag->js = \$editJs->getJs('del');\n".
+		"\t\t\t\tbreak;\n".
+		"\t\t}\n".
+		"\t}\n".
 		"}\n";
 		/*codigo edicion*/
 

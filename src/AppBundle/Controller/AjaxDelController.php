@@ -51,7 +51,7 @@ class AjaxDelController extends Controller
 
         $objPag = $serviceObj->delObj($nameObjDel, $objPag);
 
-        $codePhp = $serviceObj->createPhp($objPag, $filePag, $nameObjDel);
+        $codePhp = $serviceObj->createPhp($objPag);
         
         $file->truncateFile();
         $file->editFile($codePhp);
