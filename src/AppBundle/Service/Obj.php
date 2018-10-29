@@ -434,6 +434,11 @@ class Obj extends ObjParam
 		return $listObjPag;
 	}
 
+	public function addObj($objAdd, $listObjPag){
+		array_push($listObjPag, $objAdd);
+		return $listObjPag;
+	}
+
 	public function delObj($name, $listObjPag){
 		$key = NULL;
 		foreach ($listObjPag as $k => $v) {

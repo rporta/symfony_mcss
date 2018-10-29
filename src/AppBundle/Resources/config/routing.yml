@@ -34,3 +34,6 @@ ajax_mod:
 ajaxprocess:
     path:     /ajaxprocess
     defaults: { _controller: AppBundle:AjaxMod:mod }
+ajax_add:
+    path:     /ajaxadd/{pag}
+    defaults: { _controller: AppBundle:AjaxAdd:index }

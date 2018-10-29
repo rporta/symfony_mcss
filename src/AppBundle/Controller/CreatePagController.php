@@ -29,7 +29,7 @@ class CreatePagController extends Controller
 	    	$dirbase = new dirbase($path);
 
 	    	$newpag = $post['nueva_pagina'].$extends;
-
+// quiza esto deba estar en un servicio, y el codigo deba estar implementado en un objeto tipo temp o no, quiza un servicio
 			$tempHtml = 
 "<?
 
