@@ -136,8 +136,8 @@ class editJs extends createClass
 						}						
 					}					
 				}";
-		$js['add'] = 
-		"
+			$js['add'] = 
+			"
 				$(document).click(function(e){
 					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
 					s = e;
@@ -153,14 +153,14 @@ class editJs extends createClass
 					}
 					else{
 
-						ObjHtmlElement = setObj(e.target);
 
+						ObjHtmlElement = setObj(e.target);
 						/*agrego alerta*/
 						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar dentro de este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
+							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea agregar un nuevo objeto dentro de este objeto : <\/p><br>'+element+'<\/div><div class=\"modal-footer \"><div class=\"center-align afbtn\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ preloaderFull(\"on\", pF);  $.ajax({ url: \"/ajaxadd/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(data) {setTimeout(function(){ preloaderFull(\"off\", pF); }, 500); $(\".modal-content\")[0].innerHTML += data[0]; eval(data[1]); $(\"#inputButton-ceab0\").remove(); $(\".afbtn\").prepend(\'<button id=\"modificar\" href=\"#\" class=\"btn btn-flat\">modificar<\/button>\');$(\"#modificar\").click( function(){ $(\"#\"+data[2]+\"\").submit(); } );/*--------------aca va funcion click para enviar formulario---------------*/console.log($(\"#inputButton-ceab0\")); console.log($(\"#\"+data[2]+\"\"));} });});<\/script><\/div>'
 						);	
 					}
-					}); 
+					});
 
 					";
 			$js['edit'] = 
