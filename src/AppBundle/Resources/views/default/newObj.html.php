@@ -1,8 +1,9 @@
 <?
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
-$h['text'] = "Nueva Pagina ()";
-$h = new AppBundle\Utility\Obj\h($h);
+
+$tempElement = new AppBundle\Utility\Obj\tempElementNew($tempElement);
+
 if(!empty($editar)){
 	if(!empty($action) && $action !== 'default'){
 		$editJs = new AppBundle\Utility\Obj\editJs($editar);
@@ -20,5 +21,5 @@ if(!empty($editar)){
 		}
 	}
 }
-$pag->addObj($h);
+$pag->addObj($tempElement);
 $pag->render();

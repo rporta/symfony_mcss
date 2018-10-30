@@ -88,7 +88,9 @@ class tempElementList extends createClass
 		$optionSelect['name'] = 'type';
 		$optionSelect['text'] = 'type';
 		foreach ($objDir as $obj) {
-			$temp[] = array('text' => $obj['type'], 'value' => $obj['type']);
+			if(!preg_match_all("/(tempElementList|tempElementNew|tempElement|editJs)/", $obj['type'])){
+				$temp[] = array('text' => $obj['type'], 'value' => $obj['type']);
+			}
 		}
 
 		$optionSelect['option'] = $temp;

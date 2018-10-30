@@ -50,9 +50,8 @@ class AjaxModController extends Controller
 		$objMod = $serviceObj->jsonSetParam($data['json']);
 
 		$nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
-		$obj = $serviceObj->getObj($nameObjMod, $objPag);
+		$obj = $serviceObj->getObj($nameObjMod, $objPag, 'name');
 		$objFull = $serviceObj->getObjType($obj, $objDir);
-
 
 		$tempElement['obj'] = $obj;
 		$tempElement['objFull'] = $objFull;

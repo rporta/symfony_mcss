@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utility\dirbase\dirBase;
 use AppBundle\Utility\Obj\tempElementList;
-use AppBundle\Utility\Obj\tempElement;
+use AppBundle\Utility\Obj\tempElementNew;
 
 class AjaxAddController extends Controller
 {
@@ -74,7 +74,7 @@ class AjaxAddController extends Controller
             $pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
 
         }
-        //traigo obj mod    
+        //traigo obj data add    
         $data = $request->request->all();
 
         $serviceObj = $this->container->get('obj');
@@ -85,28 +85,22 @@ class AjaxAddController extends Controller
         $filePag = $file->viewFile();
         unset($dirbase);
 
-        //traigo obj pag
-        $objPag = $serviceObj->scanObjFile($filePag);
-
         $dirbase2 = new dirbase($pathListObj);
 
         //traigo obj disponibles
         $objDir = $serviceObj->scanObjDir($dirbase2);
         unset($dirbase2);
-     
-        $objMod = $serviceObj->jsonSetParam($data['json']);
+        
+        //traigo obj pag
+        $objPag = $serviceObj->scanObjFile($filePag);
 
-        $nameObjMod = $serviceObj->getName($objMod, $objPag, $objDir);
-        $obj = $serviceObj->getObj($nameObjMod, $objPag);
-        $objFull = $serviceObj->getObjType($obj, $objDir);
+        $obj = $serviceObj->getObj($data['type'], $objDir, 'type');
 
-
-        $tempElement['obj'] = $obj;
-        $tempElement['objFull'] = $objFull;
+        $tempElement['objFull'] = $obj;
         $tempElement['objPag'] = $objPag;
+        $tempElement['nameObjAdd'] = $data['nameObjAdd'];
         $tempElement['editar_pagina'] = $post['editar_pagina'];
-        $tempElement = new tempElement($tempElement);
-        return $this->json(array($tempElement->html, $tempElement->js[0], $tempElement->id));
+        return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));
             
     }
     public function addAction(Request $request){
@@ -116,7 +110,6 @@ class AjaxAddController extends Controller
             $relativePath = "\\src\\AppBundle\\Resources\\views\\default";
             $path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
             $pathListObj = str_replace("\\web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
-
         }
         else{
             #path plantillas html Linux
@@ -124,13 +117,11 @@ class AjaxAddController extends Controller
             $relativePath = "/src/AppBundle/Resources/views/default";
             $path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
             $pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
-
         }
-        //traigo obj add    
-        $data = $request->request->all();
+
+        $post = $request->request->all();
 
         $serviceObj = $this->container->get('obj');
-        $post['editar_pagina'] = $request->attributes->get('pag');
 
         $dirbase = new dirbase($path);
         $file = $dirbase->getObj($post['editar_pagina']);
@@ -138,23 +129,21 @@ class AjaxAddController extends Controller
         unset($dirbase);
         //traigo obj pag
         $objPag = $serviceObj->scanObjFile($filePag);
-        // xbug($objPag);
+        
+        //traigo objMod
+        $objAdd = $serviceObj->formSetParam($post);
 
-        $dirbase2 = new dirbase($pathListObj);
-        //traigo obj disponibles
-        $objDir = $serviceObj->scanObjDir($dirbase2);
-        unset($dirbase2);
-     
-        $objAdd = $serviceObj->jsonSetParam($data['json']);
+        $objPag = $serviceObj->addObj($post['nameObjAdd'], $objPag, $objAdd);
 
-        $objPag = $serviceObj->addObj($objAdd, $objPag);
+        // $objPag = $serviceObj->modObj($objMod, $objPag);
 
         $codePhp = $serviceObj->createPhp($objPag);
         
         $file->truncateFile();
         $file->editFile($codePhp);
-        
+
+
+        //pendiente crear el codigo de la pagina
         return $this->redirectToRoute('edit_pag', array('pag' => $post['editar_pagina']));
-    
     }
 }

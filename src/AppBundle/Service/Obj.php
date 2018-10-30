@@ -329,7 +329,7 @@ class Obj extends ObjParam
 		$out['param'] = array();
 		$out['action'] = array();
 		foreach ($data as $k => $v) {
-			if($k !== 'editar_pagina' && !empty($v)){			
+			if($k !== 'editar_pagina' && $k !== 'nameObjAdd' && !empty($v)){			
 				if(strpos($k, '-') === FALSE){
 					array_push($out['param'], array('name' => $k, 'value' => $v));
 				}
@@ -434,8 +434,13 @@ class Obj extends ObjParam
 		return $listObjPag;
 	}
 
-	public function addObj($objAdd, $listObjPag){
-		array_push($listObjPag, $objAdd);
+	public function addObj($nameObjAdd, $listObjPag, $addObj){
+		foreach ($listObjPag as $j => &$o) {
+			if($o['name'] == $nameObjAdd){
+				$o['action'][] = array('name' => 'addObj', 'value' => $addObj['name']);
+			}
+		}
+		$listObjPag[] = $addObj;
 		return $listObjPag;
 	}
 
@@ -476,19 +481,19 @@ class Obj extends ObjParam
 			return FALSE;
 		}
 	}
-	public function getObj($name, $listObjPag){
+	public function getObj($name, $listObjPag, $seach){
 		foreach ($listObjPag as $value) {
-			if($value['name'] == $name){
+			if($value[$seach] == $name){
 				return $value;
 			}
 		}
 	}
 	public function getObjType($obj, $listObjDir){
-		foreach ($listObjDir as $v) {
-			if($v['type'] == $obj['type']){
-				return $v;
-			}
-		}
+	       foreach ($listObjDir as $v) {
+	               if($v['type'] == $obj['type']){
+	                       return $v;
+	               }
+	       }
 	}
 	public function getName($listObjDel, $listObjPag, $listObjDir){
 		// xbug($listObjDel);
