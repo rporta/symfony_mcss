@@ -324,12 +324,12 @@ class Obj extends ObjParam
 	}
 	public function formSetParam($data){
 		$out = array();
-		$out['name'] = $data['name'];
+		$out['name'] = $data['nameVar'];
 		$out['type'] = $data['type'];
 		$out['param'] = array();
 		$out['action'] = array();
 		foreach ($data as $k => $v) {
-			if($k !== 'editar_pagina' && $k !== 'nameObjAdd' && !empty($v)){			
+			if($k !== 'editar_pagina' && $k !== 'nameObjAdd' && $k !== 'nameVar' && $k !== 'type' && !empty($v)){			
 				if(strpos($k, '-') === FALSE){
 					array_push($out['param'], array('name' => $k, 'value' => $v));
 				}
