@@ -37,14 +37,15 @@ class CreatePagController extends Controller
 
 \$pag['backgroundColor'] = 'grey,0';
 \$pag = new AppBundle\Utility\Obj\pag(\$pag);
-\$h['textAling'] = 'c';
-\$h['textColor'] = 'red,3';
-\$h['text'] = 'Nueva Pagina ({$post['nueva_pagina']})';
-\$h = new AppBundle\\Utility\\Obj\\h(\$h);
+
+\$preloaderFull['layerBackgroundColor'] = 'b-w-t,0'; 
+\$preloaderFull['backgroundColor'] = array('purple,5','blue,3'); 
+\$preloaderFull['mode'] = '0'; 
+\$preloaderFull = new AppBundle\\Utility\\Obj\\preloaderFull(\$preloaderFull);
 
 /* actions */
 
-\$pag->addObj(\$h);
+\$pag->addObj(\$preloaderFull);
 
 /* edit */
 

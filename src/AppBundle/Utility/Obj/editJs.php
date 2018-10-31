@@ -156,10 +156,16 @@ class editJs extends createClass
 					}
 					else{
 						if(e.target.nodeName == 'HTML'){
-							ObjHtmlElement = {};
-							ObjHtmlElement.id = e.target.lastChild.id;
-							ObjHtmlElement.propery = e.target.lastChild.propery;
-							ObjHtmlElement.className = e.target.lastChild.className;
+
+							obj = [];
+							propery = {};
+							propery.id = e.target.lastChild.id;
+							propery.className = e.target.lastChild.className;
+
+							obj[0] = propery;
+
+							ObjHtmlElement = {\"json\" : obj};
+
 						}else{
 							ObjHtmlElement = setObj(e.target);
 						}
@@ -188,10 +194,16 @@ class editJs extends createClass
 					}
 					else{
 						if(e.target.nodeName == 'HTML'){
-							ObjHtmlElement = {};
-							ObjHtmlElement.id = e.target.lastChild.id;
-							ObjHtmlElement.propery = e.target.lastChild.propery;
-							ObjHtmlElement.className = e.target.lastChild.className;
+
+							obj = [];
+							propery = {};
+							propery.id = e.target.lastChild.id;
+							propery.className = e.target.lastChild.className;
+
+							obj[0] = propery;
+
+							ObjHtmlElement = {\"json\" : obj};
+
 						}else{
 							ObjHtmlElement = setObj(e.target);
 						}
@@ -220,10 +232,16 @@ class editJs extends createClass
 					}
 					else{
 						if(e.target.nodeName == 'HTML'){
-							ObjHtmlElement = {};
-							ObjHtmlElement.id = e.target.lastChild.id;
-							ObjHtmlElement.propery = e.target.lastChild.propery;
-							ObjHtmlElement.className = e.target.lastChild.className;
+
+							obj = [];
+							propery = {};
+							propery.id = e.target.lastChild.id;
+							propery.className = e.target.lastChild.className;
+
+							obj[0] = propery;
+
+							ObjHtmlElement = {\"json\" : obj};
+
 						}else{
 							ObjHtmlElement = setObj(e.target);
 						}

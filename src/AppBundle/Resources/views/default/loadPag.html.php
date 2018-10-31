@@ -15,6 +15,15 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 	$preloaderFull = new AppBundle\Utility\Obj\preloaderFull($preloaderFull);
 
 
+	$style = new AppBundle\Utility\Obj\style(); 
+	$style->style = 
+	"button{
+		display: block !important;
+		margin: 10px 0px !important;
+	}";
+	$pag->addObj($style);
+
+
 	## header
 	$header = new AppBundle\Utility\Obj\header();
 
@@ -25,7 +34,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		#div pane
 		$div_2['textAling'] = "r";
-		$div_2['style'] = "width: 100%; position: absolute; bottom: 40px; right: 40px;";
+		$div_2['style'] = "position: absolute; bottom: 40px; right: 40px;";
 		$div_2['name'] = "panel";
 		if(!empty($post)){
 			$div_2['js'] = 
@@ -48,19 +57,21 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		}	
 		$div_2 = new AppBundle\Utility\Obj\div($div_2);
 
+
+
+		$sideNavVisible['edge'] = 'r';
+		$sideNavVisible = new AppBundle\Utility\Obj\sideNav($sideNavVisible);
+			$button['class'] = "circle-button-edit";
 			$button['large'] = TRUE;
 			$button['mode'] = "button";
 			$button['floating'] = TRUE;
 			$button = new AppBundle\Utility\Obj\inputButton($button);
 
-				$icon['icon'] = 'mode_edit';
+				$icon['icon'] = 'visibility';
 				$icon = new AppBundle\Utility\Obj\icon($icon);
 
 			$button->addObj($icon);
-
-		$sideNav['edge'] = 'r';
-		$sideNav = new AppBundle\Utility\Obj\sideNav($sideNav);
-		$sideNav->addObj($button);
+		$sideNavVisible->addObj($button);
 
 			$a['text'] = 'Agregar objeto';
 			$a['dataTarget'] = $editPag;
@@ -75,7 +86,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$icon_a['icon'] = 'add';
 				$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
 			$a->addObj($icon_a);
-		$sideNav->addObj($a);
+		$sideNavVisible->addObj($a);
 
 			$a2->text = "Modificar objeto";
 			$a2->dataTarget = $editPag;
@@ -87,7 +98,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 
 
-		$sideNav->addObj($a2);
+		$sideNavVisible->addObj($a2);
 			$a3->text = "Borrar objeto";
 			$a3->dataTarget = $editPag;
 
@@ -99,7 +110,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 
 
-		$sideNav->addObj($a3);
+		$sideNavVisible->addObj($a3);
 
 			$a4['href'] = '/editpag';
 			$a4['text'] = 'Volver';
@@ -111,9 +122,131 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 			$a4->addObj($icon_a4);
 
-		$sideNav->addObj($a4);
+		$sideNavVisible->addObj($a4);
+
+		unset($a, $a2, $a3, $a4,$icon_a, $icon_a2, $icon_a3, $icon_a4, $button, $icon);
+			$button['class'] = "circle-button-edit";
+			$button['large'] = TRUE;
+			$button['mode'] = "button";
+			$button['floating'] = TRUE;
+			$button = new AppBundle\Utility\Obj\inputButton($button);
+
+				$icon['icon'] = 'visibility_off';
+				$icon = new AppBundle\Utility\Obj\icon($icon);
+
+			$button->addObj($icon);		
+		$sideNavNoVisible['edge'] = 'r';
+		$sideNavNoVisible = new AppBundle\Utility\Obj\sideNav($sideNavNoVisible);
+		$sideNavNoVisible->addObj($button);
+
+			$a['text'] = 'Agregar objeto oculto';
+			$a['dataTarget'] = $editPag;
+			// $a['href'] = '/listobj/'.$editPag;
+			$a['textAling'] = 'l';
+			$a = new AppBundle\Utility\Obj\a($a);
+			$a2 = clone $a;
+			$a3 = clone $a;
+			
+				$icon_a['size'] = 1;
+				$icon_a['float'] = 'l';
+				$icon_a['icon'] = 'add';
+				$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
+			$a->addObj($icon_a);
+		$sideNavNoVisible->addObj($a);
+
+			$a2->text = "Modificar objeto oculto";
+			$a2->dataTarget = $editPag;
+
+				$icon_a2 = clone $icon_a;
+				$icon_a2->icon = "edit";
+
+			$a2->addObj($icon_a2);
+
+
+
+		$sideNavNoVisible->addObj($a2);
+			$a3->text = "Borrar objeto oculto";
+			$a3->dataTarget = $editPag;
+
+				$icon_a3 = clone $icon_a;
+				$icon_a3->icon = "remove";
+
+			$a3->addObj($icon_a3);
+
+
+
+		$sideNavNoVisible->addObj($a3);
+
+
+			$a4['href'] = '/editpag';
+			$a4['text'] = 'Volver';
+			$a4['textAling'] = 'l';
+			$a4 = new AppBundle\Utility\Obj\a($a4);
+
+				$icon_a4 = clone $icon_a;
+				$icon_a4->icon = 'arrow_back';
+
+			$a4->addObj($icon_a4);
+
+		$sideNavNoVisible->addObj($a4);
+
+  		unset($a, $a2, $a3, $a4,$icon_a, $icon_a2, $icon_a3, $icon_a4, $button, $icon);
+			$button['class'] = "circle-button-edit";
+			$button['large'] = TRUE;
+			$button['mode'] = "button";
+			$button['floating'] = TRUE;
+			$button = new AppBundle\Utility\Obj\inputButton($button);
+
+				$icon['icon'] = 'mode_edit';
+				$icon = new AppBundle\Utility\Obj\icon($icon);
+
+			$button->addObj($icon);
+		$sideNavCms['edge'] = 'r';
+		$sideNavCms = new AppBundle\Utility\Obj\sideNav($sideNavCms);
+		$sideNavCms->addObj($button);
+
+			$a['text'] = 'Agregar pagina';
+			$a['dataTarget'] = $editPag;
+			// $a['href'] = '/listobj/'.$editPag;
+			$a['textAling'] = 'l';
+			$a = new AppBundle\Utility\Obj\a($a);
+			$a2 = clone $a;
+			$a3 = clone $a;
+			
+				$icon_a['size'] = 1;
+				$icon_a['float'] = 'l';
+				$icon_a['icon'] = 'add';
+				$icon_a = new AppBundle\Utility\Obj\icon($icon_a);
+			$a->addObj($icon_a);
+		$sideNavCms->addObj($a);
+
+			$a3->text = "Borrar pagina";
+			$a3->dataTarget = $editPag;
+
+				$icon_a3 = clone $icon_a;
+				$icon_a3->icon = "remove";
+
+			$a3->addObj($icon_a3);
+
+		$sideNavCms->addObj($a3);
+
+			$a4['href'] = '/editpag';
+			$a4['text'] = 'Volver';
+			$a4['textAling'] = 'l';
+			$a4 = new AppBundle\Utility\Obj\a($a4);
+
+				$icon_a4 = clone $icon_a;
+				$icon_a4->icon = 'arrow_back';
+
+			$a4->addObj($icon_a4);
+
+		$sideNavCms->addObj($a4);
+
+
 		
-		$div_2->addObj($sideNav);
+		$div_2->addObj($sideNavCms);
+		$div_2->addObj($sideNavNoVisible);
+		$div_2->addObj($sideNavVisible);
 	$header->addObj($div);
 	$header->addObj($div_2);
 	## main
@@ -150,15 +283,32 @@ if(!empty($post)){
 	"$('a').click(function(e){
 		action = e.target.firstChild.data;
 		pag = e.target.dataset.target;
-		if(action == 'Agregar objeto'){
-			loadlink2('/loadpag/{$editPag}/add');
-		}
-		else if(action == 'Modificar objeto'){
-			loadlink2('/loadpag/{$editPag}/edit');
-		}
-		else if(action == 'Borrar objeto'){
-			loadlink2('/loadpag/{$editPag}/del');
 
+		switch(action){
+			case 'Agregar objeto' : 
+				loadlink2('/loadpag/{$editPag}/add');
+			break;
+			case 'Modificar objeto' : 
+				loadlink2('/loadpag/{$editPag}/edit');
+			break;
+			case 'Borrar objeto' : 
+				loadlink2('/loadpag/{$editPag}/del');
+			break;
+			case 'Agregar objeto oculto' : 
+				loadlink2('/loadpag/{$editPag}/add');
+			break;
+			case 'Modificar objeto oculto' : 
+				loadlink2('/loadpag/{$editPag}/edit');
+			break;
+			case 'Borrar objeto oculto' : 
+				loadlink2('/loadpag/{$editPag}/del');
+			break;
+			case 'Agregar pagina' : 
+				loadlink2('/loadpag/createPag.html.php/default');
+			break;
+			case 'Borrar pagina' : 
+				loadlink2('/loadpag/deletePag.html.php/default');
+			break;
 		}
 	});";	
 }

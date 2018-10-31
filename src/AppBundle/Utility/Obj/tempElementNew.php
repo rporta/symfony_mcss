@@ -107,7 +107,7 @@ class tempElementNew extends createClass
 		$optionFields = array();
 		$optionFields['active'] = TRUE;
 		$optionFields['disabled'] = TRUE;
-		$optionFields['name'] = 'name';
+		$optionFields['name'] = 'nameVar';
 		$optionFields['text'] = 'name';
 		$optionFields['value'] = $newNameObjAdd;
 		$inputNameH = new inputFields($optionFields);		
@@ -122,7 +122,7 @@ class tempElementNew extends createClass
 		unset($optionFields);
 		$optionFields = array();
 		$optionFields['mode'] = '3';
-		$optionFields['name'] = 'name';
+		$optionFields['name'] = 'nameVar';
 		$optionFields['text'] = 'name';
 		$optionFields['value'] = $newNameObjAdd;
 		$inputName = new inputFields($optionFields);		
