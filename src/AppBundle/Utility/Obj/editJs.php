@@ -218,37 +218,26 @@ class editJs extends createClass
 			$js['del'] = 
 			"
 				$(document).click(function(e){
-					e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
-					s = e;
-					isNav = getParent(s.target);
-					if(isNav > 0){
-						subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
-						element = setHtmlSubElementNav(s.target, isNav, subElement);
-					}else{
-						element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
-					}
-					if( $(\"#alert-72197\").length){
-											
-					}
-					else{
-						if(e.target.nodeName == 'HTML'){
-
-							obj = [];
-							propery = {};
-							propery.id = e.target.lastChild.id;
-							propery.className = e.target.lastChild.className;
-
-							obj[0] = propery;
-
-							ObjHtmlElement = {\"json\" : obj};
-
+					if(e.target.nodeName !== 'HTML'){
+						e.target.className = e.target.className.replace(\" fifi teal accent-4 fifi\", \"\");
+						s = e;
+						isNav = getParent(s.target);
+						if(isNav > 0){
+							subElement = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
+							element = setHtmlSubElementNav(s.target, isNav, subElement);
 						}else{
-							ObjHtmlElement = setObj(e.target);
+							element = s.target.outerHTML.replace(\" fifi teal accent-4 fifi\", \"\");
 						}
-						/*agrego alerta*/
-						$('body').append(
-							'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
-						);	
+						if( $(\"#alert-72197\").length){
+												
+						}
+						else{
+							ObjHtmlElement = setObj(e.target);
+							/*agrego alerta*/
+							$('body').append(
+								'<div id=\"alert-72197\" style=\"overflow-y: hidden;\" class=\" white modal modal-fixed-footer\"><div class=\"modal-content center-align \"><p id=\"p-b41dd\" class=\"black-text transparent center-align\">Desea eliminar este objeto : '+element+'<\/p><\/div><div class=\"modal-footer \"><div class=\"center-align\"><button id=\"inputButton-ceab0\" href=\"#\" class=\"btn btn-flat\">aceptar<\/button>    <button id=\"inputButton-ceab1\" href=\"#\" class=\"btn btn-flat modal-action modal-close\">cancelar<\/button></div><\/div><script type=\"text/javascript\">$(\"#alert-72197\").modal({complete: function(e) {  $(\"#alert-72197\").remove(); }}); $(\"#alert-72197\").modal(\"open\");  $(\"#inputButton-ceab0\").click(function(){ $.ajax({ url: \"/ajaxdel/{$editar}\", data: ObjHtmlElement, dataType:\"JSON\", type: \"POST\", success: function(result){ $(\"#form-send\").submit(); } });});<\/script><\/div>'
+							);	
+						}
 					}
 					}); 
 
