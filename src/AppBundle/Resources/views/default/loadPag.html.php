@@ -17,7 +17,15 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 	$style = new AppBundle\Utility\Obj\style(); 
 	$style->style = 
-	"button{
+	"
+	.side-nav li > a:hover {
+	    border-left-color: #82b1ff !important;
+	    border-left-width: 4px !important;
+	    border-left-style: solid !important;
+	    padding-left: 28px !important;
+	    background-color: #82b1ff4d !important;
+	}	
+	button{
 		display: block !important;
 		margin: 10px 0px !important;
 	}";
@@ -57,10 +65,11 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		}	
 		$div_2 = new AppBundle\Utility\Obj\div($div_2);
 
-
-
+		$sideNavVisible['textColor'] = 'b-w-t,1';
+		$sideNavVisible['backgroundColor'] = 'blue-grey,9';
 		$sideNavVisible['edge'] = 'r';
 		$sideNavVisible = new AppBundle\Utility\Obj\sideNav($sideNavVisible);
+			$button['backgroundColor'] = 'light-blue,5';
 			$button['class'] = "circle-button-edit";
 			$button['large'] = TRUE;
 			$button['mode'] = "button";
@@ -73,6 +82,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$button->addObj($icon);
 		$sideNavVisible->addObj($button);
 
+			$a['textColor'] = 'b-w-t,1';
 			$a['text'] = 'Agregar objeto';
 			$a['dataTarget'] = $editPag;
 			// $a['href'] = '/listobj/'.$editPag;
@@ -80,7 +90,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$a = new AppBundle\Utility\Obj\a($a);
 			$a2 = clone $a;
 			$a3 = clone $a;
-			
+				$icon_a['textColor'] = 'light-blue,2';
 				$icon_a['size'] = 1;
 				$icon_a['float'] = 'l';
 				$icon_a['icon'] = 'add';
@@ -112,6 +122,8 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$sideNavVisible->addObj($a3);
 
+			$a4['textColor'] = 'b-w-t,1';
+			$a4['backgroundColor'] = 'blue-grey,9';	
 			$a4['href'] = '/editpag';
 			$a4['text'] = 'Volver';
 			$a4['textAling'] = 'l';
@@ -125,6 +137,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNavVisible->addObj($a4);
 
 		unset($a, $a2, $a3, $a4,$icon_a, $icon_a2, $icon_a3, $icon_a4, $button, $icon);
+			$button['backgroundColor'] = 'light-blue,6';
 			$button['class'] = "circle-button-edit";
 			$button['large'] = TRUE;
 			$button['mode'] = "button";
@@ -134,11 +147,13 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$icon['icon'] = 'visibility_off';
 				$icon = new AppBundle\Utility\Obj\icon($icon);
 
-			$button->addObj($icon);		
+			$button->addObj($icon);
+
+		$sideNavNoVisible['backgroundColor'] = 'blue-grey,9';		
 		$sideNavNoVisible['edge'] = 'r';
 		$sideNavNoVisible = new AppBundle\Utility\Obj\sideNav($sideNavNoVisible);
 		$sideNavNoVisible->addObj($button);
-
+			$a['textColor'] = 'b-w-t,1';
 			$a['text'] = 'Agregar objeto oculto';
 			$a['dataTarget'] = $editPag;
 			// $a['href'] = '/listobj/'.$editPag;
@@ -147,6 +162,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$a2 = clone $a;
 			$a3 = clone $a;
 			
+				$icon_a['textColor'] = 'light-blue,2';
 				$icon_a['size'] = 1;
 				$icon_a['float'] = 'l';
 				$icon_a['icon'] = 'add';
@@ -177,7 +193,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$sideNavNoVisible->addObj($a3);
 
-
+			$a4['textColor'] = 'b-w-t,1';
 			$a4['href'] = '/editpag';
 			$a4['text'] = 'Volver';
 			$a4['textAling'] = 'l';
@@ -191,6 +207,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 		$sideNavNoVisible->addObj($a4);
 
   		unset($a, $a2, $a3, $a4,$icon_a, $icon_a2, $icon_a3, $icon_a4, $button, $icon);
+  			$button['backgroundColor'] = 'light-blue,7';
 			$button['class'] = "circle-button-edit";
 			$button['large'] = TRUE;
 			$button['mode'] = "button";
@@ -201,10 +218,12 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 				$icon = new AppBundle\Utility\Obj\icon($icon);
 
 			$button->addObj($icon);
+		$sideNavCms['backgroundColor'] = 'blue-grey,9';
 		$sideNavCms['edge'] = 'r';
 		$sideNavCms = new AppBundle\Utility\Obj\sideNav($sideNavCms);
 		$sideNavCms->addObj($button);
 
+			$a['textColor'] = 'b-w-t,1';
 			$a['text'] = 'Agregar pagina';
 			$a['dataTarget'] = $editPag;
 			// $a['href'] = '/listobj/'.$editPag;
@@ -212,7 +231,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 			$a = new AppBundle\Utility\Obj\a($a);
 			$a2 = clone $a;
 			$a3 = clone $a;
-			
+				$icon_a['textColor'] = 'light-blue,2';
 				$icon_a['size'] = 1;
 				$icon_a['float'] = 'l';
 				$icon_a['icon'] = 'add';
@@ -230,6 +249,7 @@ $pag = new AppBundle\Utility\Obj\pag($pag);
 
 		$sideNavCms->addObj($a3);
 
+			$a4['textColor'] = 'b-w-t,1';
 			$a4['href'] = '/editpag';
 			$a4['text'] = 'Volver';
 			$a4['textAling'] = 'l';
