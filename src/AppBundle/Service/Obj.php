@@ -364,6 +364,7 @@ class Obj extends ObjParam
 			}
 			if($tmpType == 'media'){
 				$json2[$key]['type'] = explode("-", $value['id'])[0];
+				$text = empty($value['text']) ? NULL : $value['text'] ;
 				$json2[$key]['param'] = $this->classToParam($value['className'], $json2[$key]['type'], $text);
 				array_push($json2[$key]['param'], array('name' => 'src' ,'value' => $value['url']));
 			}
