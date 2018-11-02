@@ -299,7 +299,7 @@ class createClass
 				$out = "circular"; 
 				break;		
 			case '2':
-			case 'circularFlashing':
+			case 'circularflashing':
 				$out = "circularFlashing"; 
 				break;		
 		}
@@ -342,11 +342,11 @@ class createClass
 	protected function modeInputRange($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
-			case 'noUiSlider':
+			case 'nouislider':
 				$out = "noUiSlider"; 
 				break;
 			case '1':
-			case 'HTML5 Range':
+			case 'html5 range':
 				$out = "HTML5 Range"; 
 				break;
 		}
@@ -402,7 +402,7 @@ class createClass
 				$out = "img"; 
 				break;
 			case '1':
-			case 'MaterialBox':
+			case 'materialbox':
 				$out = "MaterialBox"; 
 				break;	
 			case '2':
@@ -415,11 +415,11 @@ class createClass
 	protected function modeChip($arg){
 		switch (strtolower((string)$arg)) {
 			case '0':
-			case 'Contactos':
+			case 'contactos':
 				$out = "Contactos"; 
 				break;
 			case '1':
-			case 'Etiquetas':
+			case 'etiquetas':
 				$out = "Etiquetas"; 
 				break;		
 		}
