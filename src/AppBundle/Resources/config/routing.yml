@@ -40,6 +40,30 @@ ajax_add:
 ajax_add2:
     path:     /ajaxadd2/{pag}
     defaults: { _controller: AppBundle:AjaxAdd:index2 }
-ajaxprocessadd:
+ajax_process_add:
     path:     /ajaxprocessadd
     defaults: { _controller: AppBundle:AjaxAdd:add }
+hidden_ajax_add:
+    path:     /hiddenajaxadd/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxAdd:index }
+hidden_ajax_add2:
+    path:     /hiddenajaxadd/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxAdd:index2 }
+hidden_ajax_process_add:
+    path:     /hiddenajaxprocessadd/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxAdd:add }
+hidden_ajax_mod:
+    path:     /hiddenajaxmod/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxMod:index }
+hidden_ajax_mod2:
+    path:     /hiddenajaxmod/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxMod:index2 }
+hidden_ajax_process_mod:
+    path:     /hiddenajaxprocessmod/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxMod:mod }
+hidden_ajax_del:
+    path:     /hiddenajaxdel/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxDel:index }
+hidden_ajax_process_del:
+    path:     /hiddenajaxprocessdel/{pag}
+    defaults: { _controller: AppBundle:HiddenAjaxDel:del }
