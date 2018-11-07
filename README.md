@@ -1,5 +1,4 @@
-# symfony_mcss
-Mcss orientado a objetos en php dentro de symfony
+Actualmente este proyecto es un generador de plantillas
 
 Base symfony 3.4
 
