@@ -2,7 +2,7 @@
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
 
-$tempElement = new AppBundle\Utility\Obj\tempElementNew($tempElement);
+$tempElement = new AppBundle\Utility\Obj\tempElement($tempElement);
 
 if(!empty($editar)){
 	if(!empty($action) && $action !== 'default'){

@@ -424,7 +424,25 @@ class createClass
 				break;		
 		}
 		return is_null($arg) ? NULL :$out;
-	}	
+	}
+	protected function modeTempElemet($arg){
+		switch (strtolower($arg)) {
+			case '0':
+			case 'listobj':
+				$out = "listobj"; 
+				break;
+			case '1':
+			case 'newobj':
+				$out = "newobj"; 
+				break;
+			case '2':
+			case 'modobj':
+				$out = "modobj"; 
+				break;
+
+		}
+		return is_null($arg) ? NULL :$out;
+	}
 	protected function sizeTitle($arg = NULL){
 		return is_null($arg) ? NULL : ($arg <= 6 && $arg >= 1 ? $arg : "1");
 	}

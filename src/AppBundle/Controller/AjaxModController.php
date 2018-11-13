@@ -54,6 +54,8 @@ class AjaxModController extends Controller
 		$objFull = $serviceObj->getObjType($obj, $objDir);
 
 		$tempElement['obj'] = $obj;
+		$tempElement['mode'] = "modobj";
+		$tempElement['action'] = "/ajaxprocess";
 		$tempElement['objFull'] = $objFull;
 		$tempElement['objPag'] = $objPag;
 		$tempElement['editar_pagina'] = $post['editar_pagina'];
@@ -93,7 +95,7 @@ class AjaxModController extends Controller
 
         //se coloco la cadena 'nomevasaencontrarnunca' para que objPag no elimine los metodos
         $codePhp = $serviceObj->createPhp($objPag);
-        
+
         $file->truncateFile();
         $file->editFile($codePhp);
 

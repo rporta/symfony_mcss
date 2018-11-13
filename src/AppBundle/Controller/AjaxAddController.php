@@ -5,8 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utility\dirbase\dirBase;
-use AppBundle\Utility\Obj\tempElementList;
-use AppBundle\Utility\Obj\tempElementNew;
+use AppBundle\Utility\Obj\tempElement;
 
 class AjaxAddController extends Controller
 {
@@ -49,10 +48,12 @@ class AjaxAddController extends Controller
 
         $nameObjAdd = $serviceObj->getName($objAdd, $objPag, $objDir);
 
+        $tempElement['mode'] = "listobj";
+        $tempElement['action'] = "/ajaxadd2/{$post['editar_pagina']}";
         $tempElement['nameObjAdd'] = $nameObjAdd;
         $tempElement['objDir'] = $objDir;
         $tempElement['editar_pagina'] = $post['editar_pagina'];
-        $tempElement = new tempElementList($tempElement);
+        $tempElement = new tempElement($tempElement);
 
         return $this->json(array($tempElement->html, $tempElement->js[0], $tempElement->id));
     }
@@ -96,6 +97,8 @@ class AjaxAddController extends Controller
 
         $obj = $serviceObj->getObj($data['type'], $objDir, 'type');
 
+        $tempElement['mode'] = "newobj";
+        $tempElement['action'] = "/ajaxprocessadd";
         $tempElement['objFull'] = $obj;
         $tempElement['objPag'] = $objPag;
         $tempElement['nameObjAdd'] = $data['nameObjAdd'];
