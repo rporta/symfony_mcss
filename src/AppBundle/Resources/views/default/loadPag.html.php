@@ -2,7 +2,6 @@
 if(!empty($post)){
 	$editPag = $post['editar_pagina'];
 	$pathLoadPag = "/loadpag/{$editPag}/default";
-	$pathLoadPag = "/loadpag/{$editPag}/default";
 }
 
 
@@ -295,6 +294,15 @@ if(!empty($editar)){
 			case 'del':
 			$pag->js = $editJs->getJs('del');				
 			break;
+			case 'hiddenadd':
+			$pag->js = $editJs->getJs('hiddenadd'); 
+			break;
+			case 'hiddenedit':
+			$pag->js = $editJs->getJs('hiddenedit');				
+			break;
+			case 'hiddendel':
+			$pag->js = $editJs->getJs('hiddendel');				
+			break;
 		}
 	}
 }
@@ -315,13 +323,13 @@ if(!empty($post)){
 				loadlink2('/loadpag/{$editPag}/del');
 			break;
 			case 'Agregar objeto oculto' : 
-				loadlink2('/loadpag/{$editPag}/add');
+				loadlink2('/loadpag/{$editPag}/hiddenadd');
 			break;
 			case 'Modificar objeto oculto' : 
-				loadlink2('/loadpag/{$editPag}/edit');
+				loadlink2('/loadpag/{$editPag}/hiddenedit');
 			break;
 			case 'Borrar objeto oculto' : 
-				loadlink2('/loadpag/{$editPag}/del');
+				loadlink2('/loadpag/{$editPag}/hiddendel');
 			break;
 			case 'Agregar pagina' : 
 				loadlink2('/loadpag/createPag.html.php/default');

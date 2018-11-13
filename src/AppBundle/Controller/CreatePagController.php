@@ -63,6 +63,15 @@ if(!empty(\$editar)){
 			case 'del':
 			\$pag->js = \$editJs->getJs('del');				
 			break;
+			case 'hiddenadd':
+			\$pag->js = \$editJs->getJs('hiddenadd'); 
+			break;
+			case 'hiddenedit':
+			\$pag->js = \$editJs->getJs('hiddenedit');				
+			break;
+			case 'hiddendel':
+			\$pag->js = \$editJs->getJs('hiddendel');				
+			break;			
 		}
 	}
 }

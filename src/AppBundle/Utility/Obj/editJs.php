@@ -242,6 +242,9 @@ class editJs extends createClass
 					}); 
 
 					";
+			$js['hiddenadd'] = NULL;
+			$js['hiddenedit'] = NULL;
+			$js['hiddendel'] = NULL;
 		switch (strtolower((string)$arg)) {
 			case "0":
 			case "default":
@@ -258,6 +261,18 @@ class editJs extends createClass
 			case "3":
 			case "del":
 				$out = $js['del'];
+				break;
+			case "4":
+			case "hiddenadd":
+				$out = $js['hiddenadd'];
+				break;
+			case "5":
+			case "hiddenedit":
+				$out = $js['hiddenedit'];
+				break;
+			case "6":
+			case "hiddendel":
+				$out = $js['hiddendel'];
 				break;
 		}
 		return is_null($arg) ? NULL : $out;
