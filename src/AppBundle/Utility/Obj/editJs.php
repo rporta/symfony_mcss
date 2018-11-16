@@ -106,8 +106,8 @@ class editJs extends createClass
 							}
 							else{
 								propery.id = e.id;
-								propery.text = e.firstChild.data;
-								propery.datasetActivate = e.dataset.activates;
+								propery.text = e.firstChild == null ? '' : e.firstChild.data;
+								propery.datasetActivate = e.dataset == null ? '' : e.dataset.activates;
 								/*propery.nodeName = e.nodeName;*/
 								propery.className = e.className;
 								obj[n] = propery;
@@ -128,8 +128,8 @@ class editJs extends createClass
 							else{							
 								propery = {}
 								propery.id = e.id;
-								propery.text = e.firstChild.data;
-								propery.datasetActivate = e.dataset.activates;
+								propery.text = e.firstChild == null ? '' : e.firstChild.data;
+								propery.datasetActivate = e.dataset == null ? '' : e.dataset.activates;
 								/*propery.nodeName = e.nodeName;*/
 								propery.className = e.className;
 								obj[n] = propery;
