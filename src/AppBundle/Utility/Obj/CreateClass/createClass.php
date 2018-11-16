@@ -426,6 +426,7 @@ class createClass
 		return is_null($arg) ? NULL :$out;
 	}
 	protected function modeTempElemet($arg){
+
 		switch (strtolower($arg)) {
 			case '0':
 			case 'listobj':
@@ -438,6 +439,10 @@ class createClass
 			case '2':
 			case 'modobj':
 				$out = "modobj"; 
+				break;
+			case '3':
+			case 'listobjhidden':
+				$out = "listobjhidden"; 
 				break;
 
 		}
