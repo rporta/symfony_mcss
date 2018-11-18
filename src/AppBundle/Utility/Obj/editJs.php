@@ -112,7 +112,12 @@ class editJs extends createClass
 								propery.className = e.className;
 								obj[n] = propery;
 								n++;
-								return setObj(e.parentNode, n, obj);	
+								if(e.nodeName == 'BODY'){
+									obj.reverse();
+									return {\"json\" : obj};
+								}else{
+									return setObj(e.parentNode, n, obj);	
+								}
 							}						
 						}
 					}

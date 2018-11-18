@@ -47,9 +47,11 @@ class media extends createClass
 			$src = $this->srcMedia($this->src);
 			$alt = $this->altMedia($this->alt);
 
-			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{ID}");
-			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$id}");
-			$tempHtml = "<img id='{ID}' class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT}>";
+			$center = is_null($this->center) ? NULL : "style='display: block;margin: 0% auto;'";
+
+			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CENTER}", "{ID}");
+			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$center}",  "{$id}");
+			$tempHtml = "<img id='{ID}' class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT} {CENTER}>";
 			$tempHtml = str_replace($search, $replace, $tempHtml);
 			
 			$this->html = $tempHtml;

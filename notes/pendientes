@@ -1,5 +1,6 @@
-se debe mejorar la interfaz grafica, para modificar, borrar y eliminar.
+se debe tirar en un metodo de un servicio la creacion del codigo template de la nueva pagina, es decir sacarlo del controlador y meterlo en servicios
 
-se debe crear los controladores para trabajar con objetos ocultos modifica, borrar y eliminar
+se debe crear una plantilla que muestre la lista de objetos ocultos ( esto quiere decir objetos que se crearon que no estan ligados por ningun objeto de la pagina), de la pagina que se desea modificar , o borrar.
 
-se deben crear las vistas para los nuevos objetos ocultos
+al intentar borrar o modificar este debe disparar a la pagina que muestre el objeto oculto, y luego se debe borrar
+

@@ -215,7 +215,7 @@ class tempElement extends createClass
 					$optionSelect['option'] = $temp;
 					$inputS[] = new inputSelect($optionSelect);
 				}
-				elseif (preg_match_all("/(text|js|src|alt|icon|class|href|dataActive|dataTarget)/", $v['name']) ) {
+				elseif (preg_match_all("/(text|js|src|alt|icon|class|href|dataActive|dataTarget|repeat)/", $v['name']) ) {
 					if($v['name'] == 'js'){
 						$optionFields = array();
 						$optionFields['name'] = $v['name'];
@@ -438,19 +438,28 @@ class tempElement extends createClass
 					$temp = array();
 					foreach ($v['value'] as $o) {
 						$insert = FALSE;
-						foreach ($obj['param'] as $op) {
-							if($op['name'] == $v['name'] && $op['value'] == $o){
-								if(preg_match_all("/(color)/" ,strtolower($v['name']))){
-									$temp[] = array('active' => TRUE, 'text' => $o, 'value' => $o, 'backgroundColors' => $o);
+						if(!empty($obj['param'])){							
+							foreach ($obj['param'] as $op) {
+								if($op['name'] == $v['name'] && $op['value'] == $o){
+									if(preg_match_all("/(color)/" ,strtolower($v['name']))){
+										$temp[] = array('active' => TRUE, 'text' => $o, 'value' => $o, 'backgroundColors' => $o);
+									}else{
+										$temp[] = array('active' => TRUE, 'text' => $o, 'value' => $o);
+									}
+									continue 2;
 								}else{
-									$temp[] = array('active' => TRUE, 'text' => $o, 'value' => $o);
+									$insert = TRUE;
 								}
-								continue 2;
-							}else{
-								$insert = TRUE;
 							}
 						}
+
 						if($insert) {
+							if(preg_match_all("/(color)/" ,strtolower($v['name']))){
+								$temp[] = array('text' => $o, 'value' => $o, 'backgroundColors' => $o);
+							}else{
+								$temp[] = array('text' => $o, 'value' => $o);
+							}
+						}else{
 							if(preg_match_all("/(color)/" ,strtolower($v['name']))){
 								$temp[] = array('text' => $o, 'value' => $o, 'backgroundColors' => $o);
 							}else{
@@ -459,16 +468,19 @@ class tempElement extends createClass
 						}
 					}
 					$optionSelect['option'] = $temp;
+
 					$inputS[] = new inputSelect($optionSelect);
 				}
-				elseif (preg_match_all("/(text|js|src|alt|icon|class|href|dataActive|dataTarget)/", $v['name']) ) {
+				elseif (preg_match_all("/(text|js|src|alt|icon|class|href|dataActive|dataTarget|repeat)/", $v['name']) ) {
 					if($v['name'] == 'js'){
 						$optionFields = array();
 						$optionFields['name'] = $v['name'];
 						$optionFields['text'] = $v['name'];
-						foreach ($obj['param'] as $op) {
-							if($op['name'] == $v['name']){
-								$optionFields['value'] = $op['value'];
+						if(!empty($obj['param'])){							
+							foreach ($obj['param'] as $op) {
+								if($op['name'] == $v['name']){
+									$optionFields['value'] = $op['value'];
+								}
 							}
 						}
 						$inputT[] = new inputTextarea($optionFields);
@@ -478,9 +490,11 @@ class tempElement extends createClass
 						$optionFields['active'] = TRUE;
 						$optionFields['name'] = $v['name'];
 						$optionFields['text'] = $v['name'];
-						foreach ($obj['param'] as $op) {
-							if($op['name'] == $v['name']){
-								$optionFields['value'] = $op['value'];
+						if(!empty($obj['param'])){
+							foreach ($obj['param'] as $op) {
+								if($op['name'] == $v['name']){
+									$optionFields['value'] = $op['value'];
+								}
 							}
 						}
 						$inputF[] = new inputFields($optionFields);
@@ -492,10 +506,12 @@ class tempElement extends createClass
 					$optionCheckboxes['name'] = $v['name'];
 					$temp = array();
 					$insert = TRUE;
-					foreach ($obj['param'] as $op) {
-						if($op['name'] == $v['name']){
-							$temp[] = array('active' => TRUE ,'text' => $v['name'], 'value' => '1');
-							$insert = FALSE;
+					if(!empty($obj['param'])){						
+						foreach ($obj['param'] as $op) {
+							if($op['name'] == $v['name']){
+								$temp[] = array('active' => TRUE ,'text' => $v['name'], 'value' => '1');
+								$insert = FALSE;
+							}
 						}
 					}
 					if($insert){ $temp[] = array('text' => $v['name'], 'value' => '1'); }
