@@ -540,10 +540,18 @@ class tempElement extends createClass
 			$aDel = clone $aAdd;
 			$aDel->text = 'borrar';
 			$aDel->backgroundColor = 'red,5';
+			$aDel->refreshId();
 			$aMod = clone $aAdd;
 			$aMod->text = 'modificar';
 			$aMod->backgroundColor = 'blue,5';
+			$aMod->refreshId();
 
+			$arrayJs[] = "$(\"#{$aAdd->id}\").click( function(){ $('select').material_select(); });";
+			$arrayJs[] = "$(\"#{$aDel->id}\").click( function(){ $('select').material_select(); });";
+			$arrayJs[] = "$(\"#{$aMod->id}\").click( function(){ $('select').material_select(); });";
+
+			$js = new js();
+			$js->js = ($arrayJs);
 			$table = new table();
 			$table->center = TRUE;
 			$table->sortable = TRUE;
@@ -582,25 +590,25 @@ class tempElement extends createClass
 			}
 			
 			$form->addObj($br);
-			$form->addObj($divider);
-			$form->addObj($title2);
-			$form->addObj($br);
-			$icon->icon = "add";
-			$aAdd->addObj($icon);
-			$icon->icon = "delete";
-			$aDel->addObj($icon);
-			$icon->icon = "edit";
-			$aMod->addObj($icon);
-			$col['i']->addObj($aAdd);
-			$col['c']->addObj($aMod);
-			$col['l']->addObj($aDel);
-			$row->addObj($col['i']);
-			$row->addObj($col['c']);
-			$row->addObj($col['l']);
-			$form->addObj($row);
-			$form->addObj($br);
 			if(!empty($obj['action'])){
 				if(is_array($obj['action'])){
+					$form->addObj($divider);
+					$form->addObj($title2);
+					$form->addObj($br);
+					$icon->icon = "add";
+					$aAdd->addObj($icon);
+					$icon->icon = "delete";
+					$aDel->addObj($icon);
+					$icon->icon = "edit";
+					$aMod->addObj($icon);
+					$col['i']->addObj($aAdd);
+					$col['c']->addObj($aMod);
+					$col['l']->addObj($aDel);
+					$row->addObj($col['i']);
+					$row->addObj($col['c']);
+					$row->addObj($col['l']);
+					$form->addObj($row);
+					$form->addObj($br);
 					$table->addHead('mover');
 					$table->addHead('Acciones');
 					$table->addHead('Objetos');
@@ -623,7 +631,7 @@ class tempElement extends createClass
 						}
 						// $optionSelect['disabled'] = TRUE;
 						$optionSelect['name'] = "{$k}-action";
-						$optionSelect['text'] = $aF['name'];
+						$optionSelect['text'] = '';
 						$optionSelect['option'] = $temp;
 						$inputSelectAction[$k] = new inputSelect($optionSelect);
 
@@ -637,7 +645,7 @@ class tempElement extends createClass
 						}
 						// $optionSelect['disabled'] = TRUE;
 						$optionSelect['name'] = "{$k}-objet";
-						$optionSelect['text'] = $aF['name'];
+						$optionSelect['text'] = '';
 						$optionSelect['option'] = $temp;
 						$inputSelectObjet[$k] = new inputSelect($optionSelect);
 
@@ -649,6 +657,7 @@ class tempElement extends createClass
 				}
 			}
 			$form->addObj($br);
+			$form->addObj($js);
 			$container->addObj($form);
 			$this->id = $form->id;
 			/* set property */
