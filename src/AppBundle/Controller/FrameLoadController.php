@@ -37,7 +37,43 @@ class FrameLoadController extends Controller
 			}
 			return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => $post['editar_pagina'], 'action' => $post['editar_accion'], 'selectFile' => $selectFile));
 		}else{
-        	return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => $post['editar_pagina'], 'action' => $post['editar_accion']));			
+
+			if($post['editar_accion'] == 'add' || $post['editar_accion'] == 'edit' || $post['editar_accion'] == 'del' || $post['editar_accion'] == 'default'){
+        		return $this->render('AppBundle:default:'.$post['editar_pagina'], array('editar' => $post['editar_pagina'], 'action' => $post['editar_accion']));			
+			}else{
+				switch ($post['editar_accion']) {
+					case 'hiddenadd':
+							xbug('hiddenadd');die();
+							$tempElement['mode'] = "newobj";
+							$tempElement['action'] = "/ajaxprocessadd";
+							$tempElement['objFull'] = $obj;
+							$tempElement['objPag'] = $objPag;
+							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
+							$tempElement['editar_pagina'] = $post['editar_pagina'];
+							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));						
+						break;
+					case 'hiddenedit':
+							xbug('hiddenedit');die();
+							$tempElement['mode'] = "newobj";
+							$tempElement['action'] = "/ajaxprocessadd";
+							$tempElement['objFull'] = $obj;
+							$tempElement['objPag'] = $objPag;
+							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
+							$tempElement['editar_pagina'] = $post['editar_pagina'];
+							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));							
+						break;
+					case 'hiddendel':
+							xbug('hiddendel');die();
+							$tempElement['mode'] = "newobj";
+							$tempElement['action'] = "/ajaxprocessadd";
+							$tempElement['objFull'] = $obj;
+							$tempElement['objPag'] = $objPag;
+							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
+							$tempElement['editar_pagina'] = $post['editar_pagina'];
+							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));							
+						break;
+				}
+			}
 		}
 
 

@@ -10,6 +10,6 @@ class HiddenAjaxAddController extends Controller
 {
     public function indexAction(Request $request)
     {
-    	
+    	return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));
     }	
 }

@@ -247,9 +247,9 @@ class editJs extends createClass
 					}); 
 
 					";
-			$js['hiddenadd'] = NULL;
-			$js['hiddenedit'] = NULL;
-			$js['hiddendel'] = NULL;
+			$js['hiddenadd'] = 'alert("hidden::add")';
+			$js['hiddenedit'] = 'alert("hidden::edit")';
+			$js['hiddendel'] = 'alert("hidden::del")';
 		switch (strtolower((string)$arg)) {
 			case "0":
 			case "default":
