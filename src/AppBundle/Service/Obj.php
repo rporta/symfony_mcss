@@ -150,13 +150,13 @@ class Obj extends ObjParam
 				$param[$i]['name'] = $value;
 				switch ($value) {
 					case 'textColor':
-					$param[$i]['value'] = $this->orderKey(array_keys($this->textColor()));
+					$param[$i]['value'] = null;$this->orderKey(array_keys($this->textColor()));
 					break;
 					case 'backgroundColor':
-					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
+					$param[$i]['value'] = null;$this->orderKey(array_keys($this->backgroundColor()));
 					break;
 					case 'mobileBackgroundColor':
-					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
+					$param[$i]['value'] = null;$this->orderKey(array_keys($this->backgroundColor()));
 					break;
 					case 'float':
 					$param[$i]['value'] = array_keys($this->float());
@@ -769,5 +769,14 @@ class Obj extends ObjParam
 		}
 		$code = implode("", $code);
 		return $code;
+	}
+	public function scanHiddenObj($listObjPag){
+		$list = array();
+		foreach ($listObjPag as $o) {
+			if(preg_match("/(alert|br|breadcrumbs|card|carousel|col|collapsible|collection|container|div|divider|dropdown|footer|form|header|js|main|modal|pag|preloader|preloaderFull|row|section|slider|style|table|tab)/", $o['type'])){
+				$list[] = $o;
+			}
+		}
+		return $list;
 	}
 }
