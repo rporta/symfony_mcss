@@ -56,7 +56,7 @@ hidden_ajax_mod:
     path:     /hiddenajaxmod/{pag}
     defaults: { _controller: AppBundle:HiddenAjaxMod:index }
 hidden_ajax_mod2:
-    path:     /hiddenajaxmod/{pag}
+    path:     /hiddenajaxmod2/{pag}
     defaults: { _controller: AppBundle:HiddenAjaxMod:index2 }
 hidden_ajax_process_mod:
     path:     /hiddenajaxprocessmod/{pag}
