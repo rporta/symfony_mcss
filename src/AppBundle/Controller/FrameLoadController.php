@@ -43,34 +43,13 @@ class FrameLoadController extends Controller
 			}else{
 				switch ($post['editar_accion']) {
 					case 'hiddenadd':
-							xbug('hiddenadd');die();
-							$tempElement['mode'] = "newobj";
-							$tempElement['action'] = "/ajaxprocessadd";
-							$tempElement['objFull'] = $obj;
-							$tempElement['objPag'] = $objPag;
-							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
-							$tempElement['editar_pagina'] = $post['editar_pagina'];
-							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));						
+							return $this->redirectToRoute('hidden_ajax_add', array('pag' => $post['editar_pagina']));					
 						break;
 					case 'hiddenedit':
-							xbug('hiddenedit');die();
-							$tempElement['mode'] = "newobj";
-							$tempElement['action'] = "/ajaxprocessadd";
-							$tempElement['objFull'] = $obj;
-							$tempElement['objPag'] = $objPag;
-							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
-							$tempElement['editar_pagina'] = $post['editar_pagina'];
-							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));							
+							return $this->redirectToRoute('hidden_ajax_mod', array('pag' => $post['editar_pagina']));							
 						break;
 					case 'hiddendel':
-							xbug('hiddendel');die();
-							$tempElement['mode'] = "newobj";
-							$tempElement['action'] = "/ajaxprocessadd";
-							$tempElement['objFull'] = $obj;
-							$tempElement['objPag'] = $objPag;
-							$tempElement['nameObjAdd'] = $data['nameObjAdd'];
-							$tempElement['editar_pagina'] = $post['editar_pagina'];
-							return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));							
+							return $this->redirectToRoute('hidden_ajax_del', array('pag' => $post['editar_pagina']));							
 						break;
 				}
 			}
