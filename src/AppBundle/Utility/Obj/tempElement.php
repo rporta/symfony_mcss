@@ -15,7 +15,9 @@ use AppBundle\Utility\Obj\form;
 use AppBundle\Utility\Obj\inputSelect;
 use AppBundle\Utility\Obj\inputTextarea;
 use AppBundle\Utility\Obj\inputFields;
+use AppBundle\Utility\Obj\style;
 use AppBundle\Utility\Obj\inputCheckboxes;
+use AppBundle\Utility\Obj\inputButton;
 use AppBundle\Utility\Obj\row;
 use AppBundle\Utility\Obj\col;
 use AppBundle\Utility\Obj\pre;
@@ -658,6 +660,76 @@ class tempElement extends createClass
 			}
 			$form->addObj($br);
 			$form->addObj($js);
+			$container->addObj($form);
+			$this->id = $form->id;
+			/* set property */
+			$this->getObj('js', $container->js);
+			$out = $container->html;
+			$this->html = $out;
+		}
+		elseif($mode == 'hiddenobjmod'){
+			/* obj */
+			$container = new container();
+
+
+			$footer = new div();
+			$footer->class = "modal-footer";
+			$div = new div();
+			$div->textAling = "c";
+
+			$imputA = new inputButton();
+			$imputA->class = "btn";
+			$imputA->flat = TRUE;
+			$imputA->text = "aceptar";
+
+			$imputC = clone $imputA;
+			$imputC->text = "cancelar";
+
+
+
+			$form['action'] = $action;
+			$form['method'] = "POST";
+			$form = new form($form);
+
+			$optionFields = array();
+			$optionFields['mode'] = '3';
+			$optionFields['name'] = 'editar_pagina';
+			$optionFields['text'] = 'editar_pagina';
+			$optionFields['value'] = $editarPagina;
+			$inputEditarPagina = new inputFields($optionFields);
+			$title['textAling'] = 'c';
+			$title['textColor'] = 'grey,7';
+			$title['size'] = '3';
+			$title['text'] = "Seleccione un objeto de la lista :";
+			$title = new h($title);
+
+			$optionSelect = $temp = $name = array();
+			$optionSelect['name'] = 'type';
+			$optionSelect['text'] = 'type';
+			foreach ($objPag as $obj) {
+				if(!preg_match_all("/(tempElement|editJs)/", $obj['type'])){
+					$temp[] = array('text' => $obj['type'], 'value' => $obj['type']);
+				}
+			}
+
+			$optionSelect['option'] = $temp;
+			$inputSelect = new inputSelect($optionSelect);
+
+
+			$br = new br();
+			/* action */
+
+			$form->addObj($title);
+			$form->addObj($br);
+			$form->addObj($inputSelect);
+			$form->addObj($inputEditarPagina);
+			$div->addObj($imputA);
+			$div->addObj($imputC);
+			$footer->addObj($div);
+			$form->addObj($br);
+			$form->addObj($footer);
+
+			$container->addObj($br);
 			$container->addObj($form);
 			$this->id = $form->id;
 			/* set property */

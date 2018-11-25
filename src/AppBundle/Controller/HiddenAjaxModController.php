@@ -10,6 +10,45 @@ class HiddenAjaxModController extends Controller
 {
     public function indexAction(Request $request)
     {
-    	
+		if(strpos($request->server->get('DOCUMENT_ROOT'), "/") === FALSE ){ 
+			#path plantillas html Windows
+			$relativePathListObj = "\\src\\AppBundle\\Utility\\Obj";
+			$relativePath = "\\src\\AppBundle\\Resources\\views\\default";
+			$path = str_replace("\\web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+			$pathListObj = str_replace("\\web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
+
+		}
+		else{
+			#path plantillas html Linux
+			$relativePathListObj = "/src/AppBundle/Utility/Obj";
+			$relativePath = "/src/AppBundle/Resources/views/default";
+			$path = str_replace("/web", $relativePath, $request->server->get('DOCUMENT_ROOT'));
+			$pathListObj = str_replace("/web", $relativePathListObj, $request->server->get('DOCUMENT_ROOT'));
+
+		}
+		$serviceObj = $this->container->get('obj');
+		$post['editar_pagina'] = $request->attributes->get('pag');
+
+		$dirbase = new dirbase($path);
+		$file = $dirbase->getObj($post['editar_pagina']);
+		$filePag = $file->viewFile();
+		unset($dirbase);
+		
+		//traigo obj pag
+		$objPag = $serviceObj->scanObjFile($filePag);
+
+		$dirbase2 = new dirbase($pathListObj);
+
+		//traigo obj disponibles
+		$objDir = $serviceObj->scanObjDir($dirbase2);
+		unset($dirbase2);
+
+		$objHiddenPag = $serviceObj->scanHiddenObj($objPag);
+		
+		$tempElement['mode'] = "hiddenobjmod";
+		$tempElement['action'] = "/hiddenajaxmod2/{$post['editar_pagina']}";
+		$tempElement['objPag'] = $objPag;
+		$tempElement['editar_pagina'] = $post['editar_pagina'];
+		return $this->render('AppBundle:default:newObj.html.php' ,array('tempElement' => $tempElement));    	
     }
 }

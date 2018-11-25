@@ -444,6 +444,10 @@ class createClass
 			case 'listobjhidden':
 				$out = "listobjhidden"; 
 				break;
+			case '4':
+			case 'hiddenobjmod':
+				$out = "hiddenobjmod"; 
+				break;
 
 		}
 		return is_null($arg) ? NULL :$out;
