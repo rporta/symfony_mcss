@@ -524,17 +524,16 @@ class tempElement extends createClass
 			$col = array();
 			$row = new row();
 			$col['i'] = new col();
-			$col['i']->s = "4";
-			$col['i']->m = "4";
-			$col['i']->l = "4";
-			$col['i']->xl = "4";
-			$col['i']->textAling = "c";
+			$col['i']->s = "6";
+			$col['i']->m = "6";
+			$col['i']->l = "6";
+			$col['i']->xl = "6";
+			$col['i']->textAling = "l";
 			$col['l'] = clone $col['i'];
-			$col['c'] = clone $col['i'];
+			$col['i']->textAling = "r";
 
 			$icon = new icon();
 			$icon->float = "r";
-
 			$aAdd = new a();
 			$aAdd->class = 'btn';
 			$aAdd->text = 'agregar';
@@ -543,14 +542,22 @@ class tempElement extends createClass
 			$aDel->text = 'borrar';
 			$aDel->backgroundColor = 'red,5';
 			$aDel->refreshId();
-			$aMod = clone $aAdd;
-			$aMod->text = 'modificar';
-			$aMod->backgroundColor = 'blue,5';
-			$aMod->refreshId();
 
-			$arrayJs[] = "$(\"#{$aAdd->id}\").click( function(){ $('select').material_select(); });";
+			$arrayJs[] = 
+			"$(\"#{$aAdd->id}\").click( function(){ 
+				x = $('tbody.ui-sortable');
+				arrayNameAction = x[0].lastChild.children[1].lastChild.children[0].children[3].name.split('-');
+				arrayNameValue = x[0].lastChild.children[2].lastChild.children[0].children[3].name.split('-');
+
+				arrayNameAction[0] = Number(arrayNameAction[0]) + 1; 
+				arrayNameValue[0] = Number(arrayNameValue[0]) + 1;  
+
+				x[0].lastChild.children[1].lastChild.children[0].children[3].name = arrayNameAction.join('-');
+				x[0].lastChild.children[2].lastChild.children[0].children[3].name = arrayNameAction.join('-');
+				$('tbody.ui-sortable')[0].innerHTML += x[0].lastChild.outerHTML;
+				$('select').material_select(); 
+			});";
 			$arrayJs[] = "$(\"#{$aDel->id}\").click( function(){ $('select').material_select(); });";
-			$arrayJs[] = "$(\"#{$aMod->id}\").click( function(){ $('select').material_select(); });";
 
 			$js = new js();
 			$js->js = ($arrayJs);
@@ -602,12 +609,9 @@ class tempElement extends createClass
 					$icon->icon = "delete";
 					$aDel->addObj($icon);
 					$icon->icon = "edit";
-					$aMod->addObj($icon);
 					$col['i']->addObj($aAdd);
-					$col['c']->addObj($aMod);
 					$col['l']->addObj($aDel);
 					$row->addObj($col['i']);
-					$row->addObj($col['c']);
 					$row->addObj($col['l']);
 					$form->addObj($row);
 					$form->addObj($br);
@@ -708,7 +712,7 @@ class tempElement extends createClass
 			$optionSelect['text'] = 'type';
 			foreach ($objPag as $obj) {
 				if(!preg_match_all("/(tempElement|editJs)/", $obj['type'])){
-					$temp[] = array('text' => $obj['type'], 'value' => $obj['type']);
+					$temp[] = array('text' => $obj['type']." | ".$obj['name'], 'value' => $obj['name']);
 				}
 			}
 
