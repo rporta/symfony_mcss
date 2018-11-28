@@ -137,7 +137,6 @@ class tempElement extends createClass
 
 			/* obj */
 
-
 			$container = new container();
 			$title['textAling'] = 'c';
 			$title['textColor'] = 'grey,7';
@@ -377,7 +376,7 @@ class tempElement extends createClass
 		}
 		elseif($mode == 'modobj'){
 			/* obj */
-
+			
 			$container = new div();
 			$title['textAling'] = 'c';
 			$title['textColor'] = 'grey,7';
@@ -545,7 +544,7 @@ class tempElement extends createClass
 
 			$arrayJs[] = 
 			"$(\"#{$aAdd->id}\").click( function(){ 
-				x = $('tbody.ui-sortable');
+				x = $('tbody.ui-sortable').clone();
 				arrayNameAction = x[0].lastChild.children[1].lastChild.children[0].children[3].name.split('-');
 				arrayNameValue = x[0].lastChild.children[2].lastChild.children[0].children[3].name.split('-');
 
@@ -554,10 +553,28 @@ class tempElement extends createClass
 
 				x[0].lastChild.children[1].lastChild.children[0].children[3].name = arrayNameAction.join('-');
 				x[0].lastChild.children[2].lastChild.children[0].children[3].name = arrayNameAction.join('-');
+				x[0].lastChild.children[3].lastChild.children[0].children[0].name = arrayNameAction.join('-');
+				
+				x[0].lastChild.children[3].lastChild.children[0].children[0].id =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[0].id) + 1;
+				x[0].lastChild.children[3].lastChild.children[0].children[1].innerText =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[1].innerText) + 1;
+
+				x[0].lastChild.children[3].lastChild.children[0].children[1].htmlFor =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[1].htmlFor) + 1;
 				$('tbody.ui-sortable')[0].innerHTML += x[0].lastChild.outerHTML;
+				x = 0;
 				$('select').material_select(); 
 			});";
-			$arrayJs[] = "$(\"#{$aDel->id}\").click( function(){ $('select').material_select(); });";
+			$arrayJs[] = "$(\"#{$aDel->id}\").click( function(){ 
+				x = $('tbody.ui-sortable')[0].children;
+				$.each(x, function( i, v ) {
+					if(v.lastChild.lastChild.children[0].children[0].checked == true){
+						$(v).remove();
+					}
+				});
+
+			});";
 
 			$js = new js();
 			$js->js = ($arrayJs);
@@ -618,6 +635,7 @@ class tempElement extends createClass
 					$table->addHead('mover');
 					$table->addHead('Acciones');
 					$table->addHead('Objetos');
+					$table->addHead('borrar');
 
 					$icon->icon = "swap_vert";
 					$icon->float = NULL;
@@ -655,7 +673,12 @@ class tempElement extends createClass
 						$optionSelect['option'] = $temp;
 						$inputSelectObjet[$k] = new inputSelect($optionSelect);
 
-						$table->addRow(array($icon->html ,$inputSelectAction[$k]->html, $inputSelectObjet[$k]->html));
+						//MODIFICAR ACA
+						$temp2[] = array('text' => $k, 'value' => '1');
+						$optionCheckboxes['option'] = $temp2;
+						${"inputBorrar{$k}"} = new inputCheckboxes($optionCheckboxes);
+						unset($temp2);
+						$table->addRow(array($icon->html ,$inputSelectAction[$k]->html, $inputSelectObjet[$k]->html, ${"inputBorrar{$k}"}->html));
 					}
 					$form->addObj($table);
 				}else{
