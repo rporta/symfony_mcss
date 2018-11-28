@@ -430,7 +430,6 @@ class tempElement extends createClass
 			$optionFields['value'] = $obj['name'];
 			$inputName = new inputFields($optionFields);		
 			unset($optionFields);
-
 			foreach ($objFull['param'] as $v) {
 				if(!empty($v['value']) && is_array($v['value'])){
 					$optionSelect = array();
@@ -552,8 +551,7 @@ class tempElement extends createClass
 				arrayNameValue[0] = Number(arrayNameValue[0]) + 1;  
 
 				x[0].lastChild.children[1].lastChild.children[0].children[3].name = arrayNameAction.join('-');
-				x[0].lastChild.children[2].lastChild.children[0].children[3].name = arrayNameAction.join('-');
-				x[0].lastChild.children[3].lastChild.children[0].children[0].name = arrayNameAction.join('-');
+				x[0].lastChild.children[2].lastChild.children[0].children[3].name = arrayNameValue.join('-');
 				
 				x[0].lastChild.children[3].lastChild.children[0].children[0].id =
 				Number(x[0].lastChild.children[3].lastChild.children[0].children[0].id) + 1;
