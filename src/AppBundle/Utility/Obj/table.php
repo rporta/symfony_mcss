@@ -92,7 +92,6 @@ class table extends createClass
 			var setPadding = function(atHeight) {
 			    rule.cssText = 'border-top-width: '+atHeight+'px'; 
 			};
-			console.log($($('#{$id}')[0].children[1]));
 			$($('#{$id}')[0].children[1]).sortable({
 			    'placeholder':'marker',
 			    'start':function(ev, ui) {
