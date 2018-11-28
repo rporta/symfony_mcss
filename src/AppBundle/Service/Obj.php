@@ -150,13 +150,13 @@ class Obj extends ObjParam
 				$param[$i]['name'] = $value;
 				switch ($value) {
 					case 'textColor':
-					$param[$i]['value'] = null;$this->orderKey(array_keys($this->textColor()));
+					$param[$i]['value'] = $this->orderKey(array_keys($this->textColor()));
 					break;
 					case 'backgroundColor':
-					$param[$i]['value'] = null;$this->orderKey(array_keys($this->backgroundColor()));
+					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
 					break;
 					case 'mobileBackgroundColor':
-					$param[$i]['value'] = null;$this->orderKey(array_keys($this->backgroundColor()));
+					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
 					break;
 					case 'float':
 					$param[$i]['value'] = array_keys($this->float());
