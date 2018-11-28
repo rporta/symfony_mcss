@@ -461,6 +461,9 @@ class createClass
 	protected function submitInputButton($arg){
 		return is_null($arg) ? NULL :  "type='submit'";
 	}	
+	protected function hrefInputButton($arg){
+		return is_null($arg) ? NULL :  "href='{$arg}'";
+	}
 	protected function truncate($arg = NULL){
 		return is_null($arg) ? NULL :  "truncate";
 	}

@@ -54,7 +54,7 @@ class a extends createClass
 		$id = $this->id;
 		$textColor =  $this->textColors($this->textColor);
 		$backgroundColor =  $this->backgroundColors($this->backgroundColor);
-		$href = $this->href;
+		$href = $this->hrefInputButton($this->href);
 		$float =  $this->float($this->float);
 		$valign =  $this->valign($this->valign);
 		$dataActive = $this->dataActive($this->dataActive);
@@ -75,7 +75,7 @@ class a extends createClass
 
 		$search = array("{ID}", "{TEXTCOLOR}", "{BACKGROUNDCOLOR}", "{TEXT}", "{HREF}", "{DATA:ACTIVE}", "{DATA:TARGET}", "{CLASS}", "{obj:html}", "{WAVES}", "{FLOAT}", "{VALIGN}", "{FLOWTEXT}", "{TEXTALING}");
 		$replace = array("{$id}", "{$textColor}", "{$backgroundColor}", "{$text}", "{$href}", "{$dataActive}", "{$dataTarget}", "{$class}", "{$objHtml}", "{$waves}", "{$float}", "{$valign}", "{$flowText}", "{$textAling}");
-		$tempHtml = '<a id="{ID}" href="{HREF}" {DATA:ACTIVE} {DATA:TARGET} class="{TEXTALING} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT}">{TEXT}{obj:html}</a>';
+		$tempHtml = '<a id="{ID}" {HREF} {DATA:ACTIVE} {DATA:TARGET} class="{TEXTALING} {TEXTCOLOR} {BACKGROUNDCOLOR} {WAVES} {CLASS} {FLOAT} {VALIGN} {FLOWTEXT}">{TEXT}{obj:html}</a>';
 		$tempHtml = str_replace($search, $replace, $tempHtml);
 
 		$this->html = $tempHtml;

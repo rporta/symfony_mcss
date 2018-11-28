@@ -245,28 +245,61 @@ class tempElement extends createClass
 			$col = array();
 			$row = new row();
 			$col['i'] = new col();
-			$col['i']->s = "4";
-			$col['i']->m = "4";
-			$col['i']->l = "4";
-			$col['i']->xl = "4";
-			$col['i']->textAling = "c";
+			$col['i']->s = "6";
+			$col['i']->m = "6";
+			$col['i']->l = "6";
+			$col['i']->xl = "6";
+			$col['i']->textAling = "l";
 			$col['l'] = clone $col['i'];
-			$col['c'] = clone $col['i'];
+			$col['i']->textAling = "r";
 
 			$icon = new icon();
 			$icon->float = "r";
-
 			$aAdd = new a();
 			$aAdd->class = 'btn';
+			$aAdd->href = NULL;
 			$aAdd->text = 'agregar';
 			$aAdd->backgroundColor = 'green,7';
 			$aDel = clone $aAdd;
 			$aDel->text = 'borrar';
 			$aDel->backgroundColor = 'red,5';
-			$aMod = clone $aAdd;
-			$aMod->text = 'modificar';
-			$aMod->backgroundColor = 'blue,5';
+			$aDel->refreshId();
 
+			$arrayJs[] = 
+			"$(\"#{$aAdd->id}\").click( function(){ 
+				x = $('tbody.ui-sortable').clone();
+				arrayNameAction = x[0].lastChild.children[1].lastChild.children[0].children[3].name.split('-');
+				arrayNameValue = x[0].lastChild.children[2].lastChild.children[0].children[3].name.split('-');
+
+				arrayNameAction[0] = Number(arrayNameAction[0]) + 1; 
+				arrayNameValue[0] = Number(arrayNameValue[0]) + 1;  
+
+				x[0].lastChild.children[1].lastChild.children[0].children[3].name = arrayNameAction.join('-');
+				x[0].lastChild.children[2].lastChild.children[0].children[3].name = arrayNameValue.join('-');
+				
+				x[0].lastChild.children[3].lastChild.children[0].children[0].id =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[0].id) + 1;
+				x[0].lastChild.children[3].lastChild.children[0].children[1].innerText =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[1].innerText) + 1;
+
+				x[0].lastChild.children[3].lastChild.children[0].children[1].htmlFor =
+				Number(x[0].lastChild.children[3].lastChild.children[0].children[1].htmlFor) + 1;
+				$('tbody.ui-sortable')[0].innerHTML += x[0].lastChild.outerHTML;
+				x = 0;
+				$('select').material_select(); 
+			});";
+			$arrayJs[] = "$(\"#{$aDel->id}\").click( function(){ 
+				x = $('tbody.ui-sortable')[0].children;
+				$.each(x, function( i, v ) {
+					if(v.lastChild.lastChild.children[0].children[0].checked == true){
+						$(v).remove();
+					}
+				});
+
+			});";
+
+			$js = new js();
+			
 			$table = new table();
 			$table->center = TRUE;
 			$table->sortable = TRUE;
@@ -314,20 +347,17 @@ class tempElement extends createClass
 			$aAdd->addObj($icon);
 			$icon->icon = "delete";
 			$aDel->addObj($icon);
-			$icon->icon = "edit";
-			$aMod->addObj($icon);
 			$col['i']->addObj($aAdd);
-			$col['c']->addObj($aMod);
 			$col['l']->addObj($aDel);
-			$row->addObj($col['i']);
-			$row->addObj($col['c']);
-			$row->addObj($col['l']);
+				$row->addObj($col['i']);
+				$row->addObj($col['l']);
 			$form->addObj($row);
 			$form->addObj($br);
 			if(!empty($objFull['action'])){			
 				$table->addHead('mover');
 				$table->addHead('Acciones');
 				$table->addHead('Objetos');
+				$table->addHead('borrar');
 
 				$icon->icon = "swap_vert";
 				$icon->float = NULL;
@@ -354,8 +384,13 @@ class tempElement extends createClass
 				$optionSelect['option'] = $temp;
 				$inputSelectObjet = new inputSelect($optionSelect);
 
-				$table->addRow(array($icon->html ,$inputSelectAction->html, $inputSelectObjet->html));
-
+				//MODIFICAR ACA
+				$temp2[] = array('text' => '0', 'value' => '1');
+				$optionCheckboxes['option'] = $temp2;
+				${"inputBorrar0"} = new inputCheckboxes($optionCheckboxes);
+				unset($temp2);
+				
+				$table->addRow(array($icon->html ,$inputSelectAction->html, $inputSelectObjet->html, ${"inputBorrar0"}->html));
 				$form->addObj($table);
 			}
 			else{
@@ -363,8 +398,9 @@ class tempElement extends createClass
 			}
 			
 			$form->addObj($br);
-			$js = new js();
-			$js->js = array("$('#aceptar').click(function(){ $('#{$form->id}').submit(); }); $('#cancelar').click(function(){ var url = window.location.href.split('/'); window.location.href = url[0]+'//'+url[2]+'/editpag/{$editarPagina}';  });");
+			
+			$arrayJs[] = "$('#aceptar').click(function(){ $('#{$form->id}').submit(); }); $('#cancelar').click(function(){ var url = window.location.href.split('/'); window.location.href = url[0]+'//'+url[2]+'/editpag/{$editarPagina}';  });";
+			$js->js = ($arrayJs);
 			$form->addObj($js);
 			$container->addObj($form);
 			$this->id = $form->id;
@@ -623,7 +659,6 @@ class tempElement extends createClass
 					$aAdd->addObj($icon);
 					$icon->icon = "delete";
 					$aDel->addObj($icon);
-					$icon->icon = "edit";
 					$col['i']->addObj($aAdd);
 					$col['l']->addObj($aDel);
 					$row->addObj($col['i']);
