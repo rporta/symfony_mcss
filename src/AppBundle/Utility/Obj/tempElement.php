@@ -739,11 +739,15 @@ class tempElement extends createClass
 
 			$imputA = new inputButton();
 			$imputA->class = "btn";
-			$imputA->flat = TRUE;
 			$imputA->text = "aceptar";
+			$imputA->flat = TRUE;
 
 			$imputC = clone $imputA;
 			$imputC->text = "cancelar";
+			$imputC->href = "/editpag/{$editarPagina}";
+
+			$imputA->submit = TRUE;
+			$imputA->mode = "button";
 
 
 
@@ -764,7 +768,7 @@ class tempElement extends createClass
 			$title = new h($title);
 
 			$optionSelect = $temp = $name = array();
-			$optionSelect['name'] = 'type';
+			$optionSelect['name'] = 'name';
 			$optionSelect['text'] = 'type';
 			foreach ($objPag as $obj) {
 				if(!preg_match_all("/(tempElement|editJs)/", $obj['type'])){
@@ -830,9 +834,13 @@ class tempElement extends createClass
     	}
     }
     public function __set($property, $value )
-    {
-        $this->$property = $value;
-        $this->refreshInfo();
+    {	
+    	if($property == 'html'){
+        	$this->$property = $value;
+    	}else{    		
+        	$this->$property = $value;
+        	$this->refreshInfo();
+    	}
     }
     public function __get($property)
     {
