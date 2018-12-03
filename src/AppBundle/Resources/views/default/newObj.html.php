@@ -31,7 +31,7 @@ if(!empty($editar)){
 	}
 }
 if(!empty($hiddenMod)){
-
+	//cuando sale tempMod
 	$formId = $tempElement->id;
 
 	$js = new AppBundle\Utility\Obj\js();
@@ -45,7 +45,8 @@ if(!empty($hiddenMod)){
 	$conteiner->addObj($js);
 	$pag->addObj($conteiner);
 	
-}else{
+}
+else{
 	$pag->addObj($tempElement);
 }
 $pag->render();

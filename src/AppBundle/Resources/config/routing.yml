@@ -47,7 +47,7 @@ hidden_ajax_add:
     path:     /hiddenajaxadd/{pag}
     defaults: { _controller: AppBundle:HiddenAjaxAdd:index }
 hidden_ajax_add2:
-    path:     /hiddenajaxadd/{pag}
+    path:     /hiddenajaxadd2/{pag}
     defaults: { _controller: AppBundle:HiddenAjaxAdd:index2 }
 hidden_ajax_process_add:
     path:     /hiddenajaxprocessadd/{pag}
