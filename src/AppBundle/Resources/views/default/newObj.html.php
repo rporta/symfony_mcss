@@ -1,7 +1,7 @@
 <?
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
-
+$editarPagina = $tempElement['editar_pagina'];
 $tempElement = new AppBundle\Utility\Obj\tempElement($tempElement);
 
 if(!empty($editar)){
@@ -30,5 +30,22 @@ if(!empty($editar)){
 		}
 	}
 }
-$pag->addObj($tempElement);
+if(!empty($hiddenMod)){
+
+	$formId = $tempElement->id;
+
+	$js = new AppBundle\Utility\Obj\js();
+	$arrayJs[] = "$('#aceptar').click(function(){ $('#{$formId}').submit(); }); $('#cancelar').click(function(){ var url = window.location.href.split('/'); window.location.href = url[0]+'//'+url[2]+'/editpag/{$editarPagina}';  });";
+	$js->js = ($arrayJs);
+	
+	$tempElement->html .= '<div class="center-align afbtn"><button id="aceptar" href="#" class="btn btn-flat">aceptar</button>    <button id="cancelar" href="#" class="btn btn-flat">cancelar</button></div><br>';
+
+	$conteiner = new AppBundle\Utility\Obj\container();
+	$conteiner->addObj($tempElement);
+	$conteiner->addObj($js);
+	$pag->addObj($conteiner);
+	
+}else{
+	$pag->addObj($tempElement);
+}
 $pag->render();
