@@ -158,6 +158,9 @@ class Obj extends ObjParam
 					case 'mobileBackgroundColor':
 					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
 					break;
+					case 'layerBackgroundColor':
+					$param[$i]['value'] = $this->orderKey(array_keys($this->backgroundColor()));
+					break;
 					case 'float':
 					$param[$i]['value'] = array_keys($this->float());
 					break;
