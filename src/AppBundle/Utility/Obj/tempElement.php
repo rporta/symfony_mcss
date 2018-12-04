@@ -503,9 +503,22 @@ class tempElement extends createClass
 							}
 						}
 					}
-					$optionSelect['option'] = $temp;
+					if($objFull['type'] == 'preloaderFull' && $v['name'] == 'backgroundColor'){
+						$optionSelect['option'] = $temp;
+						$optionSelect['name'] = $v['name']."_0";
+						$inputS[] = new inputSelect($optionSelect);						
+						$optionSelect['name'] = $v['name']."_1";
+						$inputS[] = new inputSelect($optionSelect);						
+						$optionSelect['name'] = $v['name']."_2";
+						$inputS[] = new inputSelect($optionSelect);						
+						$optionSelect['name'] = $v['name']."_3";
+						$inputS[] = new inputSelect($optionSelect);						
+					}
+					else{						
+						$optionSelect['option'] = $temp;
 
-					$inputS[] = new inputSelect($optionSelect);
+						$inputS[] = new inputSelect($optionSelect);
+					}
 				}
 				elseif (preg_match_all("/(text|js|src|alt|icon|class|href|dataActive|dataTarget|repeat)/", $v['name']) ) {
 					if($v['name'] == 'js'){

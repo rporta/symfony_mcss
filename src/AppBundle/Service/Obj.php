@@ -334,7 +334,36 @@ class Obj extends ObjParam
 		foreach ($data as $k => $v) {
 			if($k !== 'editar_pagina' && $k !== 'nameObjAdd' && $k !== 'nameVar' && $k !== 'type' && !empty($v)){			
 				if(strpos($k, '-') === FALSE){
-					array_push($out['param'], array('name' => $k, 'value' => $v));
+					if($data['type'] == 'preloaderFull'){
+						$anterior = 'backgroundColor';
+						switch ($k) {
+							case 'backgroundColor_0':
+								$backgroundColor[] = $v;
+								break;
+							case 'backgroundColor_1':
+								$backgroundColor[] = $v;
+								break;
+							case 'backgroundColor_2':
+								$backgroundColor[] = $v;
+								break;
+							case 'backgroundColor_3':
+								$backgroundColor[] = $v;
+								break;
+							
+							default:
+								if($anterior == 'backgroundColor'){
+									$x = "array('".implode("','", $backgroundColor)."')";
+									array_push($out['param'], array('name' => 'backgroundColor', 'value' => $x));
+									array_push($out['param'], array('name' => $k, 'value' => $v));
+									$anterior = "";
+								}else{
+									array_push($out['param'], array('name' => $k, 'value' => $v));
+								}
+								break;
+						}
+					}else{
+						array_push($out['param'], array('name' => $k, 'value' => $v));
+					}
 				}
 				else{
 					$compare = explode("-", $k);
@@ -691,22 +720,7 @@ class Obj extends ObjParam
 			if(!empty($v['param'])){
 				foreach ($v['param'] as $vParam) {
 					if(preg_match_all("/(array)/", $vParam['value']) ){
-						$tempValue = str_replace('array(', '', $vParam['value']);
-						$tempValue = str_replace(')', '', $tempValue);
-						$arrayTempValue = explode(",", $tempValue);
-						$tempValue = $return = array();
-						foreach ($arrayTempValue as $key => $value) {
-							if($key % 2 == 0){
-								$tempValue[] = "'".trim($value);
-							}else{
-								$tempValue[] = trim($value)."'";
-								$return[] = implode(",", $tempValue);
-								$tempValue = array();
-							}					
-						}
-						$return = implode(",", $return);
-						$return = "array({$return});";
-						$code[] = "\${$v['name']}['{$vParam['name']}'] = {$return} \n";
+						$code[] = "\${$v['name']}['{$vParam['name']}'] = {$vParam['value']}; \n";
 					}else{
 						$code[] = "\${$v['name']}['{$vParam['name']}'] = '{$vParam['value']}'; \n";
 					}
