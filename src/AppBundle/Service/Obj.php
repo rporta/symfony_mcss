@@ -58,7 +58,7 @@ class Obj extends ObjParam
 						$param[$key1]['name'] = $value1;
 					}
 					foreach ($out[6] as $key2 => $value2) {
-						$param[$key2]['value'] =  str_replace(array('"', "'"), "", $value2);
+						$param[$key2]['value'] = preg_match("/array/", $value2) ? $value2 : str_replace(array('"', "'"), "", $value2);
 					}
 					$result[$key]['param'] = $param;
 					unset($param);
