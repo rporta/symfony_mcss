@@ -796,4 +796,56 @@ class Obj extends ObjParam
 		}
 		return $list;
 	}
+	public function createPag(){
+		$tempCode = 
+		"<?\n".
+		"\n".
+		"/* obj */\n".
+		"\n".
+		"\$pag['backgroundColor'] = 'grey,0';\n".
+		"\$pag = new AppBundle\Utility\Obj\pag(\$pag);\n".
+		"\n".
+		"\$preloaderFull['layerBackgroundColor'] = 'b-w-t,0'; \n".
+		"\$preloaderFull['backgroundColor'] = array('purple,5','blue,3'); \n".
+		"\$preloaderFull['mode'] = '0'; \n".
+		"\$preloaderFull = new AppBundle\\Utility\\Obj\\preloaderFull(\$preloaderFull);\n".
+		"\n".
+		"/* actions */\n".
+		"\n".
+		"\$pag->addObj(\$preloaderFull);\n".
+		"\n".
+		"/* edit */\n".
+		"\n".
+		"if(!empty(\$editar)){\n".
+		"	if(!empty(\$action) && \$action !== 'default'){\n".
+		"		\$editJs = new AppBundle\\Utility\\Obj\\editJs(\$editar);\n".
+		"		\$pag->js = \$editJs->getJs('default');\n".
+		"		switch (\$action) {\n".
+		"			case 'add':\n".
+		"			\$pag->js = \$editJs->getJs('add');\n".
+		"			break;\n".
+		"			case 'edit':\n".
+		"			\$pag->js = \$editJs->getJs('edit');\n".
+		"			break;\n".
+		"			case 'del':\n".
+		"			\$pag->js = \$editJs->getJs('del');\n".
+		"			break;\n".
+		"			case 'hiddenadd':\n".
+		"			\$pag->js = \$editJs->getJs('hiddenadd');\n".
+		"			break;\n".
+		"			case 'hiddenedit':\n".
+		"			\$pag->js = \$editJs->getJs('hiddenedit');\n".
+		"			break;\n".
+		"			case 'hiddendel':\n".
+		"			\$pag->js = \$editJs->getJs('hiddendel');\n".
+		"			break;\n".
+		"		}\n".
+		"	}\n".
+		"}\n".
+		"\n".
+		"/* final action */\n".
+		"\n".
+		"\$pag->render();\n";
+		return $tempCode;
+	}
 }
