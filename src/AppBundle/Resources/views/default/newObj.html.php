@@ -1,6 +1,12 @@
 <?
 $pag['backgroundColor'] = "grey,0";
 $pag = new AppBundle\Utility\Obj\pag($pag);
+
+$preloaderFull['layerBackgroundColor'] = 'b-w-t,0';
+$preloaderFull['backgroundColor'] = array('purple,5', 'blue,3');
+$preloaderFull['mode'] = "0";
+$preloaderFull = new AppBundle\Utility\Obj\preloaderFull($preloaderFull);
+
 $editarPagina = $tempElement['editar_pagina'];
 $tempElement = new AppBundle\Utility\Obj\tempElement($tempElement);
 
@@ -30,6 +36,7 @@ if(!empty($editar)){
 		}
 	}
 }
+$pag->addObj($preloaderFull);
 if(!empty($hiddenMod)){
 	//cuando sale tempMod
 	$formId = $tempElement->id;
