@@ -722,6 +722,7 @@ class ObjParam
 		$modeMedia['img'] = "img";
 		$modeMedia['MaterialBox'] = "MaterialBox";
 		$modeMedia['video'] = "video";
+		$modeMedia['img-fullscreen'] = "img-fullscreen";
 		if(is_null($arg)) return ($modeMedia);
 		foreach ($modeMedia as $key => $value) {
 			if($value == $arg){

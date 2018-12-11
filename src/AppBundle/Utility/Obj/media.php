@@ -41,79 +41,98 @@ class media extends createClass
 	public function refreshInfo(){
 		$id = $this->id;
 		$mode = $this->modeMedia($this->mode);
-		if ($mode == 'img'){
+		if ($mode == 'img-fullscreen'){
 			$circle = $this->circle($this->circle);
 			$responsive = $this->responsiveImg($this->responsive);
-			$src = $this->srcMedia($this->src);
+			$src = $this->src;
 			$alt = $this->altMedia($this->alt);
 
 			$center = is_null($this->center) ? NULL : "style='display: block;margin: 0% auto;'";
 
 			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CENTER}", "{ID}");
 			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$center}",  "{$id}");
-			$tempHtml = "<img id='{ID}' class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT} {CENTER}>";
-			$tempHtml = str_replace($search, $replace, $tempHtml);
-			
-			$this->html = $tempHtml;
-		}
-		elseif ($mode == 'MaterialBox'){
-			$caption = $this->dataCaption($this->caption);
-			$circle = $this->circle($this->circle);
-			$responsive = $this->responsiveImg($this->responsive);
-			$src = $this->srcMedia($this->src);
-			$alt = $this->altMedia($this->alt);
+			$tempHtml = 
+			"<style>body, html {
+				height: 100% !important; }
+				header{display: flex!important; }</style>
+				<div id='{ID}' style='position: relative;background-position: center;background-repeat: no-repeat;background-size: cover; background-image: url(\"{SRC}\");height: 100%;'></div>";
+				$tempHtml = str_replace($search, $replace, $tempHtml);
 
-			$center = is_null($this->center) ? NULL : "style='margin: 0% auto;'";
+				$this->html = $tempHtml;
+			}
+			if ($mode == 'img'){
+				$circle = $this->circle($this->circle);
+				$responsive = $this->responsiveImg($this->responsive);
+				$src = $this->srcMedia($this->src);
+				$alt = $this->altMedia($this->alt);
 
-			$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CAPTION}", "{CENTER}", "{ID}");
-			$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$caption}", "{$center}", "{$id}");
-			$tempHtml = "<img id='{ID}' class='materialboxed {CIRCLE} {RESPONSIVE}' {CAPTION} {SRC} {ALT} {CENTER}>";
-			$tempHtml = str_replace($search, $replace, $tempHtml);
-			
-			$this->html = $tempHtml;
-			$this->js[] = " $('#{$id}').materialbox(); ";
-		}		
-		elseif ($mode == 'video'){
-			$src = $this->srcMedia($this->src);
-			if ($this->_embeds == FALSE){
+				$center = is_null($this->center) ? NULL : "style='display: block;margin: 0% auto;'";
 
-				$search = array('{SRC}', '{ID}');
-				$replace =  array($src, $id);
-				$tempHtml = 
-				"<video id='{ID}' class='responsive-video' controls>
+				$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CENTER}", "{ID}");
+				$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$center}",  "{$id}");
+				$tempHtml = "<img id='{ID}' class='{CIRCLE} {RESPONSIVE}' {SRC} {ALT} {CENTER}>";
+				$tempHtml = str_replace($search, $replace, $tempHtml);
+
+				$this->html = $tempHtml;
+			}
+			elseif ($mode == 'MaterialBox'){
+				$caption = $this->dataCaption($this->caption);
+				$circle = $this->circle($this->circle);
+				$responsive = $this->responsiveImg($this->responsive);
+				$src = $this->srcMedia($this->src);
+				$alt = $this->altMedia($this->alt);
+
+				$center = is_null($this->center) ? NULL : "style='margin: 0% auto;'";
+
+				$search = array("{CIRCLE}", "{RESPONSIVE}", "{SRC}", "{ALT}", "{CAPTION}", "{CENTER}", "{ID}");
+				$replace = array("{$circle}", "{$responsive}", "{$src}", "{$alt}", "{$caption}", "{$center}", "{$id}");
+				$tempHtml = "<img id='{ID}' class='materialboxed {CIRCLE} {RESPONSIVE}' {CAPTION} {SRC} {ALT} {CENTER}>";
+				$tempHtml = str_replace($search, $replace, $tempHtml);
+
+				$this->html = $tempHtml;
+				$this->js[] = " $('#{$id}').materialbox(); ";
+			}		
+			elseif ($mode == 'video'){
+				$src = $this->srcMedia($this->src);
+				if ($this->_embeds == FALSE){
+
+					$search = array('{SRC}', '{ID}');
+					$replace =  array($src, $id);
+					$tempHtml = 
+					"<video id='{ID}' class='responsive-video' controls>
 					<source {SRC} type='video/mp4'>
-				</video>";
-				$tempHtml = str_replace($search, $replace, $tempHtml);
+					</video>";
+					$tempHtml = str_replace($search, $replace, $tempHtml);
 
-				$this->html = $tempHtml;
-			}
-			else{
+					$this->html = $tempHtml;
+				}
+				else{
 
-				$search = array('{SRC}', '{ID}');
-				$replace =  array($src, $id);
-				$tempHtml = 
-				"<div id='{ID}' class='video-container'>
+					$search = array('{SRC}', '{ID}');
+					$replace =  array($src, $id);
+					$tempHtml = 
+					"<div id='{ID}' class='video-container'>
 					<iframe {SRC} frameborder='0' allowfullscreen></iframe>
-				</div>";
-				$tempHtml = str_replace($search, $replace, $tempHtml);
+					</div>";
+					$tempHtml = str_replace($search, $replace, $tempHtml);
 
-				$this->html = $tempHtml;
+					$this->html = $tempHtml;
+				}
 			}
 		}
-	}
-	public function refreshId(){
-		$type = $this->type;
-		$id = $this->createID(5);
-		$this->id = "{$type}-{$id}";
-	}
-    public function __set($property, $value )
-    {
-        $this->$property = $value;
-        $this->refreshInfo();
-    }
-    public function __get($property)
-    {
-        return $this->$property;
-    }
+		public function refreshId(){
+			$type = $this->type;
+			$id = $this->createID(5);
+			$this->id = "{$type}-{$id}";
+		}
+		public function __set($property, $value )
+		{
+			$this->$property = $value;
+			$this->refreshInfo();
+		}
+		public function __get($property)
+		{
+			return $this->$property;
+		}
 
-}
+	}

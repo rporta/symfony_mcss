@@ -101,16 +101,16 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case "0":
 			case "l":
-				$out = "left";
-				break;
+			$out = "left";
+			break;
 			case "1":
 			case "c":
-				$out = "center"; 
-				break;
+			$out = "center"; 
+			break;
 			case "2":
 			case "r":
-				$out = "right";
-				break;
+			$out = "right";
+			break;
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -118,12 +118,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case "0":
 			case "redirect":
-				$out = "redirect";
-				break;
+			$out = "redirect";
+			break;
 			case "1":
 			case "custom":
-				$out = "custom"; 
-				break;
+			$out = "custom"; 
+			break;
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -135,12 +135,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case "0":
 			case "l":
-				$out = "left";
-				break;
+			$out = "left";
+			break;
 			case "1":
 			case "r":
-				$out = "right";
-				break;
+			$out = "right";
+			break;
 		}
 		return $out;
 	}
@@ -158,12 +158,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'in':
-				$out = "scale-transition"; 
-				break;
+			$out = "scale-transition"; 
+			break;
 			case '1':
 			case 'out':
-				$out = "scale-transition scale-out"; 
-				break;		
+			$out = "scale-transition scale-out"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -190,20 +190,20 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 't':
-				$out = $size[0];
-				break;
+			$out = $size[0];
+			break;
 			case '1':
 			case 's':
-				$out = $size[1];
-				break;
+			$out = $size[1];
+			break;
 			case '2':
 			case 'm':
-				$out = $size[2];
-				break;
+			$out = $size[2];
+			break;
 			case '3':
 			case 'l':
-				$out = $size[3];
-				break;
+			$out = $size[3];
+			break;
 		}
 		return $out;
 	}
@@ -213,16 +213,16 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 's':
-				$out = $size[0];
-				break;
+			$out = $size[0];
+			break;
 			case '1':
 			case 'm':
-				$out = $size[1];
-				break;
+			$out = $size[1];
+			break;
 			case '2':
 			case 'l':
-				$out = $size[2];
-				break;
+			$out = $size[2];
+			break;
 		}
 		return is_null($arg) ? NULL : $out;
 	}	
@@ -232,16 +232,16 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 's':
-				$out = $size[0];
-				break;
+			$out = $size[0];
+			break;
 			case '1':
 			case 'm':
-				$out = $size[1];
-				break;
+			$out = $size[1];
+			break;
 			case '2':
 			case 'b':
-				$out = $size[2];
-				break;
+			$out = $size[2];
+			break;
 		}
 		return $out;
 	}
@@ -249,20 +249,20 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'bordered':
-				$out = "bordered"; 
-				break;
+			$out = "bordered"; 
+			break;
 			case '1':
 			case 'striped':
-				$out = "striped"; 
-				break;		
+			$out = "striped"; 
+			break;		
 			case '2':
 			case 'highlight':
-				$out = "highlight"; 
-				break;		
+			$out = "highlight"; 
+			break;		
 			case '3':
 			case 'responsive-table':
-				$out = "responsive-table"; 
-				break;		
+			$out = "responsive-table"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -270,12 +270,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'basic':
-				$out = "basic"; 
-				break;
+			$out = "basic"; 
+			break;
 			case '1':
 			case 'reveal':
-				$out = "reveal"; 
-				break;			
+			$out = "reveal"; 
+			break;			
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -283,8 +283,8 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case 'h':
 			case 'horizontal':
-				$out = "horizontal"; 
-				break;			
+			$out = "horizontal"; 
+			break;			
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
@@ -292,16 +292,16 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'linear':
-				$out = "linear"; 
-				break;
+			$out = "linear"; 
+			break;
 			case '1':
 			case 'circular':
-				$out = "circular"; 
-				break;		
+			$out = "circular"; 
+			break;		
 			case '2':
 			case 'circularflashing':
-				$out = "circularFlashing"; 
-				break;		
+			$out = "circularFlashing"; 
+			break;		
 		}
 		return is_null($arg) ? NULL : $out;
 	}
@@ -309,20 +309,20 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'text':
-				$out = "text"; 
-				break;
+			$out = "text"; 
+			break;
 			case '1':
 			case 'password':
-				$out = "password"; 
-				break;		
+			$out = "password"; 
+			break;		
 			case '2':
 			case 'email':
-				$out = "email"; 
-				break;		
+			$out = "email"; 
+			break;		
 			case '3':
 			case 'hidden':
-				$out = "hidden"; 
-				break;		
+			$out = "hidden"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -330,12 +330,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'a':
-				$out = "a"; 
-				break;
+			$out = "a"; 
+			break;
 			case '1':
 			case 'button':
-				$out = "button"; 
-				break;
+			$out = "button"; 
+			break;
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
@@ -343,12 +343,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'nouislider':
-				$out = "noUiSlider"; 
-				break;
+			$out = "noUiSlider"; 
+			break;
 			case '1':
 			case 'html5 range':
-				$out = "HTML5 Range"; 
-				break;
+			$out = "HTML5 Range"; 
+			break;
 		}
 		return is_null($arg) ? NULL :$out;
 	}		
@@ -356,16 +356,16 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'single':
-				$out = "single"; 
-				break;
+			$out = "single"; 
+			break;
 			case '1':	
 			case 'icon':
-				$out = "icon"; 
-				break;		
+			$out = "icon"; 
+			break;		
 			case '2':
 			case 'browser':
-				$out = "browser"; 
-				break;		
+			$out = "browser"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -373,12 +373,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'default':
-				$out = NULL; 
-				break;
+			$out = NULL; 
+			break;
 			case '1':	
 			case 'gap':
-				$out = "with-gap"; 
-				break;			
+			$out = "with-gap"; 
+			break;			
 		}
 		return is_null($arg) ? NULL :$out;
 	}		
@@ -386,12 +386,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'default':
-				$out = NULL; 
-				break;
+			$out = NULL; 
+			break;
 			case '1':	
 			case 'filled':
-				$out = "filled-in"; 
-				break;			
+			$out = "filled-in"; 
+			break;			
 		}
 		return is_null($arg) ? NULL :$out;
 	}		
@@ -399,16 +399,20 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'img':
-				$out = "img"; 
-				break;
+			$out = "img"; 
+			break;
 			case '1':
 			case 'materialbox':
-				$out = "MaterialBox"; 
-				break;	
+			$out = "MaterialBox"; 
+			break;	
 			case '2':
 			case 'video':
-				$out = "video"; 
-				break;		
+			$out = "video"; 
+			break;		
+			case '3':
+			case 'img-fullscreen':
+			$out = "img-fullscreen"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}	
@@ -416,12 +420,12 @@ class createClass
 		switch (strtolower((string)$arg)) {
 			case '0':
 			case 'contactos':
-				$out = "Contactos"; 
-				break;
+			$out = "Contactos"; 
+			break;
 			case '1':
 			case 'etiquetas':
-				$out = "Etiquetas"; 
-				break;		
+			$out = "Etiquetas"; 
+			break;		
 		}
 		return is_null($arg) ? NULL :$out;
 	}
@@ -430,24 +434,24 @@ class createClass
 		switch (strtolower($arg)) {
 			case '0':
 			case 'listobj':
-				$out = "listobj"; 
-				break;
+			$out = "listobj"; 
+			break;
 			case '1':
 			case 'newobj':
-				$out = "newobj"; 
-				break;
+			$out = "newobj"; 
+			break;
 			case '2':
 			case 'modobj':
-				$out = "modobj"; 
-				break;
+			$out = "modobj"; 
+			break;
 			case '3':
 			case 'listobjhidden':
-				$out = "listobjhidden"; 
-				break;
+			$out = "listobjhidden"; 
+			break;
 			case '4':
 			case 'hiddenobjmod':
-				$out = "hiddenobjmod"; 
-				break;
+			$out = "hiddenobjmod"; 
+			break;
 
 		}
 		return is_null($arg) ? NULL :$out;
